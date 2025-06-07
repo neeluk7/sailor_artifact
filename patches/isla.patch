@@ -1,0 +1,1521 @@
+diff --git a/configs/riscv64.toml b/configs/riscv64.toml
+index a4c72d5..50fd50b 100644
+--- a/configs/riscv64.toml
++++ b/configs/riscv64.toml
+@@ -19,10 +19,20 @@ linker = "riscv64-elf-ld"
+ 
+ [[toolchain]]
+ name = "default"
+-assembler = "riscv64-linux-gnu-as -march=rv64imac"
+-objdump = "riscv64-linux-gnu-objdump"
+-linker = "riscv64-linux-gnu-ld"
+-nm = "riscv64-linux-gnu-nm"
++#assembler = "riscv64-linux-gnu-as -march=rv64imac"
++#objdump = "riscv64-linux-gnu-objdump"
++#linker = "riscv64-linux-gnu-ld"
++#nm = "riscv64-linux-gnu-nm"
++#assembler = "riscv64-unknown-linux-gnu-as -march=rv64gc"
++#objdump = "riscv64-unknown-linux-gnu-objdump"
++#linker = "riscv64-unknown-linux-gnu-ld"
++#nm = "riscv64-unknown-linux-gnu-nm"
++assembler = "riscv64-unknown-elf-as -march=rv64gc"
++objdump = "riscv64-unknown-elf-objdump"
++linker = "riscv64-unknown-elf-ld"
++nm = "riscv64-unknown-elf-nm"
++
++
+ 
+ # Currently not used for RISC-V
+ [mmu]
+@@ -46,15 +56,20 @@ satp = "0x0000000000000000"
+ misa = "{ bits = 0x0000000000000000 }"
+ mstatus = "{ bits = 0x0000000000000000 }"
+ mcountinhibit = " { bits = 0x00000000 }"
++#cur_privilege = "Supervisor"
++
++#[registers.resets]
++#"cur_privilege" = "Supervisor"
+ 
+ [const_primops]
+ get_config_print_reg = false
+ get_config_print_instr = false
+ get_config_print_platform = false
+ get_config_print_mem = false
++sys_enable_svinval = true
+ sys_enable_fdext = false
+ sys_enable_zfinx = false
+-sys_enable_rvc = true
++sys_enable_rvc = false
+ sys_enable_next = false
+ sys_enable_vext = false
+ sys_enable_writable_fiom = true
+diff --git a/configs/riscv64_ubuntu.toml b/configs/riscv64_ubuntu.toml
+index 11136ce..8f0c6e1 100644
+--- a/configs/riscv64_ubuntu.toml
++++ b/configs/riscv64_ubuntu.toml
+@@ -8,9 +8,13 @@ ifetch = "Read_ifetch"
+ read_exclusives = ["Read_RISCV_reserved", "Read_RISCV_reserved_acquire", "Read_RISCV_reserved_strong_acquire"]
+ write_exclusives = ["Write_RISCV_conditional", "Write_RISCV_conditional_release", "Write_RISCV_conditional_strong_release"]
+ 
+-assembler = "riscv64-unknown-elf-as -march=rv64imac"
+-objdump = "riscv64-unknown-elf-objdump"
+-linker = "riscv64-unknown-elf-ld"
++#assembler = "riscv64-unknown-elf-as -march=rv64imac"
++#objdump = "riscv64-unknown-elf-objdump"
++#linker = "riscv64-unknown-elf-ld"
++assembler = "riscv64-unknown-linux-gnu-as -march=rv64gc"
++objdump = "riscv64-unknown-linux-gnu-objdump"
++linker = "riscv64-unknown-linux-gnu-ld"
++nm = "riscv64-unknown-linux-gnu-nm"
+ 
+ # Currently not used for RISC-V
+ [mmu]
+diff --git a/isla-axiomatic/src/footprint_analysis.rs b/isla-axiomatic/src/footprint_analysis.rs
+index 8b32581..d6380a0 100644
+--- a/isla-axiomatic/src/footprint_analysis.rs
++++ b/isla-axiomatic/src/footprint_analysis.rs
+@@ -110,7 +110,7 @@ impl Cacheable for Footprint {
+ }
+ 
+ impl Footprint {
+-    fn new() -> Self {
++    pub fn new() -> Self {
+         Footprint {
+             write_data_taints: Taints::new(),
+             mem_addr_taints: Taints::new(),
+@@ -527,7 +527,7 @@ where
+                             concrete_opcodes.insert(*bv);
+                         }
+                     }
+-                    Event::Instr(_) => return Err(FootprintError::SymbolicInstruction),
++                    Event::Instr(Val::MixedBits(bv)) => return Err(FootprintError::SymbolicInstruction),
+                     _ => (),
+                 }
+             }
+diff --git a/isla-lib/src/executor.rs b/isla-lib/src/executor.rs
+index 986240b..e216ea6 100644
+--- a/isla-lib/src/executor.rs
++++ b/isla-lib/src/executor.rs
+@@ -32,6 +32,7 @@
+ //! This module implements the core of the symbolic execution engine.
+ 
+ use crossbeam::deque::{Injector, Steal, Stealer, Worker};
++use crossbeam::epoch::Pointable;
+ use crossbeam::queue::SegQueue;
+ use std::borrow::Cow;
+ use std::collections::{HashMap, HashSet};
+@@ -42,6 +43,7 @@ use std::sync::mpsc::{Receiver, Sender};
+ use std::sync::{Arc, RwLock};
+ use std::thread;
+ use std::time::{Duration, Instant};
++use std::io::{BufWriter, Read, Write};
+ 
+ use crate::bitvector::{b64::B64, required_index_bits, BV};
+ use crate::error::{ExecError, IslaError};
+@@ -125,8 +127,15 @@ fn get_id_and_initialize<'state, 'ir, B: BV>(
+                 Some(value) => Borrowed(value),
+                 None => match shared_state.type_info.enum_members.get(&id) {
+                     Some((member, enum_size, enum_id)) => {
++                        //println!("Initializing enum: id: {} member: {} ", enum_id, member);
++                        let name_id = Name::from_u32(1683);
++                        let mut new_member: usize = *member; 
++                        //if *enum_id == name_id {
++                            //println!("....This is for cur_priv....");
++                            //new_member = 1; 
++                        //}
+                         let enum_id = solver.get_enum(*enum_id, *enum_size);
+-                        Owned(Val::Enum(EnumMember { enum_id, member: *member }))
++                        Owned(Val::Enum(EnumMember { enum_id, member: new_member }))
+                     }
+                     None => return Err(ExecError::VariableNotFound(zencode::decode(shared_state.symtab.to_str(id)))),
+                 },
+@@ -146,6 +155,7 @@ fn get_loc_and_initialize<'ir, B: BV>(
+ ) -> Result<Val<B>, ExecError> {
+     Ok(match loc {
+         Loc::Id(id) => {
++            //println!("get_is_and_init_loc 1");
+             get_id_and_initialize(*id, local_state, shared_state, solver, accessor, info, for_write)?.into_owned()
+         }
+         Loc::Field(loc, field) => {
+@@ -322,6 +332,7 @@ fn write_register_from_vector<'ir, B: BV>(
+         ConcreteIndex(i) => {
+             // This unwrap should be same as all register references must point to value registers
+             local_state.regs.assign(regs[i], value.clone(), shared_state);
++            //println!("WriteReg event.. for {}", zencode::decode(&shared_state.symtab.to_str(regs[i])));
+             solver.add_event(Event::WriteReg(regs[i], Vec::new(), value))
+         }
+         SymbolicIndex(i) => {
+@@ -363,7 +374,7 @@ fn eval_exp_with_accessor<'state, 'ir, B: BV>(
+ ) -> Result<Cow<'state, Val<B>>, ExecError> {
+     use Cow::*;
+     use Exp::*;
+-
++    //println!("get_is_and_init_loc 3");
+     Ok(match exp {
+         Id(id) => get_id_and_initialize(*id, local_state, shared_state, solver, accessor, info, false)?,
+ 
+@@ -511,16 +522,26 @@ fn assign_with_accessor<'ir, B: BV>(
+     accessor: &mut Vec<Accessor>,
+     info: SourceLoc,
+ ) -> Result<(), ExecError> {
++    //println!("Assign with accessor start!");
++    //let stdout = std::io::stdout();
+     match loc {
+         Loc::Id(id) => {
+-            if local_state.vars.contains_key(id) {
++            //println!("Matched ID");
++            if local_state.vars.contains_key(id) { 
++                //println!("Matched ID vars contain the key");
+                 local_state.vars.insert(*id, UVal::Init(v));
+             } else if local_state.lets.contains_key(id) {
++                //println!("Matched ID lets contain the key"); // what is lets? 
+                 local_state.lets.insert(*id, UVal::Init(v));
+             } else {
+                 let symbol = zencode::decode(shared_state.symtab.to_str(*id));
++                //println!("Matched ID with symbol: {}", symbol);
+                 // HACK: Don't store the entire TLB in the trace
+                 if symbol != "_TLB" {
++                    //println!("WriteReg event for {}", zencode::decode(&shared_state.symtab.to_str(*id)));
++                    //let mut handle = BufWriter::with_capacity(5 * usize::pow(2, 10), stdout.lock());
++                    //v.write(&mut handle, shared_state);
++                    //handle.flush().unwrap();
+                     solver.add_event(Event::WriteReg(*id, accessor.to_vec(), v.clone()))
+                 }
+                 local_state.regs.assign(*id, v, shared_state);
+@@ -528,6 +549,7 @@ fn assign_with_accessor<'ir, B: BV>(
+         }
+ 
+         Loc::Field(loc, field) => {
++            //println!("Matched Field");
+             if let Val::Struct(field_values) =
+                 get_loc_and_initialize(loc, local_state, shared_state, solver, &mut accessor.clone(), info, true)?
+             {
+@@ -537,6 +559,7 @@ fn assign_with_accessor<'ir, B: BV>(
+                     Some(_) => {
+                         let mut field_values = field_values.clone();
+                         field_values.insert(*field, v);
++                        //println!("Assign_with_accessor call_instance 1");
+                         assign_with_accessor(
+                             loc,
+                             Val::Struct(field_values),
+@@ -560,14 +583,17 @@ fn assign_with_accessor<'ir, B: BV>(
+         }
+ 
+         Loc::Addr(loc) => {
++            //println!("Matched Addr");
+             if let Val::Ref(reg) = get_loc_and_initialize(loc, local_state, shared_state, solver, accessor, info, true)?
+             {
++                //println!("Assign_with_accessor call_instance 2");
+                 assign_with_accessor(&Loc::Id(reg), v, local_state, shared_state, solver, accessor, info)?
+             } else {
+                 panic!("Cannot get address of non-reference {:?}", loc)
+             }
+         }
+     };
++    //println!("Assign with accessor end!");
+     Ok(())
+ }
+ 
+@@ -580,6 +606,7 @@ fn assign<'ir, B: BV>(
+     solver: &mut Solver<B>,
+     info: SourceLoc,
+ ) -> Result<(), ExecError> {
++    //println!("Assign start!");
+     let id = loc.id();
+     if local_state.should_probe(shared_state, &id) {
+         log_from!(
+@@ -594,7 +621,7 @@ fn assign<'ir, B: BV>(
+             )
+         )
+     }
+-
++    //println!("Assign_with_accessor call_instance 3");
+     assign_with_accessor(loc, v, local_state, shared_state, solver, &mut Vec::new(), info)
+ }
+ 
+@@ -639,6 +666,7 @@ pub fn interrupt_pending<'ir, B: BV>(
+     solver: &mut Solver<B>,
+     info: SourceLoc,
+ ) -> Result<bool, ExecError> {
++    //println!("Interrupt pending start!");
+     for interrupt in &task_state.interrupts {
+         let Some(Val::Bits(reg_value)) =
+             frame.local_state.regs.get(interrupt.trigger_register, shared_state, solver, info)?
+@@ -661,6 +689,7 @@ pub fn interrupt_pending<'ir, B: BV>(
+             for (loc, reset) in &interrupt.reset {
+                 let value = reset(&frame.memory, shared_state.typedefs(), solver)?;
+                 let mut accessor = Vec::new();
++                //println!("Assign_with_accessor call_instance 4");
+                 assign_with_accessor(
+                     loc,
+                     value.clone(),
+@@ -676,7 +705,7 @@ pub fn interrupt_pending<'ir, B: BV>(
+             return Ok(true);
+         }
+     }
+-
++    //println!("Interrupt pending end!");
+     // No interrupts were pending
+     Ok(false)
+ }
+@@ -689,10 +718,12 @@ pub fn reset_registers<'ir, B: BV>(
+     solver: &mut Solver<B>,
+     info: SourceLoc,
+ ) -> Result<(), ExecError> {
++    //println!("Reset registers start!");
+     for (loc, reset) in &shared_state.reset_registers {
+         if !task_state.reset_registers.contains_key(loc) {
+             let value = reset(&frame.memory, shared_state.typedefs(), solver)?;
+             let mut accessor = Vec::new();
++            //println!("Assign_with_accessor call_instance 5");
+             assign_with_accessor(
+                 loc,
+                 value.clone(),
+@@ -713,6 +744,7 @@ pub fn reset_registers<'ir, B: BV>(
+     for (loc, reset) in &task_state.reset_registers {
+         let value = reset(&frame.memory, shared_state.typedefs(), solver)?;
+         let mut accessor = Vec::new();
++        //println!("Assign_with_accessor call_instance 6");
+         assign_with_accessor(loc, value.clone(), &mut frame.local_state, shared_state, solver, &mut accessor, info)?;
+         solver.add_event(Event::AssumeReg(loc.id(), accessor, value));
+     }
+@@ -784,6 +816,7 @@ pub fn reset_registers<'ir, B: BV>(
+         let asms = frame.function_assumptions.entry(f_name).or_default();
+         asms.push((val_args, val_result));
+     }
++    //println!("Reset registers end!");
+     Ok(())
+ }
+ 
+@@ -840,8 +873,10 @@ fn run_special_primop<'ir, B: BV>(
+     shared_state: &SharedState<'ir, B>,
+     solver: &mut Solver<B>,
+ ) -> Result<SpecialResult, ExecError> {
++    //println!("Run_special_primop start");
+     if f == INTERNAL_VECTOR_INIT && args.len() == 1 {
+         let arg = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned();
++        //println!("Internal vec init");
+         match loc {
+             Loc::Id(v) => match (arg, frame.vars().get(v)) {
+                 (Val::I64(len), Some(UVal::Uninit(Ty::Vector(_) | Ty::FixedVector(_, _)))) => assign(
+@@ -859,6 +894,7 @@ fn run_special_primop<'ir, B: BV>(
+         };
+         frame.pc += 1
+     } else if f == INTERNAL_VECTOR_UPDATE && args.len() == 3 {
++        //println!("Internal vec update");
+         let args = args
+             .iter()
+             .map(|arg| eval_exp(arg, &mut frame.local_state, shared_state, solver, info).map(Cow::into_owned))
+@@ -867,15 +903,18 @@ fn run_special_primop<'ir, B: BV>(
+         assign(tid, loc, vector, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == RESET_REGISTERS {
++        //println!("Reset regs");
+         reset_registers(tid, frame, task_state, shared_state, solver, info)?;
+         frame.regs_mut().synchronize();
+         assign(tid, loc, Val::Unit, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == INTERRUPT_PENDING {
++        //println!("Interrupt pending");
+         let pending = interrupt_pending(tid, task_id, frame, task_state, shared_state, solver, info)?;
+         assign(tid, loc, Val::Bool(pending), &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == ITE_PHI {
++        //println!("ITE PHI");
+         let mut true_value = None;
+         let mut symbolics = Vec::new();
+         for cond in args.chunks_exact(2) {
+@@ -910,6 +949,7 @@ fn run_special_primop<'ir, B: BV>(
+         }
+         frame.pc += 1
+     } else if f == REG_DEREF && args.len() == 1 {
++        //println!("Reg deref");
+         if let Val::Ref(reg) = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned() {
+             match frame.regs_mut().get(reg, shared_state, solver, info)? {
+                 Some(value) => {
+@@ -923,6 +963,7 @@ fn run_special_primop<'ir, B: BV>(
+         };
+         frame.pc += 1
+     } else if (f == ABSTRACT_CALL || f == ABSTRACT_PRIMOP) && !args.is_empty() {
++        //println!("abs call or primop");
+         let mut args = args
+             .iter()
+             .map(|arg| eval_exp(arg, &mut frame.local_state, shared_state, solver, info).map(Cow::into_owned))
+@@ -946,6 +987,7 @@ fn run_special_primop<'ir, B: BV>(
+         assign(tid, loc, return_value, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == READ_REGISTER_FROM_VECTOR {
++        //println!("Read reg from vec");
+         assert!(args.len() == 2);
+         let n = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+         let regs = eval_exp(&args[1], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+@@ -953,6 +995,7 @@ fn run_special_primop<'ir, B: BV>(
+         assign(tid, loc, value, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == WRITE_REGISTER_FROM_VECTOR {
++        //println!("Write reg from vec");
+         assert!(args.len() == 3);
+         let n = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+         let value = eval_exp(&args[1], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+@@ -961,6 +1004,7 @@ fn run_special_primop<'ir, B: BV>(
+         assign(tid, loc, Val::Unit, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if f == INSTR_ANNOUNCE {
++        //println!("Instr announce");
+         assert!(args.len() == 1);
+         let opcode = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+         if let Some((arch_pc, limit)) = task_state.pc_limit {
+@@ -991,6 +1035,7 @@ fn run_special_primop<'ir, B: BV>(
+         assign(tid, loc, Val::Unit, &mut frame.local_state, shared_state, solver, info)?;
+         frame.pc += 1
+     } else if shared_state.type_info.union_ctors.contains(&f) {
++        //println!("sth else");
+         assert!(args.len() == 1);
+         let arg = eval_exp(&args[0], &mut frame.local_state, shared_state, solver, info)?.into_owned();
+         assign(tid, loc, Val::Ctor(f, Box::new(arg)), &mut frame.local_state, shared_state, solver, info)?;
+@@ -999,6 +1044,7 @@ fn run_special_primop<'ir, B: BV>(
+         let symbol = zencode::decode(shared_state.symtab.to_str(f));
+         return Err(ExecError::NoFunction(symbol, info));
+     }
++    //println!("Run_special_primop end");
+     Ok(SpecialResult::Continue)
+ }
+ 
+@@ -1031,6 +1077,8 @@ fn run_loop<'ir, 'task, B: BV>(
+ ) -> Result<Run<B>, ExecError> {
+     let mut last_z3_reset = Instant::now();
+ 
++    //println!("Running loop start");
++
+     'main_loop: loop {
+         if frame.pc >= frame.instrs.len() {
+             // Currently this happens when evaluating letbindings.
+@@ -1126,6 +1174,7 @@ fn run_loop<'ir, 'task, B: BV>(
+ 
+             Instr::Copy(loc, exp, info) => {
+                 let value = eval_exp(exp, &mut frame.local_state, shared_state, solver, *info)?.into_owned();
++                //println!("Assign instr copy");
+                 assign(tid, loc, value, &mut frame.local_state, shared_state, solver, *info)?;
+                 frame.pc += 1;
+             }
+@@ -1133,6 +1182,7 @@ fn run_loop<'ir, 'task, B: BV>(
+             Instr::PrimopUnary(loc, f, arg, info) => {
+                 let arg = eval_exp(arg, &mut frame.local_state, shared_state, solver, *info)?.into_owned();
+                 let value = f(arg, solver, *info)?;
++                //println!("Assign primop unary");
+                 assign(tid, loc, value, &mut frame.local_state, shared_state, solver, *info)?;
+                 frame.pc += 1;
+             }
+@@ -1141,6 +1191,7 @@ fn run_loop<'ir, 'task, B: BV>(
+                 let arg1 = eval_exp(arg1, &mut frame.local_state, shared_state, solver, *info)?.into_owned();
+                 let arg2 = eval_exp(arg2, &mut frame.local_state, shared_state, solver, *info)?.into_owned();
+                 let value = f(arg1, arg2, solver, *info)?;
++                //println!("Assign primop binary");
+                 assign(tid, loc, value, &mut frame.local_state, shared_state, solver, *info)?;
+                 frame.pc += 1;
+             }
+@@ -1151,12 +1202,14 @@ fn run_loop<'ir, 'task, B: BV>(
+                     .map(|arg| eval_exp(arg, &mut frame.local_state, shared_state, solver, *info).map(Cow::into_owned))
+                     .collect::<Result<_, _>>()?;
+                 let value = f(args, solver, frame, *info)?;
++                //println!("Assign primop variadic");
+                 assign(tid, loc, value, &mut frame.local_state, shared_state, solver, *info)?;
+                 frame.pc += 1;
+             }
+ 
+             Instr::PrimopReset(loc, reset, info) => {
+                 let value = reset(&frame.memory, shared_state.typedefs(), solver)?;
++                //println!("Assign primop reset");
+                 assign(tid, loc, value, &mut frame.local_state, shared_state, solver, *info)?;
+                 frame.pc += 1;
+             }
+@@ -1240,6 +1293,7 @@ fn run_loop<'ir, 'task, B: BV>(
+                                             .unwrap()
+                                     })
+                                 {
++                                    //println!("Assign some assumptions");
+                                     assign(
+                                         tid,
+                                         loc,
+@@ -1280,6 +1334,7 @@ fn run_loop<'ir, 'task, B: BV>(
+                             frame.pc = caller_pc + 1;
+                             frame.instrs = caller_instrs;
+                             frame.stack_call = caller_stack_call.clone();
++                            //println!("Assign when call return");
+                             assign(tid, &loc.clone(), ret, &mut frame.local_state, shared_state, solver, *info)
+                         }));
+ 
+@@ -1330,6 +1385,7 @@ fn run_loop<'ir, 'task, B: BV>(
+             // certain bitvectors are non-symbolic, at the cost of
+             // increasing the number of paths.
+             Instr::Monomorphize(id, info) => {
++                //println!("get_is_and_init_loc 2");
+                 let val = get_id_and_initialize(
+                     *id,
+                     &mut frame.local_state,
+@@ -1396,7 +1452,7 @@ fn run_loop<'ir, 'task, B: BV>(
+                     solver.add_event(Event::Fork(frame.forks - 1, v, 0, *info));
+ 
+                     solver.assert_eq(Var(v), bits64(result, size));
+-
++                    //println!("Assign monomorphize");
+                     assign(
+                         tid,
+                         &Loc::Id(*id),
+@@ -1445,6 +1501,7 @@ fn run_loop<'ir, 'task, B: BV>(
+             }
+         }
+     }
++    //println!("Running loop end");
+ }
+ 
+ /// A collector is run on the result of each path found via symbolic execution through the code. It
+diff --git a/isla-lib/src/init.rs b/isla-lib/src/init.rs
+index ed1c2b2..b828bc3 100644
+--- a/isla-lib/src/init.rs
++++ b/isla-lib/src/init.rs
+@@ -53,6 +53,7 @@
+ 
+ use std::collections::{HashMap, HashSet};
+ use std::sync::Mutex;
++use std::io::{BufWriter, Read, Write};
+ 
+ use crate::bitvector::BV;
+ use crate::config::ISAConfig;
+@@ -116,6 +117,7 @@ fn initialize_register<'ir, B: BV>(
+     registers: &Mutex<RegisterBindings<'ir, B>>,
+     letbindings: &Mutex<Bindings<'ir, B>>,
+ ) {
++    let stdout = std::io::stdout();
+     if let Some(value) = initial_registers.get(id) {
+         // The value parser doesn't know what integer size to use, so correct it if necessary
+         let value = match (value, ty) {
+@@ -128,10 +130,16 @@ fn initialize_register<'ir, B: BV>(
+             .plausible(ty, shared_state)
+             .unwrap_or_else(|err_msg| panic!("Bad initial value for {}: {}", shared_state.symtab.to_str(*id), err_msg));
+         let mut regs = registers.lock().unwrap();
++        //println!("Initializing  initial value register: {} {}", zencode::decode(&shared_state.symtab.to_str(*id)), *id);
++        //TODO buf value.write(buf, shared_state)?;
++        let mut handle = BufWriter::with_capacity(5 * usize::pow(2, 10), stdout.lock());
++        value.write(&mut handle, shared_state);
++        handle.flush().unwrap();
+         regs.insert(*id, relaxed_registers.contains(id), UVal::Init(value));
+     } else {
+         {
+             let mut regs = registers.lock().unwrap();
++            //println!("Initializing register: {}", zencode::decode(&shared_state.symtab.to_str(*id)));
+             regs.insert(*id, relaxed_registers.contains(id), UVal::Uninit(ty));
+         }
+ 
+@@ -154,6 +162,7 @@ fn initialize_register<'ir, B: BV>(
+                     Ok((_, frame)) => {
+                         if let Some(v) = frame.regs().get_last_if_initialized(*id) {
+                             let mut regs = registers.lock().unwrap();
++                            //println!("Initializing register: {}", zencode::decode(&shared_state.symtab.to_str(*id)));
+                             regs.insert(*id, relaxed_registers.contains(id), UVal::Init(v.clone()))
+                         }
+                     }
+diff --git a/isla-lib/src/ir.rs b/isla-lib/src/ir.rs
+index 52cf568..a316273 100644
+--- a/isla-lib/src/ir.rs
++++ b/isla-lib/src/ir.rs
+@@ -340,6 +340,7 @@ impl<B: BV> Val<B> {
+                     Error::new(ErrorKind::Other, format!("Failed to get enumeration '{}'", enum_id.to_name()))
+                 })?;
+                 let name = zencode::decode(symtab.to_str(members[*member]));
++                //println!("Writing enum member: {} for {}", member, name);
+                 write!(buf, "|{}|", name)
+             }
+             Unit => write!(buf, "(_ unit)"),
+@@ -1053,6 +1054,7 @@ impl IRTypeInfo {
+ 
+                 Def::Enum(name, members) => {
+                     for (i, member) in members.iter().enumerate() {
++                        //println!("Found Enum Def: i: {} member: {} name: {}", i, *member, *name);
+                         enum_members.insert(*member, (i, members.len(), *name));
+                     }
+                     enums.insert(*name, members.clone());
+diff --git a/isla-lib/src/smt.rs b/isla-lib/src/smt.rs
+index 023a1fd..a1df8f5 100644
+--- a/isla-lib/src/smt.rs
++++ b/isla-lib/src/smt.rs
+@@ -1853,6 +1853,7 @@ impl<'ctx, B: BV> Solver<'ctx, B> {
+     }
+ 
+     pub fn get_enum(&mut self, id: Name, size: usize) -> EnumId {
++        //println!("Defining enum with id {}.",id);
+         if !self.enums.enums.contains_key(&id) {
+             self.add(Def::DefineEnum(id, size))
+         };
+diff --git a/src/footprint.rs b/src/footprint.rs
+index cbe539c..fc51ee0 100644
+--- a/src/footprint.rs
++++ b/src/footprint.rs
+@@ -28,16 +28,20 @@
+ // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ use crossbeam::queue::SegQueue;
++use sha2::digest::generic_array::iter;
+ use sha2::{Digest, Sha256};
++use core::num;
+ use std::collections::{HashMap, HashSet};
+ use std::convert::TryInto;
+ use std::fs::File;
+ use std::io::{BufWriter, Read, Write};
+ use std::process::exit;
++use std::str::Split;
+ use std::sync::Arc;
+ use std::time::Instant;
+ 
+ use isla_axiomatic::footprint_analysis::footprint_analysis;
++use isla_axiomatic::footprint_analysis::{Footprint, Footprintkey};
+ use isla_axiomatic::litmus::assemble_instruction;
+ use isla_axiomatic::page_table;
+ use isla_axiomatic::page_table::setup::PageTableSetup;
+@@ -54,13 +58,15 @@ use isla_lib::log;
+ use isla_lib::memory::Memory;
+ use isla_lib::register::Register;
+ use isla_lib::simplify;
+-use isla_lib::simplify::{EventTree, WriteOpts};
++use isla_lib::simplify::{EventTree, WriteOpts, EventReferences};
+ use isla_lib::smt;
+-use isla_lib::smt::{smtlib, Checkpoint, EvPath, Event, Solver};
++use isla_lib::smt::{smtlib, Checkpoint, EvPath, Event, Solver, Sym};
+ use isla_lib::smt_parser;
+ use isla_lib::source_loc::SourceLoc;
+ use isla_lib::zencode;
+ 
++//use isla::sailor::{generate_rvi_itype_opcode_vec, generate_rvi_rtype_opcode_vec};
++
+ mod opts;
+ use opts::CommonOpts;
+ 
+@@ -293,11 +299,304 @@ impl<'a, B: BV> OpcodeInfo<'a, B> {
+     }
+ }
+ 
+-fn isla_main() -> i32 {
++fn create_opcode_from_vec_rtype(opcode_vec: Vec<u64>) -> Vec<InstructionSegment<B129>> {
++    (vec![InstructionSegment::Concrete(B129::new(opcode_vec[6], 7)), InstructionSegment::Concrete(B129::new(opcode_vec[5], 5)), InstructionSegment::Concrete(B129::new(opcode_vec[4], 5)), InstructionSegment::Concrete(B129::new(opcode_vec[3], 3)), InstructionSegment::Concrete(B129::new(opcode_vec[2], 5)),  InstructionSegment::Concrete(B129::new(opcode_vec[1], 5)), InstructionSegment::Concrete(B129::new(opcode_vec[0], 2))])
++}
++
++fn create_opcode_from_vec_itype(opcode_vec: Vec<u64>) -> Vec<InstructionSegment<B129>> {
++    (vec![InstructionSegment::Concrete(B129::new(opcode_vec[5], 12)), InstructionSegment::Concrete(B129::new(opcode_vec[4], 5)), InstructionSegment::Concrete(B129::new(opcode_vec[3], 3)), InstructionSegment::Concrete(B129::new(opcode_vec[2], 5)),  InstructionSegment::Concrete(B129::new(opcode_vec[1], 5)), InstructionSegment::Concrete(B129::new(opcode_vec[0], 2))])
++}
++
++
++fn is_binary_string(s: &str) -> bool {
++    s.chars().all(|c| c == '0' || c == '1')
++}
++
++fn extract_integers(s: &str) -> Vec<u64> {
++    let mut numbers = Vec::new();
++    let mut current_number = String::new();
++
++    for c in s.chars() {
++        if c.is_digit(10) {
++            current_number.push(c);
++        } else if !current_number.is_empty() {
++            numbers.push(current_number.parse::<u64>().unwrap());
++            current_number.clear();
++        }
++    }
++
++    if !current_number.is_empty() {
++        numbers.push(current_number.parse::<u64>().unwrap());
++    }
++    for num in &numbers {
++        println!("Number for imm: {}", num);
++    }
++    numbers
++}
++
++fn find_min_max(numbers: &[u64]) -> (u64, u64) {
++    let mut min = 33;
++    let mut max = 0;
++
++    for num in numbers {
++        if *num < min {
++            min = *num;
++        }
++        if *num > max {
++            max = *num;
++        }
++    }
++    (min, max)
++}
++
++fn find_imm_len(s: &str) -> u64 {
++
++    if s.contains(",") {
++        let mut imm_len: u64 = 0;
++        let split_str = s.split(",");
++        for st in split_str { 
++            let numbers = extract_integers(st); 
++            if numbers.len() == 1 {
++                imm_len = imm_len + 1;
++            }
++            else {
++                let (min, max) = find_min_max(&numbers);
++                imm_len = imm_len + max - min + 1;
++            }
++        }
++
++        (imm_len)
++
++    } else {
++        let (min, max) = find_min_max(&extract_integers(s));
++        (max - min + 1)
++    }
++}
++
++fn parse_opcode_from_spec(line: &str) -> Vec<Vec<InstructionSegment<B129>>> {
++    let mut opcodes: Vec<Vec<InstructionSegment<B129>>> = vec![];
++
++    let words: Vec<&str> = line.split("|").collect();
++    let mut instr_name: &str = words[words.len()-1];
++    let mut has_rd: bool = false;   // always at 7-11
++    let mut has_rs1: bool = false;  // always at 15-19 
++    let mut has_rs2: bool = false;  // always at 20-24
++    let mut has_rs3: bool = false;  // always at 27-31 
++    let mut has_fm: bool = false;   // always at 28-31 
++    let mut imm_id: u64 = 0;
++    let mut has_rm: bool = false;   // always at 12-14 
++    // let has_imm: bool = false;  // always closer towards the msb, msb is the sign bit  
++    // let imm_start: u64 = 0;     
++    // let imm_end: u64 = 0;
++    // let has_second_imm: bool = false; 
++    // let second_imm_start: u64 = 0; 
++    // let second_imm_end: u64 = 0;
++    // let has_shamt: u64 = 0;     // It has to be the lower imm... always starting from 20... 
++
++    let mut bits_constructed: u64 = 0; 
++
++    let mut constructed_opcode: Vec<InstructionSegment<B129>> = vec![]; 
++
++    // Need a bit of preprocessing..... for the ones with imm [ | | | ]
++
++
++    for i in (0..words.len()-1) {
++        let words_split: Vec<&str> = words[i].split(" ").collect(); 
++        let field: &str = words_split[0];
++        println!("{}",field);
++
++        if is_binary_string(field) {
++            // calc len and add concrete segment 
++            // opcode... vs. funct3... vs. funct7... 
++            let val = match u64::from_str_radix(field, 2) {
++                Ok(int_val) => (int_val),
++                Err(_) => 0,
++            };
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(val, field.len().try_into().unwrap())))); 
++            bits_constructed = bits_constructed + (field.len() as u64);
++
++            if bits_constructed == 32 {
++                break;
++            }
++
++        } else if field.contains("imm") {
++            // decode the size and add symbolic segment 
++
++            // let indices = extract_integers(field);
++            // let (min, max) = find_min_max(&indices);
++            
++            // println!(" min: {} max: {}", min, max);
++
++            let imm_len = find_imm_len(field);
++
++            constructed_opcode.push(InstructionSegment::Symbolic(String::from("imm".to_owned()+&(imm_id.to_string())), (imm_len).try_into().unwrap())); 
++            bits_constructed = bits_constructed + (imm_len);
++            imm_id = imm_id + 1;
++
++        } // RD, RS1, and RS2 are always at fixed places in the instruction... i.e. 7..11, 15..19, 20..24.  
++        else if field.contains("rd") {
++            println!("Bits: {}",bits_constructed);
++            assert!(32 - bits_constructed == 12);
++            has_rd = true; 
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 5))));
++            bits_constructed = bits_constructed + 5;
++
++        } else if field.contains("rs1") {
++            println!("Bits: {}",bits_constructed);
++            assert!(32 - bits_constructed == 20);
++            has_rs1 = true; 
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 5))));
++            bits_constructed = bits_constructed + 5;
++        
++        } else if field.contains("rs2") {
++            println!("Bits: {}",bits_constructed);
++            assert!(32 - bits_constructed == 25);
++            has_rs2 = true; 
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 5))));
++            bits_constructed = bits_constructed + 5;
++
++        } else if field.contains("shamt") {
++            if bits_constructed == 6 {
++                constructed_opcode.push(InstructionSegment::Symbolic(String::from("shamt"), 6));
++                bits_constructed = bits_constructed + 6;
++            } else if bits_constructed == 7 {
++                constructed_opcode.push(InstructionSegment::Symbolic(String::from("shamt"), 5));
++                bits_constructed = bits_constructed + 5;
++            } else {
++                println!("{}",instr_name);
++                assert!(false);
++            }
++        
++        } else if field.contains("aq") {
++            assert!(bits_constructed == 5); 
++            constructed_opcode.push(InstructionSegment::Symbolic(String::from("aquire"), 1));
++            bits_constructed = bits_constructed + 1;
++        
++        } else if field.contains("rl") {
++            assert!(bits_constructed == 6); 
++            constructed_opcode.push(InstructionSegment::Symbolic(String::from("release"), 1));
++            bits_constructed = bits_constructed + 1;
++        
++        } else if field.contains("fm") {
++            assert!(bits_constructed == 0); 
++            has_fm = true; 
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 4))));
++            bits_constructed = bits_constructed + 4;
++            //assert!(false); // TODO 
++        
++        } else if field.contains("pred") {
++            assert!(bits_constructed == 4); 
++            constructed_opcode.push(InstructionSegment::Symbolic(String::from("pred"), 4));
++            bits_constructed = bits_constructed + 4;
++            //assert!(false); // TODO 
++        
++        } else if field.contains("succ") {
++            assert!(bits_constructed == 8); 
++            constructed_opcode.push(InstructionSegment::Symbolic(String::from("succ"), 4));
++            bits_constructed = bits_constructed + 4;
++            //assert!(false); // TODO 
++
++        } else if field.contains("rs3") {
++            assert!(bits_constructed == 0);
++            has_rs3 = true; 
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 5))));
++            bits_constructed = bits_constructed + 5;
++
++        } else if field.contains("rm") {
++            //assert!(bits_constructed == 5); 
++            has_rm = true;
++            constructed_opcode.push(InstructionSegment::Concrete((B129::new(0x0, 3))));
++            bits_constructed = bits_constructed + 3;
++        } else if field.contains("uimm") {
++            assert!(false); // TODO 
++        } 
++
++    }
++
++    if bits_constructed != 32 {
++        println!("Instruction: {}",instr_name);
++        println!("Bits: {}",bits_constructed);
++        assert!(false);
++    }
++
++    opcodes.push(constructed_opcode.clone());
++
++    if has_rd {
++        // complete for x10
++        let mut new_opcode = constructed_opcode.clone(); 
++        new_opcode[constructed_opcode.len() - 2] = InstructionSegment::Concrete((B129::new(0xa, 5)));
++        opcodes.push(new_opcode);
++    }
++
++    if has_rs1 {
++        // complete for x0 - this is not needed... it's already happening with the previous condition.
++        // for opcode in opcodes {
++        //     if opcode == constructed_opcode {
++        //         continue;
++        //     }
++        //     let mut new_opcode = opcode.clone(); 
++        //     new_opcode[new_opcode.len() - 4] = InstructionSegment::Concrete((B129::new(0x0, 5)));
++        //     opcodes.push(new_opcode);
++        // }
++        // complete for x11 
++        for opcode in opcodes.clone() {
++            let mut new_opcode = opcode.clone(); 
++            new_opcode[opcode.len() - 4] = InstructionSegment::Concrete((B129::new(0xb, 5)));
++            opcodes.push(new_opcode);
++        }
++    }
++
++    if has_rs2 {
++        for opcode in opcodes.clone() {
++            let mut new_opcode = opcode.clone(); 
++            new_opcode[opcode.len() - 5] = InstructionSegment::Concrete((B129::new(0xc, 5)));
++            opcodes.push(new_opcode);
++        }
++    }
++
++    if has_rs3 {
++        for opcode in opcodes.clone() {
++            let mut new_opcode = opcode.clone(); 
++            new_opcode[0] = InstructionSegment::Concrete((B129::new(0xd, 5)));
++            opcodes.push(new_opcode);
++        }
++    }
++
++    if has_fm {
++        for opcode in opcodes.clone() {
++            let mut new_opcode = opcode.clone(); 
++            new_opcode[0] = InstructionSegment::Concrete((B129::new(0b1000, 4)));   //TSO ... 
++            opcodes.push(new_opcode);
++        }
++    }
++
++    if has_rm { 
++        let rm_values = [0x1, 0x2, 0x3, 0x4];
++        let mut new_opcodes: Vec<Vec<InstructionSegment<B129>>> = vec![]; 
++        for val in rm_values {
++            for opcode in opcodes.clone() {
++                let mut new_opcode = opcode.clone(); 
++                new_opcode[opcode.len() - 3] = InstructionSegment::Concrete((B129::new(val, 3)));    
++                new_opcodes.push(new_opcode);
++            }
++        }
++        for opcode in new_opcodes {
++            opcodes.push(opcode);
++        }
++    }
++
++    println!("INSTRUCTION CONSTRUCTED: {}: rd: {} rs1: {} rs2: {} rs3: {} fm: {} opcodes_vec_len: {}", instr_name, has_rd, has_rs1, has_rs2, has_rs3, has_fm, opcodes.len());
++
++    (opcodes)
++}
++
++fn isla_main() -> i32  
++{
+     let now = Instant::now();
+ 
+     let mut opts = opts::common_opts();
+     opts.reqopt("i", "instruction", "display footprint of instruction", "<instruction>");
++    opts.optopt("n", "all_rv_i_instructions", "display footprint of all rv_i instructions", "<riscv-opcodes file>");
+     opts.optopt("e", "endianness", "instruction encoding endianness (default: little)", "big/little");
+     opts.optopt("", "elf", "load an elf file, and use instructions from it", "<file>");
+     opts.optflag("d", "dependency", "view instruction dependency info");
+@@ -350,6 +649,10 @@ fn isla_main() -> i32 {
+     let lets = &iarch.lets;
+     let shared_state = &&iarch.shared_state;
+ 
++    // println!("Assinging cur_priv...\n");
++    // regs.assign(cur_privilege, "Supervisor", *shared_state);
++    // println!("Done assinging cur_priv...\n");
++
+     log!(log::VERBOSE, &format!("Parsing took: {}ms", now.elapsed().as_millis()));
+ 
+     let little_endian = match matches.opt_str("endianness").as_deref() {
+@@ -374,7 +677,39 @@ fn isla_main() -> i32 {
+     let mut reset_registers: HashMap<Loc<Name>, Reset<B129>> = HashMap::new();
+     let mut constraints: Vec<String> = matches.opt_strs("instruction-constraint");
+ 
+-    let opcode: Vec<InstructionSegment<B129>> = if matches.opt_present("partial") {
++    let mut instrs_lines = "".split(""); 
++    let mut opcode: Vec<InstructionSegment<B129>> = vec![InstructionSegment::Concrete(B129::new(0x30200073, 32))];  //Neelu: default value = mret! 
++    let mut contents = String::new();
++
++    if let Some(rv_i_opcode_file) = matches.opt_str("n").as_deref() {
++        println!("RV_I option selected!");
++        //exit(0);
++        match File::open(rv_i_opcode_file) {
++            Ok(mut handle) => match handle.read_to_string(&mut contents) {
++                Ok(_) => {
++                    // Temporary...
++                    //println!("{}", contents);
++                    instrs_lines = contents.split("\n");
++                    // for line in instrs_lines {
++                    //     println!("{}", line);
++                    //     println!("..");
++                    // }
++                    //(vec![InstructionSegment::Concrete(B129::new(0x4, 12)), InstructionSegment::Concrete(B129::new(0xb, 5)), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))])
++                },
++                Err(e) => {
++                    eprintln!("Unexpected error when reading opcode from {}: {}", rv_i_opcode_file, e);
++                    return 1;
++                }
++            },
++            Err(e) => {
++                eprintln!("Failed to open opcode file: {}", e);
++                return 1;
++            }
++        }
++
++    } else {
++        opcode = if matches.opt_present("partial") {
++        println!("opcodes partial.");
+         instruction
+             .split_ascii_whitespace()
+             .map(|s| {
+@@ -393,6 +728,7 @@ fn isla_main() -> i32 {
+             })
+             .collect()
+     } else if let Some(opcode_file) = matches.opt_str("from-file").as_deref() {
++        println!("opcodes from file.");
+         let mut contents = String::new();
+         match File::open(opcode_file) {
+             Ok(mut handle) => match handle.read_to_string(&mut contents) {
+@@ -470,6 +806,7 @@ fn isla_main() -> i32 {
+         }
+         opcode_info.to_instruction_segments(&mut constraints)
+     } else if matches.opt_present("hex") {
++        println!("opcodes hex.");
+         match hex_bytes(&instruction) {
+             Ok(opcode) => vec![InstructionSegment::Concrete(opcode_bytes(opcode, little_endian))],
+             Err(e) => {
+@@ -478,19 +815,73 @@ fn isla_main() -> i32 {
+             }
+         }
+     } else if matches.opt_present("elf") {
++        println!("opcodes elf.");
+         Vec::new()
+-    } else {
++    } 
++    // else if let Some(rv_i_opcode_file) = matches.opt_str("n").as_deref() {
++    //     println!("RV_I option selected!");
++    //     //exit(0);
++    //     let mut contents = String::new();
++    //     match File::open(rv_i_opcode_file) {
++    //         Ok(mut handle) => match handle.read_to_string(&mut contents) {
++    //             Ok(_) => {
++    //                 // Temporary...
++    //                 //println!("{}", contents);
++    //                 let instrs_lines = contents.split("\n");
++    //                 for line in instrs_lines {
++    //                     println!("{}", line);
++    //                     println!("..");
++    //                 }
++    //                 //(vec![InstructionSegment::Concrete(B129::new(0x4, 12)), InstructionSegment::Concrete(B129::new(0xb, 5)), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))])
++    //             },
++    //             Err(e) => {
++    //                 eprintln!("Unexpected error when reading opcode from {}: {}", rv_i_opcode_file, e);
++    //                 return 1;
++    //             }
++    //         },
++    //         Err(e) => {
++    //             eprintln!("Failed to open opcode file: {}", e);
++    //             return 1;
++    //         }
++    //     }
++
++    //     //println!("{}", contents);
++
++    //     // Temporary...
++    //     (vec![InstructionSegment::Concrete(B129::new(0x4, 12)), InstructionSegment::Concrete(B129::new(0xb, 5)), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))])
++
++    // } 
++    else {
++        print!("Assembling instruction!");
+         match assemble_instruction(&instruction, &isa_config) {
+-            Ok(opcode) => vec![InstructionSegment::Concrete(opcode_bytes(opcode, little_endian))],
++            Ok(opcode) => vec![InstructionSegment::Concrete(opcode_bytes(opcode, little_endian))],    
++            //Ok(opcode) => vec![InstructionSegment::Concrete(B129::new(0x3020007, 28)), InstructionSegment::Symbolic(String::from("ins"), 2), InstructionSegment::Concrete(B129::new(0x3, 2))], // This works for mret.
++            
++            //Ok(opcode) => vec![InstructionSegment::Symbolic(String::from("imm"), 12), InstructionSegment::Concrete(B129::new(0xb, 5)), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))],
++            //Ok(opcode) => vec![InstructionSegment::Symbolic(String::from("imm"), 12), InstructionSegment::Symbolic(String::from("rs1"), 5), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))],
++
++            // All symbolic
++            //Ok(opcode) => vec![InstructionSegment::Symbolic(String::from("imm"), 12), InstructionSegment::Symbolic(String::from("rs1"), 5), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Symbolic(String::from("rd"), 5),  InstructionSegment::Concrete(B129::new(0b0010011, 7))],
++
++            //Ok(opcode) => vec![InstructionSegment::Concrete(B129::new(0x4, 12)), InstructionSegment::Concrete(B129::new(0xb, 5)), InstructionSegment::Concrete(B129::new(0x0, 3)), InstructionSegment::Concrete(B129::new(0xa, 5)),  InstructionSegment::Concrete(B129::new(0xb, 7))],
++
++            //Ok(opcode) => vec![InstructionSegment::Symbolic(String::from("ins"), 17), InstructionSegment::Concrete(B129::new(0xb, 15))], // --- too big of a search space
++            //Ok(opcode) => vec![InstructionSegment::Symbolic(String::from("ins"), 1), InstructionSegment::Concrete(B129::new(0x30200073, 31))], // 0..14 == 0xb -- addi // --- nope
+             Err(msg) => {
+                 eprintln!("{}", msg);
+                 return 1;
+             }
+         }
+-    };
++    }; 
++    } 
++
++    // if matches.opt_present("n") {
++    //     println!("RV_I option selected!");
++    // }
+ 
+     if !matches.opt_present("elf") {
+         log!(log::VERBOSE, &format!("opcode: {}", instruction_to_string(&opcode)));
++        println!("opcode: {}", instruction_to_string(&opcode));
+     }
+ 
+     let kill_conditions = StopConditions::parse(matches.opt_strs("kill-at"), shared_state, StopAction::Kill);
+@@ -579,6 +970,8 @@ fn isla_main() -> i32 {
+         None => "zisla_footprint".to_string(),
+     };
+ 
++    //// This if not -n 
++    if !matches.opt_present("n") {
+     let (initial_checkpoint, opcode_val) = {
+         let solver_cfg = smt::Config::new();
+         let solver_ctx = smt::Context::new(solver_cfg);
+@@ -729,11 +1122,459 @@ fn isla_main() -> i32 {
+                 }
+             }
+             Err(footprint_error) => {
++                println!("Cannot print footprint pretty.");
+                 eprintln!("{:?}", footprint_error);
+                 return 1;
+             }
+         }
+     }
++    } else {
++        //// Loop the above if -n is used... the following is for riscv-opcodes/extensions/rv_i, etc. files. 
++        // for line in instrs_lines {
++
++        //     let mut opcode_vec; 
++
++        //     if line.contains("1..0") {
++        //         if line.contains("pseudo_op") {
++        //             continue; 
++        //         } else if line.contains("31..25") {
++        //             opcode_vec = generate_rvi_rtype_opcode_vec(line);
++        //             opcode = create_opcode_from_vec_rtype(opcode_vec);
++        //         } else if line.contains("14..12") {
++        //             opcode_vec = generate_rvi_itype_opcode_vec(line);
++        //             opcode = create_opcode_from_vec_itype(opcode_vec);
++        //         }
++        //         else {
++        //             continue;
++        //         }
++        //         // So in some cases the above will generate errors.. e.g. j-type 
++        //     } else {
++        //         continue;
++        //     }
++
++        //     let (initial_checkpoint, opcode_val) = {
++        //         let solver_cfg = smt::Config::new();
++        //         let solver_ctx = smt::Context::new(solver_cfg);
++        //         let mut solver = Solver::from_checkpoint(&solver_ctx, elf_checkpoint.clone());
++        //         let opcode_val = instruction_to_val(&opcode, &constraints, &mut solver);
++        //         // Record register assumptions from defaults; others are recorded at reset-registers
++        //         let mut sorted_regs: Vec<(&Name, &Register<_>)> = regs.iter().collect();
++        //         sorted_regs.sort_by_key(|(name, _)| *name);
++        //         for (name, reg) in sorted_regs {
++        //             if let Some(value) = reg.read_last_if_initialized() {
++        //                 solver.add_event(Event::AssumeReg(*name, vec![], value.clone()))
++        //             }
++        //         }
++        //         (smt::checkpoint(&mut solver), opcode_val)
++        //     };
++        
++        //     let function_id = shared_state.symtab.lookup(&footprint_function);
++        //     let (args, ret_ty, instrs) = shared_state.functions.get(&function_id).unwrap();
++        //     let task_state = TaskState::new().with_reset_registers(reset_registers.clone());
++        //     let mut task = LocalFrame::new(function_id, args, ret_ty, Some(&[opcode_val.clone()]), instrs)
++        //         .add_lets(lets)
++        //         .add_regs(regs)
++        //         .set_memory(memory.clone())
++        //         .task_with_checkpoint(TaskId::fresh(), &task_state, initial_checkpoint);
++        //     task.set_stop_conditions(&stop_conditions);
++        
++        //     let queue = Arc::new(SegQueue::new());
++        
++        //     let now = Instant::now();
++        //     executor::start_multi(num_threads, timeout, vec![task], shared_state, queue.clone(), &executor::trace_collector);
++        //     log!(log::VERBOSE, &format!("Execution took: {}ms", now.elapsed().as_millis()));
++        
++        //     let mut paths = Vec::new();
++        //     let mut evtree: Option<EventTree<B129>> = None;
++        
++        //     let write_opts = WriteOpts {
++        //         define_enum: !matches.opt_present("simplify"),
++        //         hide_uninteresting: matches.opt_present("hide"),
++        //         ..WriteOpts::default()
++        //     };
++        
++        //     loop {
++        //         match queue.pop() {
++        //             Some(Ok((_, mut events))) if matches.opt_present("dependency") => {
++        //                 let mut events: EvPath<B129> = events
++        //                     .drain(..)
++        //                     .rev()
++        //                     .filter(|ev| {
++        //                         (ev.is_memory_read_or_write() && !ev.is_ifetch())
++        //                             || ev.is_smt()
++        //                             || ev.is_instr()
++        //                             || ev.is_cycle()
++        //                             || ev.is_write_reg()
++        //                     })
++        //                     .collect();
++        //                 simplify::remove_unused(&mut events);
++        //                 events.push(Event::Instr(opcode_val.clone()));
++        //                 paths.push(events)
++        //             }
++        //             Some(Ok((_, mut events))) if matches.opt_present("tree") => {
++        //                 let events: Vec<Event<B129>> = events.drain(..).rev().collect();
++        //                 if let Some(ref mut evtree) = evtree {
++        //                     evtree.add_events(&events)
++        //                 } else {
++        //                     evtree = Some(EventTree::from_events(&events))
++        //                 }
++        //             }
++        //             Some(Ok((_, mut events))) => {
++        //                 if matches.opt_present("simplify") {
++        //                     simplify::hide_initialization(&mut events);
++        //                     if matches.opt_present("simplify-registers") {
++        //                         simplify::remove_extra_register_fields(&mut events);
++        //                         simplify::remove_repeated_register_reads(&mut events);
++        //                         simplify::remove_unused_register_assumptions(&mut events);
++        //                     }
++        //                     simplify::remove_unused(&mut events);
++        //                     simplify::propagate_forwards_used_once(&mut events);
++        //                     simplify::commute_extract(&mut events);
++        //                     if matches.opt_present("eval-carefully") {
++        //                         simplify::eval_carefully(&mut events);
++        //                     } else {
++        //                         simplify::eval(&mut events);
++        //                     }
++        //                 }
++        //                 let events: Vec<Event<B129>> = events.drain(..).rev().collect();
++        //                 let stdout = std::io::stdout();
++        //                 // Traces can be large, so use a 5MB buffer
++        //                 let mut handle = BufWriter::with_capacity(5 * usize::pow(2, 20), stdout.lock());
++        //                 simplify::write_events_with_opts(&mut handle, &events, shared_state, &write_opts).unwrap();
++        //                 handle.flush().unwrap()
++        //             }
++        //             // Error during execution
++        //             Some(Err(err)) => {
++        //                 let msg = format!("{}", err);
++        //                 eprintln!(
++        //                     "{}",
++        //                     err.source_loc().message(source_path.as_ref(), shared_state.symtab.files(), &msg, true, true)
++        //                 );
++        //                 if !matches.opt_present("continue-on-error") {
++        //                     return 1;
++        //                 }
++        //             }
++        //             // Empty queue
++        //             None => break,
++        //         }
++        //     }
++        
++        //     if matches.opt_present("tree") {
++        //         if let Some(ref mut evtree) = evtree {
++        //             evtree.sort();
++        //             evtree.renumber();
++        //             if matches.opt_present("simplify") {
++        //                 simplify::hide_initialization_tree(evtree);
++        //                 if matches.opt_present("simplify-registers") {
++        //                     simplify::remove_extra_register_fields_tree(evtree);
++        //                     simplify::remove_repeated_register_reads_tree(evtree);
++        //                     simplify::remove_unused_register_assumptions_tree(evtree);
++        //                 }
++        //                 simplify::remove_unused_tree(evtree);
++        //                 simplify::propagate_forwards_used_once_tree(evtree);
++        //                 simplify::commute_extract_tree(evtree);
++        //                 if matches.opt_present("eval-carefully") {
++        //                     simplify::eval_carefully_tree(evtree);
++        //                 } else {
++        //                     simplify::eval_tree(evtree);
++        //                 }
++        //             }
++        //             if matches.opt_present("executable") {
++        //                 evtree.make_executable()
++        //             }
++        //             let stdout = std::io::stdout();
++        //             let mut handle = stdout.lock();
++        //             simplify::write_event_tree(&mut handle, evtree, shared_state, &write_opts);
++        //             writeln!(&mut handle).unwrap();
++        //         }
++        //     }
++        
++        //     if matches.opt_present("dependency") {
++        //         match footprint_analysis(num_threads, &[paths], &iarch_config, None) {
++        //             Ok(footprints) => {
++        //                 for (_, footprint) in footprints {
++        //                     {
++        //                         let stdout = std::io::stdout();
++        //                         let mut handle = stdout.lock();
++        //                         let _ = footprint.pretty(&mut handle, &shared_state.symtab);
++        //                     }
++        //                 }
++        //             }
++        //             Err(footprint_error) => {
++        //                 println!("Cannot print footprint pretty.");
++        //                 eprintln!("{:?}", footprint_error);
++        //                 return 1;
++        //             }
++        //         }
++        //     }
++
++        // }
++
++        //println!("Len of instruction_lines: {} ",instrs_lines.clone().count());
++        let mut iterations = instrs_lines.clone().count();
++        for line in instrs_lines {
++            
++            iterations = iterations - 1;
++            if iterations == 0 {
++                break;
++            }
++
++            println!("{}",line);
++            let processed_line = line.replace("\\|", ",");
++            println!("INSTR-LINE: {}", processed_line);
++            let opcodes_to_explore: Vec<Vec<InstructionSegment<B129>>> = parse_opcode_from_spec(&processed_line);
++
++            for opcode in opcodes_to_explore {  
++
++            let (initial_checkpoint, opcode_val) = {
++                let solver_cfg = smt::Config::new();
++                let solver_ctx = smt::Context::new(solver_cfg);
++                let mut solver = Solver::from_checkpoint(&solver_ctx, elf_checkpoint.clone());
++                let opcode_val = instruction_to_val(&opcode, &constraints, &mut solver);
++                // Record register assumptions from defaults; others are recorded at reset-registers
++                let mut sorted_regs: Vec<(&Name, &Register<_>)> = regs.iter().collect();
++                sorted_regs.sort_by_key(|(name, _)| *name);
++                for (name, reg) in sorted_regs {
++                    if let Some(value) = reg.read_last_if_initialized() {
++                        println!("Adding AssumeReg event for {}", *name);
++                        solver.add_event(Event::AssumeReg(*name, vec![], value.clone()))
++                    }
++                }
++                (smt::checkpoint(&mut solver), opcode_val)
++            };
++        
++            let function_id = shared_state.symtab.lookup(&footprint_function);
++            let (args, ret_ty, instrs) = shared_state.functions.get(&function_id).unwrap();
++            let task_state = TaskState::new().with_reset_registers(reset_registers.clone());
++            let mut task = LocalFrame::new(function_id, args, ret_ty, Some(&[opcode_val.clone()]), instrs)
++                .add_lets(lets)
++                .add_regs(regs)
++                .set_memory(memory.clone())
++                .task_with_checkpoint(TaskId::fresh(), &task_state, initial_checkpoint);
++            task.set_stop_conditions(&stop_conditions);
++            
++            //let mut B = BV::new(0, 32); // Neelu: IDK if this is correct!  
++            
++            //let mut footprint_buckets: Vec<Vec<EvPath<B>>> = vec![Vec::new(); 1];   //there is only 1 task 
++
++            let queue = Arc::new(SegQueue::new());
++        
++            let now = Instant::now();
++            executor::start_multi(num_threads, timeout, vec![task], shared_state, queue.clone(), &executor::trace_collector);
++            log!(log::VERBOSE, &format!("Execution took: {}ms", now.elapsed().as_millis()));
++        
++            let mut paths = Vec::new();
++            let mut evtree: Option<EventTree<B129>> = None;
++        
++            let write_opts = WriteOpts {
++                define_enum: !matches.opt_present("simplify"),
++                hide_uninteresting: matches.opt_present("hide"),
++                ..WriteOpts::default()
++            };
++        
++            loop {
++                match queue.pop() {
++                    Some(Ok((_, mut events))) if matches.opt_present("dependency") => {
++                        let mut events: EvPath<B129> = events
++                            .drain(..)
++                            .rev()
++                            .filter(|ev| {
++                                (ev.is_memory_read_or_write() && !ev.is_ifetch())
++                                    || ev.is_smt()
++                                    || ev.is_instr()
++                                    || ev.is_cycle()
++                                    || ev.is_write_reg()
++                            })
++                            .collect();
++                        simplify::remove_unused(&mut events);
++                        //footprint_buckets[opcode_val.clone()].push(events);
++                        events.push(Event::Instr(opcode_val.clone()));
++                        paths.push(events)
++                    }
++                    Some(Ok((_, mut events))) if matches.opt_present("tree") => {
++                        let events: Vec<Event<B129>> = events.drain(..).rev().collect();
++                        if let Some(ref mut evtree) = evtree {
++                            evtree.add_events(&events)
++                        } else {
++                            evtree = Some(EventTree::from_events(&events))
++                        }
++                    }
++                    Some(Ok((_, mut events))) => {
++                        if matches.opt_present("simplify") {
++                            simplify::hide_initialization(&mut events);
++                            if matches.opt_present("simplify-registers") {
++                                println!(" **** Simplifying registers **** ");
++                                simplify::remove_extra_register_fields(&mut events);
++                                simplify::remove_repeated_register_reads(&mut events);
++                                simplify::remove_unused_register_assumptions(&mut events);
++                            }
++                            simplify::remove_unused(&mut events);
++                            simplify::propagate_forwards_used_once(&mut events);
++                            simplify::commute_extract(&mut events);
++                            if matches.opt_present("eval-carefully") {
++                                simplify::eval_carefully(&mut events);
++                            } else {
++                                simplify::eval(&mut events);
++                            }
++                        }
++                        let events: Vec<Event<B129>> = events.drain(..).rev().collect();
++                        let stdout = std::io::stdout();
++                        // Traces can be large, so use a 5MB buffer
++                        let mut handle = BufWriter::with_capacity(5 * usize::pow(2, 20), stdout.lock());
++                        simplify::write_events_with_opts(&mut handle, &events, shared_state, &write_opts).unwrap();
++                        handle.flush().unwrap()
++                    }
++                    // Error during execution
++                    Some(Err(err)) => {
++                        let msg = format!("{}", err);
++                        eprintln!(
++                            "{}",
++                            err.source_loc().message(source_path.as_ref(), shared_state.symtab.files(), &msg, true, true)
++                        );
++                        if !matches.opt_present("continue-on-error") {
++                            return 1;
++                        }
++                    }
++                    // Empty queue
++                    None => break,
++                }
++            }
++        
++            if matches.opt_present("tree") {
++                if let Some(ref mut evtree) = evtree {
++                    evtree.sort();
++                    evtree.renumber();
++                    if matches.opt_present("simplify") {
++                        simplify::hide_initialization_tree(evtree);
++                        if matches.opt_present("simplify-registers") {
++                            simplify::remove_extra_register_fields_tree(evtree);
++                            simplify::remove_repeated_register_reads_tree(evtree);
++                            simplify::remove_unused_register_assumptions_tree(evtree);
++                        }
++                        simplify::remove_unused_tree(evtree);
++                        simplify::propagate_forwards_used_once_tree(evtree);
++                        simplify::commute_extract_tree(evtree);
++                        if matches.opt_present("eval-carefully") {
++                            simplify::eval_carefully_tree(evtree);
++                        } else {
++                            simplify::eval_tree(evtree);
++                        }
++                    }
++                    if matches.opt_present("executable") {
++                        evtree.make_executable()
++                    }
++                    let stdout = std::io::stdout();
++                    let mut handle = stdout.lock();
++                    simplify::write_event_tree(&mut handle, evtree, shared_state, &write_opts);
++                    writeln!(&mut handle).unwrap();
++                }
++            }
++        
++            // if matches.opt_present("dependency") {
++            //     let mut footprints = HashMap::new();
++            //     let num_footprints: usize = footprint_buckets.iter().map(|instr_paths| instr_paths.len()).sum();
++            //     log!(log::VERBOSE, &format!("There are {} footprints", num_footprints));
++
++            //     for (i, paths) in footprint_buckets.iter().enumerate() {
++            //         let opcode = opcode_val;
++            //         log!(log::VERBOSE, &format!("{:?}", opcode));
++
++            //         let mut footprint = Footprint::new();
++
++            //         for events in paths {
++            //             let evrefs = EventReferences::from_events(events);
++            //             let mut forks: Vec<Sym> = Vec::new();
++            //             let mut intrinsic_data: HashMap<Sym, HashSet<RegisterField>> = HashMap::new();
++            //             let mut intrinsic_ctrl: HashSet<RegisterField> = HashSet::new();
++            //             for event in events {
++            //                 match event {
++            //                     // Event::Smt(smtlib::Def::DefineConst(v, exp), _, _) => {
++            //                     //     let mut register_data: HashSet<RegisterField> = HashSet::new();
++            //                     //     for v in exp.variables() {
++            //                     //         register_data.extend(intrinsic_data.get(&v).into_iter().flatten().cloned())
++            //                     //     }
++            //                     //     intrinsic_data.insert(*v, register_data);
++            //                     // }
++            //                     // Event::Fork(_, v, _, _) => {
++            //                     //     forks.push(*v);
++            //                     //     intrinsic_ctrl.extend(intrinsic_data.get(v).into_iter().flatten().cloned());
++            //                     // }
++            //                     Event::ReadReg(rd_reg, accessor, val) if !iarch_config.isa_config.ignored_registers.contains(&rd_reg) => {
++            //                         footprint.register_reads.insert((*rd_reg, accessor.clone()));
++            //                         // let vars = val.symbolic_variables();
++            //                         // for v in vars {
++            //                         //     let reg_taints = intrinsic_data.entry(v).or_default();
++            //                         //     reg_taints.insert((*rd_reg, accessor.clone()));
++            //                         // }
++            //                     }
++            //                     Event::WriteReg(wr_reg, accessor, data) if !iarch_config.isa_config.ignored_registers.contains(&wr_reg) => {
++            //                         footprint.register_writes.insert((*wr_reg, accessor.clone()));
++            //                         // If the data written to the register is tainted by a value read
++            //                         // from memory record this fact.
++            //                         if evrefs.value_taints(data, events).memory {
++            //                             footprint.register_writes_tainted.insert((*wr_reg, accessor.clone()));
++            //                         }
++            //                     }
++            //                     Event::MarkReg { regs, mark } => {
++            //                         if mark == "pick" && regs.len() == 1 {
++            //                             let picks = footprint.register_pick_deps.entry(regs[0]).or_default();
++            //                             picks.extend(intrinsic_ctrl.iter().cloned())
++            //                         } else if mark == "ignore_write" && regs.len() == 1 {
++            //                             footprint.register_writes_ignored.insert((None, regs[0]));
++            //                         } else if mark == "ignore_edge" && regs.len() == 2 {
++            //                             footprint.register_writes_ignored.insert((Some(regs[0]), regs[1]));
++            //                         }
++            //                     }
++            //                     Event::ReadMem { address, .. } => {
++            //                         footprint.is_load = true;
++            //                         if event.is_exclusive() {
++            //                             footprint.is_exclusive = true;
++            //                         }
++            //                         evrefs.collect_value_taints(address, events, &mut footprint.mem_addr_taints)
++            //                     }
++            //                     Event::WriteMem { address, data, .. } => {
++            //                         footprint.is_store = true;
++            //                         if event.is_exclusive() {
++            //                             footprint.is_exclusive = true;
++            //                         }
++            //                         evrefs.collect_value_taints(address, events, &mut footprint.mem_addr_taints);
++            //                         evrefs.collect_value_taints(data, events, &mut footprint.write_data_taints);
++            //                     }
++            //                     Event::AddressAnnounce { address } => {
++            //                         evrefs.collect_value_taints(address, events, &mut footprint.mem_addr_taints);
++            //                     }
++            //                     Event::Branch { address } => {
++            //                         footprint.is_branch = true;
++            //                         evrefs.collect_value_taints(address, events, &mut footprint.branch_addr_taints);
++            //                         for v in &forks {
++            //                             evrefs.collect_taints(*v, events, &mut footprint.branch_addr_taints)
++            //                         }
++            //                     }
++            //                     Event::Abstract { name, .. }
++            //                         if iarch_config.shared_state.symtab.to_str(*name) == "zsail_system_register_write" =>
++            //                     {
++            //                         footprint.is_system_register_write = true
++            //                     }
++            //                     _ => (),
++            //                 }
++            //             }
++            //         }
++
++            //         footprints.insert(opcode, footprint);
++            //     }
++            //     for (_, footprint) in footprints {
++            //         {
++            //             let stdout = std::io::stdout();
++            //             let mut handle = stdout.lock();
++            //             let _ = footprint.pretty(&mut handle, &shared_state.symtab);
++            //         }
++            //     }
++            // }
++
++            }
++        }
++
++    }
+ 
+     0
+ }
+diff --git a/src/lib.rs b/src/lib.rs
+index 0b7fbcd..6711a91 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -28,3 +28,4 @@
+ // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ pub mod opts;
++//pub mod sailor;

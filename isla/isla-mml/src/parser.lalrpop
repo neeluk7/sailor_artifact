@@ -1,0 +1,516 @@
+// BSD 2-Clause License
+//
+// Copyright (c) 2022 Alasdair Armstrong
+//
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+// 1. Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+use isla_lib::bitvector::b64::B64;
+use isla_lib::bitvector::{bit_vector_from_str, BV};
+
+use crate::memory_model::*;
+use crate::lexer::*;
+
+use lalrpop_util::ParseError;
+
+grammar<'input>(file: usize, arena: &mut ExpArena, symtab: &mut Symtab);
+
+Spanned<T>: Spanned<T> = {
+    <start:@L> <x:T> <end:@R> => Spanned { node: x, file, span: (start, end) }
+}
+
+Comma<T>: Vec<T> = {
+    <mut v:(<T> ",")*> <e:T> => {
+        v.push(e);
+        v
+    },
+    => Vec::new(),
+};
+
+CommaNonEmpty<T>: Vec<T> = {
+    <mut v:(<T> ",")*> <e:T> => {
+        v.push(e);
+        v
+    }
+};
+
+CommaTwoOrMore<T>: Vec<T> = {
+    <mut v:(<T> ",")+> <e:T> => {
+        v.push(e);
+        v
+    }
+};
+
+BarNonEmpty<T>: Vec<T> = {
+    <mut v:(<T> "|")*> <e:T> => {
+        v.push(e);
+        v
+    }
+};
+
+Arg: Option<ExpId> = {
+    <x:Exp> => Some(x),
+    "_" => None,
+}
+
+Arg0: Option<ExpId> = {
+    <x:Exp0> => Some(x),
+    "_" => None,
+}
+
+U32: u32 = {
+    <start:@L> <n:"natural"> <end:@R> =>? u32::from_str_radix(n, 10).map_err(|e| ParseError::User {
+        error: ModelParseError::ParseInt { error: e, span: (start, end) }
+    }),
+}
+
+Usize: usize = {
+    <start:@L> <n:"natural"> <end:@R> =>? usize::from_str_radix(n, 10).map_err(|e| ParseError::User {
+        error: ModelParseError::ParseInt { error: e, span: (start, end) }
+    }),
+}
+
+I128: i128 = {
+    <start:@L> <n:"natural"> <end:@R> =>? i128::from_str_radix(n, 10).map_err(|e| ParseError::User {
+        error: ModelParseError::ParseInt { error: e, span: (start, end) }
+    }),
+}
+
+FixedNat: Vec<bool> = {
+    <start:@L> <n:"fixed_natural"> <end:@R> =>? {
+        let (value, width) = n.split_once('i').unwrap();
+        let value = u64::from_str_radix(n, 10).map_err(|e| ParseError::User {
+            error: ModelParseError::ParseInt { error: e, span: (start, end) }
+        })?;
+        let width = u32::from_str_radix(n, 10).map_err(|e| ParseError::User {
+            error: ModelParseError::ParseInt { error: e, span: (start, end) }
+        })?;
+        Ok(B64::new(value, width).to_vec())
+    }
+}
+
+Ctor: Vec<Accessor> = {
+    <id:Id> "=>" <mut a:FieldAccessor> => {
+        a.push(Accessor::Ctor(id));
+        a
+    },
+    "_" "=>" <mut a:FieldAccessor> => {
+        a.push(Accessor::Wildcard);
+        a
+    },
+}
+
+FieldAccessor: Vec<Accessor> = {
+    <a:Accessor> => a,
+    <hex:"hex"> => vec![Accessor::Bits(bit_vector_from_str(hex).unwrap())],
+    <bin:"bin"> => vec![Accessor::Bits(bit_vector_from_str(bin).unwrap())],
+    <id:Id> => vec![Accessor::Id(id)],
+}
+
+Accessor: Vec<Accessor> = {
+    "is" <expected:Id> => vec![Accessor::Is(expected)],
+    "." <a:DotAccessor> => a,
+    "[" <hi:U32> ".." <lo:U32> "]" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Subvec(hi, lo)],
+            Some(mut a) => {
+                a.push(Accessor::Subvec(hi, lo));
+                a
+            },
+        }
+    },
+}
+
+#[inline]
+FieldName: Name = {
+    <field:Id> => field,
+}
+
+DotAccessor: Vec<Accessor> = {
+    "match" "{" <mut ctors:CommaNonEmpty<Ctor>> "}" => {
+        let mut acc = Vec::new();
+        for ctor in ctors.iter_mut() {
+            acc.append(ctor)
+        }
+        acc.push(Accessor::Match(ctors.len()));
+        acc
+    },
+    <field:FieldName> <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Field(field)],
+            Some(mut a) => {
+                a.push(Accessor::Field(field));
+                a
+            },
+        }
+    },
+    "extz" "(" <n:U32> ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Extz(n)],
+            Some(mut a) => {
+                a.push(Accessor::Extz(n));
+                a
+            },
+        }
+    },
+    "exts" "(" <n:U32> ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Exts(n)],
+            Some(mut a) => {
+                a.push(Accessor::Exts(n));
+                a
+            },
+        }
+    },
+    "length" "(" <n:U32> ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Length(n)],
+            Some(mut a) => {
+                a.push(Accessor::Length(n));
+                a
+            },
+        }
+    },
+    "address" "(" ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Address],
+            Some(mut a) => {
+                a.push(Accessor::Address);
+                a
+            },
+        }
+    },
+    "data" "(" ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Data],
+            Some(mut a) => {
+                a.push(Accessor::Data);
+                a
+            },
+        }
+    },
+    "opcode" "(" ")" <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Opcode],
+            Some(mut a) => {
+                a.push(Accessor::Opcode);
+                a
+            },
+        }
+    },
+    <n:Usize> <a:(<Accessor>)?> => {
+        match a {
+            None => vec![Accessor::Tuple(n)],
+            Some(mut a) => {
+                a.push(Accessor::Tuple(n));
+                a
+            }
+        }
+    }
+}
+
+AtomicExp: ExpId = {
+    <start:@L> <hex:"hex"> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Bits(bit_vector_from_str(hex).unwrap()), file, span: (start, end) }),
+    <start:@L> <bin:"bin"> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Bits(bit_vector_from_str(bin).unwrap()), file, span: (start, end) }),
+    <start:@L> "{" "}" <end:@R> => arena.alloc(Spanned { node: Exp::Empty, file, span: (start, end) }),
+    <start:@L> "{" <xs:CommaNonEmpty<Exp>> "}" <end:@R> => arena.alloc(Spanned { node: Exp::SetLiteral(xs), file, span: (start, end) }),
+    <id:Spanned<Id>> => arena.alloc(Spanned { node: Exp::Id(id.node), file, span: id.span }),
+    <start:@L> <id:Id> "(" <args:Comma<Arg>> ")" <end:@R> =>
+        arena.alloc(Spanned { node: Exp::App(id, args), file, span: (start, end) }),
+    "(" <x:Exp> ")" => x,
+    <start:@L> "(" <xs:CommaTwoOrMore<Exp>> ")" <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Tuple(xs), file, span: (start, end) }),
+    <start:@L> "[" <x:Exp> "]" <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Unary(Unary::Identity, x), file, span: (start, end) }),
+    <start:@L> <i:I128> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Int(i), file, span: (start, end) }),
+}
+
+PrefixExp: ExpId = {
+    <x:AtomicExp> => x,
+    <start:@L> "~" <x:PrefixExp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Unary(Unary::Compl, x),  file, span: (start, end) }),
+}
+
+PostfixExp: ExpId = {
+    <x:PrefixExp> => x,
+    <start:@L> <x:AtomicExp> <accessor:Accessor> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Accessor(x, accessor), file, span: (start, end) }),
+    <start:@L> <x:AtomicExp> "[" <ix:Exp> "]" <accessor:Accessor> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Accessor(x, accessor), file, span: (start, end) }),
+    <start:@L> <x:PostfixExp> "?" <end:@R> => 
+        arena.alloc(Spanned { node: Exp::Unary(Unary::IdentityUnion, x),  file, span: (start, end) }),
+    <start:@L> <x:PostfixExp> "^-1" <end:@R> => 
+        arena.alloc(Spanned { node: Exp::Unary(Unary::Inverse, x),  file, span: (start, end) }),
+    <start:@L> <x:PostfixExp> "^*" <end:@R> => 
+        arena.alloc(Spanned { node: Exp::Unary(Unary::RTClosure, x),  file, span: (start, end) }),
+    <start:@L> <x:PostfixExp> "^+" <end:@R> => 
+        arena.alloc(Spanned { node: Exp::Unary(Unary::TClosure, x),  file, span: (start, end) }),
+}
+
+Exp0: ExpId = {
+    <x:PostfixExp> => x,
+}
+
+Exp1: ExpId = {
+    <x:Exp0> => x,
+    <start:@L> <x:Arg0> "*" <y:Arg0> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Cartesian(x, y), file, span: (start, end) }),
+}
+
+Exp2: ExpId = {
+    <x:Exp1> => x,
+    <start:@L> <x:Exp2> "\\" <y:Exp1> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Diff, x, y), file, span: (start, end) }),
+}
+
+Exp3: ExpId = {
+    <x:Exp2> => x,
+    <start:@L> <x:Exp2> "&" <y:Exp3> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Inter, x, y), file, span: (start, end) }),
+}
+
+Exp4: ExpId = {
+    <x:Exp3> => x,
+    <start:@L> <x:Exp3> ";" <y:Exp4> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Seq, x, y), file, span: (start, end) }),
+}
+
+Exp4a: ExpId = {
+    <x: Exp4> => x,
+    <start:@L> "if" <v:Id> "then" <x:Exp4> "else" <y:Exp4> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::IfThen(v, x, Some(y)), file, span: (start, end) }),
+    <start:@L> "if" <v:Id> "then" <x:Exp4> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::IfThen(v, x, None), file, span: (start, end) }),
+}
+
+Exp5: ExpId = {
+    <x:Exp4a> => x,
+    <start:@L> <x:Exp4a> "|" <y:Exp5> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Union, x, y), file, span: (start, end) }),
+}
+
+Exp6: ExpId = {
+    <x:Exp5> => x,
+    <start:@L> <x:Exp5> "-->" <y:Exp5> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Implies, x, y), file, span: (start, end) }),
+    <start:@L> <x:Exp5> "in" <y:Exp5> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::In, x, y), file, span: (start, end) }),
+    <start:@L> <x:Exp5> "==" <y:Exp5> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Eq, x, y), file, span: (start, end) }),
+    <start:@L> <x:Exp5> "!=" <y:Exp5> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Binary(Binary::Neq, x, y), file, span: (start, end) }),
+}
+
+Exp: ExpId = {
+    <x:Exp6> => x,
+    <start:@L> "set" <p:Id> <pty:TyAnnot> "=>" <x:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Set(p, pty, x), file, span: (start, end) }),
+    <start:@L> "relation" <p:Id> <pty:TyAnnot> "," <q:Id> <qty:TyAnnot> "=>" <x:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Relation(p, pty, q, qty, x), file, span: (start, end) }),
+    <start:@L> "forall" <ps:Comma<Param>> "=>" <x:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Forall(ps, x), file, span: (start, end) }),
+    <start:@L> "exists" <ps:Comma<Param>> "=>" <x:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::Exists(ps, x), file, span: (start, end) }),
+}
+
+WhereExp: ExpId = {
+    <x:Exp> => x,
+    <start:@L> <x:Exp> "where" "forall" <ps:Comma<Param>> "=>" <cond:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::WhereForall(x, ps, cond), file, span: (start, end) }),
+    <start:@L> <x:Exp> "where" "exists" <ps:Comma<Param>> "=>" <cond:Exp> <end:@R> =>
+        arena.alloc(Spanned { node: Exp::WhereExists(x, ps, cond), file, span: (start, end) }),
+}
+
+#[inline]
+TyAnnot: TyAnnot = {
+  ":" <ty:AtomicExp> => Some(ty),
+  => None,
+}
+
+Check: Check = {
+    "acyclic" => Check::Acyclic,
+    "irreflexive" => Check::Irreflexive,
+    "empty" => Check::Empty,
+    "~" "acyclic" => Check::NonAcyclic,
+    "~" "irreflexive" => Check::NonIrreflexive,
+    "~" "empty" => Check::NonEmpty,
+}
+
+Param: (Name, TyAnnot) = {
+    <arg:Id> <ty:TyAnnot> => (arg, ty),
+}
+
+ParamTyRequired: (Name, ExpId) = {
+    <arg:Id> ":" <ty:AtomicExp> => (arg, ty),
+}
+
+Def: Spanned<Def> = {
+    <start:@L> "let" <f:TopLevelId> <ty:TyAnnot> "=" <x:WhereExp> <end:@R> =>
+        Spanned { node: Def::Let(f, Vec::new(), ty, x), file, span: (start, end) },
+    <start:@L> "let" <f:TopLevelId> "(" <params:Comma<Param>> ")" <ty:TyAnnot> "=" <x:WhereExp> <end:@R> =>
+        Spanned { node: Def::Let(f, params, ty, x), file, span: (start, end) },
+    <start:@L> <check:Check> <x:Exp> "as" <id:Id> <end:@R> =>
+        Spanned { node: Def::Check(check, x, id), file, span: (start, end) },
+    <start:@L> "assert" <x:Exp> <end:@R> =>
+        Spanned { node: Def::Assert(x), file, span: (start, end) },
+    <start:@L> "include" <path:"string"> <end:@R> =>
+        Spanned { node: Def::Include(path.to_string()), file, span: (start, end) },
+    <start:@L> "set" <id:TopLevelId> <end:@R> =>
+        Spanned { node: Def::Relation(1, id), file, span: (start, end) },
+    <start:@L> "relation" <id:TopLevelId> <end:@R> =>
+        Spanned { node: Def::Relation(2, id), file, span: (start, end) },
+    <start:@L> "relation" <n:U32> <id:TopLevelId> <end:@R> =>? {
+        if n == 0 {
+            Err(ParseError::User { error: ModelParseError::NullaryRelation { span: (start, end) } })
+        } else {
+            Ok(Spanned { node: Def::Relation(n, id), file, span: (start, end) })
+        }
+    },
+    <start:@L> "variant" <ids:VariantId+> <end:@R> =>? {
+            Ok(Spanned { node: Def::Variants(ids), file, span: (start, end) })
+    },
+    <start:@L> "show" <ids:CommaNonEmpty<TopLevelId>> <end:@R> =>
+        Spanned { node: Def::Show(ids), file, span: (start, end) },
+    <start:@L> "flag" <check:Check> <x:Exp> "as" <id:Id> <end:@R> =>
+        Spanned { node: Def::Flag(check, x, id), file, span: (start, end) },
+    <start:@L> "declare" <f:TopLevelId> "(" <tys:CommaNonEmpty<Exp>> ")" ":" <ret_ty:Exp> <end:@R> =>
+        Spanned { node: Def::Declare(f, tys, ret_ty), file, span: (start, end) },
+    <start:@L> "declare" <f:TopLevelId> ":" <ret_ty:Exp> <end:@R> =>
+        Spanned { node: Def::Declare(f, Vec::new(), ret_ty), file, span: (start, end) },
+    <start:@L> "define" <f:TopLevelId> "(" <params:CommaNonEmpty<ParamTyRequired>> ")" ":" <ret_ty:Exp> "=" <body:Exp> <end:@R> =>
+        Spanned { node: Def::Define(f, params, ret_ty, body), file, span: (start, end) },
+    <start:@L> "define" <f:TopLevelId> ":" <ret_ty:Exp> "=" <body:Exp> <end:@R> =>
+        Spanned { node: Def::Define(f, Vec::new(), ret_ty, body), file, span: (start, end) },
+    <start:@L> "accessor" <f:Id> ":" <ret_ty:Exp> "=" <acc:Accessor> <end:@R> =>
+        Spanned { node: Def::Accessor(f, ret_ty, acc), file, span: (start, end) },
+    <start:@L> "accessor" <f:Id> "[" <ix:Id> "]" ":" <ret_ty:Exp> "=" <acc:Accessor> <end:@R> =>
+        Spanned { node: Def::IndexedAccessor(f, ix, ret_ty, acc), file, span: (start, end) },
+    <start:@L> "index" <i:Id> <end:@L> =>
+        Spanned { node: Def::Index(i), file, span: (start, end) },
+}
+
+pub MemoryModel: MemoryModel = {
+    <tag:"string"?> <defs:Def*> => MemoryModel {
+        tag: tag.map(str::to_string),
+        defs,
+    },
+}
+
+TopLevelId: Name = {
+    <id:"id"> => symtab.intern_toplevel(id),
+    "data" => symtab.set_toplevel(constants::DATA.name()),
+    "address" => symtab.set_toplevel(constants::ADDRESS.name()),
+}
+
+Id: Name = {
+    <id:"id"> => symtab.intern(id),
+    "data" => constants::DATA.name(),
+    "address" => constants::ADDRESS.name(),
+}
+
+VariantId: Name = {
+    <id:"id"> => symtab.intern_variant_name(id),
+}
+
+extern {
+    type Location = usize;
+    type Error = ModelParseError;
+
+    enum Tok<'input> {
+        "id" => Tok::Id(<&'input str>),
+        "string" => Tok::String(<&'input str>),
+        "bin" => Tok::Bin(<&'input str>),
+        "hex" => Tok::Hex(<&'input str>),
+        "natural" => Tok::Nat(<&'input str>),
+        "fixed_natural" => Tok::FixedNat(<&'input str>),
+        "!=" => Tok::Neq,
+        "&" => Tok::Amp,
+        "(" => Tok::Lparen,
+        ")" => Tok::Rparen,
+        "*" => Tok::Star,
+        "+" => Tok::Plus,
+        "++" => Tok::PlusPlus,
+        "," => Tok::Comma,
+        "." => Tok::Dot,
+        ".." => Tok::DotDot,
+        "0" => Tok::Zero,
+        ":" => Tok::Colon,
+        ";" => Tok::SemiColon,
+        "=" => Tok::Eq,
+        "==" => Tok::EqEq,
+        "=>" => Tok::EqGt,
+        "-->" => Tok::Implies,
+        "?" => Tok::Question,
+        "[" => Tok::Lsquare,
+        "\\" => Tok::Backslash,
+        "]" => Tok::Rsquare,
+        "^*" => Tok::HatStar,
+        "^+" => Tok::HatPlus,
+        "^-1" => Tok::Inverse,
+        "_" => Tok::Underscore,
+        "accessor" => Tok::Accessor,
+        "acyclic" => Tok::Acyclic,
+        "address" => Tok::Address,
+        "and" => Tok::And,
+        "as" => Tok::As,
+        "assert" => Tok::Assert,
+        "data" => Tok::Data,
+        "declare" => Tok::Declare,
+        "define" => Tok::Define,
+        "else" => Tok::Else,
+        "empty" => Tok::Empty,
+        "equals" => Tok::Equals,
+        "exists" => Tok::Exists,
+        "exts" => Tok::Exts,
+        "extz" => Tok::Extz,
+        "flag" => Tok::Flag,
+        "forall" => Tok::Forall,
+        "if" => Tok::If,
+        "in" => Tok::In,
+        "include" => Tok::Include,
+        "index" => Tok::Index,
+        "irreflexive" => Tok::Irreflexive,
+        "is" => Tok::Is,
+        "length" => Tok::Length,
+        "let" => Tok::Let,
+        "match" => Tok::Match,
+        "opcode" => Tok::Opcode,
+        "relation" => Tok::Relation,
+        "return" => Tok::Return,
+        "set" => Tok::Set,
+        "show" => Tok::Show,
+        "then" => Tok::Then,
+        "unshow" => Tok::Unshow,
+        "variant" => Tok::Variant,
+        "where" => Tok::Where,
+        "{" => Tok::Lbrace,
+        "|" => Tok::Bar,
+        "}" => Tok::Rbrace,
+        "~" => Tok::Tilde,
+    }
+}

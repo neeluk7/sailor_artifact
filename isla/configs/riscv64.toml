@@ -1,0 +1,200 @@
+# This is a config for Sail RISC-V in 64-bit mode
+
+pc = "PC"
+
+zero_announce_exit = true
+
+default_sizeof = 4
+
+in_program_order = ["sail_barrier"]
+
+[[toolchain]]
+name = "macos-riscv64"
+os = "macos"
+arch = "aarch64"
+assembler = "riscv64-elf-as -march=rv64gczihpmzicntr"
+objdump = "riscv64-elf-objdump"
+nm = "riscv64-elf-nm"
+linker = "riscv64-elf-ld"
+
+[[toolchain]]
+name = "default"
+#assembler = "riscv64-linux-gnu-as -march=rv64imac"
+#objdump = "riscv64-linux-gnu-objdump"
+#linker = "riscv64-linux-gnu-ld"
+#nm = "riscv64-linux-gnu-nm"
+#assembler = "riscv64-unknown-linux-gnu-as -march=rv64gc"
+#objdump = "riscv64-unknown-linux-gnu-objdump"
+#linker = "riscv64-unknown-linux-gnu-ld"
+#nm = "riscv64-unknown-linux-gnu-nm"
+
+#assembler = "riscv64-unknown-elf-as -march=rv64gc"
+#objdump = "riscv64-unknown-elf-objdump"
+#linker = "riscv64-unknown-elf-ld"
+#nm = "riscv64-unknown-elf-nm"
+
+assembler = "riscv64-linux-gnu-as -march=rv64gc"
+objdump = "riscv64-linux-gnu-objdump"
+linker = "riscv64-linux-gnu-ld"
+nm = "riscv64-linux-gnu-nm"
+
+# Currently not used for RISC-V
+[mmu]
+page_table_base = "0x300000"
+page_size = "4096"
+s2_page_table_base = "0x300000"
+s2_page_size = "4096"
+
+[threads]
+base = "0x80100000"
+top = "0x80300000"
+stride = "0x10000"
+
+[symbolic_addrs]
+base = "0x80310000"
+top = "0x80410000"
+stride = "0x10"
+
+[registers.defaults]
+satp = "0x0000000000000000"
+mtvec = "{ bits = 0x0000000000000000 }"
+#misa = "{ bits = 0x0000000000000000 }"
+#mstatus = "{ bits = 0x0000000000000000 }"
+#mcountinhibit = " { bits = 0x00000000 }"
+#cur_privilege = "Supervisor"
+
+#[registers.resets]
+#"cur_privilege" = "Supervisor"
+
+[const_primops]
+get_config_print_reg = false
+get_config_print_instr = false
+get_config_print_platform = false
+get_config_print_mem = false
+sys_enable_svinval = true
+sys_enable_fdext = true
+sys_enable_zfinx = false
+sys_enable_rvc = false
+sys_enable_next = true
+sys_enable_sstc = true
+sys_enable_zicntr = true
+sys_enable_zihpm = true
+sys_enable_zicbom = true
+sys_enable_zicboz = true
+sys_enable_zicond = true
+sys_enable_zifencei = true
+sys_enable_zmmul = true
+sys_enable_zaamo = true
+sys_enable_zalrsc = true
+sys_enable_zfa = true
+sys_enable_zfh = true
+sys_enable_zfhmin = true
+sys_enable_zdinx = true
+sys_enable_zba = true
+sys_enable_zbb = true
+sys_enable_zbc = true
+sys_enable_zbkb = true
+sys_enable_zbkc = true
+sys_enable_zbkx = true
+sys_enable_zbs = true
+sys_enable_zknd = true
+sys_enable_zkne = true
+sys_enable_zknh = true
+sys_enable_zkr = true
+sys_enable_zksed = true
+sys_enable_zksh = true
+sys_enable_zhinx = true
+sys_enable_vext = true
+sys_enable_writable_fiom = true
+sys_enable_writable_misa = true
+sys_writable_hpm_counters = true
+sys_enable_bext = false
+sys_pmp_count = "0 : %i64"
+softfloat_f32add = "0 : %i64"
+softfloat_f16add = "0 : %i64"
+softfloat_f16sub = "0 : %i64"
+softfloat_f16mul = "0 : %i64"
+softfloat_f16div = "0 : %i64"
+softfloat_f32sub = "0 : %i64"
+softfloat_f32mul = "0 : %i64"
+softfloat_f32div = "0 : %i64"
+softfloat_f64add = "0 : %i64"
+softfloat_f64sub = "0 : %i64"
+softfloat_f64mul = "0 : %i64"
+softfloat_f64div = "0 : %i64"
+softfloat_f16muladd = "0 : %i64"
+softfloat_f32muladd = "0 : %i64"
+softfloat_f64muladd = "0 : %i64"
+softfloat_f16sqrt = "0 : %i64"
+softfloat_f32sqrt = "0 : %i64"
+softfloat_f64sqrt = "0 : %i64"
+softfloat_f16toi32 = "0 : %i64"
+softfloat_f16toui32 = "0 : %i64"
+softfloat_i32tof16 = "0 : %i64"
+softfloat_ui32tof16 = "0 : %i64"
+softfloat_f16toi64 = "0 : %i64"
+softfloat_f16toui64 = "0 : %i64"
+softfloat_i64tof16 = "0 : %i64"
+softfloat_ui64tof16 = "0 : %i64"
+softfloat_f32toi32 = "0 : %i64"
+softfloat_f32toui32 = "0 : %i64"
+softfloat_i32tof32 = "0 : %i64"
+softfloat_ui32tof32 = "0 : %i64"
+softfloat_f32toi64 = "0 : %i64"
+softfloat_f32toui64 = "0 : %i64"
+softfloat_i64tof32 = "0 : %i64"
+softfloat_ui64tof32 = "0 : %i64"
+softfloat_f64toi32 = "0 : %i64"
+softfloat_f64toui32 = "0 : %i64"
+softfloat_i32tof64 = "0 : %i64"
+softfloat_ui32tof64 = "0 : %i64"
+softfloat_f64toi64 = "0 : %i64"
+softfloat_f64toui64 = "0 : %i64"
+softfloat_i64tof64 = "0 : %i64"
+softfloat_ui64tof64 = "0 : %i64"
+softfloat_f16tof32 = "0 : %i64"
+softfloat_f16tof64 = "0 : %i64"
+softfloat_f32tof64 = "0 : %i64"
+softfloat_f32tof16 = "0 : %i64"
+softfloat_f64tof16 = "0 : %i64"
+softfloat_f64tof32 = "0 : %i64"
+softfloat_f16lt = "0 : %i64"
+softfloat_f16lt_quiet = "0 : %i64"
+softfloat_f16le = "0 : %i64"
+softfloat_f16le_quiet = "0 : %i64"
+softfloat_f16eq = "0 : %i64"
+softfloat_f32lt = "0 : %i64"
+softfloat_f32lt_quiet = "0 : %i64"
+softfloat_f32le = "0 : %i64"
+softfloat_f32le_quiet = "0 : %i64"
+softfloat_f32eq = "0 : %i64"
+softfloat_f64lt = "0 : %i64"
+softfloat_f64lt_quiet = "0 : %i64"
+softfloat_f64le = "0 : %i64"
+softfloat_f64le_quiet = "0 : %i64"
+softfloat_f64eq = "0 : %i64"
+softfloat_f16roundToInt = "0 : %i64"
+softfloat_f32roundToInt = "0 : %i64"
+softfloat_f64roundToInt = "0 : %i64"
+plat_enable_pmp = false
+plat_enable_dirty_update = false
+plat_enable_misaligned_access = false
+plat_mtval_has_illegal_inst_bits = false
+plat_insns_per_tick = 10
+plat_ram_base = "0x0000000080000000"
+plat_ram_size = "0x0000000004000000"
+plat_rom_base = "0x0000000000001000"
+plat_rom_size = "0x0000000000000100"
+plat_clint_base = "0x0000000002000000"
+plat_clint_size = "0x00000000000c0000"
+plat_htif_tohost = "0x0000000040001000"
+plat_get_16_random_bits = "undefined : %bv16"
+plat_term_write = "()"
+print_reg = "()"
+print_platform = "()"
+print_instr = "()"
+print_mem_access = "()"
+speculate_conditional = "undefined : %bool"
+match_reservation = "true"
+cancel_reservation = "()"
+load_reservation = "()"

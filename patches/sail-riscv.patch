@@ -1,0 +1,67 @@
+diff --git a/model/CMakeLists.txt b/model/CMakeLists.txt
+index 8cf55dfb..4d0df4bc 100644
+--- a/model/CMakeLists.txt
++++ b/model/CMakeLists.txt
+@@ -197,6 +197,8 @@ foreach (xlen IN ITEMS 32 64)
+                 "main.sail"
+             )
+ 
++	    message("The value of sail_srcs is: ${sail_srcs}")
++
+             # Convert to absolute paths, so we can run
+ 
+             # Generate C code from Sail model with & without RVFI-DII support.
+diff --git a/model/riscv_sys_control.sail b/model/riscv_sys_control.sail
+index 6ac714fe..4c4dfad2 100644
+--- a/model/riscv_sys_control.sail
++++ b/model/riscv_sys_control.sail
+@@ -312,8 +312,8 @@ function handle_interrupt(i : InterruptType, del_priv : Privilege) -> unit =
+ function init_sys() -> unit = {
+   cur_privilege = Machine;
+ 
+-  mhartid     = zeros();
+-  mconfigptr  = zeros();
++  //mhartid     = zeros();
++  //mconfigptr  = zeros();
+ 
+   misa[MXL] = architecture(if xlen == 32 then RV32 else RV64);
+   misa[A]   = 0b1;                             /* atomics */
+@@ -346,26 +346,26 @@ function init_sys() -> unit = {
+     SBE = 0b0,
+   ];
+ 
+-  mip.bits     = zeros();
+-  mie.bits     = zeros();
+-  mideleg.bits = zeros();
++  //mip.bits     = zeros();
++  //mie.bits     = zeros();
++  //mideleg.bits = zeros();
+   medeleg.bits = zeros();
+   mtvec.bits   = zeros();
+   mcause.bits  = zeros();
+-  mepc            = zeros();
+-  mtval           = zeros();
+-  mscratch        = zeros();
++  //mepc            = zeros();
++  //mtval           = zeros();
++  //mscratch        = zeros();
+ 
+-  mcycle          = zeros();
+-  mtime           = zeros();
++  //mcycle          = zeros();
++  //mtime           = zeros();
+ 
+-  mcounteren.bits = zeros();
++  //mcounteren.bits = zeros();
+ 
+-  minstret           = zeros();
++  //minstret           = zeros();
+   minstret_increment = true;
+ 
+-  menvcfg.bits = zeros();
+-  senvcfg.bits = zeros();
++  //menvcfg.bits = zeros();
++  //senvcfg.bits = zeros();
+   /* initialize vector csrs */
+   vstart             = zeros();
+   vl                 = zeros();

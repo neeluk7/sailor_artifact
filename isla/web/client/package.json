@@ -1,0 +1,39 @@
+{
+  "name": "Isla",
+  "version": "0.1.0",
+  "description": "Isla UI",
+  "private": true,
+  "scripts": {
+    "start": "webpack --config dev.config.js -w",
+    "build": "webpack --config dev.config.js",
+    "deploy": "webpack --config prod.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rems-project/isla"
+  },
+  "homepage": "https://www.cl.cam.ac.uk/~pes20/cerberus/",
+  "keywords": [],
+  "author": "Victor Gomes",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "@types/codemirror": "0.0.60",
+    "@types/jquery": "^3.3.6",
+    "@types/lodash": "^4.14.199",
+    "css-loader": "^6.8.1",
+    "jquery": "^3.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "style-loader": "^0.23.0",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "big-integer": "^1.6.43",
+    "codemirror": "^5.40.0",
+    "golden-layout": "^1.5.9",
+    "lodash": "^4.17.21",
+    "viz.js": "^2.1.2"
+  }
+}

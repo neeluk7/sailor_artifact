@@ -1,0 +1,14 @@
+[
+  {
+    "section": "Instruction-fetch",
+    "model": "esop2020.cat",
+    "tests": [
+      "SM.toml",
+      "SM+cachesync-isb.toml",
+      "CoRF.toml",
+      "SM.F+ic.toml",
+      "FOW.toml",
+      "MP.R.RF+addr-cachesync+dmb+ctrl-isb.toml"
+    ]
+  }
+]
