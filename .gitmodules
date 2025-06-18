@@ -1,0 +1,9 @@
+[submodule "sail-riscv"]
+	path = sail-riscv
+	url = https://github.com/riscv/sail-riscv.git
+[submodule "isla"]
+	path = isla
+	url = https://github.com/rems-project/isla.git
+[submodule "keystone"]
+	path = keystone
+	url = https://github.com/keystone-enclave/keystone.git
