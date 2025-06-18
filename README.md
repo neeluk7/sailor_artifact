@@ -9,6 +9,7 @@ Directory Structure
   - isla\_csr\_access.py    // Generate Isla CSR Access traces
   - isla\_csr\_access\_dict\_to\_csvs.py 
   - analyzer.py             // Analyzer implementing the classifier algorithm 
+- scripts                   // Scripts to generate Isla traces -- Warning! NOT READY FOR USE..
 - configs
   - rv64gc\_all\_opcodes.txt
 - test-generator            // Automatic test generator 
