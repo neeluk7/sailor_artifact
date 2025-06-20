@@ -7,3 +7,6 @@
 [submodule "keystone"]
 	path = keystone
 	url = https://github.com/keystone-enclave/keystone.git
+[submodule "serval"]
+	path = serval
+	url = https://github.com/uw-unsat/serval-sosp19.git
