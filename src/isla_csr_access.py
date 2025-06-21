@@ -139,7 +139,7 @@ for priv_mode in priv_modes:
     # For each CSR, execute isla-footprint for the csrrs instruction, once with x10, x0..... i.e. csrr x10, <csr> - this covers checks for the CSR Read operation
     for csr in csr_list: 
         #print("Checking read for CSR with priv mode: "+csr+" "+priv_mode);
-        f = os.popen("target/release/isla-footprint -A ./isla-sail/IRs/riscv64-9454e6e8-IR-updated-init.ir -C configs/riscv64.toml -i 'csrr x10, "+csr+"' -s -R cur_privilege="+priv_mode, "r"); 
+        f = os.popen("isla/target/release/isla-footprint -A ./configs/riscv64-9454e6e8-IR-updated-init.ir -C isla/configs/riscv64.toml -i 'csrr x10, "+csr+"' -s -R cur_privilege="+priv_mode, "r"); 
         output = f.readlines(); 
 
         for line in output: 
@@ -160,7 +160,7 @@ for priv_mode in priv_modes:
 
     for csr in csr_list: 
         #print("Checking write for CSR "+csr);
-        f = os.popen("target/release/isla-footprint -A ./isla-sail/IRs/riscv64-9454e6e8-IR-updated-init.ir -C configs/riscv64.toml -i 'csrw "+csr+", x10' -s -R cur_privilege="+priv_mode, "r"); 
+        f = os.popen("isla/target/release/isla-footprint -A ./configs/riscv64-9454e6e8-IR-updated-init.ir -C isla/configs/riscv64.toml -i 'csrw "+csr+", x10' -s -R cur_privilege="+priv_mode, "r"); 
         output = f.readlines(); 
 
         for line in output: 
@@ -208,10 +208,10 @@ def csr_access_dict_to_csv(dict_list, write, csv_writer):
 
 csv_file = open(output_files_dir+"/"+csr_access_output_files[0], 'w');
 csv_file_writer = csv.writer(csv_file);
-csr_access_dict_to_csv(csr_read_access_per_mode, 0, csv_file_writer);
+csr_access_dict_to_csv(read_access, 0, csv_file_writer);
 csv_file.close();
 
 csv_file = open(output_files_dir+"/"+csr_access_output_files[1], 'w');
 csv_file_writer = csv.writer(csv_file);
-csr_access_dict_to_csv(csr_write_access_per_mode, 1, csv_file_writer);
+csr_access_dict_to_csv(write_access, 1, csv_file_writer);
 csv_file.close();

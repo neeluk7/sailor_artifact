@@ -19,7 +19,7 @@ gen-isla-traces-full:
 	./scripts/gen_rv64gc_unpriv_instr_traces.sh &
 
 isla-traces-test:
-	mkdir isla_test_traces
+	mkdir -p isla_test_traces
 	./scripts/gen_rv64gc_unpriv_instr_traces_test.sh &
 	diff -bur isla_traces_test expected_results/isla_test_traces
 
@@ -28,7 +28,7 @@ isla-parse-test:
 	diff -bur parse_test_output.txt expected_results/parse_test_output.txt
 
 run-sailor:
-	mkdir CSVs
+	mkdir -p CSVs
 	python3 src/parse_isla_traces.py
 	python3 src/isla_csr_access.py
 	python3 src/analyzer.py
