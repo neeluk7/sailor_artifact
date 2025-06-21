@@ -136,6 +136,7 @@ def check_for_trap_in_trace(trace_lines, csr, write, priv_mode):
 
 for priv_mode in priv_modes: 
     output_file = open(csr_access_traces_output_files[priv_mode_indices[priv_modes.index(priv_mode)]], 'w');
+    output_file.write("INSTRUCTION CONSTRUCTED: CSRRW:\n");
     # For each CSR, execute isla-footprint for the csrrs instruction, once with x10, x0..... i.e. csrr x10, <csr> - this covers checks for the CSR Read operation
     for csr in csr_list: 
         #print("Checking read for CSR with priv mode: "+csr+" "+priv_mode);

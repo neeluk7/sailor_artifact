@@ -29,8 +29,8 @@ isla-parse-test:
 
 run-sailor:
 	mkdir -p CSVs
-	python3 src/parse_isla_traces.py
 	python3 src/isla_csr_access.py
+	python3 src/parse_isla_traces.py
 	python3 src/analyzer.py
 	diff -bur CSVs expected_results/reference_CSVs
 
