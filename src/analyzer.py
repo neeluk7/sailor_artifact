@@ -11,10 +11,10 @@ import csv;
 
 SUPPORTED_MODES = ["U", "S", "", "M"];
 
-scanner_results_dir = "/scanner-results/";
-analyzer_results_dir = "/analyzer-results/";
-arch_scanner_results_dir = "";
-arch_analyzer_results_dir = "";
+#scanner_results_dir = "/scanner-results/";
+#analyzer_results_dir = "/analyzer-results/";
+#arch_scanner_results_dir = "";
+#arch_analyzer_results_dir = "";
 
 arch_module = "";
 arch_name = "";
@@ -23,7 +23,14 @@ results_dir = "";
 SOURCE_MODE = "U";
 TARGET_MODE = "U";
 
-csr_list = ["fflags", "frm", "fcsr", "hpmcounter3", "hpmcounter4", "hpmcounter5", "hpmcounter6", "hpmcounter7", "hpmcounter8", "hpmcounter9", "hpmcounter10", "hpmcounter11", "hpmcounter12", "hpmcounter13", "hpmcounter14", "hpmcounter15", "hpmcounter16", "hpmcounter17", "hpmcounter18", "hpmcounter19", "hpmcounter20", "hpmcounter21", "hpmcounter22", "hpmcounter23", "hpmcounter24", "hpmcounter25", "hpmcounter26", "hpmcounter27", "hpmcounter28", "hpmcounter29", "hpmcounter30", "hpmcounter31", "mhpmevent3", "mhpmevent4", "mhpmevent5", "mhpmevent6", "mhpmevent7", "mhpmevent8", "mhpmevent9", "mhpmevent10", "mhpmevent11", "mhpmevent12", "mhpmevent13", "mhpmevent14", "mhpmevent15", "mhpmevent16", "mhpmevent17", "mhpmevent18", "mhpmevent19", "mhpmevent20", "mhpmevent21", "mhpmevent22", "mhpmevent23", "mhpmevent24", "mhpmevent25", "mhpmevent26", "mhpmevent27", "mhpmevent28", "mhpmevent29", "mhpmevent30", "mhpmevent31", "mhpmcounter3", "mhpmcounter4", "mhpmcounter5", "mhpmcounter6", "mhpmcounter7", "mhpmcounter8", "mhpmcounter9", "mhpmcounter10", "mhpmcounter11", "mhpmcounter12", "mhpmcounter13", "mhpmcounter14", "mhpmcounter15", "mhpmcounter16", "mhpmcounter17", "mhpmcounter18", "mhpmcounter19", "mhpmcounter20", "mhpmcounter21", "mhpmcounter22", "mhpmcounter23", "mhpmcounter24", "mhpmcounter25", "mhpmcounter26", "mhpmcounter27", "mhpmcounter28", "mhpmcounter29", "mhpmcounter30", "mhpmcounter31", "pmpcfg0", "pmpcfg1", "pmpcfg2", "pmpcfg3", "pmpcfg4", "pmpcfg5", "pmpcfg6", "pmpcfg7", "pmpcfg8", "pmpcfg9", "pmpcfg10", "pmpcfg11", "pmpcfg12", "pmpcfg13", "pmpcfg14", "pmpcfg15", "pmpaddr0", "pmpaddr1", "pmpaddr2", "pmpaddr3", "pmpaddr4", "pmpaddr5", "pmpaddr6", "pmpaddr7", "pmpaddr8", "pmpaddr9", "pmpaddr10", "pmpaddr11", "pmpaddr12", "pmpaddr13", "pmpaddr14", "pmpaddr15", "pmpaddr16", "pmpaddr17", "pmpaddr18", "pmpaddr19", "pmpaddr20", "pmpaddr21", "pmpaddr22", "pmpaddr23", "pmpaddr24", "pmpaddr25", "pmpaddr26", "pmpaddr27", "pmpaddr28", "pmpaddr29", "pmpaddr30", "pmpaddr31", "pmpaddr32", "pmpaddr33", "pmpaddr34", "pmpaddr35", "pmpaddr36", "pmpaddr37", "pmpaddr38", "pmpaddr39", "pmpaddr40", "pmpaddr41", "pmpaddr42", "pmpaddr43", "pmpaddr44", "pmpaddr45", "pmpaddr46", "pmpaddr47", "pmpaddr48", "pmpaddr49", "pmpaddr50", "pmpaddr51", "pmpaddr52", "pmpaddr53", "pmpaddr54", "pmpaddr55", "pmpaddr56", "pmpaddr57", "pmpaddr58", "pmpaddr59", "pmpaddr60", "pmpaddr61", "pmpaddr62", "pmpaddr63", "cycle", "time", "instret", "cycleh", "timeh", "instreth", "mcycle", "minstret", "mcycleh", "minstreth", "stimecmp", "stimecmph", "stvec", "sepc", "mtvec", "mepc", "misa", "mstatus", "menvcfg", "menvcfgh", "senvcfg", "mie", "mip", "medeleg", "medelegh", "mideleg", "mcause", "mtval", "mscratch", "scounteren", "mcounteren", "mcountinhibit", "mvendorid", "marchid", "mimpid", "mhartid", "mconfigptr", "sstatus", "sip", "sie", "sscratch", "scause", "stval", "tselect", "tdata1", "tdata2", "tdata3", "seed", "vstart", "vxsat", "vxrm", "vcsr", "vl", "vtype", "vlenb", "satp"];
+csr_list_file = open("configs/csr_list.txt", "r");
+csr_list_file_lines = csr_list_file.readlines();
+csr_list_file.close();
+
+csr_list = [];
+
+for csr in csr_list_file_lines:
+    csr_list.append(csr.strip("\n"));
 
 # -------------------------------------------------------- Input from the scanner for the analyzer------------------------------------------------------ #
 
@@ -42,8 +49,8 @@ def switch_security_domain(source_mode, target_mode):
    source_mode_id = SUPPORTED_MODES.index(source_mode);
    target_mode_id = SUPPORTED_MODES.index(target_mode);
 
-   print("Source_mode_ID: "+str(source_mode_id));
-   print("Target mode id: "+str(target_mode_id));
+   #print("Source_mode_ID: "+str(source_mode_id));
+   #print("Target mode id: "+str(target_mode_id));
 
    csr_swap_list = [];  
    csr_do_nothing_list = [];
@@ -59,7 +66,7 @@ def switch_security_domain(source_mode, target_mode):
       source_is_dependent = False;
       csr_name = csr;
 
-      print("For CSR: "+csr_name);
+      #print("For CSR: "+csr_name);
 
       # We assume NExt extension to be disabled: so we will remove ustatus, uie, utvec, uscratch, uepc, ucause, utval, uip 
       #if csr_name in next_csr_list:
@@ -67,7 +74,7 @@ def switch_security_domain(source_mode, target_mode):
 
       if CSR_write_access[source_mode_id][csr_name] == "Allowed" or CSR_write_access[source_mode_id][csr_name] == "Conditional": 
          # Source mode can directly write the CSR using CSR operation instructions. 
-         print("source_affects directly = true");
+         #print("source_affects directly = true");
          source_affects = True;
       if source_affects == False: 
          # Source mode cannot directly write the CSR using CSR operation instructions.
@@ -80,9 +87,9 @@ def switch_security_domain(source_mode, target_mode):
             #if csr+" Write" in instruction_CSR_footprint[instr] or csr+" R+W" in instruction_CSR_footprint[instr]: 
                if "Allowed" in instruction_execution_access[source_mode_id][instr] or "Conditional" in instruction_execution_access[source_mode_id][instr]: 
                   # Source mode can indirectly modify the content of the CSR during execution
-                  print("source affects idirectly true");
-                  if csr_name == "misa": 
-                     print("Instr: "+instr+" affects "+csr);
+                  #print("source affects idirectly true");
+                  #if csr_name == "misa": 
+                     #print("Instr: "+instr+" affects "+csr);
                   source_affects = True; 
                   break; 
       if source_affects == False: 
@@ -92,10 +99,10 @@ def switch_security_domain(source_mode, target_mode):
                # TODO: Checking 'csr' itself in the list as there are some csr uses where the scanner doesn't detect if the use was a Read/Write. 
                # Until that is resolved in the scanner, we assume the use to be R+W.  
                if csr in instruction_CSR_footprint[source_mode_id][instr] or csr+" Read" in instruction_CSR_footprint[source_mode_id][instr] or csr+" R+W" in instruction_CSR_footprint[source_mode_id][instr] or csr_name in instruction_CSR_footprint[source_mode_id][instr] or csr_name+" Read" in instruction_CSR_footprint[source_mode_id][instr] or csr_name+" R+W" in instruction_CSR_footprint[source_mode_id][instr]: 
-                  if csr == "satp": 
-                     print("Instr "+instr+" can read satp! Here is the instr_exec_acc for Source: "+instruction_execution_access[source_mode_id][instr]);
+                  #if csr == "satp": 
+                  #   print("Instr "+instr+" can read satp! Here is the instr_exec_acc for Source: "+instruction_execution_access[source_mode_id][instr]);
                   if "Allowed" in instruction_execution_access[source_mode_id][instr] or "Conditional" in instruction_execution_access[source_mode_id][instr]: 
-                     print("source is dependent");
+                     #print("source is dependent");
                      source_is_dependent = True;
                      break; 
 
@@ -105,7 +112,7 @@ def switch_security_domain(source_mode, target_mode):
       # If source affects the value of the CSR directly or indirectly OR if execution in source mode is dependent on the content of CSR
       if source_affects == True or source_is_dependent == True: 
          if CSR_read_access[target_mode_id][csr_name] == "Allowed" or CSR_read_access[target_mode_id][csr_name] == "Conditional": 
-            print("Target directly reads");
+            #print("Target directly reads");
             # Target mode can directly read the CSR using CSR operation instructions.
             # Direct side channel 
             # Must swap and restore! 
@@ -137,7 +144,7 @@ def switch_security_domain(source_mode, target_mode):
                     #    print("Found Target mode execution true for LOAD. (sedeleg Read)");
                     # if csr_name == "scause":
                     #    print("Target can be affected by scause");
-                     print("Target indirectly reads");
+                     #print("Target indirectly reads");
                      csr_swap_list.append(csr);
                      csr_swap = True; 
                      break; 
@@ -245,7 +252,7 @@ for index in range(4):
                values.remove(' ');
          instruction_CSR_footprint[index][key] = values;
 
-   print(instruction_CSR_footprint);
+   #print(instruction_CSR_footprint);
 
 with open(arch_scanner_results_dir+'instruction_access_per_mode.csv', mode='r') as infile:
    reader = csv.reader(infile)
@@ -287,9 +294,9 @@ with open(arch_scanner_results_dir+'csr_write_access.csv', mode='r') as infile:
       CSR_write_access[1][key] = row[2];
       CSR_write_access[3][key] = row[3];
 
-print(instruction_execution_access);
-print(CSR_read_access);
-print(CSR_write_access);
+#print(instruction_execution_access);
+#print(CSR_read_access);
+#print(CSR_write_access);
 
 switch_security_domain(SOURCE_MODE, TARGET_MODE);
 

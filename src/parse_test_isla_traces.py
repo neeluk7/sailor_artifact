@@ -58,8 +58,8 @@ isla_csr_footprint = [{}, {}, {}, {}];
 
 instruction_access_per_mode = [{}, {}, {}, {}];
 
-isla_results_files_path = "./isla_traces_dir/";
-isla_results_files = ["rv64gc_all_traces_unpriv_simplified_Machine.txt", "rv64gc_all_traces_unpriv_simplified_Supervisor.txt", "rv64gc_all_traces_unpriv_simplified_User.txt","rv64gc_remaining_traces_unpriv_simplified_Machine.txt","rv64gc_remaining_traces_unpriv_simplified_Supervisor.txt", "rv64gc_remaining_traces_unpriv_simplified_User.txt","csr_access_traces_machine.txt","csr_access_traces_supervisor.txt","csr_access_traces_user.txt","machine_mret_simplified_trace.txt", "machine_sfence_vma_simplified_trace.txt", "machine_sret_simplified_trace.txt", "machine_uret_simplified_trace.txt", "machine_wfi_simplified_trace.txt", "supervisor_mret_simplified_trace.txt", "supervisor_sfence_vma_simplified_trace.txt", "supervisor_sret_simplified_trace.txt", "supervisor_uret_simplified_trace.txt", "supervisor_wfi_simplified_trace.txt", "user_mret_simplified_trace.txt", "user_sfence_vma_simplified_trace.txt", "user_sret_simplified_trace.txt", "user_uret_simplified_trace.txt", "user_wfi_simplified_trace.txt"];
+isla_results_files_path = "./isla_traces_test/";
+isla_results_files = ["rv64gc_all_traces_unpriv_simplified_Machine_test.txt", "rv64gc_all_traces_unpriv_simplified_Supervisor_test.txt", "rv64gc_all_traces_unpriv_simplified_User_test.txt"]; 
 
 # Capture CSRs list
 csr_list_file = open("configs/csr_list.txt", "r");
@@ -166,59 +166,8 @@ for isla_results_file_name in isla_results_files:
 
     curr_instruction_being_scanned = "";
 
-output_files_dir = "CSVs";
-csr_footprint_files_name = ["csr_footprint_per_instruction_user.csv", "csr_footprint_per_instruction_supervisor.csv", "", "csr_footprint_per_instruction_machine.csv"];
-instruction_access_per_mode_file_name = "instruction_access_per_mode.csv";
 
-#isla_step_additions = ['mcountinhibit Read', 'mip R+W', 'mcause Write', 'mstatus R+W','medeleg Read','mideleg Read','mtval Write','mepc R+W', 'scause Write', 'sstatus R+W', 'stval Write', 'sepc R+W', 'mtvec Read', 'utval Write', 'uepc Write', 'ucause Read', 'stvec Read', 'utvec Read', 'sedeleg Read', 'minstret Write', 'instret Write', 'mcycle Write', 'cycle Write', 'mtime Write', 'time Write', 'mtimecmp Read', 'stimecmp Read', 'mhpmcounter3 Write', 'hpmcounter3 Write', 'mhpmcounter4 Write', 'hpmcounter4 Write', 'mhpmcounter5 Write', 'hpmcounter5 Write',  'mhpmcounter6 Write', 'hpmcounter6 Write',  'mhpmcounter7 Write', 'hpmcounter7 Write', 'mhpmcounter8 Write', 'hpmcounter8 Write',  'mhpmcounter9 Write', 'hpmcounter9 Write',  'mhpmcounter10 Write', 'hpmcounter10 Write', 'mhpmcounter11 Write', 'hpmcounter11 Write',  'mhpmcounter12 Write', 'hpmcounter12 Write',  'mhpmcounter13 Write', 'hpmcounter13 Write', 'mhpmcounter14 Write', 'hpmcounter14 Write',  'mhpmcounter15 Write', 'hpmcounter15 Write',  'mhpmcounter16 Write', 'hpmcounter16 Write', 'mhpmcounter17 Write', 'hpmcounter17 Write',  'mhpmcounter18 Write', 'hpmcounter18 Write',  'mhpmcounter19 Write', 'hpmcounter19 Write', 'mhpmcounter20 Write', 'hpmcounter20 Write', 'mhpmcounter21 Write', 'hpmcounter21 Write', 'mhpmcounter22 Write', 'hpmcounter22 Write', 'mhpmcounter23 Write', 'hpmcounter23 Write', 'mhpmcounter24 Write', 'hpmcounter24 Write', 'mhpmcounter25 Write', 'hpmcounter25 Write', 'mhpmcounter26 Write', 'hpmcounter26 Write', 'mhpmcounter27 Write', 'hpmcounter27 Write', 'mhpmcounter28 Write', 'hpmcounter28 Write', 'mhpmcounter29 Write', 'hpmcounter29 Write', 'mhpmcounter30 Write', 'hpmcounter30 Write', 'mhpmcounter31 Write', 'hpmcounter31 Write'];
-isla_step_additions = [];
 
-for index in range(4):
-    if index == 2: 
-        continue;
-    for instr in isla_csr_footprint[index].keys():
-        for elem in isla_step_additions:
-            if elem not in isla_csr_footprint[index][instr]:
-                isla_csr_footprint[index][instr].append(elem);
-
-for index in range(4):
-    if index == 2:
-        continue;
-    
-    csr_footprint_file = open(output_files_dir+"/"+csr_footprint_files_name[index], 'w');
-    csr_footprint_file_writer = csv.writer(csr_footprint_file);
-    csr_footprint_file_writer.writerow(["Instruction", "CSR footprint"]);
-    
-    if index == 0:
-        instruction_access_per_mode_file = open(output_files_dir+"/"+instruction_access_per_mode_file_name, 'w');
-        instruction_access_per_mode_file_writer = csv.writer(instruction_access_per_mode_file);
-        instruction_access_per_mode_file_writer.writerow(["Instruction", "User", "Supervisor", "Machine"]);
-
-    for instr in isla_csr_footprint[index].keys(): 
-
-        # Something's missing here... need to regen trace.
-        if instr == "FADD.D" or instr == "FCVT.D.LU" or instr == "FMV.D.X": 
-            continue;
-
-        if instr not in instruction_access_per_mode[0].keys() or instr not in instruction_access_per_mode[1].keys() or instr not in instruction_access_per_mode[3].keys():
-            continue;
-
-        new_csr_footprint_row = [];
-        new_csr_footprint_row.append(instr);
-        for csr in isla_csr_footprint[index][instr]:
-            new_csr_footprint_row.append(csr);
-        csr_footprint_file_writer.writerow(new_csr_footprint_row);
-
-        if index == 0:
-            new_instr_access_row = [];
-            new_instr_access_row.append(instr);
-            new_instr_access_row.append(instruction_access_per_mode[0][instr]);
-            new_instr_access_row.append(instruction_access_per_mode[1][instr]);
-            new_instr_access_row.append(instruction_access_per_mode[3][instr]);
-
-            instruction_access_per_mode_file_writer.writerow(new_instr_access_row);
-
-    csr_footprint_file.close();
-    if index == 0:
-        instruction_access_per_mode_file.close();
+print(isla_csr_footprint);
+print(instruction_access_per_mode);
 

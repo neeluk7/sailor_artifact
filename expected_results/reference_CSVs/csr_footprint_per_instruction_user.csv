@@ -1,0 +1,151 @@
+Instruction,CSR footprint
+LUI
+AUIPC
+JAL,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+JALR,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BEQ,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BNE,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BLT,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BGE,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BLTU,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+BGEU,misa Read,medeleg Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+LB,mstatus Read,satp Read,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+LH,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read
+LW,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read,mip Read
+LBU,mstatus Read,satp Read,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+LHU,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read
+SB,mstatus Read,satp Read,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+SH,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read
+SW,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read,mip Read,mip Write,stimecmp Read
+ADDI
+SLTI
+SLTIU
+XORI
+ORI
+ANDI
+SLLI
+SRLI
+SRAI
+ADD
+SUB
+SLL
+SLT
+SLTU
+XOR
+SRL
+SRA
+OR
+AND
+FENCE,menvcfg Read,senvcfg Read,misa Read
+FENCE.TSO
+PAUSE,menvcfg Read,senvcfg Read
+ECALL,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+EBREAK,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+LWU,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read,mip Read
+LD,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read,mip Read
+SD,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read,satp Read,mip Read,mip Write,stimecmp Read
+ADDIW
+SLLIW
+SRLIW
+SRAIW
+ADDW
+SUBW
+SLLW
+SRLW
+SRAW
+MUL,misa Read
+MULH,misa Read
+MULHSU,misa Read
+MULHU,misa Read
+DIV,misa Read
+DIVU,misa Read
+REM,misa Read
+REMU,misa Read
+MULW,misa Read
+DIVW,misa Read
+DIVUW,misa Read
+REMW,misa Read
+REMUW,misa Read
+LR.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read
+SC.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOSWAP.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOADD.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOXOR.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOAND.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOOR.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMIN.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMAX.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMINU.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMAXU.W,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+LR.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read
+SC.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOSWAP.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOADD.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOXOR.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOAND.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOOR.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMIN.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMAX.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMINU.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+AMOMAXU.D,misa Read,mstatus Read,satp Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mip Read,mip Write,stimecmp Read
+FMADD.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMSUB.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FNMSUB.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FNMADD.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FADD.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSUB.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMUL.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FDIV.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSQRT.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJ.S,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJN.S,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJX.S,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMIN.S,misa Read,mstatus Read,fcsr Read,mstatus Write,fcsr Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMAX.S,misa Read,mstatus Read,fcsr Read,mstatus Write,fcsr Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.W.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.WU.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMV.X.W,misa Read,mstatus Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+FEQ.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FLT.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FLE.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCLASS.S,misa Read,mstatus Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+FCVT.S.W,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.S.WU,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMV.W.X,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.L.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.LU.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.S.L,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.S.LU,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMADD.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMSUB.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FNMSUB.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FNMADD.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSUB.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMUL.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FDIV.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSQRT.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJ.D,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJN.D,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FSGNJX.D,misa Read,mstatus Read,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMIN.D,misa Read,mstatus Read,fcsr Read,mstatus Write,fcsr Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMAX.D,misa Read,mstatus Read,fcsr Read,mstatus Write,fcsr Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.S.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.D.S,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FEQ.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FLT.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FLE.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCLASS.D,misa Read,mstatus Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+FCVT.W.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.WU.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.D.W,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.D.WU,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.L.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FCVT.LU.D,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+FMV.X.D,misa Read,mstatus Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+FCVT.D.L,misa Read,mstatus Read,fcsr Read,fcsr Write,mstatus Write,medeleg Read,mcause Read,mcause Write,mtval Write,mepc Write,mtvec Read
+CSRRW,misa Read,mstatus Read,fcsr Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read,mcounteren Read,scounteren Read,mcycle Read,minstret Read,vstart Read,vcsr Read,vl Read,vtype Read,fcsr Write,vcsr Write
+MRET,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+SFENCE_VMA,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+SRET,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read
+URET,misa Read,mstatus Read,medeleg Read,mcause Read,mcause Write,mstatus Write,mtval Write,mepc Write,mtvec Read
+WFI,medeleg Read,misa Read,mcause Read,mcause Write,mstatus Read,mstatus Write,mtval Write,mepc Write,mtvec Read

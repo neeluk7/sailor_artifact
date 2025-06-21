@@ -6,7 +6,9 @@ priv_mode_indices = [0, 1, 3];
 
 csr_access_trap_or_success_undetermined = [];
 
-csr_access_traces_output_files = ["sailor_traces/csr_access_traces_user.txt", "sailor_traces/csr_access_traces_supervisor.txt", "", "sailor_traces/csr_access_traces_machine.txt"];
+traces_dir = "isla_traces_dir/";
+
+csr_access_traces_output_files = [traces_dir+"csr_access_traces_user.txt", traces_dir+"csr_access_traces_supervisor.txt", "", traces_dir+"csr_access_traces_machine.txt"];
 
 def csr_access_csv_to_dicts(filename):
   """
@@ -40,22 +42,30 @@ def csr_access_csv_to_dicts(filename):
 # Capture CSRs list
 # csr_list = csv_keys_to_list(csr_access_file_path); 
 
-csr_list = ["fflags", "frm", "fcsr", "hpmcounter3", "hpmcounter4", "hpmcounter5", "hpmcounter6", "hpmcounter7", "hpmcounter8", "hpmcounter9", "hpmcounter10", "hpmcounter11", "hpmcounter12", "hpmcounter13", "hpmcounter14", "hpmcounter15", "hpmcounter16", "hpmcounter17", "hpmcounter18", "hpmcounter19", "hpmcounter20", "hpmcounter21", "hpmcounter22", "hpmcounter23", "hpmcounter24", "hpmcounter25", "hpmcounter26", "hpmcounter27", "hpmcounter28", "hpmcounter29", "hpmcounter30", "hpmcounter31", "mhpmevent3", "mhpmevent4", "mhpmevent5", "mhpmevent6", "mhpmevent7", "mhpmevent8", "mhpmevent9", "mhpmevent10", "mhpmevent11", "mhpmevent12", "mhpmevent13", "mhpmevent14", "mhpmevent15", "mhpmevent16", "mhpmevent17", "mhpmevent18", "mhpmevent19", "mhpmevent20", "mhpmevent21", "mhpmevent22", "mhpmevent23", "mhpmevent24", "mhpmevent25", "mhpmevent26", "mhpmevent27", "mhpmevent28", "mhpmevent29", "mhpmevent30", "mhpmevent31", "mhpmcounter3", "mhpmcounter4", "mhpmcounter5", "mhpmcounter6", "mhpmcounter7", "mhpmcounter8", "mhpmcounter9", "mhpmcounter10", "mhpmcounter11", "mhpmcounter12", "mhpmcounter13", "mhpmcounter14", "mhpmcounter15", "mhpmcounter16", "mhpmcounter17", "mhpmcounter18", "mhpmcounter19", "mhpmcounter20", "mhpmcounter21", "mhpmcounter22", "mhpmcounter23", "mhpmcounter24", "mhpmcounter25", "mhpmcounter26", "mhpmcounter27", "mhpmcounter28", "mhpmcounter29", "mhpmcounter30", "mhpmcounter31", "pmpcfg0", "pmpcfg1", "pmpcfg2", "pmpcfg3", "pmpcfg4", "pmpcfg5", "pmpcfg6", "pmpcfg7", "pmpcfg8", "pmpcfg9", "pmpcfg10", "pmpcfg11", "pmpcfg12", "pmpcfg13", "pmpcfg14", "pmpcfg15", "pmpaddr0", "pmpaddr1", "pmpaddr2", "pmpaddr3", "pmpaddr4", "pmpaddr5", "pmpaddr6", "pmpaddr7", "pmpaddr8", "pmpaddr9", "pmpaddr10", "pmpaddr11", "pmpaddr12", "pmpaddr13", "pmpaddr14", "pmpaddr15", "pmpaddr16", "pmpaddr17", "pmpaddr18", "pmpaddr19", "pmpaddr20", "pmpaddr21", "pmpaddr22", "pmpaddr23", "pmpaddr24", "pmpaddr25", "pmpaddr26", "pmpaddr27", "pmpaddr28", "pmpaddr29", "pmpaddr30", "pmpaddr31", "pmpaddr32", "pmpaddr33", "pmpaddr34", "pmpaddr35", "pmpaddr36", "pmpaddr37", "pmpaddr38", "pmpaddr39", "pmpaddr40", "pmpaddr41", "pmpaddr42", "pmpaddr43", "pmpaddr44", "pmpaddr45", "pmpaddr46", "pmpaddr47", "pmpaddr48", "pmpaddr49", "pmpaddr50", "pmpaddr51", "pmpaddr52", "pmpaddr53", "pmpaddr54", "pmpaddr55", "pmpaddr56", "pmpaddr57", "pmpaddr58", "pmpaddr59", "pmpaddr60", "pmpaddr61", "pmpaddr62", "pmpaddr63", "cycle", "time", "instret", "cycleh", "timeh", "instreth", "mcycle", "minstret", "mcycleh", "minstreth", "stimecmp", "stimecmph", "stvec", "sepc", "mtvec", "mepc", "misa", "mstatus", "menvcfg", "menvcfgh", "senvcfg", "mie", "mip", "medeleg", "medelegh", "mideleg", "mcause", "mtval", "mscratch", "scounteren", "mcounteren", "mcountinhibit", "mvendorid", "marchid", "mimpid", "mhartid", "mconfigptr", "sstatus", "sip", "sie", "sscratch", "scause", "stval", "tselect", "tdata1", "tdata2", "tdata3", "seed", "vstart", "vxsat", "vxrm", "vcsr", "vl", "vtype", "vlenb", "satp"];
 #csr_list = ["fflags", "fcsr", "instret"];
+
+csr_list_file = open("configs/csr_list.txt", "r");
+csr_list_file_lines = csr_list_file.readlines();
+csr_list_file.close();
+
+csr_list = [];
+
+for csr in csr_list_file_lines: 
+    csr_list.append(csr.strip("\n"));
 
 read_access = [{}, {}, {}, {}]; 
 write_access = [{}, {}, {}, {}];
 #read_access[0], write_access[0], read_access[1], write_access[1], read_access[3], write_access[3] = csr_access_csv_to_dicts(csr_access_file_path);
 
-print("U-mode:");
-print(read_access[0]);
-print(write_access[0]);
-print("S-mode:"); 
-print(read_access[1]);
-print(write_access[1]);
-print("M-mode:");
-print(read_access[3]);
-print(write_access[3]);
+#print("U-mode:");
+#print(read_access[0]);
+#print(write_access[0]);
+#print("S-mode:"); 
+#print(read_access[1]);
+#print(write_access[1]);
+#print("M-mode:");
+#print(read_access[3]);
+#print(write_access[3]);
 
 # In the trace, if we find the following: 
 # (cycle), (read-reg |cur_privilege| nil |<priv_mode>|), 
@@ -90,8 +100,8 @@ def check_for_trap_in_trace(trace_lines, csr, write, priv_mode):
             elif encountered_cycle > 0: 
                 success = True;
                 success_count = success_count + 1; 
-            if trapped == True and success == True: 
-                print("Both trapped and success within a single trace for CSR: "+csr+" with encountered_cycle count: "+str(encountered_cycle));
+            #if trapped == True and success == True: 
+            #    print("Both trapped and success within a single trace for CSR: "+csr+" with encountered_cycle count: "+str(encountered_cycle));
             trapped = False;
             success = False; 
             encountered_cycle = encountered_cycle + 1; 
@@ -128,7 +138,7 @@ for priv_mode in priv_modes:
     output_file = open(csr_access_traces_output_files[priv_mode_indices[priv_modes.index(priv_mode)]], 'w');
     # For each CSR, execute isla-footprint for the csrrs instruction, once with x10, x0..... i.e. csrr x10, <csr> - this covers checks for the CSR Read operation
     for csr in csr_list: 
-        print("Checking read for CSR with priv mode: "+csr+" "+priv_mode);
+        #print("Checking read for CSR with priv mode: "+csr+" "+priv_mode);
         f = os.popen("target/release/isla-footprint -A ./isla-sail/IRs/riscv64-9454e6e8-IR-updated-init.ir -C configs/riscv64.toml -i 'csrr x10, "+csr+"' -s -R cur_privilege="+priv_mode, "r"); 
         output = f.readlines(); 
 
@@ -136,7 +146,7 @@ for priv_mode in priv_modes:
             output_file.write(line);
 
         (access_trapped, access_success) = check_for_trap_in_trace(output, csr, False, priv_mode);
-        print("Access trapped: "+str(access_trapped)+" and success: "+str(access_success)+" for CSR with priv mode: "+csr+ " "+priv_mode+" ");
+        #print("Access trapped: "+str(access_trapped)+" and success: "+str(access_success)+" for CSR with priv mode: "+csr+ " "+priv_mode+" ");
         if access_success == 0 and access_trapped > 0: 
             read_access[priv_mode_indices[priv_modes.index(priv_mode)]][csr] = "Not allowed";
         elif access_trapped == 0 and access_success > 0:
@@ -149,7 +159,7 @@ for priv_mode in priv_modes:
     # Again, for each CSR, execute isla-footprint for the CSRRW x0, csr, rs1 instruction --- to check for the CSR Write operation! 
 
     for csr in csr_list: 
-        print("Checking write for CSR "+csr);
+        #print("Checking write for CSR "+csr);
         f = os.popen("target/release/isla-footprint -A ./isla-sail/IRs/riscv64-9454e6e8-IR-updated-init.ir -C configs/riscv64.toml -i 'csrw "+csr+", x10' -s -R cur_privilege="+priv_mode, "r"); 
         output = f.readlines(); 
 
@@ -167,11 +177,41 @@ for priv_mode in priv_modes:
         elif access_success == 0 and access_trapped == 0:
             write_access[priv_mode_indices[priv_modes.index(priv_mode)]][csr] = "Undetermined";
 
-print("Read access dict: ");
-print(read_access);
+#print("Read access dict: ");
+#print(read_access);
 
-print("Write access dict: ")
-print(write_access);
+#print("Write access dict: ")
+#print(write_access);
     
-print("Access undetermined");
-print(csr_access_trap_or_success_undetermined);
+#print("Access undetermined");
+#print(csr_access_trap_or_success_undetermined);
+
+output_files_dir = "CSVs";
+csr_access_output_files = ["csr_read_access.csv", "csr_write_access.csv"]
+
+def csr_access_dict_to_csv(dict_list, write, csv_writer):
+    first_row = ["CSR", "User", "Supervisor", "Machine"];
+    csv_writer.writerow(first_row);
+    for csr in csr_list:
+        new_row = [];
+        new_row.append(csr);
+        #if write == 1:
+        #    new_row.append(csr+" Write");
+        #else:
+        #    new_row.append(csr+" Read");
+        new_row.append(dict_list[0][csr]);
+        new_row.append(dict_list[1][csr]);
+        new_row.append(dict_list[3][csr]);
+        csv_writer.writerow(new_row);
+
+### CSR accesses per priv mode:
+
+csv_file = open(output_files_dir+"/"+csr_access_output_files[0], 'w');
+csv_file_writer = csv.writer(csv_file);
+csr_access_dict_to_csv(csr_read_access_per_mode, 0, csv_file_writer);
+csv_file.close();
+
+csv_file = open(output_files_dir+"/"+csr_access_output_files[1], 'w');
+csv_file_writer = csv.writer(csv_file);
+csr_access_dict_to_csv(csr_write_access_per_mode, 1, csv_file_writer);
+csv_file.close();

@@ -1,9 +1,0 @@
-[
-  {
-    "section": "AArch64 VMSA tests",
-    "model": "aarch64-vmsa-strong.cat",
-    "tests": [
-      "W.toml"
-    ]
-  }
-]

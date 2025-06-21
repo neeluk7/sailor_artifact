@@ -1,0 +1,285 @@
+CSR,User,Supervisor,Machine
+fflags,Conditional,Conditional,Conditional
+frm,Conditional,Conditional,Conditional
+fcsr,Conditional,Conditional,Conditional
+hpmcounter3,Not allowed,Not allowed,Not allowed
+hpmcounter4,Not allowed,Not allowed,Not allowed
+hpmcounter5,Not allowed,Not allowed,Not allowed
+hpmcounter6,Not allowed,Not allowed,Not allowed
+hpmcounter7,Not allowed,Not allowed,Not allowed
+hpmcounter8,Not allowed,Not allowed,Not allowed
+hpmcounter9,Not allowed,Not allowed,Not allowed
+hpmcounter10,Not allowed,Not allowed,Not allowed
+hpmcounter11,Not allowed,Not allowed,Not allowed
+hpmcounter12,Not allowed,Not allowed,Not allowed
+hpmcounter13,Not allowed,Not allowed,Not allowed
+hpmcounter14,Not allowed,Not allowed,Not allowed
+hpmcounter15,Not allowed,Not allowed,Not allowed
+hpmcounter16,Not allowed,Not allowed,Not allowed
+hpmcounter17,Not allowed,Not allowed,Not allowed
+hpmcounter18,Not allowed,Not allowed,Not allowed
+hpmcounter19,Not allowed,Not allowed,Not allowed
+hpmcounter20,Not allowed,Not allowed,Not allowed
+hpmcounter21,Not allowed,Not allowed,Not allowed
+hpmcounter22,Not allowed,Not allowed,Not allowed
+hpmcounter23,Not allowed,Not allowed,Not allowed
+hpmcounter24,Not allowed,Not allowed,Not allowed
+hpmcounter25,Not allowed,Not allowed,Not allowed
+hpmcounter26,Not allowed,Not allowed,Not allowed
+hpmcounter27,Not allowed,Not allowed,Not allowed
+hpmcounter28,Not allowed,Not allowed,Not allowed
+hpmcounter29,Not allowed,Not allowed,Not allowed
+hpmcounter30,Not allowed,Not allowed,Not allowed
+hpmcounter31,Not allowed,Not allowed,Not allowed
+hpmcounter3h,Not allowed,Not allowed,Not allowed
+hpmcounter4h,Not allowed,Not allowed,Not allowed
+hpmcounter5h,Not allowed,Not allowed,Not allowed
+hpmcounter6h,Not allowed,Not allowed,Not allowed
+hpmcounter7h,Not allowed,Not allowed,Not allowed
+hpmcounter8h,Not allowed,Not allowed,Not allowed
+hpmcounter9h,Not allowed,Not allowed,Not allowed
+hpmcounter10h,Not allowed,Not allowed,Not allowed
+hpmcounter11h,Not allowed,Not allowed,Not allowed
+hpmcounter12h,Not allowed,Not allowed,Not allowed
+hpmcounter13h,Not allowed,Not allowed,Not allowed
+hpmcounter14h,Not allowed,Not allowed,Not allowed
+hpmcounter15h,Not allowed,Not allowed,Not allowed
+hpmcounter16h,Not allowed,Not allowed,Not allowed
+hpmcounter17h,Not allowed,Not allowed,Not allowed
+hpmcounter18h,Not allowed,Not allowed,Not allowed
+hpmcounter19h,Not allowed,Not allowed,Not allowed
+hpmcounter20h,Not allowed,Not allowed,Not allowed
+hpmcounter21h,Not allowed,Not allowed,Not allowed
+hpmcounter22h,Not allowed,Not allowed,Not allowed
+hpmcounter23h,Not allowed,Not allowed,Not allowed
+hpmcounter24h,Not allowed,Not allowed,Not allowed
+hpmcounter25h,Not allowed,Not allowed,Not allowed
+hpmcounter26h,Not allowed,Not allowed,Not allowed
+hpmcounter27h,Not allowed,Not allowed,Not allowed
+hpmcounter28h,Not allowed,Not allowed,Not allowed
+hpmcounter29h,Not allowed,Not allowed,Not allowed
+hpmcounter30h,Not allowed,Not allowed,Not allowed
+hpmcounter31h,Not allowed,Not allowed,Not allowed
+mhpmevent3,Not allowed,Not allowed,Undetermined
+mhpmevent4,Not allowed,Not allowed,Undetermined
+mhpmevent5,Not allowed,Not allowed,Undetermined
+mhpmevent6,Not allowed,Not allowed,Undetermined
+mhpmevent7,Not allowed,Not allowed,Undetermined
+mhpmevent8,Not allowed,Not allowed,Undetermined
+mhpmevent9,Not allowed,Not allowed,Undetermined
+mhpmevent10,Not allowed,Not allowed,Undetermined
+mhpmevent11,Not allowed,Not allowed,Undetermined
+mhpmevent12,Not allowed,Not allowed,Undetermined
+mhpmevent13,Not allowed,Not allowed,Undetermined
+mhpmevent14,Not allowed,Not allowed,Undetermined
+mhpmevent15,Not allowed,Not allowed,Undetermined
+mhpmevent16,Not allowed,Not allowed,Undetermined
+mhpmevent17,Not allowed,Not allowed,Undetermined
+mhpmevent18,Not allowed,Not allowed,Undetermined
+mhpmevent19,Not allowed,Not allowed,Undetermined
+mhpmevent20,Not allowed,Not allowed,Undetermined
+mhpmevent21,Not allowed,Not allowed,Undetermined
+mhpmevent22,Not allowed,Not allowed,Undetermined
+mhpmevent23,Not allowed,Not allowed,Undetermined
+mhpmevent24,Not allowed,Not allowed,Undetermined
+mhpmevent25,Not allowed,Not allowed,Undetermined
+mhpmevent26,Not allowed,Not allowed,Undetermined
+mhpmevent27,Not allowed,Not allowed,Undetermined
+mhpmevent28,Not allowed,Not allowed,Undetermined
+mhpmevent29,Not allowed,Not allowed,Undetermined
+mhpmevent30,Not allowed,Not allowed,Undetermined
+mhpmevent31,Not allowed,Not allowed,Undetermined
+mhpmcounter3,Not allowed,Not allowed,Undetermined
+mhpmcounter4,Not allowed,Not allowed,Undetermined
+mhpmcounter5,Not allowed,Not allowed,Undetermined
+mhpmcounter6,Not allowed,Not allowed,Undetermined
+mhpmcounter7,Not allowed,Not allowed,Undetermined
+mhpmcounter8,Not allowed,Not allowed,Undetermined
+mhpmcounter9,Not allowed,Not allowed,Undetermined
+mhpmcounter10,Not allowed,Not allowed,Undetermined
+mhpmcounter11,Not allowed,Not allowed,Undetermined
+mhpmcounter12,Not allowed,Not allowed,Undetermined
+mhpmcounter13,Not allowed,Not allowed,Undetermined
+mhpmcounter14,Not allowed,Not allowed,Undetermined
+mhpmcounter15,Not allowed,Not allowed,Undetermined
+mhpmcounter16,Not allowed,Not allowed,Undetermined
+mhpmcounter17,Not allowed,Not allowed,Undetermined
+mhpmcounter18,Not allowed,Not allowed,Undetermined
+mhpmcounter19,Not allowed,Not allowed,Undetermined
+mhpmcounter20,Not allowed,Not allowed,Undetermined
+mhpmcounter21,Not allowed,Not allowed,Undetermined
+mhpmcounter22,Not allowed,Not allowed,Undetermined
+mhpmcounter23,Not allowed,Not allowed,Undetermined
+mhpmcounter24,Not allowed,Not allowed,Undetermined
+mhpmcounter25,Not allowed,Not allowed,Undetermined
+mhpmcounter26,Not allowed,Not allowed,Undetermined
+mhpmcounter27,Not allowed,Not allowed,Undetermined
+mhpmcounter28,Not allowed,Not allowed,Undetermined
+mhpmcounter29,Not allowed,Not allowed,Undetermined
+mhpmcounter30,Not allowed,Not allowed,Undetermined
+mhpmcounter31,Not allowed,Not allowed,Undetermined
+mhpmcounter3h,Not allowed,Not allowed,Not allowed
+mhpmcounter4h,Not allowed,Not allowed,Not allowed
+mhpmcounter5h,Not allowed,Not allowed,Not allowed
+mhpmcounter6h,Not allowed,Not allowed,Not allowed
+mhpmcounter7h,Not allowed,Not allowed,Not allowed
+mhpmcounter8h,Not allowed,Not allowed,Not allowed
+mhpmcounter9h,Not allowed,Not allowed,Not allowed
+mhpmcounter10h,Not allowed,Not allowed,Not allowed
+mhpmcounter11h,Not allowed,Not allowed,Not allowed
+mhpmcounter12h,Not allowed,Not allowed,Not allowed
+mhpmcounter13h,Not allowed,Not allowed,Not allowed
+mhpmcounter14h,Not allowed,Not allowed,Not allowed
+mhpmcounter15h,Not allowed,Not allowed,Not allowed
+mhpmcounter16h,Not allowed,Not allowed,Not allowed
+mhpmcounter17h,Not allowed,Not allowed,Not allowed
+mhpmcounter18h,Not allowed,Not allowed,Not allowed
+mhpmcounter19h,Not allowed,Not allowed,Not allowed
+mhpmcounter20h,Not allowed,Not allowed,Not allowed
+mhpmcounter21h,Not allowed,Not allowed,Not allowed
+mhpmcounter22h,Not allowed,Not allowed,Not allowed
+mhpmcounter23h,Not allowed,Not allowed,Not allowed
+mhpmcounter24h,Not allowed,Not allowed,Not allowed
+mhpmcounter25h,Not allowed,Not allowed,Not allowed
+mhpmcounter26h,Not allowed,Not allowed,Not allowed
+mhpmcounter27h,Not allowed,Not allowed,Not allowed
+mhpmcounter28h,Not allowed,Not allowed,Not allowed
+mhpmcounter29h,Not allowed,Not allowed,Not allowed
+mhpmcounter30h,Not allowed,Not allowed,Not allowed
+mhpmcounter31h,Not allowed,Not allowed,Not allowed
+pmpcfg0,Not allowed,Not allowed,Not allowed
+pmpcfg1,Not allowed,Not allowed,Not allowed
+pmpcfg2,Not allowed,Not allowed,Not allowed
+pmpcfg3,Not allowed,Not allowed,Not allowed
+pmpcfg4,Not allowed,Not allowed,Not allowed
+pmpcfg5,Not allowed,Not allowed,Not allowed
+pmpcfg6,Not allowed,Not allowed,Not allowed
+pmpcfg7,Not allowed,Not allowed,Not allowed
+pmpcfg8,Not allowed,Not allowed,Not allowed
+pmpcfg9,Not allowed,Not allowed,Not allowed
+pmpcfg10,Not allowed,Not allowed,Not allowed
+pmpcfg11,Not allowed,Not allowed,Not allowed
+pmpcfg12,Not allowed,Not allowed,Not allowed
+pmpcfg13,Not allowed,Not allowed,Not allowed
+pmpcfg14,Not allowed,Not allowed,Not allowed
+pmpcfg15,Not allowed,Not allowed,Not allowed
+pmpaddr0,Not allowed,Not allowed,Not allowed
+pmpaddr1,Not allowed,Not allowed,Not allowed
+pmpaddr2,Not allowed,Not allowed,Not allowed
+pmpaddr3,Not allowed,Not allowed,Not allowed
+pmpaddr4,Not allowed,Not allowed,Not allowed
+pmpaddr5,Not allowed,Not allowed,Not allowed
+pmpaddr6,Not allowed,Not allowed,Not allowed
+pmpaddr7,Not allowed,Not allowed,Not allowed
+pmpaddr8,Not allowed,Not allowed,Not allowed
+pmpaddr9,Not allowed,Not allowed,Not allowed
+pmpaddr10,Not allowed,Not allowed,Not allowed
+pmpaddr11,Not allowed,Not allowed,Not allowed
+pmpaddr12,Not allowed,Not allowed,Not allowed
+pmpaddr13,Not allowed,Not allowed,Not allowed
+pmpaddr14,Not allowed,Not allowed,Not allowed
+pmpaddr15,Not allowed,Not allowed,Not allowed
+pmpaddr16,Not allowed,Not allowed,Not allowed
+pmpaddr17,Not allowed,Not allowed,Not allowed
+pmpaddr18,Not allowed,Not allowed,Not allowed
+pmpaddr19,Not allowed,Not allowed,Not allowed
+pmpaddr20,Not allowed,Not allowed,Not allowed
+pmpaddr21,Not allowed,Not allowed,Not allowed
+pmpaddr22,Not allowed,Not allowed,Not allowed
+pmpaddr23,Not allowed,Not allowed,Not allowed
+pmpaddr24,Not allowed,Not allowed,Not allowed
+pmpaddr25,Not allowed,Not allowed,Not allowed
+pmpaddr26,Not allowed,Not allowed,Not allowed
+pmpaddr27,Not allowed,Not allowed,Not allowed
+pmpaddr28,Not allowed,Not allowed,Not allowed
+pmpaddr29,Not allowed,Not allowed,Not allowed
+pmpaddr30,Not allowed,Not allowed,Not allowed
+pmpaddr31,Not allowed,Not allowed,Not allowed
+pmpaddr32,Not allowed,Not allowed,Not allowed
+pmpaddr33,Not allowed,Not allowed,Not allowed
+pmpaddr34,Not allowed,Not allowed,Not allowed
+pmpaddr35,Not allowed,Not allowed,Not allowed
+pmpaddr36,Not allowed,Not allowed,Not allowed
+pmpaddr37,Not allowed,Not allowed,Not allowed
+pmpaddr38,Not allowed,Not allowed,Not allowed
+pmpaddr39,Not allowed,Not allowed,Not allowed
+pmpaddr40,Not allowed,Not allowed,Not allowed
+pmpaddr41,Not allowed,Not allowed,Not allowed
+pmpaddr42,Not allowed,Not allowed,Not allowed
+pmpaddr43,Not allowed,Not allowed,Not allowed
+pmpaddr44,Not allowed,Not allowed,Not allowed
+pmpaddr45,Not allowed,Not allowed,Not allowed
+pmpaddr46,Not allowed,Not allowed,Not allowed
+pmpaddr47,Not allowed,Not allowed,Not allowed
+pmpaddr48,Not allowed,Not allowed,Not allowed
+pmpaddr49,Not allowed,Not allowed,Not allowed
+pmpaddr50,Not allowed,Not allowed,Not allowed
+pmpaddr51,Not allowed,Not allowed,Not allowed
+pmpaddr52,Not allowed,Not allowed,Not allowed
+pmpaddr53,Not allowed,Not allowed,Not allowed
+pmpaddr54,Not allowed,Not allowed,Not allowed
+pmpaddr55,Not allowed,Not allowed,Not allowed
+pmpaddr56,Not allowed,Not allowed,Not allowed
+pmpaddr57,Not allowed,Not allowed,Not allowed
+pmpaddr58,Not allowed,Not allowed,Not allowed
+pmpaddr59,Not allowed,Not allowed,Not allowed
+pmpaddr60,Not allowed,Not allowed,Not allowed
+pmpaddr61,Not allowed,Not allowed,Not allowed
+pmpaddr62,Not allowed,Not allowed,Not allowed
+pmpaddr63,Not allowed,Not allowed,Not allowed
+cycle,Not allowed,Not allowed,Not allowed
+time,Not allowed,Not allowed,Not allowed
+instret,Not allowed,Not allowed,Not allowed
+cycleh,Not allowed,Not allowed,Not allowed
+timeh,Not allowed,Not allowed,Not allowed
+instreth,Not allowed,Not allowed,Not allowed
+mcycle,Not allowed,Not allowed,Allowed
+minstret,Not allowed,Not allowed,Allowed
+mcycleh,Not allowed,Not allowed,Not allowed
+minstreth,Not allowed,Not allowed,Not allowed
+stimecmp,Not allowed,Not allowed,Not allowed
+stimecmph,Not allowed,Not allowed,Not allowed
+stvec,Not allowed,Allowed,Allowed
+sepc,Not allowed,Allowed,Allowed
+mtvec,Not allowed,Not allowed,Allowed
+mepc,Not allowed,Not allowed,Allowed
+misa,Not allowed,Not allowed,Allowed
+mstatus,Not allowed,Not allowed,Allowed
+menvcfg,Not allowed,Not allowed,Allowed
+menvcfgh,Not allowed,Not allowed,Not allowed
+senvcfg,Not allowed,Allowed,Allowed
+mie,Not allowed,Not allowed,Allowed
+mip,Not allowed,Not allowed,Allowed
+medeleg,Not allowed,Not allowed,Allowed
+medelegh,Undetermined,Undetermined,Undetermined
+mideleg,Not allowed,Not allowed,Allowed
+mcause,Not allowed,Not allowed,Allowed
+mtval,Not allowed,Not allowed,Allowed
+mscratch,Not allowed,Not allowed,Allowed
+scounteren,Not allowed,Undetermined,Undetermined
+mcounteren,Not allowed,Not allowed,Undetermined
+mcountinhibit,Not allowed,Not allowed,Undetermined
+mvendorid,Not allowed,Not allowed,Not allowed
+marchid,Not allowed,Not allowed,Not allowed
+mimpid,Not allowed,Not allowed,Not allowed
+mhartid,Not allowed,Not allowed,Not allowed
+mconfigptr,Not allowed,Not allowed,Not allowed
+sstatus,Not allowed,Allowed,Allowed
+sip,Not allowed,Allowed,Allowed
+sie,Not allowed,Allowed,Allowed
+sscratch,Not allowed,Allowed,Allowed
+scause,Not allowed,Allowed,Allowed
+stval,Not allowed,Allowed,Allowed
+tselect,Not allowed,Not allowed,Allowed
+tdata1,Not allowed,Not allowed,Not allowed
+tdata2,Not allowed,Not allowed,Not allowed
+tdata3,Not allowed,Not allowed,Not allowed
+seed,Not allowed,Not allowed,Allowed
+vstart,Undetermined,Undetermined,Undetermined
+vxsat,Conditional,Conditional,Conditional
+vxrm,Conditional,Conditional,Conditional
+vcsr,Conditional,Conditional,Conditional
+vl,Not allowed,Not allowed,Not allowed
+vtype,Not allowed,Not allowed,Not allowed
+vlenb,Not allowed,Not allowed,Not allowed
+satp,Not allowed,Conditional,Allowed
