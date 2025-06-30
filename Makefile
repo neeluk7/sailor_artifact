@@ -3,10 +3,13 @@
 setup-dependencies: 
 	sudo apt install gcc-riscv64-linux-gnu
 	sudo apt-get install opam
+	opam init
 	eval $(opam config env)
+	sudo apt-get install curl
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 
 	rustup default 1.86.0
-	opam install z3=4.8.12
+	opam install z3=4.8.13
+	git submodule update --init --recursive
 
 setup-sail-riscv:
 	./scripts/build_sail-riscv.sh
@@ -19,8 +22,8 @@ gen-isla-traces-full:
 	./scripts/gen_rv64gc_unpriv_instr_traces.sh &
 
 isla-traces-test:
-	mkdir -p isla_test_traces
-	./scripts/gen_rv64gc_unpriv_instr_traces_test.sh &
+	mkdir -p isla_traces_test
+	./scripts/gen_rv64gc_unpriv_instr_traces_test.sh 
 	diff -bur isla_traces_test expected_results/isla_test_traces
 
 isla-parse-test:
