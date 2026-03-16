@@ -1,0 +1,147 @@
+Loading dependency reports...
+✓ Loaded
+
+================================================================================
+CSR DEPENDENCY COMPARISON ACROSS PRIVILEGE MODES
+================================================================================
+
+
+READ-READ Dependencies
+--------------------------------------------------------------------------------
+
+Common to all 3 modes: 101 dependencies
+  (Showing first 20 of 101)
+  PC                   => cur_privilege       
+  PC                   => mcause              
+  PC                   => medeleg             
+  PC                   => misa                
+  PC                   => mstatus             
+  PC                   => mtvec               
+  __monomorphize_reads => cur_privilege       
+  __monomorphize_reads => mstatus             
+  __monomorphize_reads => x11                 
+  __monomorphize_writes => cur_privilege       
+  __monomorphize_writes => mstatus             
+  __monomorphize_writes => x11                 
+  cur_privilege        => mstatus             
+  f0                   => fcsr                
+  f0                   => misa                
+  f0                   => mstatus             
+  f11                  => fcsr                
+  f11                  => misa                
+  f11                  => mstatus             
+  f12                  => fcsr                
+
+Supervisor mode ONLY: 11 dependencies
+  __monomorphize_reads => satp                  100.0%
+  __monomorphize_writes => satp                  100.0%
+  htif_cmd_write       => satp                  100.0%
+  htif_payload_writes  => satp                  100.0%
+  htif_tohost          => satp                  100.0%
+  mip                  => satp                  100.0%
+  mtime                => satp                  100.0%
+  mtimecmp             => satp                  100.0%
+  stimecmp             => satp                  100.0%
+  x11                  => satp                  97.2%
+
+READ-WRITE Dependencies
+--------------------------------------------------------------------------------
+
+Common to all 3 modes: 36 dependencies
+  (Showing first 20 of 36)
+  PC                   => cur_privilege       
+  PC                   => mcause              
+  PC                   => mepc                
+  PC                   => mstatus             
+  PC                   => mtval               
+  PC                   => nextPC              
+  f0                   => mstatus             
+  f11                  => mstatus             
+  f12                  => mstatus             
+  fcsr                 => mstatus             
+  float_fflags         => mstatus             
+  float_result         => mstatus             
+  htif_cmd_write       => htif_payload_writes 
+  htif_cmd_write       => htif_tohost         
+  htif_payload_writes  => htif_tohost         
+  htif_tohost          => htif_payload_writes 
+  mcause               => cur_privilege       
+  mcause               => mepc                
+  mcause               => mstatus             
+  mcause               => mtval               
+
+WRITE-READ Dependencies
+--------------------------------------------------------------------------------
+
+Common to all 3 modes: 95 dependencies
+  (Showing first 20 of 95)
+  cur_privilege        => PC                  
+  cur_privilege        => mcause              
+  cur_privilege        => medeleg             
+  cur_privilege        => misa                
+  cur_privilege        => mstatus             
+  cur_privilege        => mtvec               
+  f0                   => fcsr                
+  f0                   => misa                
+  f0                   => mstatus             
+  f10                  => fcsr                
+  f10                  => misa                
+  f10                  => mstatus             
+  fcsr                 => misa                
+  fcsr                 => mstatus             
+  htif_cmd_write       => cur_privilege       
+  htif_cmd_write       => htif_payload_writes 
+  htif_cmd_write       => htif_tohost         
+  htif_cmd_write       => mstatus             
+  htif_cmd_write       => x11                 
+  htif_done            => cur_privilege       
+
+Supervisor mode ONLY: 8 dependencies
+  htif_cmd_write       => satp                  100.0%
+  htif_done            => satp                  100.0%
+  htif_exit_code       => satp                  100.0%
+  htif_payload_writes  => satp                  100.0%
+  htif_tohost          => satp                  100.0%
+  mip                  => satp                  100.0%
+  mtime                => satp                  100.0%
+  mtimecmp             => satp                  100.0%
+
+WRITE-WRITE Dependencies
+--------------------------------------------------------------------------------
+
+Common to all 3 modes: 42 dependencies
+  (Showing first 20 of 42)
+  cur_privilege        => mcause              
+  cur_privilege        => mepc                
+  cur_privilege        => mstatus             
+  cur_privilege        => mtval               
+  cur_privilege        => nextPC              
+  f0                   => mstatus             
+  f10                  => mstatus             
+  fcsr                 => mstatus             
+  htif_cmd_write       => htif_payload_writes 
+  htif_cmd_write       => htif_tohost         
+  htif_done            => htif_cmd_write      
+  htif_done            => htif_exit_code      
+  htif_done            => htif_payload_writes 
+  htif_done            => htif_tohost         
+  htif_exit_code       => htif_cmd_write      
+  htif_exit_code       => htif_done           
+  htif_exit_code       => htif_payload_writes 
+  htif_exit_code       => htif_tohost         
+  htif_payload_writes  => htif_tohost         
+  htif_tohost          => htif_payload_writes 
+
+================================================================================
+
+SUMMARY
+================================================================================
+Total dependencies (≥95% correlation):
+  Machine mode:    274
+  Supervisor mode: 293
+  User mode:       293
+
+⚠ Different numbers of dependencies across modes
+  Difference: 19 dependencies
+
+Comparison complete!
