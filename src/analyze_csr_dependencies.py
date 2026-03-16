@@ -88,9 +88,9 @@ def analyze_dependencies(traces: List[Dict[str, Set[str]]]) -> Dict[str, Dict]:
     Analyze register dependencies across all traces.
     
     For each register pair (A, B) and each operation type combination, check:
-    - How often A appears
-    - When A appears, how often B also appears
-    - Calculate dependency percentage
+    - How often A appears (total)
+    - When A appears, how often B also appears (together)
+    - Calculate dependency percentage: together / total
     
     Returns dictionary with dependency statistics.
     """
@@ -103,61 +103,79 @@ def analyze_dependencies(traces: List[Dict[str, Set[str]]]) -> Dict[str, Dict]:
     # 4. WRITE-WRITE: A write implies B write
     
     dependencies = {
-        'READ-READ': defaultdict(lambda: {'total': 0, 'together': 0}),
-        'READ-WRITE': defaultdict(lambda: {'total': 0, 'together': 0}),
-        'WRITE-READ': defaultdict(lambda: {'total': 0, 'together': 0}),
-        'WRITE-WRITE': defaultdict(lambda: {'total': 0, 'together': 0}),
+        'READ-READ': defaultdict(lambda: {'together': 0}),
+        'READ-WRITE': defaultdict(lambda: {'together': 0}),
+        'WRITE-READ': defaultdict(lambda: {'together': 0}),
+        'WRITE-WRITE': defaultdict(lambda: {'together': 0}),
     }
+    
+    # Count how many traces each register appears in (for 'total')
+    read_counts = defaultdict(int)
+    write_counts = defaultdict(int)
     
     # Get all unique registers
     all_registers = set()
     for trace in traces:
         all_registers.update(trace['reads'])
         all_registers.update(trace['writes'])
+        # Count register occurrences
+        for reg in trace['reads']:
+            read_counts[reg] += 1
+        for reg in trace['writes']:
+            write_counts[reg] += 1
     
     print(f"  Found {len(all_registers)} unique registers")
     print(f"  Analyzing {len(traces)} traces...")
     
-    # For each trace, check all register pairs
+    # For each trace, check register co-occurrences
     for trace_num, trace in enumerate(traces, 1):
         if trace_num % 10000 == 0:
             print(f"    Processing trace {trace_num}/{len(traces)}...")
         
-        # READ-READ dependencies
+        # READ-READ dependencies: when reg_a is read, is reg_b also read?
         for reg_a in trace['reads']:
-            for reg_b in all_registers:
+            for reg_b in trace['reads']:
                 if reg_a != reg_b:
                     key = (reg_a, reg_b)
-                    dependencies['READ-READ'][key]['total'] += 1
-                    if reg_b in trace['reads']:
-                        dependencies['READ-READ'][key]['together'] += 1
+                    dependencies['READ-READ'][key]['together'] += 1
         
-        # READ-WRITE dependencies
+        # READ-WRITE dependencies: when reg_a is read, is reg_b written?
         for reg_a in trace['reads']:
-            for reg_b in all_registers:
+            for reg_b in trace['writes']:
                 if reg_a != reg_b:
                     key = (reg_a, reg_b)
-                    dependencies['READ-WRITE'][key]['total'] += 1
-                    if reg_b in trace['writes']:
-                        dependencies['READ-WRITE'][key]['together'] += 1
+                    dependencies['READ-WRITE'][key]['together'] += 1
         
-        # WRITE-READ dependencies
+        # WRITE-READ dependencies: when reg_a is written, is reg_b read?
         for reg_a in trace['writes']:
-            for reg_b in all_registers:
+            for reg_b in trace['reads']:
                 if reg_a != reg_b:
                     key = (reg_a, reg_b)
-                    dependencies['WRITE-READ'][key]['total'] += 1
-                    if reg_b in trace['reads']:
-                        dependencies['WRITE-READ'][key]['together'] += 1
+                    dependencies['WRITE-READ'][key]['together'] += 1
         
-        # WRITE-WRITE dependencies
+        # WRITE-WRITE dependencies: when reg_a is written, is reg_b also written?
         for reg_a in trace['writes']:
-            for reg_b in all_registers:
+            for reg_b in trace['writes']:
                 if reg_a != reg_b:
                     key = (reg_a, reg_b)
-                    dependencies['WRITE-WRITE'][key]['total'] += 1
-                    if reg_b in trace['writes']:
-                        dependencies['WRITE-WRITE'][key]['together'] += 1
+                    dependencies['WRITE-WRITE'][key]['together'] += 1
+    
+    # Add 'total' counts to each dependency
+    for key in dependencies['READ-READ']:
+        reg_a = key[0]
+        dependencies['READ-READ'][key]['total'] = read_counts[reg_a]
+    
+    for key in dependencies['READ-WRITE']:
+        reg_a = key[0]
+        dependencies['READ-WRITE'][key]['total'] = read_counts[reg_a]
+    
+    for key in dependencies['WRITE-READ']:
+        reg_a = key[0]
+        dependencies['WRITE-READ'][key]['total'] = write_counts[reg_a]
+    
+    for key in dependencies['WRITE-WRITE']:
+        reg_a = key[0]
+        dependencies['WRITE-WRITE'][key]['total'] = write_counts[reg_a]
     
     print("✓ Dependency analysis complete")
     return dependencies
