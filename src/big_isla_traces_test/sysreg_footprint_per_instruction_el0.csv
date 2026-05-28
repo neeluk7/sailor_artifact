@@ -1,0 +1,164 @@
+Instruction,Sysreg footprint
+ADDG_64_addsub_immtags | Mode
+ADDS_32S_addsub_imm | Mode
+ADDS_64S_addsub_imm | Mode
+ADD_32_addsub_imm | Mode
+ADD_64_addsub_imm | Mode
+ADRP_only_pcreladdr | Mode
+ADR_only_pcreladdr | Mode
+ANDS_32S_log_imm | Mode
+ANDS_64S_log_imm | Mode
+AND_32_log_imm | Mode
+AND_64_log_imm | Mode
+AXFLAG_M_pstate | Mode
+BC_only_condbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+BFM_32M_bitfield | Mode
+BFM_64M_bitfield | Mode
+BLR_64_branch_reg | Mode,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+BL_only_branch_imm | Mode,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+BR_64_branch_reg | Mode,HCR_EL2 Read,TCR_EL1 Read
+BTI_HB_hints | Mode
+B_only_branch_imm | Mode,HCR_EL2 Read,TCR_EL1 Read
+B_only_condbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+CASPAL_CP32_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPAL_CP64_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPA_CP32_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPA_CP64_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPL_CP32_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPL_CP64_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASP_CP32_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASP_CP64_comswappr | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CBBEQ_8_regs | Mode
+CBBGE_8_regs | Mode
+CBBGT_8_regs | Mode
+CBBHI_8_regs | Mode
+CBBHS_8_regs | Mode
+CBBNE_8_regs | Mode
+CBEQ_32_imm | Mode
+CBEQ_32_regs | Mode
+CBEQ_64_imm | Mode
+CBEQ_64_regs | Mode
+CBGE_32_regs | Mode
+CBGE_64_regs | Mode
+CBGT_32_imm | Mode
+CBGT_32_regs | Mode
+CBGT_64_imm | Mode
+CBGT_64_regs | Mode
+CBHEQ_16_regs | Mode
+CBHGE_16_regs | Mode
+CBHGT_16_regs | Mode
+CBHHI_16_regs | Mode
+CBHHS_16_regs | Mode
+CBHI_32_imm | Mode
+CBHI_32_regs | Mode
+CBHI_64_imm | Mode
+CBHI_64_regs | Mode
+CBHNE_16_regs | Mode
+CBHS_32_regs | Mode
+CBHS_64_regs | Mode
+CBLO_32_imm | Mode
+CBLO_64_imm | Mode
+CBLT_32_imm | Mode
+CBLT_64_imm | Mode
+CBNE_32_imm | Mode
+CBNE_32_regs | Mode
+CBNE_64_imm | Mode
+CBNE_64_regs | Mode
+CBNZ_32_compbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+CBNZ_64_compbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+CBZ_32_compbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+CBZ_64_compbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+CFINV_M_pstate | Mode
+CHKFEAT_HF_hints | Mode,SCR_EL3 Read
+CLRBHB_HI_hints | Mode
+CLREX_BN_barriers | Mode
+CSDB_HI_hints | Mode
+DGH_HI_hints | Mode
+DMB_BO_barriers | Mode
+DRPS_64E_branch_reg | Mode
+DSB_BO_barriers | Mode
+DSB_BOn_barriers | Mode
+EOR_32_log_imm | Mode
+EOR_64_log_imm | Mode
+ERET_64E_branch_reg | Mode
+ESB_HI_hints | Mode,SCR_EL3 Read,HCR_EL2 Read,DISR_EL1 Write
+EXTR_32_extract | Mode
+EXTR_64_extract | Mode
+GCSB_HD_hints | Mode
+ISB_BI_barriers | Mode
+LDCLRPL_128_memop_128 | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+LDCLRP_128_memop_128 | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+LDSETP_128_memop_128 | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+MOVK_32_movewide | Mode
+MOVK_64_movewide | Mode
+MOVN_32_movewide | Mode
+MOVN_64_movewide | Mode
+MOVZ_32_movewide | Mode
+MOVZ_64_movewide | Mode
+MRRS_RS_systemmovepr | Mode,HCR_EL2 Read
+MRS_RS_systemmove | Mode,HCR_EL2 Read
+MSRR_SR_systemmovepr | Mode,HCR_EL2 Read
+MSR_SI_pstate | Mode
+MSR_SR_systemmove | Mode,MDCR_EL2 Read,HCR_EL2 Read
+NOP_HI_hints | Mode
+ORR_32_log_imm | Mode
+ORR_64_log_imm | Mode
+PSB_HC_hints | Mode
+RCWCASAL_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASA_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASL_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASPAL_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWCASPA_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWCASPL_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWCASP_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWCAS_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCLRP_128_memop_128 | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASAL_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASA_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASL_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASPAL_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASPA_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASPL_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASP_C64_rcwcomswappr | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSCAS_C64_rcwcomswap | Mode,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSETP_128_memop_128 | Mode,HCR_EL2 Read,SCR_EL3 Read
+RCWSWPP_128_memop_128 | Mode,HCR_EL2 Read,SCR_EL3 Read
+RET_64R_branch_reg | Mode,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+SBFM_32M_bitfield | Mode
+SBFM_64M_bitfield | Mode
+SB_only_barriers | Mode
+SHUH_HI_hints | Mode
+SMAX_32_minmax_imm | Mode
+SMAX_64_minmax_imm | Mode
+SMIN_32_minmax_imm | Mode
+SMIN_64_minmax_imm | Mode
+STCPH_HI_hints | Mode
+STSHH_HI_hints | Mode
+SUBG_64_addsub_immtags | Mode
+SUBS_32S_addsub_imm | Mode
+SUBS_64S_addsub_imm | Mode
+SUB_32_addsub_imm | Mode
+SUB_64_addsub_imm | Mode
+SWPP_128_memop_128 | Mode,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+SYSL_RC_systeminstrs | Mode,HCR_EL2 Read
+SYSP_CR_syspairinstrs | Mode,HCR_EL2 Read
+SYS_CR_systeminstrs | Mode,HCR_EL2 Read
+TBNZ_only_testbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+TBZ_only_testbranch | Mode,HCR_EL2 Read,TCR_EL1 Read
+TCHANGEB_tc_imm | Mode
+TCHANGEB_tc_reg | Mode
+TCHANGEF_tc_imm | Mode
+TCHANGEF_tc_reg | Mode
+TENTER_te_exception | Mode
+TEXIT_te_branch_reg | Mode
+TSB_HC_hints | Mode
+UBFM_32M_bitfield | Mode
+UBFM_64M_bitfield | Mode
+UMAX_32U_minmax_imm | Mode
+UMAX_64U_minmax_imm | Mode
+UMIN_32U_minmax_imm | Mode
+UMIN_64U_minmax_imm | Mode
+WFET_only_systeminstrswithreg | Mode,HCR_EL2 Read,SCTLR_EL1 Read,SCR_EL3 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read
+WFIT_only_systeminstrswithreg | Mode,HCR_EL2 Read,SCR_EL3 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read
+XAFLAG_M_pstate | Mode
+YIELD_HI_hints | Mode

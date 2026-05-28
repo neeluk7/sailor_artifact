@@ -1,0 +1,2 @@
+Instruction,Sysreg footprint
+ERET,ELR_EL3 Read,SP_EL0 Read,SCR_EL3 Read,OSLSR_EL1 Read,MDSCR_EL1 Read,TCR_EL3 Read,HCR_EL2 Read,MDCR_EL2 Read,TCR_EL1 Read,TCR_EL2 Read

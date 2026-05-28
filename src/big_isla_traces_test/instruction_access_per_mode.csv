@@ -1,0 +1,164 @@
+Instruction,EL0,EL1,EL2,EL3
+ADDG_64_addsub_immtags | Mode,Not allowed,No data,No data,No data
+ADDS_32S_addsub_imm | Mode,Not allowed,No data,No data,No data
+ADDS_64S_addsub_imm | Mode,Not allowed,No data,No data,No data
+ADD_32_addsub_imm | Mode,Not allowed,No data,No data,No data
+ADD_64_addsub_imm | Mode,Not allowed,No data,No data,No data
+ADRP_only_pcreladdr | Mode,Not allowed,No data,No data,No data
+ADR_only_pcreladdr | Mode,Not allowed,No data,No data,No data
+ANDS_32S_log_imm | Mode,Not allowed,No data,No data,No data
+ANDS_64S_log_imm | Mode,Not allowed,No data,No data,No data
+AND_32_log_imm | Mode,Not allowed,No data,No data,No data
+AND_64_log_imm | Mode,Not allowed,No data,No data,No data
+AXFLAG_M_pstate | Mode,Not allowed,No data,No data,No data
+BC_only_condbranch | Mode,Conditional,No data,No data,No data
+BFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
+BFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
+BLR_64_branch_reg | Mode,Allowed,No data,No data,No data
+BL_only_branch_imm | Mode,Allowed,No data,No data,No data
+BR_64_branch_reg | Mode,Allowed,No data,No data,No data
+BTI_HB_hints | Mode,Not allowed,No data,No data,No data
+B_only_branch_imm | Mode,Allowed,No data,No data,No data
+B_only_condbranch | Mode,Conditional,No data,No data,No data
+CASPAL_CP32_comswappr | Mode,Conditional,No data,No data,No data
+CASPAL_CP64_comswappr | Mode,Conditional,No data,No data,No data
+CASPA_CP32_comswappr | Mode,Conditional,No data,No data,No data
+CASPA_CP64_comswappr | Mode,Conditional,No data,No data,No data
+CASPL_CP32_comswappr | Mode,Conditional,No data,No data,No data
+CASPL_CP64_comswappr | Mode,Conditional,No data,No data,No data
+CASP_CP32_comswappr | Mode,Conditional,No data,No data,No data
+CASP_CP64_comswappr | Mode,Conditional,No data,No data,No data
+CBBEQ_8_regs | Mode,Not allowed,No data,No data,No data
+CBBGE_8_regs | Mode,Not allowed,No data,No data,No data
+CBBGT_8_regs | Mode,Not allowed,No data,No data,No data
+CBBHI_8_regs | Mode,Not allowed,No data,No data,No data
+CBBHS_8_regs | Mode,Not allowed,No data,No data,No data
+CBBNE_8_regs | Mode,Not allowed,No data,No data,No data
+CBEQ_32_imm | Mode,Not allowed,No data,No data,No data
+CBEQ_32_regs | Mode,Not allowed,No data,No data,No data
+CBEQ_64_imm | Mode,Not allowed,No data,No data,No data
+CBEQ_64_regs | Mode,Not allowed,No data,No data,No data
+CBGE_32_regs | Mode,Not allowed,No data,No data,No data
+CBGE_64_regs | Mode,Not allowed,No data,No data,No data
+CBGT_32_imm | Mode,Not allowed,No data,No data,No data
+CBGT_32_regs | Mode,Not allowed,No data,No data,No data
+CBGT_64_imm | Mode,Not allowed,No data,No data,No data
+CBGT_64_regs | Mode,Not allowed,No data,No data,No data
+CBHEQ_16_regs | Mode,Not allowed,No data,No data,No data
+CBHGE_16_regs | Mode,Not allowed,No data,No data,No data
+CBHGT_16_regs | Mode,Not allowed,No data,No data,No data
+CBHHI_16_regs | Mode,Not allowed,No data,No data,No data
+CBHHS_16_regs | Mode,Not allowed,No data,No data,No data
+CBHI_32_imm | Mode,Not allowed,No data,No data,No data
+CBHI_32_regs | Mode,Not allowed,No data,No data,No data
+CBHI_64_imm | Mode,Not allowed,No data,No data,No data
+CBHI_64_regs | Mode,Not allowed,No data,No data,No data
+CBHNE_16_regs | Mode,Not allowed,No data,No data,No data
+CBHS_32_regs | Mode,Not allowed,No data,No data,No data
+CBHS_64_regs | Mode,Not allowed,No data,No data,No data
+CBLO_32_imm | Mode,Not allowed,No data,No data,No data
+CBLO_64_imm | Mode,Not allowed,No data,No data,No data
+CBLT_32_imm | Mode,Not allowed,No data,No data,No data
+CBLT_64_imm | Mode,Not allowed,No data,No data,No data
+CBNE_32_imm | Mode,Not allowed,No data,No data,No data
+CBNE_32_regs | Mode,Not allowed,No data,No data,No data
+CBNE_64_imm | Mode,Not allowed,No data,No data,No data
+CBNE_64_regs | Mode,Not allowed,No data,No data,No data
+CBNZ_32_compbranch | Mode,Conditional,No data,No data,No data
+CBNZ_64_compbranch | Mode,Conditional,No data,No data,No data
+CBZ_32_compbranch | Mode,Conditional,No data,No data,No data
+CBZ_64_compbranch | Mode,Conditional,No data,No data,No data
+CFINV_M_pstate | Mode,Not allowed,No data,No data,No data
+CHKFEAT_HF_hints | Mode,Not allowed,No data,No data,No data
+CLRBHB_HI_hints | Mode,Not allowed,No data,No data,No data
+CLREX_BN_barriers | Mode,Not allowed,No data,No data,No data
+CSDB_HI_hints | Mode,Not allowed,No data,No data,No data
+DGH_HI_hints | Mode,Not allowed,No data,No data,No data
+DMB_BO_barriers | Mode,Not allowed,No data,No data,No data
+DRPS_64E_branch_reg | Mode,Not allowed,No data,No data,No data
+DSB_BO_barriers | Mode,Not allowed,No data,No data,No data
+DSB_BOn_barriers | Mode,Not allowed,No data,No data,No data
+EOR_32_log_imm | Mode,Not allowed,No data,No data,No data
+EOR_64_log_imm | Mode,Not allowed,No data,No data,No data
+ERET_64E_branch_reg | Mode,Not allowed,No data,No data,No data
+ESB_HI_hints | Mode,Not allowed,No data,No data,No data
+EXTR_32_extract | Mode,Not allowed,No data,No data,No data
+EXTR_64_extract | Mode,Not allowed,No data,No data,No data
+GCSB_HD_hints | Mode,Not allowed,No data,No data,No data
+ISB_BI_barriers | Mode,Not allowed,No data,No data,No data
+LDCLRPL_128_memop_128 | Mode,Conditional,No data,No data,No data
+LDCLRP_128_memop_128 | Mode,Conditional,No data,No data,No data
+LDSETP_128_memop_128 | Mode,Conditional,No data,No data,No data
+MOVK_32_movewide | Mode,Not allowed,No data,No data,No data
+MOVK_64_movewide | Mode,Not allowed,No data,No data,No data
+MOVN_32_movewide | Mode,Not allowed,No data,No data,No data
+MOVN_64_movewide | Mode,Not allowed,No data,No data,No data
+MOVZ_32_movewide | Mode,Not allowed,No data,No data,No data
+MOVZ_64_movewide | Mode,Not allowed,No data,No data,No data
+MRRS_RS_systemmovepr | Mode,Not allowed,No data,No data,No data
+MRS_RS_systemmove | Mode,Not allowed,No data,No data,No data
+MSRR_SR_systemmovepr | Mode,Not allowed,No data,No data,No data
+MSR_SI_pstate | Mode,Not allowed,No data,No data,No data
+MSR_SR_systemmove | Mode,Not allowed,No data,No data,No data
+NOP_HI_hints | Mode,Not allowed,No data,No data,No data
+ORR_32_log_imm | Mode,Not allowed,No data,No data,No data
+ORR_64_log_imm | Mode,Not allowed,No data,No data,No data
+PSB_HC_hints | Mode,Not allowed,No data,No data,No data
+RCWCASAL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWCASA_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWCASL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWCASPAL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWCASPA_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWCASPL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWCASP_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWCAS_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWCLRP_128_memop_128 | Mode,Not allowed,No data,No data,No data
+RCWSCASAL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWSCASA_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWSCASL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWSCASPAL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWSCASPA_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWSCASPL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWSCASP_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
+RCWSCAS_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
+RCWSETP_128_memop_128 | Mode,Not allowed,No data,No data,No data
+RCWSWPP_128_memop_128 | Mode,Not allowed,No data,No data,No data
+RET_64R_branch_reg | Mode,Allowed,No data,No data,No data
+SBFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
+SBFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
+SB_only_barriers | Mode,Not allowed,No data,No data,No data
+SHUH_HI_hints | Mode,Not allowed,No data,No data,No data
+SMAX_32_minmax_imm | Mode,Not allowed,No data,No data,No data
+SMAX_64_minmax_imm | Mode,Not allowed,No data,No data,No data
+SMIN_32_minmax_imm | Mode,Not allowed,No data,No data,No data
+SMIN_64_minmax_imm | Mode,Not allowed,No data,No data,No data
+STCPH_HI_hints | Mode,Not allowed,No data,No data,No data
+STSHH_HI_hints | Mode,Not allowed,No data,No data,No data
+SUBG_64_addsub_immtags | Mode,Not allowed,No data,No data,No data
+SUBS_32S_addsub_imm | Mode,Not allowed,No data,No data,No data
+SUBS_64S_addsub_imm | Mode,Not allowed,No data,No data,No data
+SUB_32_addsub_imm | Mode,Not allowed,No data,No data,No data
+SUB_64_addsub_imm | Mode,Not allowed,No data,No data,No data
+SWPP_128_memop_128 | Mode,Conditional,No data,No data,No data
+SYSL_RC_systeminstrs | Mode,Not allowed,No data,No data,No data
+SYSP_CR_syspairinstrs | Mode,Not allowed,No data,No data,No data
+SYS_CR_systeminstrs | Mode,Not allowed,No data,No data,No data
+TBNZ_only_testbranch | Mode,Conditional,No data,No data,No data
+TBZ_only_testbranch | Mode,Conditional,No data,No data,No data
+TCHANGEB_tc_imm | Mode,Not allowed,No data,No data,No data
+TCHANGEB_tc_reg | Mode,Not allowed,No data,No data,No data
+TCHANGEF_tc_imm | Mode,Not allowed,No data,No data,No data
+TCHANGEF_tc_reg | Mode,Not allowed,No data,No data,No data
+TENTER_te_exception | Mode,Not allowed,No data,No data,No data
+TEXIT_te_branch_reg | Mode,Not allowed,No data,No data,No data
+TSB_HC_hints | Mode,Not allowed,No data,No data,No data
+UBFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
+UBFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
+UMAX_32U_minmax_imm | Mode,Not allowed,No data,No data,No data
+UMAX_64U_minmax_imm | Mode,Not allowed,No data,No data,No data
+UMIN_32U_minmax_imm | Mode,Not allowed,No data,No data,No data
+UMIN_64U_minmax_imm | Mode,Not allowed,No data,No data,No data
+WFET_only_systeminstrswithreg | Mode,Conditional,No data,No data,No data
+WFIT_only_systeminstrswithreg | Mode,Conditional,No data,No data,No data
+XAFLAG_M_pstate | Mode,Not allowed,No data,No data,No data
+YIELD_HI_hints | Mode,Not allowed,No data,No data,No data

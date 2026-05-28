@@ -1,0 +1,164 @@
+Instruction,Sysreg footprint
+ADDG_64_addsub_immtags
+ADDS_32S_addsub_imm
+ADDS_64S_addsub_imm
+ADD_32_addsub_imm
+ADD_64_addsub_imm
+ADRP_only_pcreladdr
+ADR_only_pcreladdr
+ANDS_32S_log_imm
+ANDS_64S_log_imm
+AND_32_log_imm
+AND_64_log_imm
+AXFLAG_M_pstate
+BC_only_condbranch,HCR_EL2 Read,TCR_EL1 Read
+BFM_32M_bitfield
+BFM_64M_bitfield
+BLR_64_branch_reg,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+BL_only_branch_imm,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+BR_64_branch_reg,HCR_EL2 Read,TCR_EL1 Read
+BTI_HB_hints
+B_only_branch_imm,HCR_EL2 Read,TCR_EL1 Read
+B_only_condbranch,HCR_EL2 Read,TCR_EL1 Read
+CASPAL_CP32_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPAL_CP64_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPA_CP32_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPA_CP64_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPL_CP32_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASPL_CP64_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASP_CP32_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CASP_CP64_comswappr,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+CBBEQ_8_regs
+CBBGE_8_regs
+CBBGT_8_regs
+CBBHI_8_regs
+CBBHS_8_regs
+CBBNE_8_regs
+CBEQ_32_imm
+CBEQ_32_regs
+CBEQ_64_imm
+CBEQ_64_regs
+CBGE_32_regs
+CBGE_64_regs
+CBGT_32_imm
+CBGT_32_regs
+CBGT_64_imm
+CBGT_64_regs
+CBHEQ_16_regs
+CBHGE_16_regs
+CBHGT_16_regs
+CBHHI_16_regs
+CBHHS_16_regs
+CBHI_32_imm
+CBHI_32_regs
+CBHI_64_imm
+CBHI_64_regs
+CBHNE_16_regs
+CBHS_32_regs
+CBHS_64_regs
+CBLO_32_imm
+CBLO_64_imm
+CBLT_32_imm
+CBLT_64_imm
+CBNE_32_imm
+CBNE_32_regs
+CBNE_64_imm
+CBNE_64_regs
+CBNZ_32_compbranch,HCR_EL2 Read,TCR_EL1 Read
+CBNZ_64_compbranch,HCR_EL2 Read,TCR_EL1 Read
+CBZ_32_compbranch,HCR_EL2 Read,TCR_EL1 Read
+CBZ_64_compbranch,HCR_EL2 Read,TCR_EL1 Read
+CFINV_M_pstate
+CHKFEAT_HF_hints,SCR_EL3 Read
+CLRBHB_HI_hints
+CLREX_BN_barriers
+CSDB_HI_hints
+DGH_HI_hints
+DMB_BO_barriers
+DRPS_64E_branch_reg
+DSB_BO_barriers
+DSB_BOn_barriers
+EOR_32_log_imm
+EOR_64_log_imm
+ERET_64E_branch_reg
+ESB_HI_hints,SCR_EL3 Read,HCR_EL2 Read,DISR_EL1 Write
+EXTR_32_extract
+EXTR_64_extract
+GCSB_HD_hints
+ISB_BI_barriers
+LDCLRPL_128_memop_128,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+LDCLRP_128_memop_128,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+LDSETP_128_memop_128,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+MOVK_32_movewide
+MOVK_64_movewide
+MOVN_32_movewide
+MOVN_64_movewide
+MOVZ_32_movewide
+MOVZ_64_movewide
+MRRS_RS_systemmovepr,HCR_EL2 Read
+MRS_RS_systemmove,HCR_EL2 Read
+MSRR_SR_systemmovepr,HCR_EL2 Read
+MSR_SI_pstate
+MSR_SR_systemmove,MDCR_EL2 Read,HCR_EL2 Read
+NOP_HI_hints
+ORR_32_log_imm
+ORR_64_log_imm
+PSB_HC_hints
+RCWCASAL_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASA_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASL_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCASPAL_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWCASPA_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWCASPL_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWCASP_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWCAS_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWCLRP_128_memop_128,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASAL_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASA_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASL_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSCASPAL_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASPA_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASPL_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWSCASP_C64_rcwcomswappr,HCR_EL2 Read,SCR_EL3 Read
+RCWSCAS_C64_rcwcomswap,HCR_EL2 Read,SCR_EL3 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+RCWSETP_128_memop_128,HCR_EL2 Read,SCR_EL3 Read
+RCWSWPP_128_memop_128,HCR_EL2 Read,SCR_EL3 Read
+RET_64R_branch_reg,GCSCRE0_EL1 Read,HCR_EL2 Read,TCR_EL1 Read
+SBFM_32M_bitfield
+SBFM_64M_bitfield
+SB_only_barriers
+SHUH_HI_hints
+SMAX_32_minmax_imm
+SMAX_64_minmax_imm
+SMIN_32_minmax_imm
+SMIN_64_minmax_imm
+STCPH_HI_hints
+STSHH_HI_hints
+SUBG_64_addsub_immtags
+SUBS_32S_addsub_imm
+SUBS_64S_addsub_imm
+SUB_32_addsub_imm
+SUB_64_addsub_imm
+SWPP_128_memop_128,SCR_EL3 Read,HCR_EL2 Read,SCTLR_EL1 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read,VTCR_EL2 Read,SCTLR_EL2 Read,OSLSR_EL1 Read
+SYSL_RC_systeminstrs,HCR_EL2 Read
+SYSP_CR_syspairinstrs,HCR_EL2 Read
+SYS_CR_systeminstrs,HCR_EL2 Read
+TBNZ_only_testbranch,HCR_EL2 Read,TCR_EL1 Read
+TBZ_only_testbranch,HCR_EL2 Read,TCR_EL1 Read
+TCHANGEB_tc_imm
+TCHANGEB_tc_reg
+TCHANGEF_tc_imm
+TCHANGEF_tc_reg
+TENTER_te_exception
+TEXIT_te_branch_reg
+TSB_HC_hints
+UBFM_32M_bitfield
+UBFM_64M_bitfield
+UMAX_32U_minmax_imm
+UMAX_64U_minmax_imm
+UMIN_32U_minmax_imm
+UMIN_64U_minmax_imm
+WFET_only_systeminstrswithreg,HCR_EL2 Read,SCTLR_EL1 Read,SCR_EL3 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read
+WFIT_only_systeminstrswithreg,HCR_EL2 Read,SCR_EL3 Read,SMCR_EL1 Read,SMCR_EL2 Read,SMCR_EL3 Read,ZCR_EL1 Read,ZCR_EL2 Read,ZCR_EL3 Read,CPACR_EL1 Read,FAR_EL1 Write,PFAR_EL1 Write,SPSR_EL1 Write,ELR_EL1 Write,VBAR_EL1 Read,TCR_EL1 Read
+XAFLAG_M_pstate
+YIELD_HI_hints
