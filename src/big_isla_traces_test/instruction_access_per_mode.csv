@@ -1,164 +1,871 @@
 Instruction,EL0,EL1,EL2,EL3
-ADDG_64_addsub_immtags | Mode,Not allowed,No data,No data,No data
-ADDS_32S_addsub_imm | Mode,Not allowed,No data,No data,No data
-ADDS_64S_addsub_imm | Mode,Not allowed,No data,No data,No data
-ADD_32_addsub_imm | Mode,Not allowed,No data,No data,No data
-ADD_64_addsub_imm | Mode,Not allowed,No data,No data,No data
-ADRP_only_pcreladdr | Mode,Not allowed,No data,No data,No data
-ADR_only_pcreladdr | Mode,Not allowed,No data,No data,No data
-ANDS_32S_log_imm | Mode,Not allowed,No data,No data,No data
-ANDS_64S_log_imm | Mode,Not allowed,No data,No data,No data
-AND_32_log_imm | Mode,Not allowed,No data,No data,No data
-AND_64_log_imm | Mode,Not allowed,No data,No data,No data
-AXFLAG_M_pstate | Mode,Not allowed,No data,No data,No data
-BC_only_condbranch | Mode,Conditional,No data,No data,No data
-BFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
-BFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
-BLR_64_branch_reg | Mode,Allowed,No data,No data,No data
-BL_only_branch_imm | Mode,Allowed,No data,No data,No data
-BR_64_branch_reg | Mode,Allowed,No data,No data,No data
-BTI_HB_hints | Mode,Not allowed,No data,No data,No data
-B_only_branch_imm | Mode,Allowed,No data,No data,No data
-B_only_condbranch | Mode,Conditional,No data,No data,No data
-CASPAL_CP32_comswappr | Mode,Conditional,No data,No data,No data
-CASPAL_CP64_comswappr | Mode,Conditional,No data,No data,No data
-CASPA_CP32_comswappr | Mode,Conditional,No data,No data,No data
-CASPA_CP64_comswappr | Mode,Conditional,No data,No data,No data
-CASPL_CP32_comswappr | Mode,Conditional,No data,No data,No data
-CASPL_CP64_comswappr | Mode,Conditional,No data,No data,No data
-CASP_CP32_comswappr | Mode,Conditional,No data,No data,No data
-CASP_CP64_comswappr | Mode,Conditional,No data,No data,No data
-CBBEQ_8_regs | Mode,Not allowed,No data,No data,No data
-CBBGE_8_regs | Mode,Not allowed,No data,No data,No data
-CBBGT_8_regs | Mode,Not allowed,No data,No data,No data
-CBBHI_8_regs | Mode,Not allowed,No data,No data,No data
-CBBHS_8_regs | Mode,Not allowed,No data,No data,No data
-CBBNE_8_regs | Mode,Not allowed,No data,No data,No data
-CBEQ_32_imm | Mode,Not allowed,No data,No data,No data
-CBEQ_32_regs | Mode,Not allowed,No data,No data,No data
-CBEQ_64_imm | Mode,Not allowed,No data,No data,No data
-CBEQ_64_regs | Mode,Not allowed,No data,No data,No data
-CBGE_32_regs | Mode,Not allowed,No data,No data,No data
-CBGE_64_regs | Mode,Not allowed,No data,No data,No data
-CBGT_32_imm | Mode,Not allowed,No data,No data,No data
-CBGT_32_regs | Mode,Not allowed,No data,No data,No data
-CBGT_64_imm | Mode,Not allowed,No data,No data,No data
-CBGT_64_regs | Mode,Not allowed,No data,No data,No data
-CBHEQ_16_regs | Mode,Not allowed,No data,No data,No data
-CBHGE_16_regs | Mode,Not allowed,No data,No data,No data
-CBHGT_16_regs | Mode,Not allowed,No data,No data,No data
-CBHHI_16_regs | Mode,Not allowed,No data,No data,No data
-CBHHS_16_regs | Mode,Not allowed,No data,No data,No data
-CBHI_32_imm | Mode,Not allowed,No data,No data,No data
-CBHI_32_regs | Mode,Not allowed,No data,No data,No data
-CBHI_64_imm | Mode,Not allowed,No data,No data,No data
-CBHI_64_regs | Mode,Not allowed,No data,No data,No data
-CBHNE_16_regs | Mode,Not allowed,No data,No data,No data
-CBHS_32_regs | Mode,Not allowed,No data,No data,No data
-CBHS_64_regs | Mode,Not allowed,No data,No data,No data
-CBLO_32_imm | Mode,Not allowed,No data,No data,No data
-CBLO_64_imm | Mode,Not allowed,No data,No data,No data
-CBLT_32_imm | Mode,Not allowed,No data,No data,No data
-CBLT_64_imm | Mode,Not allowed,No data,No data,No data
-CBNE_32_imm | Mode,Not allowed,No data,No data,No data
-CBNE_32_regs | Mode,Not allowed,No data,No data,No data
-CBNE_64_imm | Mode,Not allowed,No data,No data,No data
-CBNE_64_regs | Mode,Not allowed,No data,No data,No data
-CBNZ_32_compbranch | Mode,Conditional,No data,No data,No data
-CBNZ_64_compbranch | Mode,Conditional,No data,No data,No data
-CBZ_32_compbranch | Mode,Conditional,No data,No data,No data
-CBZ_64_compbranch | Mode,Conditional,No data,No data,No data
-CFINV_M_pstate | Mode,Not allowed,No data,No data,No data
-CHKFEAT_HF_hints | Mode,Not allowed,No data,No data,No data
-CLRBHB_HI_hints | Mode,Not allowed,No data,No data,No data
-CLREX_BN_barriers | Mode,Not allowed,No data,No data,No data
-CSDB_HI_hints | Mode,Not allowed,No data,No data,No data
-DGH_HI_hints | Mode,Not allowed,No data,No data,No data
-DMB_BO_barriers | Mode,Not allowed,No data,No data,No data
-DRPS_64E_branch_reg | Mode,Not allowed,No data,No data,No data
-DSB_BO_barriers | Mode,Not allowed,No data,No data,No data
-DSB_BOn_barriers | Mode,Not allowed,No data,No data,No data
-EOR_32_log_imm | Mode,Not allowed,No data,No data,No data
-EOR_64_log_imm | Mode,Not allowed,No data,No data,No data
-ERET_64E_branch_reg | Mode,Not allowed,No data,No data,No data
-ESB_HI_hints | Mode,Not allowed,No data,No data,No data
-EXTR_32_extract | Mode,Not allowed,No data,No data,No data
-EXTR_64_extract | Mode,Not allowed,No data,No data,No data
-GCSB_HD_hints | Mode,Not allowed,No data,No data,No data
-ISB_BI_barriers | Mode,Not allowed,No data,No data,No data
-LDCLRPL_128_memop_128 | Mode,Conditional,No data,No data,No data
-LDCLRP_128_memop_128 | Mode,Conditional,No data,No data,No data
-LDSETP_128_memop_128 | Mode,Conditional,No data,No data,No data
-MOVK_32_movewide | Mode,Not allowed,No data,No data,No data
-MOVK_64_movewide | Mode,Not allowed,No data,No data,No data
-MOVN_32_movewide | Mode,Not allowed,No data,No data,No data
-MOVN_64_movewide | Mode,Not allowed,No data,No data,No data
-MOVZ_32_movewide | Mode,Not allowed,No data,No data,No data
-MOVZ_64_movewide | Mode,Not allowed,No data,No data,No data
-MRRS_RS_systemmovepr | Mode,Not allowed,No data,No data,No data
-MRS_RS_systemmove | Mode,Not allowed,No data,No data,No data
-MSRR_SR_systemmovepr | Mode,Not allowed,No data,No data,No data
-MSR_SI_pstate | Mode,Not allowed,No data,No data,No data
-MSR_SR_systemmove | Mode,Not allowed,No data,No data,No data
-NOP_HI_hints | Mode,Not allowed,No data,No data,No data
-ORR_32_log_imm | Mode,Not allowed,No data,No data,No data
-ORR_64_log_imm | Mode,Not allowed,No data,No data,No data
-PSB_HC_hints | Mode,Not allowed,No data,No data,No data
-RCWCASAL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWCASA_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWCASL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWCASPAL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWCASPA_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWCASPL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWCASP_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWCAS_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWCLRP_128_memop_128 | Mode,Not allowed,No data,No data,No data
-RCWSCASAL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWSCASA_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWSCASL_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWSCASPAL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWSCASPA_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWSCASPL_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWSCASP_C64_rcwcomswappr | Mode,Not allowed,No data,No data,No data
-RCWSCAS_C64_rcwcomswap | Mode,Conditional,No data,No data,No data
-RCWSETP_128_memop_128 | Mode,Not allowed,No data,No data,No data
-RCWSWPP_128_memop_128 | Mode,Not allowed,No data,No data,No data
-RET_64R_branch_reg | Mode,Allowed,No data,No data,No data
-SBFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
-SBFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
-SB_only_barriers | Mode,Not allowed,No data,No data,No data
-SHUH_HI_hints | Mode,Not allowed,No data,No data,No data
-SMAX_32_minmax_imm | Mode,Not allowed,No data,No data,No data
-SMAX_64_minmax_imm | Mode,Not allowed,No data,No data,No data
-SMIN_32_minmax_imm | Mode,Not allowed,No data,No data,No data
-SMIN_64_minmax_imm | Mode,Not allowed,No data,No data,No data
-STCPH_HI_hints | Mode,Not allowed,No data,No data,No data
-STSHH_HI_hints | Mode,Not allowed,No data,No data,No data
-SUBG_64_addsub_immtags | Mode,Not allowed,No data,No data,No data
-SUBS_32S_addsub_imm | Mode,Not allowed,No data,No data,No data
-SUBS_64S_addsub_imm | Mode,Not allowed,No data,No data,No data
-SUB_32_addsub_imm | Mode,Not allowed,No data,No data,No data
-SUB_64_addsub_imm | Mode,Not allowed,No data,No data,No data
-SWPP_128_memop_128 | Mode,Conditional,No data,No data,No data
-SYSL_RC_systeminstrs | Mode,Not allowed,No data,No data,No data
-SYSP_CR_syspairinstrs | Mode,Not allowed,No data,No data,No data
-SYS_CR_systeminstrs | Mode,Not allowed,No data,No data,No data
-TBNZ_only_testbranch | Mode,Conditional,No data,No data,No data
-TBZ_only_testbranch | Mode,Conditional,No data,No data,No data
-TCHANGEB_tc_imm | Mode,Not allowed,No data,No data,No data
-TCHANGEB_tc_reg | Mode,Not allowed,No data,No data,No data
-TCHANGEF_tc_imm | Mode,Not allowed,No data,No data,No data
-TCHANGEF_tc_reg | Mode,Not allowed,No data,No data,No data
-TENTER_te_exception | Mode,Not allowed,No data,No data,No data
-TEXIT_te_branch_reg | Mode,Not allowed,No data,No data,No data
-TSB_HC_hints | Mode,Not allowed,No data,No data,No data
-UBFM_32M_bitfield | Mode,Not allowed,No data,No data,No data
-UBFM_64M_bitfield | Mode,Not allowed,No data,No data,No data
-UMAX_32U_minmax_imm | Mode,Not allowed,No data,No data,No data
-UMAX_64U_minmax_imm | Mode,Not allowed,No data,No data,No data
-UMIN_32U_minmax_imm | Mode,Not allowed,No data,No data,No data
-UMIN_64U_minmax_imm | Mode,Not allowed,No data,No data,No data
-WFET_only_systeminstrswithreg | Mode,Conditional,No data,No data,No data
-WFIT_only_systeminstrswithreg | Mode,Conditional,No data,No data,No data
-XAFLAG_M_pstate | Mode,Not allowed,No data,No data,No data
-YIELD_HI_hints | Mode,Not allowed,No data,No data,No data
+ABS_32_dp_1src,Allowed,Allowed,No data,No data
+ABS_64_dp_1src,Allowed,Allowed,No data,No data
+ADCS_32_addsub_carry,Allowed,Allowed,No data,No data
+ADCS_64_addsub_carry,Allowed,Allowed,No data,No data
+ADC_32_addsub_carry,Allowed,Allowed,No data,No data
+ADC_64_addsub_carry,Allowed,Allowed,No data,No data
+ADDG_64_addsub_immtags,Not allowed,Not allowed,No data,No data
+ADDPT_64_addsub_pt,Not allowed,Not allowed,No data,No data
+ADDS_32S_addsub_ext,Allowed,Allowed,No data,No data
+ADDS_32S_addsub_imm,Allowed,Allowed,No data,No data
+ADDS_32_addsub_shift,Allowed,Allowed,No data,No data
+ADDS_64S_addsub_ext,Allowed,Allowed,No data,No data
+ADDS_64S_addsub_imm,Allowed,Allowed,No data,No data
+ADDS_64_addsub_shift,Allowed,Allowed,No data,No data
+ADD_32_addsub_ext,Allowed,Allowed,No data,No data
+ADD_32_addsub_imm,Allowed,Allowed,No data,No data
+ADD_32_addsub_shift,Allowed,Allowed,No data,No data
+ADD_64_addsub_ext,Allowed,Allowed,No data,No data
+ADD_64_addsub_imm,Allowed,Allowed,No data,No data
+ADD_64_addsub_shift,Allowed,Allowed,No data,No data
+ADRP_only_pcreladdr,Allowed,Allowed,No data,No data
+ADR_only_pcreladdr,Allowed,Allowed,No data,No data
+ANDS_32S_log_imm,Allowed,Allowed,No data,No data
+ANDS_32_log_shift,Allowed,Allowed,No data,No data
+ANDS_64S_log_imm,Allowed,Allowed,No data,No data
+ANDS_64_log_shift,Allowed,Allowed,No data,No data
+AND_32_log_imm,Allowed,Allowed,No data,No data
+AND_32_log_shift,Allowed,Allowed,No data,No data
+AND_64_log_imm,Allowed,Allowed,No data,No data
+AND_64_log_shift,Allowed,Allowed,No data,No data
+ASRV_32_dp_2src,Allowed,Allowed,No data,No data
+ASRV_64_dp_2src,Allowed,Allowed,No data,No data
+AXFLAG_M_pstate,Allowed,Allowed,No data,No data
+BC_only_condbranch,Allowed,Allowed,No data,No data
+BFM_32M_bitfield,Allowed,Allowed,No data,No data
+BFM_64M_bitfield,Allowed,Allowed,No data,No data
+BICS_32_log_shift,Allowed,Allowed,No data,No data
+BICS_64_log_shift,Allowed,Allowed,No data,No data
+BIC_32_log_shift,Allowed,Allowed,No data,No data
+BIC_64_log_shift,Allowed,Allowed,No data,No data
+BLR_64_branch_reg,Allowed,Allowed,No data,No data
+BL_only_branch_imm,Allowed,Allowed,No data,No data
+BR_64_branch_reg,Allowed,Allowed,No data,No data
+BTI_HB_hints,Allowed,Allowed,No data,No data
+B_only_branch_imm,Allowed,Allowed,No data,No data
+B_only_condbranch,Allowed,Allowed,No data,No data
+CASAB_C32_comswap,Allowed,Allowed,No data,No data
+CASAH_C32_comswap,Allowed,Allowed,No data,No data
+CASALB_C32_comswap,Allowed,Allowed,No data,No data
+CASALH_C32_comswap,Allowed,Allowed,No data,No data
+CASALT_C64_comswap_unpriv,Not allowed,Not allowed,No data,No data
+CASAL_C32_comswap,Allowed,Allowed,No data,No data
+CASAL_C64_comswap,Allowed,Allowed,No data,No data
+CASAT_C64_comswap_unpriv,Not allowed,Not allowed,No data,No data
+CASA_C32_comswap,Allowed,Allowed,No data,No data
+CASA_C64_comswap,Allowed,Allowed,No data,No data
+CASB_C32_comswap,Allowed,Allowed,No data,No data
+CASH_C32_comswap,Allowed,Allowed,No data,No data
+CASLB_C32_comswap,Allowed,Allowed,No data,No data
+CASLH_C32_comswap,Allowed,Allowed,No data,No data
+CASLT_C64_comswap_unpriv,Not allowed,Not allowed,No data,No data
+CASL_C32_comswap,Allowed,Allowed,No data,No data
+CASL_C64_comswap,Allowed,Allowed,No data,No data
+CAST_C64_comswap_unpriv,Not allowed,Not allowed,No data,No data
+CAS_C32_comswap,Allowed,Allowed,No data,No data
+CAS_C64_comswap,Allowed,Allowed,No data,No data
+CBBEQ_8_regs,Not allowed,Not allowed,No data,No data
+CBBGE_8_regs,Not allowed,Not allowed,No data,No data
+CBBGT_8_regs,Not allowed,Not allowed,No data,No data
+CBBHI_8_regs,Not allowed,Not allowed,No data,No data
+CBBHS_8_regs,Not allowed,Not allowed,No data,No data
+CBBNE_8_regs,Not allowed,Not allowed,No data,No data
+CBEQ_32_imm,Not allowed,Not allowed,No data,No data
+CBEQ_32_regs,Not allowed,Not allowed,No data,No data
+CBEQ_64_imm,Not allowed,Not allowed,No data,No data
+CBEQ_64_regs,Not allowed,Not allowed,No data,No data
+CBGE_32_regs,Not allowed,Not allowed,No data,No data
+CBGE_64_regs,Not allowed,Not allowed,No data,No data
+CBGT_32_imm,Not allowed,Not allowed,No data,No data
+CBGT_32_regs,Not allowed,Not allowed,No data,No data
+CBGT_64_imm,Not allowed,Not allowed,No data,No data
+CBGT_64_regs,Not allowed,Not allowed,No data,No data
+CBHEQ_16_regs,Not allowed,Not allowed,No data,No data
+CBHGE_16_regs,Not allowed,Not allowed,No data,No data
+CBHGT_16_regs,Not allowed,Not allowed,No data,No data
+CBHHI_16_regs,Not allowed,Not allowed,No data,No data
+CBHHS_16_regs,Not allowed,Not allowed,No data,No data
+CBHI_32_imm,Not allowed,Not allowed,No data,No data
+CBHI_32_regs,Not allowed,Not allowed,No data,No data
+CBHI_64_imm,Not allowed,Not allowed,No data,No data
+CBHI_64_regs,Not allowed,Not allowed,No data,No data
+CBHNE_16_regs,Not allowed,Not allowed,No data,No data
+CBHS_32_regs,Not allowed,Not allowed,No data,No data
+CBHS_64_regs,Not allowed,Not allowed,No data,No data
+CBLO_32_imm,Not allowed,Not allowed,No data,No data
+CBLO_64_imm,Not allowed,Not allowed,No data,No data
+CBLT_32_imm,Not allowed,Not allowed,No data,No data
+CBLT_64_imm,Not allowed,Not allowed,No data,No data
+CBNE_32_imm,Not allowed,Not allowed,No data,No data
+CBNE_32_regs,Not allowed,Not allowed,No data,No data
+CBNE_64_imm,Not allowed,Not allowed,No data,No data
+CBNE_64_regs,Not allowed,Not allowed,No data,No data
+CBNZ_32_compbranch,Allowed,Allowed,No data,No data
+CBNZ_64_compbranch,Allowed,Allowed,No data,No data
+CBZ_32_compbranch,Allowed,Allowed,No data,No data
+CBZ_64_compbranch,Allowed,Allowed,No data,No data
+CCMN_32_condcmp_imm,Allowed,Allowed,No data,No data
+CCMN_32_condcmp_reg,Allowed,Allowed,No data,No data
+CCMN_64_condcmp_imm,Allowed,Allowed,No data,No data
+CCMN_64_condcmp_reg,Allowed,Allowed,No data,No data
+CCMP_32_condcmp_imm,Allowed,Allowed,No data,No data
+CCMP_32_condcmp_reg,Allowed,Allowed,No data,No data
+CCMP_64_condcmp_imm,Allowed,Allowed,No data,No data
+CCMP_64_condcmp_reg,Allowed,Allowed,No data,No data
+CFINV_M_pstate,Allowed,Allowed,No data,No data
+CHKFEAT_HF_hints,Allowed,Allowed,No data,No data
+CLRBHB_HI_hints,Allowed,Allowed,No data,No data
+CLREX_BN_barriers,Allowed,Allowed,No data,No data
+CLS_32_dp_1src,Allowed,Allowed,No data,No data
+CLS_64_dp_1src,Allowed,Allowed,No data,No data
+CLZ_32_dp_1src,Allowed,Allowed,No data,No data
+CLZ_64_dp_1src,Allowed,Allowed,No data,No data
+CNT_32_dp_1src,Timeout,Timeout,No data,No data
+CNT_64_dp_1src,Timeout,Timeout,No data,No data
+CRC32B_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32CB_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32CH_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32CW_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32CX_64C_dp_2src,Timeout,Timeout,No data,No data
+CRC32H_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32W_32C_dp_2src,Timeout,Timeout,No data,No data
+CRC32X_64C_dp_2src,Timeout,Timeout,No data,No data
+CSDB_HI_hints,Allowed,Allowed,No data,No data
+CSEL_32_condsel,Allowed,Allowed,No data,No data
+CSEL_64_condsel,Allowed,Allowed,No data,No data
+CSINC_32_condsel,Allowed,Allowed,No data,No data
+CSINC_64_condsel,Allowed,Allowed,No data,No data
+CSINV_32_condsel,Allowed,Allowed,No data,No data
+CSINV_64_condsel,Allowed,Allowed,No data,No data
+CSNEG_32_condsel,Allowed,Allowed,No data,No data
+CSNEG_64_condsel,Allowed,Allowed,No data,No data
+CTZ_32_dp_1src,Allowed,Allowed,No data,No data
+CTZ_64_dp_1src,Allowed,Allowed,No data,No data
+DGH_HI_hints,Allowed,Allowed,No data,No data
+DMB_BO_barriers,Allowed,Allowed,No data,No data
+DRPS_64E_branch_reg,Not allowed,Not allowed,No data,No data
+DSB_BO_barriers,Allowed,Allowed,No data,No data
+DSB_BOn_barriers,Allowed,Allowed,No data,No data
+EON_32_log_shift,Allowed,Allowed,No data,No data
+EON_64_log_shift,Allowed,Allowed,No data,No data
+EOR_32_log_imm,Allowed,Allowed,No data,No data
+EOR_32_log_shift,Allowed,Allowed,No data,No data
+EOR_64_log_imm,Allowed,Allowed,No data,No data
+EOR_64_log_shift,Allowed,Allowed,No data,No data
+ERET_64E_branch_reg,Not allowed,Allowed,No data,No data
+ESB_HI_hints,Allowed,Timeout,No data,No data
+EXTR_32_extract,Allowed,Allowed,No data,No data
+EXTR_64_extract,Allowed,Allowed,No data,No data
+GCSB_HD_hints,Allowed,Allowed,No data,No data
+GCSSTR_64_ldst_gcs,Allowed,Allowed,No data,No data
+GCSSTTR_64_ldst_gcs,Allowed,Allowed,No data,No data
+GMI_64G_dp_2src,Not allowed,Not allowed,No data,No data
+IRG_64I_dp_2src,Not allowed,Not allowed,No data,No data
+ISB_BI_barriers,Allowed,Allowed,No data,No data
+LD64B_64L_memop,Allowed,Allowed,No data,No data
+LDADDAB_32_memop,Allowed,Allowed,No data,No data
+LDADDAH_32_memop,Allowed,Allowed,No data,No data
+LDADDALB_32_memop,Allowed,Allowed,No data,No data
+LDADDALH_32_memop,Allowed,Allowed,No data,No data
+LDADDAL_32_memop,Allowed,Allowed,No data,No data
+LDADDAL_64_memop,Allowed,Allowed,No data,No data
+LDADDA_32_memop,Allowed,Allowed,No data,No data
+LDADDA_64_memop,Allowed,Allowed,No data,No data
+LDADDB_32_memop,Allowed,Allowed,No data,No data
+LDADDH_32_memop,Allowed,Allowed,No data,No data
+LDADDLB_32_memop,Allowed,Allowed,No data,No data
+LDADDLH_32_memop,Allowed,Allowed,No data,No data
+LDADDL_32_memop,Allowed,Allowed,No data,No data
+LDADDL_64_memop,Allowed,Allowed,No data,No data
+LDADD_32_memop,Allowed,Allowed,No data,No data
+LDADD_64_memop,Allowed,Allowed,No data,No data
+LDAPP_64_ldiappstilp,Not allowed,Not allowed,No data,No data
+LDAPRB_32L_memop,Allowed,Allowed,No data,No data
+LDAPRH_32L_memop,Allowed,Allowed,No data,No data
+LDAPR_32L_ldapstl_writeback,Allowed,Allowed,No data,No data
+LDAPR_32L_memop,Allowed,Allowed,No data,No data
+LDAPR_64L_ldapstl_writeback,Allowed,Allowed,No data,No data
+LDAPR_64L_memop,Allowed,Allowed,No data,No data
+LDAPURB_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURH_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURSB_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURSB_64_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURSH_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURSH_64_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPURSW_64_ldapstl_unscaled,Timeout,Timeout,No data,No data
+LDAPUR_32_ldapstl_unscaled,Timeout,Timeout,No data,No data
+LDAPUR_64_ldapstl_unscaled,Allowed,Allowed,No data,No data
+LDAPUR_B_ldapstl_simd,Allowed,Allowed,No data,No data
+LDAPUR_D_ldapstl_simd,Allowed,Allowed,No data,No data
+LDAPUR_H_ldapstl_simd,Allowed,Allowed,No data,No data
+LDAPUR_Q_ldapstl_simd,Allowed,Allowed,No data,No data
+LDAPUR_S_ldapstl_simd,Allowed,Allowed,No data,No data
+LDAP_64_ldiappstilp,Not allowed,Not allowed,No data,No data
+LDARB_LR32_ldstord,Allowed,Allowed,No data,No data
+LDARH_LR32_ldstord,Allowed,Allowed,No data,No data
+LDAR_LR32_ldstord,Allowed,Allowed,No data,No data
+LDAR_LR64_ldstord,Allowed,Allowed,No data,No data
+LDATXR_LR32_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+LDATXR_LR64_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+LDBFADDAL_16,Not allowed,Not allowed,No data,No data
+LDBFADDA_16,Not allowed,Not allowed,No data,No data
+LDBFADDL_16,Not allowed,Not allowed,No data,No data
+LDBFADD_16,Not allowed,Not allowed,No data,No data
+LDBFMAXAL_16,Not allowed,Not allowed,No data,No data
+LDBFMAXA_16,Not allowed,Not allowed,No data,No data
+LDBFMAXL_16,Not allowed,Not allowed,No data,No data
+LDBFMAXNMAL_16,Not allowed,Not allowed,No data,No data
+LDBFMAXNMA_16,Not allowed,Not allowed,No data,No data
+LDBFMAXNML_16,Not allowed,Not allowed,No data,No data
+LDBFMAXNM_16,Not allowed,Not allowed,No data,No data
+LDBFMAX_16,Not allowed,Not allowed,No data,No data
+LDBFMINAL_16,Not allowed,Not allowed,No data,No data
+LDBFMINA_16,Not allowed,Not allowed,No data,No data
+LDBFMINL_16,Not allowed,Not allowed,No data,No data
+LDBFMINNMAL_16,Not allowed,Not allowed,No data,No data
+LDBFMINNMA_16,Not allowed,Not allowed,No data,No data
+LDBFMINNML_16,Not allowed,Not allowed,No data,No data
+LDBFMINNM_16,Not allowed,Not allowed,No data,No data
+LDBFMIN_16,Not allowed,Not allowed,No data,No data
+LDCLRAB_32_memop,Allowed,Allowed,No data,No data
+LDCLRAH_32_memop,Allowed,Allowed,No data,No data
+LDCLRALB_32_memop,Allowed,Allowed,No data,No data
+LDCLRALH_32_memop,Allowed,Allowed,No data,No data
+LDCLRAL_32_memop,Allowed,Allowed,No data,No data
+LDCLRAL_64_memop,Allowed,Allowed,No data,No data
+LDCLRA_32_memop,Allowed,Allowed,No data,No data
+LDCLRA_64_memop,Allowed,Allowed,No data,No data
+LDCLRB_32_memop,Allowed,Allowed,No data,No data
+LDCLRH_32_memop,Allowed,Allowed,No data,No data
+LDCLRLB_32_memop,Allowed,Allowed,No data,No data
+LDCLRLH_32_memop,Allowed,Allowed,No data,No data
+LDCLRL_32_memop,Allowed,Allowed,No data,No data
+LDCLRL_64_memop,Allowed,Allowed,No data,No data
+LDCLR_32_memop,Allowed,Allowed,No data,No data
+LDCLR_64_memop,Allowed,Allowed,No data,No data
+LDEORAB_32_memop,Allowed,Allowed,No data,No data
+LDEORAH_32_memop,Allowed,Allowed,No data,No data
+LDEORALB_32_memop,Allowed,Allowed,No data,No data
+LDEORALH_32_memop,Allowed,Allowed,No data,No data
+LDEORAL_32_memop,Allowed,Allowed,No data,No data
+LDEORAL_64_memop,Allowed,Allowed,No data,No data
+LDEORA_32_memop,Allowed,Allowed,No data,No data
+LDEORA_64_memop,Allowed,Allowed,No data,No data
+LDEORB_32_memop,Allowed,Allowed,No data,No data
+LDEORH_32_memop,Allowed,Allowed,No data,No data
+LDEORLB_32_memop,Allowed,Allowed,No data,No data
+LDEORLH_32_memop,Allowed,Allowed,No data,No data
+LDEORL_32_memop,Allowed,Allowed,No data,No data
+LDEORL_64_memop,Allowed,Allowed,No data,No data
+LDEOR_32_memop,Allowed,Allowed,No data,No data
+LDEOR_64_memop,Allowed,Allowed,No data,No data
+LDFADDAL_16,Not allowed,Not allowed,No data,No data
+LDFADDAL_32,Not allowed,Not allowed,No data,No data
+LDFADDAL_64,Not allowed,Not allowed,No data,No data
+LDFADDA_16,Not allowed,Not allowed,No data,No data
+LDFADDA_32,Not allowed,Not allowed,No data,No data
+LDFADDA_64,Not allowed,Not allowed,No data,No data
+LDFADDL_16,Not allowed,Not allowed,No data,No data
+LDFADDL_32,Not allowed,Not allowed,No data,No data
+LDFADDL_64,Not allowed,Not allowed,No data,No data
+LDFADD_16,Not allowed,Not allowed,No data,No data
+LDFADD_32,Not allowed,Not allowed,No data,No data
+LDFADD_64,Not allowed,Not allowed,No data,No data
+LDFMAXAL_16,Not allowed,Not allowed,No data,No data
+LDFMAXAL_32,Not allowed,Not allowed,No data,No data
+LDFMAXAL_64,Not allowed,Not allowed,No data,No data
+LDFMAXA_16,Not allowed,Not allowed,No data,No data
+LDFMAXA_32,Not allowed,Not allowed,No data,No data
+LDFMAXA_64,Not allowed,Not allowed,No data,No data
+LDFMAXL_16,Not allowed,Not allowed,No data,No data
+LDFMAXL_32,Not allowed,Not allowed,No data,No data
+LDFMAXL_64,Not allowed,Not allowed,No data,No data
+LDFMAXNMAL_16,Not allowed,Not allowed,No data,No data
+LDFMAXNMAL_32,Not allowed,Not allowed,No data,No data
+LDFMAXNMAL_64,Not allowed,Not allowed,No data,No data
+LDFMAXNMA_16,Not allowed,Not allowed,No data,No data
+LDFMAXNMA_32,Not allowed,Not allowed,No data,No data
+LDFMAXNMA_64,Not allowed,Not allowed,No data,No data
+LDFMAXNML_16,Not allowed,Not allowed,No data,No data
+LDFMAXNML_32,Not allowed,Not allowed,No data,No data
+LDFMAXNML_64,Not allowed,Not allowed,No data,No data
+LDFMAXNM_16,Not allowed,Not allowed,No data,No data
+LDFMAXNM_32,Not allowed,Not allowed,No data,No data
+LDFMAXNM_64,Not allowed,Not allowed,No data,No data
+LDFMAX_16,Not allowed,Not allowed,No data,No data
+LDFMAX_32,Not allowed,Not allowed,No data,No data
+LDFMAX_64,Not allowed,Not allowed,No data,No data
+LDFMINAL_16,Not allowed,Not allowed,No data,No data
+LDFMINAL_32,Not allowed,Not allowed,No data,No data
+LDFMINAL_64,Not allowed,Not allowed,No data,No data
+LDFMINA_16,Not allowed,Not allowed,No data,No data
+LDFMINA_32,Not allowed,Not allowed,No data,No data
+LDFMINA_64,Not allowed,Not allowed,No data,No data
+LDFMINL_16,Not allowed,Not allowed,No data,No data
+LDFMINL_32,Not allowed,Not allowed,No data,No data
+LDFMINL_64,Not allowed,Not allowed,No data,No data
+LDFMINNMAL_16,Not allowed,Not allowed,No data,No data
+LDFMINNMAL_32,Not allowed,Not allowed,No data,No data
+LDFMINNMAL_64,Not allowed,Not allowed,No data,No data
+LDFMINNMA_16,Not allowed,Not allowed,No data,No data
+LDFMINNMA_32,Not allowed,Not allowed,No data,No data
+LDFMINNMA_64,Not allowed,Not allowed,No data,No data
+LDFMINNML_16,Not allowed,Not allowed,No data,No data
+LDFMINNML_32,Not allowed,Not allowed,No data,No data
+LDFMINNML_64,Not allowed,Not allowed,No data,No data
+LDFMINNM_16,Not allowed,Not allowed,No data,No data
+LDFMINNM_32,Not allowed,Not allowed,No data,No data
+LDFMINNM_64,Not allowed,Not allowed,No data,No data
+LDFMIN_16,Not allowed,Not allowed,No data,No data
+LDFMIN_32,Not allowed,Not allowed,No data,No data
+LDFMIN_64,Not allowed,Not allowed,No data,No data
+LDLARB_LR32_ldstord,Allowed,Allowed,No data,No data
+LDLARH_LR32_ldstord,Allowed,Allowed,No data,No data
+LDLAR_LR32_ldstord,Allowed,Allowed,No data,No data
+LDLAR_LR64_ldstord,Allowed,Allowed,No data,No data
+LDRB_32BL_ldst_regoff,Allowed,Allowed,No data,No data
+LDRB_32B_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRB_32_ldst_immpost,Allowed,Allowed,No data,No data
+LDRB_32_ldst_immpre,Allowed,Allowed,No data,No data
+LDRB_32_ldst_pos,Allowed,Allowed,No data,No data
+LDRH_32_ldst_immpost,Allowed,Allowed,No data,No data
+LDRH_32_ldst_immpre,Timeout,Timeout,No data,No data
+LDRH_32_ldst_pos,Timeout,Timeout,No data,No data
+LDRH_32_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSB_32BL_ldst_regoff,Allowed,Allowed,No data,No data
+LDRSB_32B_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSB_32_ldst_immpost,Allowed,Allowed,No data,No data
+LDRSB_32_ldst_immpre,Allowed,Allowed,No data,No data
+LDRSB_32_ldst_pos,Allowed,Allowed,No data,No data
+LDRSB_64BL_ldst_regoff,Allowed,Allowed,No data,No data
+LDRSB_64B_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSB_64_ldst_immpost,Allowed,Allowed,No data,No data
+LDRSB_64_ldst_immpre,Allowed,Allowed,No data,No data
+LDRSB_64_ldst_pos,Allowed,Allowed,No data,No data
+LDRSH_32_ldst_immpost,Allowed,Allowed,No data,No data
+LDRSH_32_ldst_immpre,Timeout,Timeout,No data,No data
+LDRSH_32_ldst_pos,Timeout,Timeout,No data,No data
+LDRSH_32_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSH_64_ldst_immpost,Allowed,Allowed,No data,No data
+LDRSH_64_ldst_immpre,Timeout,Timeout,No data,No data
+LDRSH_64_ldst_pos,Timeout,Timeout,No data,No data
+LDRSH_64_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSW_64_ldst_immpost,Allowed,Allowed,No data,No data
+LDRSW_64_ldst_immpre,Timeout,Timeout,No data,No data
+LDRSW_64_ldst_pos,Timeout,Timeout,No data,No data
+LDRSW_64_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDRSW_64_loadlit,Allowed,Allowed,No data,No data
+LDR_32_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_32_ldst_immpre,Timeout,Timeout,No data,No data
+LDR_32_ldst_pos,Timeout,Timeout,No data,No data
+LDR_32_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_32_loadlit,Allowed,Allowed,No data,No data
+LDR_64_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_64_ldst_immpre,Timeout,Timeout,No data,No data
+LDR_64_ldst_pos,Timeout,Timeout,No data,No data
+LDR_64_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_64_loadlit,Allowed,Allowed,No data,No data
+LDR_BL_ldst_regoff,Allowed,Allowed,No data,No data
+LDR_B_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_B_ldst_immpre,Allowed,Allowed,No data,No data
+LDR_B_ldst_pos,Allowed,Allowed,No data,No data
+LDR_B_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_D_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_D_ldst_immpre,Allowed,Allowed,No data,No data
+LDR_D_ldst_pos,Allowed,Allowed,No data,No data
+LDR_D_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_D_loadlit,Allowed,Allowed,No data,No data
+LDR_H_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_H_ldst_immpre,Allowed,Allowed,No data,No data
+LDR_H_ldst_pos,Allowed,Allowed,No data,No data
+LDR_H_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_Q_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_Q_ldst_immpre,Allowed,Allowed,No data,No data
+LDR_Q_ldst_pos,Allowed,Allowed,No data,No data
+LDR_Q_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_Q_loadlit,Allowed,Allowed,No data,No data
+LDR_S_ldst_immpost,Allowed,Allowed,No data,No data
+LDR_S_ldst_immpre,Allowed,Allowed,No data,No data
+LDR_S_ldst_pos,Allowed,Allowed,No data,No data
+LDR_S_ldst_regoff,Not allowed,Not allowed,No data,No data
+LDR_S_loadlit,Allowed,Allowed,No data,No data
+LDSETAB_32_memop,Allowed,Allowed,No data,No data
+LDSETAH_32_memop,Allowed,Allowed,No data,No data
+LDSETALB_32_memop,Allowed,Allowed,No data,No data
+LDSETALH_32_memop,Allowed,Allowed,No data,No data
+LDSETAL_32_memop,Allowed,Allowed,No data,No data
+LDSETAL_64_memop,Allowed,Allowed,No data,No data
+LDSETA_32_memop,Allowed,Allowed,No data,No data
+LDSETA_64_memop,Allowed,Allowed,No data,No data
+LDSETB_32_memop,Allowed,Allowed,No data,No data
+LDSETH_32_memop,Allowed,Allowed,No data,No data
+LDSETLB_32_memop,Allowed,Allowed,No data,No data
+LDSETLH_32_memop,Allowed,Allowed,No data,No data
+LDSETL_32_memop,Allowed,Allowed,No data,No data
+LDSETL_64_memop,Allowed,Allowed,No data,No data
+LDSET_32_memop,Allowed,Allowed,No data,No data
+LDSET_64_memop,Allowed,Allowed,No data,No data
+LDSMAXAB_32_memop,Allowed,Allowed,No data,No data
+LDSMAXAH_32_memop,Allowed,Allowed,No data,No data
+LDSMAXALB_32_memop,Allowed,Allowed,No data,No data
+LDSMAXALH_32_memop,Allowed,Allowed,No data,No data
+LDSMAXAL_32_memop,Allowed,Allowed,No data,No data
+LDSMAXAL_64_memop,Allowed,Allowed,No data,No data
+LDSMAXA_32_memop,Allowed,Allowed,No data,No data
+LDSMAXA_64_memop,Allowed,Allowed,No data,No data
+LDSMAXB_32_memop,Allowed,Allowed,No data,No data
+LDSMAXH_32_memop,Allowed,Allowed,No data,No data
+LDSMAXLB_32_memop,Allowed,Allowed,No data,No data
+LDSMAXLH_32_memop,Allowed,Allowed,No data,No data
+LDSMAXL_32_memop,Allowed,Allowed,No data,No data
+LDSMAXL_64_memop,Allowed,Allowed,No data,No data
+LDSMAX_32_memop,Allowed,Allowed,No data,No data
+LDSMAX_64_memop,Allowed,Allowed,No data,No data
+LDSMINAB_32_memop,Allowed,Allowed,No data,No data
+LDSMINAH_32_memop,Allowed,Allowed,No data,No data
+LDSMINALB_32_memop,Allowed,Allowed,No data,No data
+LDSMINALH_32_memop,Allowed,Allowed,No data,No data
+LDSMINAL_32_memop,Allowed,Allowed,No data,No data
+LDSMINAL_64_memop,Allowed,Allowed,No data,No data
+LDSMINA_32_memop,Allowed,Allowed,No data,No data
+LDSMINA_64_memop,Allowed,Allowed,No data,No data
+LDSMINB_32_memop,Allowed,Allowed,No data,No data
+LDSMINH_32_memop,Allowed,Allowed,No data,No data
+LDSMINLB_32_memop,Allowed,Allowed,No data,No data
+LDSMINLH_32_memop,Allowed,Allowed,No data,No data
+LDSMINL_32_memop,Allowed,Allowed,No data,No data
+LDSMINL_64_memop,Allowed,Allowed,No data,No data
+LDSMIN_32_memop,Allowed,Allowed,No data,No data
+LDSMIN_64_memop,Allowed,Allowed,No data,No data
+LDTADDAL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADDAL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADDA_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADDA_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADDL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADDL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADD_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTADD_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRAL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRAL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRA_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRA_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLRL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLR_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTCLR_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTNP_64_ldstnapair_offs,Not allowed,Not allowed,No data,No data
+LDTNP_Q_ldstnapair_offs,Not allowed,Not allowed,No data,No data
+LDTP_64_ldstpair_off,Not allowed,Not allowed,No data,No data
+LDTP_64_ldstpair_post,Not allowed,Not allowed,No data,No data
+LDTP_64_ldstpair_pre,Not allowed,Not allowed,No data,No data
+LDTP_Q_ldstpair_off,Not allowed,Not allowed,No data,No data
+LDTP_Q_ldstpair_post,Not allowed,Not allowed,No data,No data
+LDTP_Q_ldstpair_pre,Not allowed,Not allowed,No data,No data
+LDTSETAL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSETAL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSETA_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSETA_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSETL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSETL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSET_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTSET_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+LDTXR_LR32_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+LDTXR_LR64_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+LDUMAXAB_32_memop,Allowed,Allowed,No data,No data
+LDUMAXAH_32_memop,Allowed,Allowed,No data,No data
+LDUMAXALB_32_memop,Allowed,Allowed,No data,No data
+LDUMAXALH_32_memop,Allowed,Allowed,No data,No data
+LDUMAXAL_32_memop,Allowed,Allowed,No data,No data
+LDUMAXAL_64_memop,Allowed,Allowed,No data,No data
+LDUMAXA_32_memop,Allowed,Allowed,No data,No data
+LDUMAXA_64_memop,Allowed,Allowed,No data,No data
+LDUMAXB_32_memop,Allowed,Allowed,No data,No data
+LDUMAXH_32_memop,Allowed,Allowed,No data,No data
+LDUMAXLB_32_memop,Allowed,Allowed,No data,No data
+LDUMAXLH_32_memop,Allowed,Allowed,No data,No data
+LDUMAXL_32_memop,Allowed,Allowed,No data,No data
+LDUMAXL_64_memop,Allowed,Allowed,No data,No data
+LDUMAX_32_memop,Allowed,Allowed,No data,No data
+LDUMAX_64_memop,Allowed,Allowed,No data,No data
+LDUMINAB_32_memop,Allowed,Allowed,No data,No data
+LDUMINAH_32_memop,Allowed,Allowed,No data,No data
+LDUMINALB_32_memop,Allowed,Allowed,No data,No data
+LDUMINALH_32_memop,Allowed,Allowed,No data,No data
+LDUMINAL_32_memop,Allowed,Allowed,No data,No data
+LDUMINAL_64_memop,Allowed,Allowed,No data,No data
+LDUMINA_32_memop,Allowed,Allowed,No data,No data
+LDUMINA_64_memop,Allowed,Allowed,No data,No data
+LDUMINB_32_memop,Allowed,Allowed,No data,No data
+LDUMINH_32_memop,Allowed,Allowed,No data,No data
+LDUMINLB_32_memop,Allowed,Allowed,No data,No data
+LDUMINLH_32_memop,Allowed,Allowed,No data,No data
+LDUMINL_32_memop,Allowed,Allowed,No data,No data
+LDUMINL_64_memop,Allowed,Allowed,No data,No data
+LDUMIN_32_memop,Allowed,Allowed,No data,No data
+LDUMIN_64_memop,Allowed,Allowed,No data,No data
+LDURB_32_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURH_32_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURSB_32_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURSB_64_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURSH_32_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURSH_64_ldst_unscaled,Allowed,Allowed,No data,No data
+LDURSW_64_ldst_unscaled,Timeout,Timeout,No data,No data
+LDUR_32_ldst_unscaled,Timeout,Timeout,No data,No data
+LDUR_64_ldst_unscaled,Allowed,Allowed,No data,No data
+LDUR_B_ldst_unscaled,Allowed,Allowed,No data,No data
+LDUR_D_ldst_unscaled,Allowed,Allowed,No data,No data
+LDUR_H_ldst_unscaled,Allowed,Allowed,No data,No data
+LDUR_Q_ldst_unscaled,Allowed,Allowed,No data,No data
+LDUR_S_ldst_unscaled,Allowed,Allowed,No data,No data
+LSLV_32_dp_2src,Allowed,Allowed,No data,No data
+LSLV_64_dp_2src,Allowed,Allowed,No data,No data
+LSRV_32_dp_2src,Allowed,Allowed,No data,No data
+LSRV_64_dp_2src,Allowed,Allowed,No data,No data
+MADD_32A_dp_3src,Allowed,Allowed,No data,No data
+MADD_64A_dp_3src,Allowed,Allowed,No data,No data
+MOVK_32_movewide,Allowed,Allowed,No data,No data
+MOVK_64_movewide,Allowed,Allowed,No data,No data
+MOVN_32_movewide,Allowed,Allowed,No data,No data
+MOVN_64_movewide,Allowed,Allowed,No data,No data
+MOVZ_32_movewide,Allowed,Allowed,No data,No data
+MOVZ_64_movewide,Allowed,Allowed,No data,No data
+MRRS_RS_systemmovepr,Not allowed,Not allowed,No data,No data
+MRS_RS_systemmove,Not allowed,Not allowed,No data,No data
+MSRR_SR_systemmovepr,Not allowed,Not allowed,No data,No data
+MSR_SI_pstate,Allowed,Allowed,No data,No data
+MSR_SR_systemmove,Not allowed,Not allowed,No data,No data
+MSUB_32A_dp_3src,Allowed,Allowed,No data,No data
+MSUB_64A_dp_3src,Allowed,Allowed,No data,No data
+NOP_HI_hints,Allowed,Allowed,No data,No data
+ORN_32_log_shift,Allowed,Allowed,No data,No data
+ORN_64_log_shift,Allowed,Allowed,No data,No data
+ORR_32_log_imm,Allowed,Allowed,No data,No data
+ORR_32_log_shift,Allowed,Allowed,No data,No data
+ORR_64_log_imm,Allowed,Allowed,No data,No data
+ORR_64_log_shift,Allowed,Allowed,No data,No data
+PSB_HC_hints,Allowed,Allowed,No data,No data
+RBIT_32_dp_1src,Allowed,Allowed,No data,No data
+RBIT_64_dp_1src,Allowed,Allowed,No data,No data
+RCWCASAL_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWCASA_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWCASL_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWCASPAL_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWCASPA_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWCASPL_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWCASP_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWCAS_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWCLRAL_64_memop,Allowed,Allowed,No data,No data
+RCWCLRA_64_memop,Allowed,Allowed,No data,No data
+RCWCLRL_64_memop,Allowed,Allowed,No data,No data
+RCWCLRPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWCLRPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWCLRPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWCLRP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWCLR_64_memop,Allowed,Allowed,No data,No data
+RCWSCASAL_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWSCASA_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWSCASL_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWSCASPAL_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWSCASPA_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWSCASPL_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWSCASP_C64_rcwcomswappr,Not allowed,Not allowed,No data,No data
+RCWSCAS_C64_rcwcomswap,Allowed,Allowed,No data,No data
+RCWSCLRAL_64_memop,Allowed,Allowed,No data,No data
+RCWSCLRA_64_memop,Allowed,Allowed,No data,No data
+RCWSCLRL_64_memop,Allowed,Allowed,No data,No data
+RCWSCLRPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSCLRPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSCLRPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSCLRP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSCLR_64_memop,Allowed,Allowed,No data,No data
+RCWSETAL_64_memop,Allowed,Allowed,No data,No data
+RCWSETA_64_memop,Allowed,Allowed,No data,No data
+RCWSETL_64_memop,Allowed,Allowed,No data,No data
+RCWSETPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSETPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSETPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSETP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSET_64_memop,Allowed,Allowed,No data,No data
+RCWSSETAL_64_memop,Allowed,Allowed,No data,No data
+RCWSSETA_64_memop,Allowed,Allowed,No data,No data
+RCWSSETL_64_memop,Allowed,Allowed,No data,No data
+RCWSSETPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSETPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSETPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSETP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSET_64_memop,Allowed,Allowed,No data,No data
+RCWSSWPAL_64_memop,Allowed,Allowed,No data,No data
+RCWSSWPA_64_memop,Allowed,Allowed,No data,No data
+RCWSSWPL_64_memop,Allowed,Allowed,No data,No data
+RCWSSWPPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSWPPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSWPPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSWPP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSSWP_64_memop,Allowed,Allowed,No data,No data
+RCWSWPAL_64_memop,Allowed,Allowed,No data,No data
+RCWSWPA_64_memop,Allowed,Allowed,No data,No data
+RCWSWPL_64_memop,Allowed,Allowed,No data,No data
+RCWSWPPAL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSWPPA_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSWPPL_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSWPP_128_memop_128,Not allowed,Not allowed,No data,No data
+RCWSWP_64_memop,Allowed,Allowed,No data,No data
+RET_64R_branch_reg,Allowed,Allowed,No data,No data
+REV16_32_dp_1src,Allowed,Allowed,No data,No data
+REV16_64_dp_1src,Allowed,Allowed,No data,No data
+REV32_64_dp_1src,Allowed,Allowed,No data,No data
+REV_32_dp_1src,Allowed,Allowed,No data,No data
+REV_64_dp_1src,Allowed,Allowed,No data,No data
+RMIF_only_rmif,Allowed,Allowed,No data,No data
+RORV_32_dp_2src,Allowed,Allowed,No data,No data
+RORV_64_dp_2src,Allowed,Allowed,No data,No data
+RPRFM_R_ldst_regoff,Not allowed,Not allowed,No data,No data
+SBCS_32_addsub_carry,Allowed,Allowed,No data,No data
+SBCS_64_addsub_carry,Allowed,Allowed,No data,No data
+SBC_32_addsub_carry,Allowed,Allowed,No data,No data
+SBC_64_addsub_carry,Allowed,Allowed,No data,No data
+SBFM_32M_bitfield,Allowed,Allowed,No data,No data
+SBFM_64M_bitfield,Allowed,Allowed,No data,No data
+SB_only_barriers,Allowed,Allowed,No data,No data
+SDIV_32_dp_2src,No traces,No traces,No data,No data
+SDIV_64_dp_2src,No traces,No traces,No data,No data
+SETEN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETETN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETET_SET_memcms,Not allowed,Not allowed,No data,No data
+SETE_SET_memcms,Not allowed,Not allowed,No data,No data
+SETF16_only_setf,Allowed,Allowed,No data,No data
+SETF8_only_setf,Allowed,Allowed,No data,No data
+SETGEN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGETN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGET_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGE_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGMN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGMTN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGMT_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGM_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGOEN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOETN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOET_memset_go,Not allowed,Not allowed,No data,No data
+SETGOE_memset_go,Not allowed,Not allowed,No data,No data
+SETGOMN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOMTN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOMT_memset_go,Not allowed,Not allowed,No data,No data
+SETGOM_memset_go,Not allowed,Not allowed,No data,No data
+SETGOPN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOPTN_memset_go,Not allowed,Not allowed,No data,No data
+SETGOPT_memset_go,Not allowed,Not allowed,No data,No data
+SETGOP_memset_go,Not allowed,Not allowed,No data,No data
+SETGPN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGPTN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGPT_SET_memcms,Not allowed,Not allowed,No data,No data
+SETGP_SET_memcms,Not allowed,Not allowed,No data,No data
+SETMN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETMTN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETMT_SET_memcms,Not allowed,Not allowed,No data,No data
+SETM_SET_memcms,Not allowed,Not allowed,No data,No data
+SETPN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETPTN_SET_memcms,Not allowed,Not allowed,No data,No data
+SETPT_SET_memcms,Not allowed,Not allowed,No data,No data
+SETP_SET_memcms,Not allowed,Not allowed,No data,No data
+SHUH_HI_hints,Allowed,Allowed,No data,No data
+SMAX_32_dp_2src,Allowed,Allowed,No data,No data
+SMAX_32_minmax_imm,Allowed,Allowed,No data,No data
+SMAX_64_dp_2src,Allowed,Allowed,No data,No data
+SMAX_64_minmax_imm,Allowed,Allowed,No data,No data
+SMIN_32_dp_2src,Allowed,Allowed,No data,No data
+SMIN_32_minmax_imm,Allowed,Allowed,No data,No data
+SMIN_64_dp_2src,Allowed,Allowed,No data,No data
+SMIN_64_minmax_imm,Allowed,Allowed,No data,No data
+ST64BV0_64_memop,Allowed,Allowed,No data,No data
+ST64BV_64_memop,Allowed,Allowed,No data,No data
+ST64B_64L_memop,Allowed,Allowed,No data,No data
+STBFADDL_16,Not allowed,Not allowed,No data,No data
+STBFADD_16,Not allowed,Not allowed,No data,No data
+STBFMAXL_16,Not allowed,Not allowed,No data,No data
+STBFMAXNML_16,Not allowed,Not allowed,No data,No data
+STBFMAXNM_16,Not allowed,Not allowed,No data,No data
+STBFMAX_16,Not allowed,Not allowed,No data,No data
+STBFMINL_16,Not allowed,Not allowed,No data,No data
+STBFMINNML_16,Not allowed,Not allowed,No data,No data
+STBFMINNM_16,Not allowed,Not allowed,No data,No data
+STBFMIN_16,Not allowed,Not allowed,No data,No data
+STCPH_HI_hints,Allowed,Allowed,No data,No data
+STFADDL_16,Not allowed,Not allowed,No data,No data
+STFADDL_32,Not allowed,Not allowed,No data,No data
+STFADDL_64,Not allowed,Not allowed,No data,No data
+STFADD_16,Not allowed,Not allowed,No data,No data
+STFADD_32,Not allowed,Not allowed,No data,No data
+STFADD_64,Not allowed,Not allowed,No data,No data
+STFMAXL_16,Not allowed,Not allowed,No data,No data
+STFMAXL_32,Not allowed,Not allowed,No data,No data
+STFMAXL_64,Not allowed,Not allowed,No data,No data
+STFMAXNML_16,Not allowed,Not allowed,No data,No data
+STFMAXNML_32,Not allowed,Not allowed,No data,No data
+STFMAXNML_64,Not allowed,Not allowed,No data,No data
+STFMAXNM_16,Not allowed,Not allowed,No data,No data
+STFMAXNM_32,Not allowed,Not allowed,No data,No data
+STFMAXNM_64,Not allowed,Not allowed,No data,No data
+STFMAX_16,Not allowed,Not allowed,No data,No data
+STFMAX_32,Not allowed,Not allowed,No data,No data
+STFMAX_64,Not allowed,Not allowed,No data,No data
+STFMINL_16,Not allowed,Not allowed,No data,No data
+STFMINL_32,Not allowed,Not allowed,No data,No data
+STFMINL_64,Not allowed,Not allowed,No data,No data
+STFMINNML_16,Not allowed,Not allowed,No data,No data
+STFMINNML_32,Not allowed,Not allowed,No data,No data
+STFMINNML_64,Not allowed,Not allowed,No data,No data
+STFMINNM_16,Not allowed,Not allowed,No data,No data
+STFMINNM_32,Not allowed,Not allowed,No data,No data
+STFMINNM_64,Not allowed,Not allowed,No data,No data
+STFMIN_16,Not allowed,Not allowed,No data,No data
+STFMIN_32,Not allowed,Not allowed,No data,No data
+STFMIN_64,Not allowed,Not allowed,No data,No data
+STLLRB_SL32_ldstord,Allowed,Allowed,No data,No data
+STLLRH_SL32_ldstord,Allowed,Allowed,No data,No data
+STLLR_SL32_ldstord,Allowed,Allowed,No data,No data
+STLLR_SL64_ldstord,Allowed,Allowed,No data,No data
+STLP_64_ldiappstilp,Not allowed,Not allowed,No data,No data
+STLRB_SL32_ldstord,Allowed,Allowed,No data,No data
+STLRH_SL32_ldstord,Allowed,Allowed,No data,No data
+STLR_32S_ldapstl_writeback,Timeout,Timeout,No data,No data
+STLR_64S_ldapstl_writeback,Timeout,Timeout,No data,No data
+STLR_SL32_ldstord,Allowed,Allowed,No data,No data
+STLR_SL64_ldstord,Allowed,Allowed,No data,No data
+STLTXR_SR32_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+STLTXR_SR64_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+STLURB_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+STLURH_32_ldapstl_unscaled,Allowed,Allowed,No data,No data
+STLUR_32_ldapstl_unscaled,Timeout,Timeout,No data,No data
+STLUR_64_ldapstl_unscaled,Allowed,Allowed,No data,No data
+STLUR_B_ldapstl_simd,Allowed,Allowed,No data,No data
+STLUR_D_ldapstl_simd,Allowed,Allowed,No data,No data
+STLUR_H_ldapstl_simd,Allowed,Allowed,No data,No data
+STLUR_Q_ldapstl_simd,Allowed,Allowed,No data,No data
+STLUR_S_ldapstl_simd,Allowed,Allowed,No data,No data
+STRB_32BL_ldst_regoff,Allowed,Allowed,No data,No data
+STRB_32B_ldst_regoff,Not allowed,Not allowed,No data,No data
+STRB_32_ldst_immpost,Allowed,Allowed,No data,No data
+STRB_32_ldst_immpre,Allowed,Allowed,No data,No data
+STRB_32_ldst_pos,Allowed,Allowed,No data,No data
+STRH_32_ldst_immpost,Allowed,Allowed,No data,No data
+STRH_32_ldst_immpre,Timeout,Timeout,No data,No data
+STRH_32_ldst_pos,Timeout,Timeout,No data,No data
+STRH_32_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_32_ldst_immpost,Allowed,Allowed,No data,No data
+STR_32_ldst_immpre,Timeout,Timeout,No data,No data
+STR_32_ldst_pos,Timeout,Timeout,No data,No data
+STR_32_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_64_ldst_immpost,Allowed,Allowed,No data,No data
+STR_64_ldst_immpre,Timeout,Timeout,No data,No data
+STR_64_ldst_pos,Timeout,Timeout,No data,No data
+STR_64_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_BL_ldst_regoff,Allowed,Allowed,No data,No data
+STR_B_ldst_immpost,Allowed,Allowed,No data,No data
+STR_B_ldst_immpre,Allowed,Allowed,No data,No data
+STR_B_ldst_pos,Allowed,Allowed,No data,No data
+STR_B_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_D_ldst_immpost,Allowed,Allowed,No data,No data
+STR_D_ldst_immpre,Allowed,Allowed,No data,No data
+STR_D_ldst_pos,Allowed,Allowed,No data,No data
+STR_D_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_H_ldst_immpost,Allowed,Allowed,No data,No data
+STR_H_ldst_immpre,Allowed,Allowed,No data,No data
+STR_H_ldst_pos,Allowed,Allowed,No data,No data
+STR_H_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_Q_ldst_immpost,Allowed,Allowed,No data,No data
+STR_Q_ldst_immpre,Allowed,Allowed,No data,No data
+STR_Q_ldst_pos,Allowed,Allowed,No data,No data
+STR_Q_ldst_regoff,Not allowed,Not allowed,No data,No data
+STR_S_ldst_immpost,Allowed,Allowed,No data,No data
+STR_S_ldst_immpre,Allowed,Allowed,No data,No data
+STR_S_ldst_pos,Allowed,Allowed,No data,No data
+STR_S_ldst_regoff,Not allowed,Not allowed,No data,No data
+STSHH_HI_hints,Allowed,Allowed,No data,No data
+STTNP_64_ldstnapair_offs,Not allowed,Not allowed,No data,No data
+STTNP_Q_ldstnapair_offs,Not allowed,Not allowed,No data,No data
+STTP_64_ldstpair_off,Not allowed,Not allowed,No data,No data
+STTP_64_ldstpair_post,Not allowed,Not allowed,No data,No data
+STTP_64_ldstpair_pre,Not allowed,Not allowed,No data,No data
+STTP_Q_ldstpair_off,Not allowed,Not allowed,No data,No data
+STTP_Q_ldstpair_post,Not allowed,Not allowed,No data,No data
+STTP_Q_ldstpair_pre,Not allowed,Not allowed,No data,No data
+STTXR_SR32_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+STTXR_SR64_ldstexclr_unpriv,Not allowed,Not allowed,No data,No data
+STURB_32_ldst_unscaled,Allowed,Allowed,No data,No data
+STURH_32_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_32_ldst_unscaled,Timeout,Timeout,No data,No data
+STUR_64_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_B_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_D_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_H_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_Q_ldst_unscaled,Allowed,Allowed,No data,No data
+STUR_S_ldst_unscaled,Allowed,Allowed,No data,No data
+SUBG_64_addsub_immtags,Not allowed,Not allowed,No data,No data
+SUBPS_64S_dp_2src,Not allowed,Not allowed,No data,No data
+SUBPT_64_addsub_pt,Not allowed,Not allowed,No data,No data
+SUBP_64S_dp_2src,Not allowed,Not allowed,No data,No data
+SUBS_32S_addsub_ext,Allowed,Allowed,No data,No data
+SUBS_32S_addsub_imm,Allowed,Allowed,No data,No data
+SUBS_32_addsub_shift,Allowed,Allowed,No data,No data
+SUBS_64S_addsub_ext,Allowed,Allowed,No data,No data
+SUBS_64S_addsub_imm,Allowed,Allowed,No data,No data
+SUBS_64_addsub_shift,Allowed,Allowed,No data,No data
+SUB_32_addsub_ext,Allowed,Allowed,No data,No data
+SUB_32_addsub_imm,Allowed,Allowed,No data,No data
+SUB_32_addsub_shift,Allowed,Allowed,No data,No data
+SUB_64_addsub_ext,Allowed,Allowed,No data,No data
+SUB_64_addsub_imm,Allowed,Allowed,No data,No data
+SUB_64_addsub_shift,Allowed,Allowed,No data,No data
+SWPAB_32_memop,Allowed,Allowed,No data,No data
+SWPAH_32_memop,Allowed,Allowed,No data,No data
+SWPALB_32_memop,Allowed,Allowed,No data,No data
+SWPALH_32_memop,Allowed,Allowed,No data,No data
+SWPAL_32_memop,Allowed,Allowed,No data,No data
+SWPAL_64_memop,Allowed,Allowed,No data,No data
+SWPA_32_memop,Allowed,Allowed,No data,No data
+SWPA_64_memop,Allowed,Allowed,No data,No data
+SWPB_32_memop,Allowed,Allowed,No data,No data
+SWPH_32_memop,Allowed,Allowed,No data,No data
+SWPLB_32_memop,Allowed,Allowed,No data,No data
+SWPLH_32_memop,Allowed,Allowed,No data,No data
+SWPL_32_memop,Allowed,Allowed,No data,No data
+SWPL_64_memop,Allowed,Allowed,No data,No data
+SWPTAL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPTAL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPTA_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPTA_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPTL_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPTL_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPT_32_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWPT_64_memop_unpriv,Not allowed,Not allowed,No data,No data
+SWP_32_memop,Allowed,Allowed,No data,No data
+SWP_64_memop,Allowed,Allowed,No data,No data
+SYSL_RC_systeminstrs,Not allowed,Not allowed,No data,No data
+SYSP_CR_syspairinstrs,Not allowed,Not allowed,No data,No data
+SYS_CR_systeminstrs,Not allowed,Not allowed,No data,No data
+TBNZ_only_testbranch,Allowed,Allowed,No data,No data
+TBZ_only_testbranch,Allowed,Allowed,No data,No data
+TCHANGEB_tc_imm,Not allowed,Not allowed,No data,No data
+TCHANGEB_tc_reg,Not allowed,Not allowed,No data,No data
+TCHANGEF_tc_imm,Not allowed,Not allowed,No data,No data
+TCHANGEF_tc_reg,Not allowed,Not allowed,No data,No data
+TENTER_te_exception,Not allowed,Not allowed,No data,No data
+TEXIT_te_branch_reg,Not allowed,Not allowed,No data,No data
+TSB_HC_hints,Allowed,Allowed,No data,No data
+UBFM_32M_bitfield,Allowed,Allowed,No data,No data
+UBFM_64M_bitfield,Allowed,Allowed,No data,No data
+UDIV_32_dp_2src,No traces,No traces,No data,No data
+UDIV_64_dp_2src,No traces,No traces,No data,No data
+UMAX_32U_minmax_imm,Allowed,Allowed,No data,No data
+UMAX_32_dp_2src,Allowed,Allowed,No data,No data
+UMAX_64U_minmax_imm,Allowed,Allowed,No data,No data
+UMAX_64_dp_2src,Allowed,Allowed,No data,No data
+UMIN_32U_minmax_imm,Allowed,Allowed,No data,No data
+UMIN_32_dp_2src,Allowed,Allowed,No data,No data
+UMIN_64U_minmax_imm,Allowed,Allowed,No data,No data
+UMIN_64_dp_2src,Allowed,Allowed,No data,No data
+WFET_only_systeminstrswithreg,Allowed,Allowed,No data,No data
+WFIT_only_systeminstrswithreg,Allowed,Allowed,No data,No data
+XAFLAG_M_pstate,Allowed,Allowed,No data,No data
+YIELD_HI_hints,Allowed,Allowed,No data,No data
