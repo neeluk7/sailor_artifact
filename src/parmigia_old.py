@@ -10,13 +10,6 @@ OUTPUT_DIR         = 'big_isla_traces_test'
 
 INSTR_SKIP_LIST = set()
 
-# Exclude instructions that are unusable at EVERY exception level (no clean
-# path anywhere): always-timeout, always-undefined, always-exception, and
-# always-failing-mixed. They contribute no footprint and only clutter the
-# coverage analysis. They are still recorded in excluded_instructions.csv so
-# the soundness boundary is explicit. Set False to keep them in the main CSVs.
-EXCLUDE_DEAD = True
-
 MAX_PARTS = [
     216,
     216,
@@ -37,10 +30,13 @@ SYSREG_SKIP_EXACT = {
 }
 SYSREG_SKIP_SUBSTRINGS = ['ALLINT', 'PM', 'S1_', 'S3_', 'SVCR']
 
+# Each trace in the isla output begins with one of these headers:
+#   --- Instruction: NAME | Mode: ELx | throw_at: None ---
+#   --- Instruction: NAME | Mode: ELx | throw_at: Some("src/...") ---
+#   --- Instruction: NAME | Mode: ELx | EXEC_ERR: <message> ---
+# The harness writes ONE header per execution path, so a single instruction
+# can have several consecutive trace blocks here.
 HEADER_SPLIT = re.compile(r'(?=--- Instruction:)')
-
-# A status counts as "usable" iff at least one execution path completed cleanly.
-USABLE_STATUSES = {"Allowed", "Conditional"}
 
 
 def load_sysreg_list(json_path):
@@ -65,13 +61,17 @@ def load_sysreg_list(json_path):
 
 
 def classify(clean, exception, undefined, exec_err):
+    """Per-instruction verdict from the tally across ALL of its traces."""
     total = clean + exception + undefined + exec_err
     if total == 0:
         return "No traces"
     if clean == total:
         return "Allowed"
     if clean > 0:
+        # At least one path executes cleanly and at least one fails: the
+        # instruction is legal but its behaviour is input-dependent.
         return "Conditional"
+    # No clean path at all. Report the dominant blocking reason.
     if exec_err == total:
         return "Timeout/ExecErr"
     if undefined == total:
@@ -82,6 +82,7 @@ def classify(clean, exception, undefined, exec_err):
 
 
 def _merge_reg(fp, reg, is_write):
+    """Add a sysreg access to a footprint list, promoting Read -> Write."""
     rd, wr = reg + " Read", reg + " Write"
     if is_write:
         if wr in fp:
@@ -97,6 +98,13 @@ def _merge_reg(fp, reg, is_write):
 
 
 def _trace_is_undefined(chunk_lines):
+    """True iff this trace contains an actual Error_Undefined exception event.
+
+    Matched the same precise way as the original parser (a write-reg event to
+    the exception variable carrying Error_Undefined) so the Error_Undefined
+    type name appearing in an enum *definition* does not false-positive every
+    trace.
+    """
     for ln in chunk_lines:
         if "write-reg" in ln and "exception" in ln and "Error_Undefined" in ln:
             return True
@@ -124,9 +132,10 @@ def parse_traces(trace_files, sysregs):
         with open(filepath) as f:
             content = f.read()
 
+        # One chunk == one trace (header + its event body).
         for chunk in HEADER_SPLIT.split(content):
             if not chunk.startswith("--- Instruction:"):
-                continue
+                continue  # any preamble before the first header
 
             chunk_lines = chunk.splitlines()
             header = chunk_lines[0]
@@ -137,6 +146,13 @@ def parse_traces(trace_files, sysregs):
             footprint[el].setdefault(name, [])
             counts[el].setdefault(name, [0, 0, 0, 0])
 
+            # --- Classify THIS trace -------------------------------------
+            #   exec-err : executor failed/timed out (no usable body)
+            #   undefined: model raised Error_Undefined (UNALLOCATED decode)
+            #   exception: model took an architectural exception (throw_at Some)
+            #              -> alignment/FP/abort; body is HANDLER state, not the
+            #                 instruction's own footprint, so it is discarded
+            #   clean    : completed normally -> contributes footprint
             if "EXEC_ERR" in header:
                 counts[el][name][3] += 1
                 continue
@@ -147,6 +163,7 @@ def parse_traces(trace_files, sysregs):
                 counts[el][name][1] += 1
                 continue
 
+            # Clean path: record its sysreg footprint.
             counts[el][name][0] += 1
             fp = footprint[el][name]
             for ln in chunk_lines:
@@ -173,20 +190,6 @@ def parse_traces(trace_files, sysregs):
     return footprint, access, counts
 
 
-def _dead_reason(statuses):
-    """Why an instruction is dead (it has no usable EL)."""
-    real = [s for s in statuses if s != "No data"]
-    if not real:
-        return "no-data"
-    if all(s == "Timeout/ExecErr" for s in real):
-        return "always-timeout"
-    if all(s == "Not allowed (undefined)" for s in real):
-        return "always-undefined"
-    if all(s == "Not allowed (exception)" for s in real):
-        return "always-exception"
-    return "always-failing-mixed"
-
-
 def write_csvs(footprint, access, counts):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -194,8 +197,6 @@ def write_csvs(footprint, access, counts):
     fp_files       = [f"sysreg_footprint_per_instruction_el{i}.csv" for i in range(4)]
     access_file    = os.path.join(OUTPUT_DIR, "instruction_access_per_mode.csv")
     breakdown_file = os.path.join(OUTPUT_DIR, "trace_breakdown_per_instruction.csv")
-    excluded_file  = os.path.join(OUTPUT_DIR, "excluded_instructions.csv")
-    live_list_file = os.path.join(OUTPUT_DIR, "live_instructions.txt")
 
     all_instrs = sorted(
         instr
@@ -203,34 +204,25 @@ def write_csvs(footprint, access, counts):
         if instr not in INSTR_SKIP_LIST and instr != ""
     )
 
-    # Split into live (usable at >=1 EL) and dead (usable nowhere).
-    live, dead = [], []
-    for instr in all_instrs:
-        statuses = [access[el].get(instr, "No data") for el in range(4)]
-        if any(s in USABLE_STATUSES for s in statuses):
-            live.append(instr)
-        else:
-            dead.append((instr, statuses, _dead_reason(statuses)))
-
-    emit = live if EXCLUDE_DEAD else all_instrs
-
-    # Per-EL footprint CSVs (clean-path footprints, live instructions only).
+    # Per-EL footprint CSVs (clean-path footprints only) -- same format as before
+    # so unique_witness.py / minimal_cover.py keep working unchanged.
     for el in range(4):
         path = os.path.join(OUTPUT_DIR, fp_files[el])
         with open(path, 'w', newline='') as f:
             w = csv.writer(f)
             w.writerow(["Instruction", "Sysreg footprint"])
-            for instr in emit:
+            for instr in all_instrs:
                 w.writerow([instr] + footprint[el].get(instr, []))
 
-    # Combined access CSV (live instructions only).
+    # Combined access CSV -- same format as before.
     with open(access_file, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(["Instruction"] + el_names)
-        for instr in emit:
+        for instr in all_instrs:
             w.writerow([instr] + [access[el].get(instr, "No data") for el in range(4)])
 
-    # Trace breakdown for every instruction (live and dead) -- diagnostics.
+    # New diagnostics: per-instruction, per-EL trace breakdown so a verdict is
+    # explainable ("Not allowed (exception)" with 0 clean / 3 exception, etc.).
     with open(breakdown_file, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(["Instruction", "EL", "Clean", "Exception", "Undefined", "ExecErr", "Status"])
@@ -240,25 +232,7 @@ def write_csvs(footprint, access, counts):
                 if c:
                     w.writerow([instr, el_names[el]] + c + [access[el].get(instr, "No data")])
 
-    # Excluded set -- the documented coverage boundary.
-    with open(excluded_file, 'w', newline='') as f:
-        w = csv.writer(f)
-        w.writerow(["Instruction"] + el_names + ["Reason"])
-        for instr, statuses, reason in dead:
-            w.writerow([instr] + statuses + [reason])
-
-    # Live keep-list: feed straight back into the harness as --keep-list to
-    # re-run only the instructions worth tracing.
-    with open(live_list_file, 'w') as f:
-        for instr in live:
-            f.write(instr + "\n")
-
-    print(f"Live (usable >=1 EL): {len(live)}   Excluded (dead): {len(dead)}")
-    reasons = {}
-    for _, _, r in dead:
-        reasons[r] = reasons.get(r, 0) + 1
-    for r in sorted(reasons):
-        print(f"  excluded [{r}]: {reasons[r]}")
+    print(f"Successfully processed {len(all_instrs)} instructions inside {OUTPUT_DIR}/")
     for el in range(4):
         agg = [0, 0, 0, 0]
         for c in counts[el].values():
@@ -266,11 +240,9 @@ def write_csvs(footprint, access, counts):
                 agg[i] += c[i]
         print(f"  {el_names[el]}: clean={agg[0]} exception={agg[1]} "
               f"undefined={agg[2]} execerr={agg[3]}")
-    print(f"Wrote footprints/access/breakdown + excluded_instructions.csv + "
-          f"live_instructions.txt to {OUTPUT_DIR}/")
 
 
 if __name__ == "__main__":
-    sysregs                   = load_sysreg_list(REGISTER_JSONpath)
-    footprint, access, counts = parse_traces(ISLA_TRACE_FILES, sysregs)
+    sysregs                    = load_sysreg_list(REGISTER_JSONpath)
+    footprint, access, counts  = parse_traces(ISLA_TRACE_FILES, sysregs)
     write_csvs(footprint, access, counts)

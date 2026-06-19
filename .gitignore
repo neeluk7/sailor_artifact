@@ -4,3 +4,8 @@ arm_traces*.txt
 configs/*.ir
 arm_traces_output/
 instructionsJson/
+src/big_isla_traces_test/
+arm_traces_output_SMALLR15/
+arm_traces_output_biggest_run/
+arm_traces_output_save/
+rust_runF.log
