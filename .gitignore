@@ -4,3 +4,10 @@ arm_traces*.txt
 configs/*.ir
 arm_traces_output/
 instructionsJson/
+src/big_isla_traces_test/
+arm_traces_output_mon29_late/
+arm_traces_output_MRS30/
+arm_traces_output_thur1/
+results_bad/
+srcb/
+
