@@ -1,0 +1,27 @@
+Instruction,EL0,EL1,EL2,EL3,Reason
+LDRSW_64_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+LDR_32_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+LDR_64_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+LDR_D_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+LDR_Q_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+LDR_S_loadlit,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MRS_RS_systemmove@OSLAR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MRS_RS_systemmove@SMCR_EL3,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MRS_RS_systemmove@SP_EL0,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@DBGAUTHSTATUS_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@ERRIDR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@ERXFR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@ERXGSR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@ERXPFGF_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@ISR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@LORID_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@MDCCSR_EL0,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@MDRAR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@OSLSR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@RNDR,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@RNDRRS,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@RVBAR_EL3,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@SMCR_EL3,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@SMIDR_EL1,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+MSR_SR_systemmove@SP_EL0,Not allowed,Not allowed,Not allowed,Not allowed,always-failing
+XAFLAG_M_pstate,Not allowed,Not allowed,Not allowed,Not allowed,always-failing

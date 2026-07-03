@@ -1,2 +1,0 @@
-Instruction,EL0,EL1,EL2,EL3
-ERET,Not allowed,Allowed,No data,Allowed

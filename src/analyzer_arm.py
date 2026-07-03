@@ -3,22 +3,6 @@
 # Sailor-ARM context-switch security analyzer (AArch64 / EL0..EL3)
 #
 # --------------------------------------------------
-# The RISC-V analyzer consumed FOUR inputs:
-#     csr_footprint_per_instruction_{user,supervisor,machine}.csv
-#     instruction_access_per_mode.csv          (3 modes: U/S/M)
-#     csr_read_access.csv      <- per-CSR direct READ accessibility per mode
-#     csr_write_access.csv     <- per-CSR direct WRITE accessibility per mode
-#
-# The Sailor-ARM run does NOT produce csr_read_access.csv / csr_write_access.csv.
-# Per-register direct accessibility is instead encoded *inside* the
-# instruction-access table by the MRS/MSR sweep:
-#     MRS_RS_systemmove@<REG> row  ==  "can this EL READ  <REG> ?"
-#     MSR_SR_systemmove@<REG> row  ==  "can this EL WRITE <REG> ?"
-# so the read/write access matrices are DERIVED here from those rows rather
-# than read from separate files. It also has 4 ELs, not 3 modes, and the
-# footprint tokens are explicit "<REG> Read" / "<REG> Write" (no RISC-V-style
-# "R+W" to assume around).
-#
 # Inputs (all from --in directory, default "."):
 #     instruction_access_per_mode.csv
 #         header: Instruction,EL0,EL1,EL2,EL3
@@ -90,20 +74,16 @@ def load_footprint(path):
                 tok = tok.strip()
                 if not tok:
                     continue
-                # token looks like "TTBR0_EL1 Read" / "FPSR Write"
                 parts = tok.rsplit(" ", 1)
                 if len(parts) == 2 and parts[1] in ("Read", "Write"):
                     entries.add((parts[0].strip(), parts[1]))
                 else:
-                    # defensively treat an un-annotated reg as a read
+                    # unannotated reg as a read
                     entries.add((tok, "Read"))
             fp.setdefault(key, set()).update(entries)
     return fp
 
 
-# --------------------------------------------------------------------------- #
-# Derived per-EL direct read/write accessibility, from the MRS/MSR sweep rows
-# --------------------------------------------------------------------------- #
 def derive_direct_access(access_table):
     """Returns (read_access, write_access) where each is
        [el_index] -> {reg: cell_string}."""
@@ -121,10 +101,10 @@ def derive_direct_access(access_table):
     return read_access, write_access
 
 
-def collect_sysregs(footprints, read_access, write_access, extra=None):
+def collect_sysregs(footprints, read_access, write_access, extra=None, banned=None):
     """Universe of registers to analyze: everything that appears in any
     footprint, plus everything covered by the MRS/MSR sweep, plus any names
-    from an optional config file."""
+    from an optional config file -- minus anything on the ban list."""
     regs = set()
     for fp in footprints:
         for entries in fp.values():
@@ -135,12 +115,11 @@ def collect_sysregs(footprints, read_access, write_access, extra=None):
         regs.update(write_access[el].keys())
     if extra:
         regs.update(extra)
+    if banned:
+        regs.difference_update(banned)
     return sorted(regs)
 
 
-# --------------------------------------------------------------------------- #
-# Core: faithful port of switch_security_domain, adapted
-# --------------------------------------------------------------------------- #
 def source_affects(reg, s, access_table, footprints, write_access):
     """Source EL can change REG: directly (MSR REG runs at s) or indirectly
     (some instruction runnable at s writes REG as a side effect)."""
@@ -186,7 +165,23 @@ def analyze_switch(s, t, sysregs, access_table, footprints,
                    read_access, write_access, strict=False):
     """Returns (sensitive, not_sensitive, detail).
        sensitive/not_sensitive are lists of register names.
-       detail maps reg -> (source_reason, target_reason)."""
+       detail maps reg -> (source_reason, target_reason).
+
+       There is no longer an "unknown"/"unprobed" bucket. A register the
+       source can change (measured: direct MSR, or an instruction at the
+       source writes it) is now classified SENSITIVE by default whenever the
+       target's ability to read it was never measured (the register is
+       absent from the MRS/MSR sweep AND read by no instruction in the
+       target's footprint) -- this is exactly the old DISR_EL1 / MDCCSR_EL0
+       case (written indirectly by ESB at EL0, but never swept, so we cannot
+       prove EL1 can't read it). Rather than surface that as a separate
+       coverage-gap column, we now fail SAFE: an unprobed target read is
+       treated as a positive read, and the register is reported sensitive.
+       Only a register whose target read-access WAS actually measured (it's
+       in the sweep, or read by some target-side instruction) and measured
+       negative is reported not_sensitive. The definitive fix for a register
+       that lands here via the unprobed path is still to add it to the
+       sweep -- see the "UNPROBED" note baked into its detail entry."""
     sensitive, not_sensitive, detail = [], [], {}
     for reg in sysregs:
         aff, aff_why = source_affects(reg, s, access_table, footprints, write_access)
@@ -204,7 +199,19 @@ def analyze_switch(s, t, sysregs, access_table, footprints,
         if obs:
             sensitive.append(reg)
             detail[reg] = (aff_why or dep_why, obs_why)
+        elif reg not in read_access[t]:
+            # Source can change it, target never observed reading it, AND the
+            # target's direct read-access was never probed (reg not in the
+            # sweep) -> fail-safe: treat as sensitive rather than silently
+            # calling it safe.
+            sensitive.append(reg)
+            detail[reg] = (aff_why or dep_why,
+                           "UNPROBED: %s not in MRS sweep and no instruction "
+                           "reads it at %s -- treated as sensitive (fail-safe)"
+                           % (reg, EL_NAMES[t]))
         else:
+            # Target read-access WAS measured (reg is in the sweep) and is not
+            # accessible, and nothing reads it indirectly -> measured safe.
             not_sensitive.append(reg)
     return sensitive, not_sensitive, detail
 
@@ -215,6 +222,7 @@ def analyze_switch(s, t, sysregs, access_table, footprints,
 def write_pair_csv(out_dir, s, t, sensitive, not_sensitive, detail, detailed):
     base = "switch-from-%s-to-%s" % (EL_NAMES[s], EL_NAMES[t])
     path = os.path.join(out_dir, base + ".csv")
+
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Security Sensitive", "Not Security Sensitive"])
@@ -223,6 +231,7 @@ def write_pair_csv(out_dir, s, t, sensitive, not_sensitive, detail, detailed):
                 sensitive[i] if i < len(sensitive) else "",
                 not_sensitive[i] if i < len(not_sensitive) else "",
             ])
+
     if detailed:
         dpath = os.path.join(out_dir, base + "-detail.csv")
         with open(dpath, "w", newline="") as f:
@@ -234,11 +243,10 @@ def write_pair_csv(out_dir, s, t, sensitive, not_sensitive, detail, detailed):
     return path
 
 
-# --------------------------------------------------------------------------- #
 def main():
     ap = argparse.ArgumentParser(
         description="ARM (AArch64) context-switch security analyzer.")
-    ap.add_argument("--in", dest="indir", default=".",
+    ap.add_argument("--in", dest="indir", default="../results",
                     help="directory holding the Sailor-ARM CSVs (default .)")
     ap.add_argument("--out", dest="outdir", default=None,
                     help="output directory (default = --in)")
@@ -246,14 +254,34 @@ def main():
                     help="source EL (EL0..EL3). Omit to sweep all ordered pairs.")
     ap.add_argument("--target", default=None,
                     help="target EL (EL0..EL3). Omit to sweep all ordered pairs.")
-    ap.add_argument("--strict", action="store_true",
-                    help="require the source to be able to WRITE a register for "
-                         "it to count (drops read-only-by-both 'constants' such "
-                         "as trap-check registers). Default mirrors the RISC-V "
-                         "analyzer: affect OR depend.")
+    ap.add_argument("--strict", dest="strict", action="store_true", default=False,
+                    help="OPT-IN narrower view: a register counts only if the "
+                         "SOURCE EL can WRITE it (direct MSR, or an instruction at "
+                         "the source whose footprint writes it) -- i.e. drop the "
+                         "Source_Dependent term. This removes read-only-by-both "
+                         "'constants' (e.g. SCR_EL3 / trap-check registers) but it "
+                         "ALSO removes legitimately context-bound registers the "
+                         "source only reads, such as TTBR0_EL1 for an EL0->EL0 "
+                         "switch. NOT the default.")
+    ap.add_argument("--faithful", dest="strict", action="store_false",
+                    help="(default) implement the full sensitivity rule: "
+                         "(Source_Direct_Write OR Source_Indirect_Write OR "
+                         "Source_Dependent) AND (Target_Dependent OR "
+                         "Target_Direct_Read). The Source_Dependent term is what "
+                         "flags registers the source only READS (e.g. every EL0 "
+                         "load reads TTBR0_EL1 during translation), so TTBR0_EL1 is "
+                         "correctly sensitive for EL0->EL0. Applied uniformly, "
+                         "including same-EL switches.")
     ap.add_argument("--sysreg-list", default=None,
                     help="optional file of extra register names to force into "
                          "the universe (one per line, '#' comments ok).")
+    ap.add_argument("--sysreg-ban-list", default=None,
+                    help="optional file of register names to force OUT of the "
+                         "universe -- these are dropped from `sysregs` entirely "
+                         "before analysis and so never appear in either "
+                         "'Security Sensitive' or 'Not Security Sensitive' "
+                         "(one per line, '#' comments ok). Applied after "
+                         "--sysreg-list, so a name in both files is banned.")
     ap.add_argument("--detail", action="store_true",
                     help="also emit *-detail.csv naming the channel per sysreg.")
     args = ap.parse_args()
@@ -278,7 +306,6 @@ def main():
                   % (EL_NAMES[el], os.path.basename(fp_path), EL_NAMES[el]))
         footprints.append(fp)
 
-    # Warn about incomplete access columns (e.g. an unfinished EL3 pass).
     for el in range(4):
         nod = sum(1 for c in access_table.values() if c[el].strip() == "No data")
         if nod:
@@ -293,9 +320,17 @@ def main():
         with open(args.sysreg_list) as f:
             extra = [l.strip() for l in f
                      if l.strip() and not l.strip().startswith("#")]
-    sysregs = collect_sysregs(footprints, read_access, write_access, extra)
-    print("Analyzing %d candidate system registers across %s.\n"
-          % (len(sysregs), ", ".join(EL_NAMES)))
+
+    banned = None
+    if args.sysreg_ban_list and os.path.exists(args.sysreg_ban_list):
+        with open(args.sysreg_ban_list) as f:
+            banned = {l.strip() for l in f
+                      if l.strip() and not l.strip().startswith("#")}
+
+    sysregs = collect_sysregs(footprints, read_access, write_access, extra, banned)
+    print("Analyzing %d candidate system registers across %s.%s\n"
+          % (len(sysregs), ", ".join(EL_NAMES),
+             ("  (%d banned via --sysreg-ban-list)" % len(banned)) if banned else ""))
 
     if args.source and args.target:
         pairs = [(EL_NAMES.index(args.source), EL_NAMES.index(args.target))]
@@ -303,9 +338,17 @@ def main():
         pairs = [(s, t) for s in range(4) for t in range(4)]
 
     for (s, t) in pairs:
+        # The full rule (Source_Write OR Source_Dependent) AND (Target_Read OR
+        # Target_Dependent) is applied UNIFORMLY, including same-EL switches.
+        # For s == t the Source_Dependent term is essential, not degenerate: it
+        # is what makes context-bound state the EL only READS -- e.g. TTBR0_EL1,
+        # which every EL0 load reads during translation -- sensitive for an
+        # EL0->EL0 switch (two EL0 contexts whose page tables differ). --strict
+        # drops that term and is left to the caller as an explicit narrower view.
+        pair_strict = args.strict
         sensitive, not_sensitive, detail = analyze_switch(
             s, t, sysregs, access_table, footprints,
-            read_access, write_access, strict=args.strict)
+            read_access, write_access, strict=pair_strict)
         path = write_pair_csv(outdir, s, t, sensitive, not_sensitive,
                               detail, args.detail)
         print("%s -> %s : %d sensitive, %d not  (%s)"

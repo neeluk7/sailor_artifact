@@ -1,0 +1,1084 @@
+Instruction,EL0,EL1,EL2,EL3
+ABS_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+ABS_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+ADCS_32_addsub_carry,Allowed,Allowed,Allowed,Allowed
+ADCS_64_addsub_carry,Allowed,Allowed,Allowed,Allowed
+ADC_32_addsub_carry,Allowed,Allowed,Allowed,Allowed
+ADC_64_addsub_carry,Allowed,Allowed,Allowed,Allowed
+ADDS_32S_addsub_ext,Conditional,Conditional,Conditional,Conditional
+ADDS_32S_addsub_imm,Allowed,Allowed,Allowed,Allowed
+ADDS_32_addsub_shift,Allowed,Allowed,Allowed,Allowed
+ADDS_64S_addsub_ext,Conditional,Conditional,Conditional,Conditional
+ADDS_64S_addsub_imm,Allowed,Allowed,Allowed,Allowed
+ADDS_64_addsub_shift,Allowed,Allowed,Allowed,Allowed
+ADD_32_addsub_ext,Conditional,Conditional,Conditional,Conditional
+ADD_32_addsub_imm,Allowed,Allowed,Allowed,Allowed
+ADD_32_addsub_shift,Allowed,Allowed,Allowed,Allowed
+ADD_64_addsub_ext,Conditional,Conditional,Conditional,Conditional
+ADD_64_addsub_imm,Allowed,Allowed,Allowed,Allowed
+ADD_64_addsub_shift,Allowed,Allowed,Allowed,Allowed
+ADRP_only_pcreladdr,Allowed,Allowed,Allowed,Allowed
+ADR_only_pcreladdr,Allowed,Allowed,Allowed,Allowed
+ANDS_32S_log_imm,Allowed,Allowed,Allowed,Allowed
+ANDS_32_log_shift,Allowed,Allowed,Allowed,Allowed
+ANDS_64S_log_imm,Allowed,Allowed,Allowed,Allowed
+ANDS_64_log_shift,Allowed,Allowed,Allowed,Allowed
+AND_32_log_imm,Allowed,Allowed,Allowed,Allowed
+AND_32_log_shift,Allowed,Allowed,Allowed,Allowed
+AND_64_log_imm,Allowed,Allowed,Allowed,Allowed
+AND_64_log_shift,Allowed,Allowed,Allowed,Allowed
+ASRV_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+ASRV_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+AXFLAG_M_pstate,Allowed,Allowed,Allowed,Allowed
+BC_only_condbranch,Allowed,Allowed,Allowed,Allowed
+BFM_32M_bitfield,Allowed,Allowed,Allowed,Allowed
+BFM_64M_bitfield,Allowed,Allowed,Allowed,Allowed
+BICS_32_log_shift,Allowed,Allowed,Allowed,Allowed
+BICS_64_log_shift,Allowed,Allowed,Allowed,Allowed
+BIC_32_log_shift,Allowed,Allowed,Allowed,Allowed
+BIC_64_log_shift,Allowed,Allowed,Allowed,Allowed
+BLR_64_branch_reg,Allowed,Allowed,Allowed,Allowed
+BL_only_branch_imm,Allowed,Allowed,Allowed,Allowed
+BR_64_branch_reg,Allowed,Allowed,Allowed,Allowed
+BTI_HB_hints,Allowed,Allowed,Allowed,Allowed
+B_only_branch_imm,Allowed,Allowed,Allowed,Allowed
+B_only_condbranch,Allowed,Allowed,Allowed,Allowed
+CASAB_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASAH_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASALB_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASALH_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASAL_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASAL_C64_comswap,Conditional,Conditional,Conditional,Conditional
+CASA_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASA_C64_comswap,Conditional,Conditional,Conditional,Conditional
+CASB_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASH_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASLB_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASLH_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASL_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CASL_C64_comswap,Conditional,Conditional,Conditional,Conditional
+CAS_C32_comswap,Conditional,Conditional,Conditional,Conditional
+CAS_C64_comswap,Conditional,Conditional,Conditional,Conditional
+CBNZ_32_compbranch,Allowed,Allowed,Allowed,Allowed
+CBNZ_64_compbranch,Allowed,Allowed,Allowed,Allowed
+CBZ_32_compbranch,Allowed,Allowed,Allowed,Allowed
+CBZ_64_compbranch,Allowed,Allowed,Allowed,Allowed
+CCMN_32_condcmp_imm,Allowed,Allowed,Allowed,Allowed
+CCMN_32_condcmp_reg,Allowed,Allowed,Allowed,Allowed
+CCMN_64_condcmp_imm,Allowed,Allowed,Allowed,Allowed
+CCMN_64_condcmp_reg,Allowed,Allowed,Allowed,Allowed
+CCMP_32_condcmp_imm,Allowed,Allowed,Allowed,Allowed
+CCMP_32_condcmp_reg,Allowed,Allowed,Allowed,Allowed
+CCMP_64_condcmp_imm,Allowed,Allowed,Allowed,Allowed
+CCMP_64_condcmp_reg,Allowed,Allowed,Allowed,Allowed
+CFINV_M_pstate,Allowed,Allowed,Allowed,Allowed
+CHKFEAT_HF_hints,Allowed,Allowed,Allowed,Allowed
+CLRBHB_HI_hints,Allowed,Allowed,Allowed,Allowed
+CLREX_BN_barriers,Allowed,Allowed,Allowed,Allowed
+CLS_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+CLS_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+CLZ_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+CLZ_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+CNT_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+CNT_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+CPYFMN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMRTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMRTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMRTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMRT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMWTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMWTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMWTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFMWT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFM_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPRTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPRTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPRTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPRT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPWTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPWTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPWTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFPWT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYFP_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMRTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMRTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMRTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMRT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMWTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMWTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMWTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYMWT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYM_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPRTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPRTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPRTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPRT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPWTN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPWTRN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPWTWN_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYPWT_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CPYP_CPY_memcms,Not allowed,Not allowed,Conditional,Conditional
+CRC32B_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32CB_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32CH_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32CW_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32CX_64C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32H_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32W_32C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CRC32X_64C_dp_2src,Allowed,Allowed,Allowed,Allowed
+CSDB_HI_hints,Allowed,Allowed,Allowed,Allowed
+CSEL_32_condsel,Allowed,Allowed,Allowed,Allowed
+CSEL_64_condsel,Allowed,Allowed,Allowed,Allowed
+CSINC_32_condsel,Allowed,Allowed,Allowed,Allowed
+CSINC_64_condsel,Allowed,Allowed,Allowed,Allowed
+CSINV_32_condsel,Allowed,Allowed,Allowed,Allowed
+CSINV_64_condsel,Allowed,Allowed,Allowed,Allowed
+CSNEG_32_condsel,Allowed,Allowed,Allowed,Allowed
+CSNEG_64_condsel,Allowed,Allowed,Allowed,Allowed
+CTZ_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+CTZ_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+DGH_HI_hints,Allowed,Allowed,Allowed,Allowed
+DMB_BO_barriers,Allowed,Allowed,Allowed,Allowed
+DSB_BO_barriers,Allowed,Allowed,Allowed,Allowed
+DSB_BOn_barriers,Allowed,Allowed,Allowed,Allowed
+EON_32_log_shift,Allowed,Allowed,Allowed,Allowed
+EON_64_log_shift,Allowed,Allowed,Allowed,Allowed
+EOR_32_log_imm,Allowed,Allowed,Allowed,Allowed
+EOR_32_log_shift,Allowed,Allowed,Allowed,Allowed
+EOR_64_log_imm,Allowed,Allowed,Allowed,Allowed
+EOR_64_log_shift,Allowed,Allowed,Allowed,Allowed
+ERET_64E_branch_reg,Not allowed,Allowed,Allowed,Allowed
+ESB_HI_hints,Allowed,Allowed,Allowed,Allowed
+EXTR_32_extract,Allowed,Allowed,Allowed,Allowed
+EXTR_64_extract,Allowed,Allowed,Allowed,Allowed
+FABS_D_floatdp1,Conditional,Conditional,Conditional,Conditional
+FABS_H_floatdp1,Conditional,Conditional,Conditional,Conditional
+FABS_S_floatdp1,Conditional,Conditional,Conditional,Conditional
+FCCMPE_D_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCCMPE_H_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCCMPE_S_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCCMP_D_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCCMP_H_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCCMP_S_floatccmp,Conditional,Conditional,Conditional,Conditional
+FCSEL_D_floatsel,Allowed,Allowed,Allowed,Allowed
+FCSEL_H_floatsel,Allowed,Allowed,Allowed,Allowed
+FCSEL_S_floatsel,Allowed,Allowed,Allowed,Allowed
+FMOV_32H_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_32S_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_64D_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_64H_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_64VX_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_D64_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_D_floatdp1,Allowed,Allowed,Allowed,Allowed
+FMOV_D_floatimm,Allowed,Allowed,Allowed,Allowed
+FMOV_H32_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_H64_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_H_floatdp1,Allowed,Allowed,Allowed,Allowed
+FMOV_H_floatimm,Allowed,Allowed,Allowed,Allowed
+FMOV_S32_float2int,Allowed,Allowed,Allowed,Allowed
+FMOV_S_floatdp1,Allowed,Allowed,Allowed,Allowed
+FMOV_S_floatimm,Allowed,Allowed,Allowed,Allowed
+FMOV_V64I_float2int,Allowed,Allowed,Allowed,Allowed
+FNEG_D_floatdp1,Conditional,Conditional,Conditional,Conditional
+FNEG_H_floatdp1,Conditional,Conditional,Conditional,Conditional
+FNEG_S_floatdp1,Conditional,Conditional,Conditional,Conditional
+ISB_BI_barriers,Allowed,Allowed,Allowed,Allowed
+LDADDAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDADDA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDADDB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADDL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDADD_32_memop,Conditional,Conditional,Conditional,Conditional
+LDADD_64_memop,Conditional,Conditional,Conditional,Conditional
+LDAPRB_32L_memop,Conditional,Conditional,Conditional,Conditional
+LDAPRH_32L_memop,Conditional,Conditional,Conditional,Conditional
+LDAPR_32L_ldapstl_writeback,Conditional,Conditional,Conditional,Conditional
+LDAPR_32L_memop,Conditional,Conditional,Conditional,Conditional
+LDAPR_64L_ldapstl_writeback,Conditional,Conditional,Conditional,Conditional
+LDAPR_64L_memop,Conditional,Conditional,Conditional,Conditional
+LDAPURB_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURH_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURSB_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURSB_64_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURSH_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURSH_64_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPURSW_64_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPUR_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPUR_64_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+LDAPUR_B_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+LDAPUR_D_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+LDAPUR_H_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+LDAPUR_Q_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+LDAPUR_S_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+LDARB_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDARH_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDAR_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDAR_LR64_ldstord,Conditional,Conditional,Conditional,Conditional
+LDAXP_LP32_ldstexclp,Conditional,Conditional,Conditional,Conditional
+LDAXP_LP64_ldstexclp,Not allowed,Not allowed,Not allowed,Conditional
+LDAXRB_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDAXRH_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDAXR_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDAXR_LR64_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDCLRAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLRL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDCLR_32_memop,Conditional,Conditional,Conditional,Conditional
+LDCLR_64_memop,Conditional,Conditional,Conditional,Conditional
+LDEORAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDEORA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDEORB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEORL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDEOR_32_memop,Conditional,Conditional,Conditional,Conditional
+LDEOR_64_memop,Conditional,Conditional,Conditional,Conditional
+LDLARB_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDLARH_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDLAR_LR32_ldstord,Conditional,Conditional,Conditional,Conditional
+LDLAR_LR64_ldstord,Conditional,Conditional,Conditional,Conditional
+LDNP_32_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+LDNP_64_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+LDNP_D_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+LDNP_Q_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+LDNP_S_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+LDPSW_64_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDPSW_64_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDPSW_64_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDP_32_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDP_32_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDP_32_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDP_64_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDP_64_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDP_64_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDP_D_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDP_D_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDP_D_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDP_Q_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDP_Q_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDP_Q_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDP_S_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+LDP_S_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+LDP_S_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+LDRB_32BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRB_32B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRB_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRB_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRB_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRH_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRH_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRH_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRH_32_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSB_32BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSB_32B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSB_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRSB_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRSB_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRSB_64BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSB_64B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSB_64_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRSB_64_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRSB_64_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRSH_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRSH_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRSH_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRSH_32_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSH_64_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRSH_64_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRSH_64_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRSH_64_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDRSW_64_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDRSW_64_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDRSW_64_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDRSW_64_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_32_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_64_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_64_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_64_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_64_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_B_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_B_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_B_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_D_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_D_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_D_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_D_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_H_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_H_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_H_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_H_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_Q_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_Q_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_Q_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_Q_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDR_S_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+LDR_S_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+LDR_S_ldst_pos,Conditional,Conditional,Conditional,Conditional
+LDR_S_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+LDSETAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSETA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSETB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSETL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSET_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSET_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAXL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAX_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMAX_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMINL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDSMIN_32_memop,Conditional,Conditional,Conditional,Conditional
+LDSMIN_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAXL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAX_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMAX_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINAB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINAH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINALB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINALH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINAL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINAL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINA_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINA_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINLB_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINLH_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINL_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMINL_64_memop,Conditional,Conditional,Conditional,Conditional
+LDUMIN_32_memop,Conditional,Conditional,Conditional,Conditional
+LDUMIN_64_memop,Conditional,Conditional,Conditional,Conditional
+LDURB_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURH_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURSB_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURSB_64_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURSH_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURSH_64_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDURSW_64_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_64_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_B_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_D_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_H_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_Q_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDUR_S_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+LDXP_LP32_ldstexclp,Conditional,Conditional,Conditional,Conditional
+LDXP_LP64_ldstexclp,Not allowed,Not allowed,Not allowed,Conditional
+LDXRB_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDXRH_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDXR_LR32_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LDXR_LR64_ldstexclr,Conditional,Conditional,Conditional,Conditional
+LSLV_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+LSLV_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+LSRV_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+LSRV_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+MADD_32A_dp_3src,Allowed,Allowed,Allowed,Allowed
+MADD_64A_dp_3src,Allowed,Allowed,Allowed,Allowed
+MOVK_32_movewide,Conditional,Conditional,Conditional,Conditional
+MOVK_64_movewide,Allowed,Allowed,Allowed,Allowed
+MOVN_32_movewide,Conditional,Conditional,Conditional,Conditional
+MOVN_64_movewide,Allowed,Allowed,Allowed,Allowed
+MOVZ_32_movewide,Conditional,Conditional,Conditional,Conditional
+MOVZ_64_movewide,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ACCDATA_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@ACTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ACTLR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@ACTLR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@AFSR0_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@AFSR0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@AFSR0_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@AFSR1_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@AFSR1_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@AFSR1_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@AMAIR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@AMAIR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@AMAIR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@AMAIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@AMAIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@AMAIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@APDAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APDAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APDBKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APDBKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APGAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APGAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APIAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APIAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APIBKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@APIBKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@CONTEXTIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@CONTEXTIDR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@CPACR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@CPTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@CPTR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@CSSELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGAUTHSTATUS_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGCLAIMCLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGCLAIMSET_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGDTRRX_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGDTRTX_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGDTR_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DBGPRCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@DISR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ELR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@ELR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@ERRIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERRSELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXADDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXCTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXFR_EL1,Not allowed,Conditional,Conditional,Conditional
+MRS_RS_systemmove@ERXGSR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXMISC0_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXMISC1_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXMISC2_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXMISC3_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ERXPFGCDN_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@ERXPFGCTL_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@ERXPFGF_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@ERXSTATUS_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ESR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@ESR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@ESR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@FAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@FAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@FAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@FPCR,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@FPSR,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@GCR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@GCSCRE0_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@GCSPR_EL0,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSPR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSPR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@GCSPR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@GPCCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@GPTBR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@HACR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HAFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HCRX_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HDFGRTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HDFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HDFGWTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HDFGWTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGITR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGITR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGRTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGWTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HFGWTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HPFAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@HSTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@ISR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@LORC_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@LOREA_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@LORID_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@LORN_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@LORSA_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MAIR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MAIR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@MAIR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MAIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MAIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@MAIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MDCCINT_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MDCCSR_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MDCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@MDCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MDRAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MDSCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@MDSELR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MFAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MPAMHCR_EL2,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@MPAMSM_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@OSDLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@OSDTRRX_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@OSDTRTX_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@OSECCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@OSLAR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MRS_RS_systemmove@OSLSR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@PAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@PFAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@PFAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@PIRE0_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@PIRE0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@PIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@PIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@PIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@POR_EL0,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@POR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@POR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@POR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@RCWMASK_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@RCWSMASK_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@RGSR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@RMR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@RNDR,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@RNDRRS,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@RVBAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@S2PIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@S2POR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@SCTLR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SCTLR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SCTLR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@SCTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SCTLR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SCTLR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@SCXTNUM_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SCXTNUM_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SCXTNUM_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SCXTNUM_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@SMCR_EL3,Not allowed,Not allowed,Not allowed,Not allowed
+MRS_RS_systemmove@SMIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@SPSR_abt,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_fiq,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_irq,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SPSR_und,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SP_EL0,Not allowed,Not allowed,Not allowed,Not allowed
+MRS_RS_systemmove@SP_EL1,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@SP_EL2,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@TCR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TCR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@TCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@TCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@TPIDR2_EL0,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TPIDRRO_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TPIDR_EL0,Allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TPIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TPIDR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@TPIDR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@TTBR0_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TTBR0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@TTBR0_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@TTBR1_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@TTBR1_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VBAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MRS_RS_systemmove@VBAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VBAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MRS_RS_systemmove@VDISR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VNCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VSESR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VTCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MRS_RS_systemmove@VTTBR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SI_pstate,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ACCDATA_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@ACTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ACTLR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@ACTLR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@AFSR0_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@AFSR0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@AFSR0_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@AFSR1_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@AFSR1_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@AFSR1_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@AMAIR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@AMAIR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@AMAIR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@AMAIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@AMAIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@AMAIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@APDAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APDAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APDBKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APDBKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APGAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APGAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APIAKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APIAKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APIBKeyHi_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@APIBKeyLo_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@CONTEXTIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@CONTEXTIDR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@CPACR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@CPTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@CPTR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@CSSELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGAUTHSTATUS_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@DBGCLAIMCLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGCLAIMSET_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGDTRRX_EL0,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGDTRTX_EL0,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGDTR_EL0,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DBGPRCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@DISR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ELR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@ELR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@ERRIDR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@ERRSELR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXADDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXCTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXFR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@ERXGSR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@ERXMISC0_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXMISC1_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXMISC2_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXMISC3_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ERXPFGCDN_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@ERXPFGCTL_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@ERXPFGF_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@ERXSTATUS_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ESR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@ESR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@ESR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@FAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@FAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@FAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@FPCR,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@FPSR,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@GCR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@GCSCRE0_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@GCSPR_EL0,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSPR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSPR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@GCSPR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@GPCCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@GPTBR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@HACR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HAFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HCRX_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HDFGRTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HDFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HDFGWTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HDFGWTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGITR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGITR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGRTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGRTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGWTR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HFGWTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HPFAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@HSTR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@ISR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@LORC_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@LOREA_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@LORID_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@LORN_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@LORSA_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@MAIR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@MAIR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@MAIR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MAIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@MAIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@MAIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MDCCINT_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@MDCCSR_EL0,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@MDCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@MDCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MDRAR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@MDSCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@MDSELR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MFAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MPAMHCR_EL2,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@MPAMSM_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@OSDLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@OSDTRRX_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@OSDTRTX_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@OSECCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@OSLAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@OSLSR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@PAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@PFAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@PFAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@PIRE0_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@PIRE0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@PIR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@PIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@PIR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@POR_EL0,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@POR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@POR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@POR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@RCWMASK_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@RCWSMASK_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@RGSR_EL1,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@RMR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@RNDR,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@RNDRRS,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@RVBAR_EL3,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@S2PIR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@S2POR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@SCTLR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SCTLR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SCTLR2_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@SCTLR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SCTLR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SCTLR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@SCXTNUM_EL0,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SCXTNUM_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SCXTNUM_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SCXTNUM_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@SMCR_EL3,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@SMIDR_EL1,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@SPSR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@SPSR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SPSR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@SPSR_abt,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SPSR_fiq,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SPSR_irq,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SPSR_und,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SP_EL0,Not allowed,Not allowed,Not allowed,Not allowed
+MSR_SR_systemmove@SP_EL1,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@SP_EL2,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@TCR2_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TCR2_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@TCR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@TCR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@TPIDR2_EL0,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TPIDRRO_EL0,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TPIDR_EL0,Allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TPIDR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TPIDR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@TPIDR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@TTBR0_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TTBR0_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@TTBR0_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@TTBR1_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@TTBR1_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VBAR_EL1,Not allowed,Allowed,Allowed,Allowed
+MSR_SR_systemmove@VBAR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VBAR_EL3,Not allowed,Not allowed,Not allowed,Allowed
+MSR_SR_systemmove@VDISR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VNCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VSESR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VTCR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSR_SR_systemmove@VTTBR_EL2,Not allowed,Not allowed,Allowed,Allowed
+MSUB_32A_dp_3src,Allowed,Allowed,Allowed,Allowed
+MSUB_64A_dp_3src,Allowed,Allowed,Allowed,Allowed
+NOP_HI_hints,Allowed,Allowed,Allowed,Allowed
+ORN_32_log_shift,Allowed,Allowed,Allowed,Allowed
+ORN_64_log_shift,Allowed,Allowed,Allowed,Allowed
+ORR_32_log_imm,Allowed,Allowed,Allowed,Allowed
+ORR_32_log_shift,Allowed,Allowed,Allowed,Allowed
+ORR_64_log_imm,Allowed,Allowed,Allowed,Allowed
+ORR_64_log_shift,Allowed,Allowed,Allowed,Allowed
+RBIT_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+RBIT_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+RCWCASAL_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWCASA_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWCASL_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWCAS_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWCLRAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWCLRA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWCLRL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWCLR_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSCASAL_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWSCASA_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWSCASL_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWSCAS_C64_rcwcomswap,Conditional,Conditional,Conditional,Conditional
+RCWSCLRAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSCLRA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSCLRL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSCLR_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSETAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSETA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSETL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSET_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSETAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSETA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSETL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSET_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSWPAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSWPA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSWPL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSSWP_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSWPAL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSWPA_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSWPL_64_memop,Conditional,Conditional,Conditional,Conditional
+RCWSWP_64_memop,Conditional,Conditional,Conditional,Conditional
+RET_64R_branch_reg,Allowed,Allowed,Allowed,Allowed
+REV16_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+REV16_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+REV32_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+REV_32_dp_1src,Allowed,Allowed,Allowed,Allowed
+REV_64_dp_1src,Allowed,Allowed,Allowed,Allowed
+RMIF_only_rmif,Allowed,Allowed,Allowed,Allowed
+RORV_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+RORV_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+RPRFM_R_ldst_regoff,Allowed,Allowed,Allowed,Allowed
+SBCS_32_addsub_carry,Allowed,Allowed,Allowed,Allowed
+SBCS_64_addsub_carry,Allowed,Allowed,Allowed,Allowed
+SBC_32_addsub_carry,Allowed,Allowed,Allowed,Allowed
+SBC_64_addsub_carry,Allowed,Allowed,Allowed,Allowed
+SBFM_32M_bitfield,Allowed,Allowed,Allowed,Allowed
+SBFM_64M_bitfield,Allowed,Allowed,Allowed,Allowed
+SB_only_barriers,Allowed,Allowed,Allowed,Allowed
+SETF16_only_setf,Allowed,Allowed,Allowed,Allowed
+SETF8_only_setf,Allowed,Allowed,Allowed,Allowed
+SMADDL_64WA_dp_3src,Allowed,Allowed,Allowed,Allowed
+SMAX_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+SMAX_32_minmax_imm,Allowed,Allowed,Allowed,Allowed
+SMAX_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+SMAX_64_minmax_imm,Allowed,Allowed,Allowed,Allowed
+SMIN_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+SMIN_32_minmax_imm,Allowed,Allowed,Allowed,Allowed
+SMIN_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+SMIN_64_minmax_imm,Allowed,Allowed,Allowed,Allowed
+SMSUBL_64WA_dp_3src,Allowed,Allowed,Allowed,Allowed
+SMULH_64_dp_3src,Allowed,Allowed,Allowed,Allowed
+STLLRB_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLLRH_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLLR_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLLR_SL64_ldstord,Conditional,Conditional,Conditional,Conditional
+STLRB_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLRH_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLR_32S_ldapstl_writeback,Not allowed,Not allowed,Not allowed,Conditional
+STLR_64S_ldapstl_writeback,Not allowed,Not allowed,Not allowed,Conditional
+STLR_SL32_ldstord,Conditional,Conditional,Conditional,Conditional
+STLR_SL64_ldstord,Conditional,Conditional,Conditional,Conditional
+STLURB_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+STLURH_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+STLUR_32_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+STLUR_64_ldapstl_unscaled,Conditional,Conditional,Conditional,Conditional
+STLUR_B_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+STLUR_D_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+STLUR_H_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+STLUR_Q_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+STLUR_S_ldapstl_simd,Conditional,Conditional,Conditional,Conditional
+STLXP_SP32_ldstexclp,Conditional,Conditional,Not allowed,Conditional
+STLXP_SP64_ldstexclp,Conditional,Conditional,Not allowed,Conditional
+STLXRB_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STLXRH_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STLXR_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STLXR_SR64_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STNP_32_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+STNP_64_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+STNP_D_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+STNP_Q_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+STNP_S_ldstnapair_offs,Conditional,Conditional,Conditional,Conditional
+STP_32_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+STP_32_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+STP_32_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+STP_64_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+STP_64_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+STP_64_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+STP_D_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+STP_D_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+STP_D_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+STP_Q_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+STP_Q_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+STP_Q_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+STP_S_ldstpair_off,Conditional,Conditional,Conditional,Conditional
+STP_S_ldstpair_post,Conditional,Conditional,Conditional,Conditional
+STP_S_ldstpair_pre,Conditional,Conditional,Conditional,Conditional
+STRB_32BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STRB_32B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STRB_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STRB_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STRB_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STRH_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STRH_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STRH_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STRH_32_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_32_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_32_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_32_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_32_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_64_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_64_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_64_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_64_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_BL_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_B_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_B_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_B_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_B_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_D_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_D_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_D_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_D_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_H_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_H_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_H_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_H_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_Q_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_Q_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_Q_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_Q_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STR_S_ldst_immpost,Conditional,Conditional,Conditional,Conditional
+STR_S_ldst_immpre,Conditional,Conditional,Conditional,Conditional
+STR_S_ldst_pos,Conditional,Conditional,Conditional,Conditional
+STR_S_ldst_regoff,Not allowed,Not allowed,Not allowed,Conditional
+STURB_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STURH_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_32_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_64_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_B_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_D_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_H_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_Q_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STUR_S_ldst_unscaled,Conditional,Conditional,Conditional,Conditional
+STXP_SP32_ldstexclp,Conditional,Conditional,Not allowed,Conditional
+STXP_SP64_ldstexclp,Conditional,Conditional,Not allowed,Conditional
+STXRB_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STXRH_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STXR_SR32_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+STXR_SR64_ldstexclr,Conditional,Conditional,Not allowed,Conditional
+SUBS_32S_addsub_ext,Conditional,Conditional,Conditional,Conditional
+SUBS_32S_addsub_imm,Allowed,Allowed,Allowed,Allowed
+SUBS_32_addsub_shift,Allowed,Allowed,Allowed,Allowed
+SUBS_64S_addsub_ext,Conditional,Conditional,Conditional,Conditional
+SUBS_64S_addsub_imm,Allowed,Allowed,Allowed,Allowed
+SUBS_64_addsub_shift,Allowed,Allowed,Allowed,Allowed
+SUB_32_addsub_ext,Conditional,Conditional,Conditional,Conditional
+SUB_32_addsub_imm,Allowed,Allowed,Allowed,Allowed
+SUB_32_addsub_shift,Allowed,Allowed,Allowed,Allowed
+SUB_64_addsub_ext,Conditional,Conditional,Conditional,Conditional
+SUB_64_addsub_imm,Allowed,Allowed,Allowed,Allowed
+SUB_64_addsub_shift,Allowed,Allowed,Allowed,Allowed
+SWPAB_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPAH_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPALB_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPALH_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPAL_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPAL_64_memop,Conditional,Conditional,Conditional,Conditional
+SWPA_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPA_64_memop,Conditional,Conditional,Conditional,Conditional
+SWPB_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPH_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPLB_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPLH_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPL_32_memop,Conditional,Conditional,Conditional,Conditional
+SWPL_64_memop,Conditional,Conditional,Conditional,Conditional
+SWP_32_memop,Conditional,Conditional,Conditional,Conditional
+SWP_64_memop,Conditional,Conditional,Conditional,Conditional
+TBNZ_only_testbranch,Allowed,Allowed,Allowed,Allowed
+TBZ_only_testbranch,Allowed,Allowed,Allowed,Allowed
+TSB_HC_hints,Allowed,Allowed,Allowed,Allowed
+UBFM_32M_bitfield,Allowed,Allowed,Allowed,Allowed
+UBFM_64M_bitfield,Allowed,Allowed,Allowed,Allowed
+UMADDL_64WA_dp_3src,Allowed,Allowed,Allowed,Allowed
+UMAX_32U_minmax_imm,Allowed,Allowed,Allowed,Allowed
+UMAX_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+UMAX_64U_minmax_imm,Allowed,Allowed,Allowed,Allowed
+UMAX_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+UMIN_32U_minmax_imm,Allowed,Allowed,Allowed,Allowed
+UMIN_32_dp_2src,Allowed,Allowed,Allowed,Allowed
+UMIN_64U_minmax_imm,Allowed,Allowed,Allowed,Allowed
+UMIN_64_dp_2src,Allowed,Allowed,Allowed,Allowed
+UMSUBL_64WA_dp_3src,Allowed,Allowed,Allowed,Allowed
+UMULH_64_dp_3src,Allowed,Allowed,Allowed,Allowed
+WFET_only_systeminstrswithreg,Conditional,Conditional,Conditional,Conditional
+WFIT_only_systeminstrswithreg,Not allowed,Conditional,Conditional,Conditional
+YIELD_HI_hints,Allowed,Allowed,Allowed,Allowed
