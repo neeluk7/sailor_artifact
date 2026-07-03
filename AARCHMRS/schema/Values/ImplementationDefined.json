@@ -1,0 +1,67 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This value represents a single `ImplementationDefined` value.",
+        "If not all `ImplementationDefined` values are permitted, then the implemented value must be one of the values described in the constraints property."
+    ],
+    "examples": [
+        {
+            "_type": "Values.ImplementationDefined",
+            "meaning": "An ImplementationDefined value with no constraints."
+        },
+        {
+            "_type": "Values.ImplementationDefined",
+            "meaning": "An ImplementationDefined value with two constraints.",
+            "constraints": {
+                "_type": "Valuesets.Values",
+                "values": [
+                    {
+                        "_type": "Values.Value",
+                        "value": "'00'",
+                        "meaning": "First Value"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "value": "'01'",
+                        "meaning": "Second Value"
+                    }
+                ]
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Values.ImplementationDefined"
+            ]
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "see": "Value.json"
+        },
+        "constraints": {
+            "oneOf": [
+                {
+                    "$ref": "../Valuesets/Values.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "info": [
+                "This property highlights implementation constraints that apply.",
+                "When set to None no constraints apply."
+            ]
+        }
+    },
+    "title": "ImplementationDefined",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

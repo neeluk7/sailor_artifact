@@ -1,0 +1,43 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "Access is `IMPLEMENTATION DEFINED`.",
+        "This means that the access is not architecturally defined, but must be defined and documented by individual implementations."
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Memory.ImplementationDefined",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../../../../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.AccessTypes.Memory.ImplementationDefined"
+            ]
+        },
+        "constraints": {
+            "info": [
+                "An array of architectural constraints an implementation must comply with.",
+                "When set to null, no constraints apply."
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 2,
+                    "items": {
+                        "$ref": "ReadWriteAccess.json"
+                    }
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    }
+}

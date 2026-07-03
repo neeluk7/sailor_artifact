@@ -1,0 +1,56 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Resets.InstanceReset",
+            "resets": {
+                "REG0_S": {
+                    "_type": "Values.Value",
+                    "value": "'10'"
+                },
+                "REG0_NS": {
+                    "_type": "Values.Value",
+                    "value": "'00'"
+                }
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Resets.InstanceReset"
+            ]
+        },
+        "resets": {
+            "type": "object",
+            "minProperties": 1,
+            "info": [
+                "This object represents a field reset for a particular instance of a Register.  There could be more than one instance (e.g. Secure and Non-Secure) for a given reset event (cold or warm)."
+            ],
+            "patternProperties": {
+                ".*": {
+                    "$ref": "../FieldResets.json#/definitions/allowed_resets"
+                }
+            }
+        }
+    },
+    "required": [
+        "resets"
+    ],
+    "title": "InstanceReset",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "An `InstanceReset` is a reset that is used to specify a reset that applies in a specific",
+            "instance of a register."
+        ]
+    ]
+}

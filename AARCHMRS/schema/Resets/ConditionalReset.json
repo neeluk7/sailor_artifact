@@ -1,0 +1,106 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A conditional reset where the reset applies only when a condition holds true."
+    ],
+    "examples": [
+        {
+            "_type": "Resets.ConditionalReset",
+            "resets": [
+                {
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "FEAT_X"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "reset": {
+                        "_type": "Resets.ImplementationDefined"
+                    }
+                },
+                {
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "reset": {
+                        "_type": "Resets.Unknown"
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Resets.ConditionalReset"
+            ]
+        },
+        "resets": {
+            "type": "array",
+            "minItems": 1,
+            "additionalItems": false,
+            "examples": [
+                [
+                    {
+                        "condition": "x < 3",
+                        "reset": {
+                            "_type": "Values.Value",
+                            "value": "'10'"
+                        }
+                    },
+                    {
+                        "condition": null,
+                        "reset": {
+                            "_type": "Resets.Unknown"
+                        }
+                    }
+                ]
+            ],
+            "info": [
+                "This array holds an object of `condition` and `reset`, where the `reset` applies on the `condition` property evaluating to true.",
+                "A null condition must appear only once and must always be the last element."
+            ],
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "condition": {
+                        "$ref": "../Traits/HasCondition.json#/definitions/condition"
+                    },
+                    "reset": {
+                        "oneOf": [
+                            {
+                                "$ref": "../FieldResets.json#/definitions/allowed_resets"
+                            },
+                            {
+                                "$ref": "InstanceReset.json"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "condition",
+                    "reset"
+                ]
+            }
+        }
+    },
+    "required": [
+        "resets"
+    ],
+    "title": "ConditionalReset",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

@@ -1,0 +1,55 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "StructureReference",
+            "reference": "STE"
+        }
+    ],
+    "info": [
+        [
+            "The StructureReference class references a Structure object",
+            "by holding the name of the referenced Structure."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json",
+            "info": [
+                "User defined content."
+            ]
+        },
+        "_type": {
+            "enum": [
+                "StructureReference"
+            ]
+        },
+        "reference": {
+            "info": [
+                "The name of the Structure object being referenced."
+            ],
+            "type": "string"
+        },
+        "condition": {
+            "$ref": "Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition must be true for this StructureReference to be present.",
+                [
+                    "Conditions are unique when `StructureReference` are used",
+                    "inside an array container, this is because two field layouts with the same ",
+                    "condition cannot coexist."
+                ]
+            ]
+        }
+    },
+    "required": [
+        "reference"
+    ],
+    "title": "StructureReference",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

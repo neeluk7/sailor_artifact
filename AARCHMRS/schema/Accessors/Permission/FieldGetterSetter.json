@@ -1,0 +1,112 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "$(Accessors.Permission.FieldGetterSetter) allows a field to have specific (ASL) behavior",
+            "on read (get) and/or write (set). At least one of the getter and setter properties",
+            "must contain ASL."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Accessors.Permission.FieldGetterSetter",
+            "getter": "return ReadValue();",
+            "setter": "_REG0.B = WriteValue();",
+            "condition": {
+                "_type": "AST.BinaryOp",
+                "left": {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "PSTATE"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "EL"
+                        }
+                    ]
+                },
+                "op": "==",
+                "right": {
+                    "_type": "AST.Identifier",
+                    "value": "EL1"
+                }
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.FieldGetterSetter"
+            ]
+        },
+        "getter": {
+            "oneOf": [
+                {
+                    "info": [
+                        [
+                            "The ASL that should be executed when this field is read. This ASL may be",
+                            "arbitrarily complex, but it is not parsed and is stored as a string."
+                        ]
+                    ],
+                    "type": "string"
+                },
+                {
+                    "info": [
+                        [
+                            "If the getter is None, the default field read behavior is not overridden,",
+                            "and is inherited from the parent object."
+                        ]
+                    ],
+                    "type": "null"
+                }
+            ]
+        },
+        "setter": {
+            "oneOf": [
+                {
+                    "info": [
+                        [
+                            "The ASL that should be executed when this field is written. This ASL",
+                            "may be arbitrarily complex, but it is not parsed and is stored as a string."
+                        ]
+                    ],
+                    "type": "string"
+                },
+                {
+                    "info": [
+                        [
+                            "If the setter is None, the default field read behavior is not overridden,",
+                            "and is inherited from the parent object."
+                        ]
+                    ],
+                    "type": "null"
+                }
+            ]
+        },
+        "condition": {
+            "info": [
+                "The condition under which the current access applies."
+            ],
+            "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "getter",
+        "setter"
+    ],
+    "title": "FieldGetterSetter",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

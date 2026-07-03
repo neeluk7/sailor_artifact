@@ -1,0 +1,74 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A model representing a tuple:",
+        [
+            " - `(foo, bar)`",
+            " - `(TRUE, Zeros(32))`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.Tuple",
+            "values": [
+                {
+                    "_type": "AST.Function",
+                    "name": "foo"
+                },
+                {
+                    "_type": "AST.Function",
+                    "name": "bar"
+                }
+            ]
+        },
+        {
+            "_type": "AST.Tuple",
+            "values": [
+                {
+                    "_type": "AST.Bool",
+                    "value": true
+                },
+                {
+                    "_type": "AST.Function",
+                    "name": "Zeros",
+                    "arguments": [
+                        {
+                            "_type": "AST.Integer",
+                            "value": 32
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Tuple"
+            ]
+        },
+        "values": {
+            "info": [
+                "The values of the tuple."
+            ],
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "$ref": "BinaryOp.json#/definitions/expression"
+            }
+        }
+    },
+    "required": [
+        "values"
+    ],
+    "title": "Tuple",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

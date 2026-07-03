@@ -1,0 +1,246 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Instruction.OperationAbstract - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Instruction.</span><span class=" title-type">OperationAbstract</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>This contains functionality that is common between <a class="schema_link" href="../Instruction/Operation_schema.html" title="Instruction.Operation">Operation</a> and <a class="schema_link" href="../Instruction/OperationAlias_schema.html" title="Instruction.OperationAlias">OperationAlias</a>.
+<a class="schema_link" href="../Instruction/OperationAbstract_schema.html" title="Instruction.OperationAbstract">OperationAbstract</a> is not used on its own.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/brief" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/brief">brief</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A string that describes the instruction in a few words.</p></div>
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;Add scaled register&#34;</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/description" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/description">description</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Text_schema.html" class="schema_link">Text</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Human-readable text that describes the operation. For example, 'ADD adds the value
+of the two source registers together and writes the result back to the destination register.'</p></div>
+                    
+    <div>
+        See
+            <a href="../Text_schema.html" class="schema_link">Text</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/title" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/title">title</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A string that describes the instruction, using at least part of its mnemonic.</p></div>
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;ADD (register)&#34;</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    [
+      "This contains functionality that is common between $(~Instruction.Operation) and $(~Instruction.OperationAlias).",
+      "$(~Instruction.OperationAbstract) is not used on its own."
+    ]
+  ],
+  "type": "object",
+  "definitions": {
+    "description": {
+      "$ref": "../Text.json",
+      "info": [
+        [
+          "Human-readable text that describes the operation. For example, 'ADD adds the value",
+          "of the two source registers together and writes the result back to the destination register.'"
+        ]
+      ]
+    },
+    "brief": {
+      "examples": [
+        "Add scaled register"
+      ],
+      "info": [
+        "A string that describes the instruction in a few words."
+      ],
+      "type": "string",
+      "maxLength": 200
+    },
+    "title": {
+      "examples": [
+        "ADD (register)"
+      ],
+      "info": [
+        "A string that describes the instruction, using at least part of its mnemonic."
+      ],
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Instruction.OperationAbstract"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A model representing an assignment statement in ASL.",
+        "An example rendering would be: `REG0 = '01'`."
+    ],
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "AST.Assignment",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "REG0"
+            },
+            "val": {
+                "_type": "Values.Value",
+                "value": "'01'",
+                "meaning": null
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Assignment"
+            ]
+        },
+        "var": {
+            "info": [
+                "The value to be assigned to in the statement."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "SquareOp.json"
+                },
+                {
+                    "$ref": "ArrayAccessOp.json"
+                },
+                {
+                    "$ref": "DotAtom.json"
+                },
+                {
+                    "$ref": "Identifier.json"
+                },
+                {
+                    "$ref": "Concat.json"
+                },
+                {
+                    "$ref": "Tuple.json"
+                },
+                {
+                    "$ref": "Function.json"
+                }
+            ]
+        },
+        "val": {
+            "info": [
+                "The value to be assigned in the statement."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        }
+    },
+    "required": [
+        "var",
+        "val"
+    ],
+    "type": "object",
+    "title": "Assignment",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

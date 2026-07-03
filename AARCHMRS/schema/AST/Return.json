@@ -1,0 +1,57 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A model representing a return statement in ASL.",
+        "An example rendering would be:",
+        [
+            " - `return`",
+            " - `return 42`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.Return",
+            "val": null
+        },
+        {
+            "_type": "AST.Return",
+            "val": {
+                "_type": "AST.Integer",
+                "value": 42
+            }
+        }
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Return"
+            ]
+        },
+        "val": {
+            "oneOf": [
+                {
+                    "info": [
+                        "The value to be returned in the statement."
+                    ],
+                    "$ref": "BinaryOp.json#/definitions/expression"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "required": [
+        "val"
+    ],
+    "type": "object",
+    "title": "Return",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

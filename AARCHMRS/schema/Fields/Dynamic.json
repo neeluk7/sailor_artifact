@@ -1,0 +1,70 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A Dynamic field is a space in which one of a set of [__Fieldset__](../Fieldset_schema.html)s exist at a time.",
+        "The fieldsets are stored in the _instances_ variable. A separate __Field__ exists elsewhere in the register",
+        "that has a set of [__Link__](../Values/Link_schema.html) instances in its value table, and whichever of those",
+        "[__Link__](../Values/Link_schema.html) instance values is currently set in that field determines which fieldset exists in this one."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.Dynamic"
+            ]
+        },
+        "description": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Traits/HasDescription.json#/definitions/description"
+        },
+        "display": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "instances": {
+            "info": [
+                "The list of __Fieldset__ that represent a different view of this field."
+            ],
+            "items": {
+                "$ref": "../Fieldset.json"
+            },
+            "type": "array"
+        },
+        "volatile": {
+            "see": "../Fields/Field.json",
+            "type": "boolean"
+        },
+        "name": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "resets": {
+            "see": "../Fields/Field.json",
+            "$ref": "../FieldResets.json"
+        }
+    },
+    "required": [
+        "name",
+        "rangeset",
+        "instances"
+    ],
+    "title": "Dynamic",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

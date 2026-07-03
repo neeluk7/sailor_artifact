@@ -1,0 +1,143 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An $(~Instruction.InstructionAlias) object defines an alias of an $(~Instruction.Instruction) as a child of",
+            "that instruction. The alias assembly can be different, but the assembly it defines maps back to the assembly",
+            "of its parent $(~Instruction.Instruction)."
+        ],
+        [
+            "The `operation_id` refers to an instance of `OperationAlias`, which provides a link to the ASL pseudocode",
+            "for the alias and overrides the descriptive elements."
+        ],
+        [
+            "The `preferred` attribute states when a disassembler should emit the alias instead of the parent instruction.",
+            "It is a condition that evaluates True when the alias",
+            "should be emitted and False when the parent instruction should be emitted."
+        ],
+        "The first example below is of an alias named 'ADC32'. Its assembly is never preferred.",
+        [
+            "The second example has a `preferred` attribute. Its assembly is preferred if and only if FEAT_ADC is implemented",
+            "(otherwise, its parent is the preferred disassembly)."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.InstructionAlias",
+            "name": "ADC32",
+            "operation_id": "foo",
+            "assembly": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "ADD"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rd"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "imm4"
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "Instruction.InstructionAlias",
+            "name": "ADC32",
+            "operation_id": "foo",
+            "assembly": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "ADD"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rd"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "imm4"
+                    }
+                ]
+            },
+            "preferred": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_ADC"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.InstructionAlias"
+            ]
+        },
+        "name": {
+            "info": [
+                "The unique name of the $(~Instruction.InstructionAlias), which identifies it in the instruction set."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "operation_id": {
+            "info": [
+                [
+                    "The ID of the $(~Instruction.OperationAlias) for this $(~Instruction.InstructionAlias). The $(~Instruction.OperationAlias)",
+                    "is a value in the `operations` property of the top-level $(~Instruction.Instructions) element, and this `operation_id` matches its key."
+                ]
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "assembly": {
+            "info": [
+                "The assembly for this $(~Instruction.InstructionAlias)."
+            ],
+            "$ref": "Assembly.json"
+        },
+        "preferred": {
+            "info": [
+                [
+                    "Defines whether this $(~Instruction.InstructionAlias) is the preferred disassembly for the parent $(~Instruction.Instruction).",
+                    "If the `preferred` condition evaluates True, this $(~Instruction.InstructionAlias) is the preferred disassembly.",
+                    "This can be a complex condition that needs to be evaluated."
+                ]
+            ],
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "default": {
+                "_type": "AST.Bool",
+                "value": false
+            }
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "name",
+        "operation_id",
+        "assembly"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.InstructionAlias"
+}

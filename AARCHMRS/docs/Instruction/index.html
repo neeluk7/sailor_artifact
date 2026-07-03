@@ -1,0 +1,870 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./../img/mstile-144x144.png">
+    <link rel="icon" href="./../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./../index.html"><img src="./../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="isa-data-model-user-guide">ISA Data Model User Guide</h1>
+<p>This guide introduces the AARCHMRS <strong>I</strong>nstruction <strong>S</strong>et <strong>A</strong>rchitecture (ISA) and the underlying
+data models that represent it. The target audience is people who want to manipulate or read ISAs and their
+contents programmatically.</p>
+<p>This guide describes a fictitious ISA, named B64, which should not be conflated with a real ISA.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#instructioninstructions-wrapper">Instruction.Instructions wrapper</a></li>
+<li><a href="#building-the-b64-instruction-set">Building the B64 instruction set</a><ul>
+<li><a href="#adding-instruction-groups-and-individual-instructions-to-b64">Adding instruction groups and individual instructions to B64</a></li>
+<li><a href="#b64arithmetic">B64.arithmetic</a></li>
+<li><a href="#b64arithmeticregister-and-b64arithmeticimmediate">B64.arithmetic.register and B64.arithmetic.immediate</a></li>
+<li><a href="#b64arithmeticregisteradd">B64.arithmetic.register.ADD</a></li>
+</ul>
+</li>
+<li><a href="#adding-assembly-to-b64">Adding assembly to B64</a></li>
+<li><a href="#alias">Alias</a></li>
+<li><a href="#sub-instruction">Sub-instruction</a></li>
+</ul>
+</div>
+<h2 id="instructioninstructions-wrapper"><a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instruction.Instructions</a> wrapper</h2>
+<p><a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instructions</a> holds all instruction-related content. It has three properties:</p>
+<ul>
+<li><code>instructions</code> - An array of instances of <a class="schema_link" href="../Instruction/InstructionSet_schema.html" title="Instruction.InstructionSet">Instruction.InstructionSet</a>, which is the root class for trees
+  of instructions.</li>
+<li><code>assembly_rules</code> - An object containing instances of <a class="schema_link" href="../Instruction/Rules/" title="Instruction.Rules">Instruction.Rules</a>, keyed by <code>rule_id</code>.</li>
+<li><code>operations</code> - An object containing instances of <a class="schema_link" href="../Instruction/Operation_schema.html" title="Instruction.Operation">Instruction.Operation</a> or
+  <a class="schema_link" href="../Instruction/OperationAlias_schema.html" title="Instruction.OperationAlias">Instruction.OperationAlias</a>, keyed by <code>operation_id</code>. Each <a class="schema_link" href="../Instruction/Instruction_schema.html" title="Instruction.Instruction">Instruction</a> in the
+  <a class="schema_link" href="../Instruction/InstructionSet_schema.html" title="Instruction.InstructionSet">InstructionSet</a> is linked to an operation using an <code>operation_id</code>.</li>
+</ul>
+<h2 id="building-the-b64-instruction-set">Building the <code>B64</code> instruction set</h2>
+<p>The example below includes the following concepts, contained in an <a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instruction.Instructions</a> object:</p>
+<ul>
+<li>The <a class="schema_link" href="../Instruction/InstructionSet_schema.html" title="Instruction.InstructionSet">InstructionSet</a> node, which defines <code>B64</code>.</li>
+<li>The <a class="schema_link" href="../Instruction/Operation_schema.html" title="Instruction.Operation">Operation</a>, which can define the default execute behavior of the instruction set.</li>
+</ul>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.Instructions",
+    "instructions": [
+        {
+            "_type": "Instruction.InstructionSet",
+            "name": "B64",
+            "read_width": 32,
+            "operation_id": "unalloc",
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": [
+                    {
+                        "_type": "Instruction.Encodeset.Field",
+                        "name": "op0",
+                        "range": {
+                            "_type": "Range",
+                            "start": 25,
+                            "width": 7
+                        },
+                        "value": {
+                            "_type": "Values.Value",
+                            "value": "'xxxxxxx'",
+                            "meaning": null
+                        },
+                        "should_be_mask": {
+                            "_type": "Values.Value",
+                            "value": "'0000000'"
+                        }
+                    }
+                ]
+            },
+            "children": []
+        }
+    ],
+    "assembly_rules": {},
+    "operations": {
+        "unalloc": {
+            "_type": "Instruction.Operation",
+            "title": "Default Behavior",
+            "operation": [
+                [
+                    "REG_LASTINSTRUCTION_OP = encoding[31:0];",
+                    "RaiseException(UNALLOCATED);"
+                ]
+            ],
+            "brief": "Default behavior of the B64 instruction set",
+            "description": "If no child instruction is matched, the following operation is executed."
+        }
+    }
+}
+</code></pre>
+<p>In this example, there is a 32-bit instruction set named <code>B64</code>, which can have default behavior that here is defined in the operation identified by <code>unalloc</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each instruction uses an <a class="schema_link" href="../Instruction/Encodeset/Encodeset_schema.html" title="Instruction.Encodeset.Encodeset">Instruction.Encodeset.Encodeset</a> to define its bits. For more information,
+see <a class="schema_link" href="../Instruction/Encodeset/" title="Instruction.Encodeset">Encodeset</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For ease of use from this point, instructions and operations are shown independently. In a real
+instruction set, they are defined within <a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instruction.Instructions</a>, as described above.</p>
+</div>
+<h3 id="adding-instruction-groups-and-individual-instructions-to-b64">Adding instruction groups and individual instructions to <code>B64</code></h3>
+<p>In the examples that follow, a group, <code>B64.arithmetic</code>, is added. It has two children -
+<code>B64.arithmetic.register</code> and <code>B64.arithmetic.immediate</code> - and each has an <code>ADD</code> child and a <code>SUB</code> child.</p>
+<p>The following is being represented:</p>
+<pre><code>B64 --&gt; arithmetic --&gt; register  --&gt; ADD
+                   |             \-&gt; SUB
+                   \-&gt; immediate --&gt; ADD
+                                 \-&gt; SUB
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The grouping shown above is useful for representational purposes, but the following is semantically
+equivalent:</p>
+<pre><code>B64 --&gt; ADD_register
+    |-&gt; SUB_register
+    |-&gt; ADD_immediate
+    \-&gt; SUB_immediate
+</code></pre>
+<p>No architectural meaning should be inferred from syntactic differences between semantically equivalent
+arrangements of the tree.</p>
+</div>
+<p>The grouping provides an organisational representation of an architecture that may contain many
+instructions. The grouping also allows common fields to be defined at the group level, which enables the use
+of inheritance to reduce the duplicating of information in the data.</p>
+<p>The four instructions in <code>B64.arithmetic</code> define the following:</p>
+<ul>
+<li><code>B64.arithmetic.register.ADD</code> provides a definition for <code>R[dst] = R[src0] + R[src1]</code>.</li>
+<li><code>B64.arithmetic.register.SUB</code> provides a definition for <code>R[dst] = R[src0] - R[src1]</code>.</li>
+<li><code>B64.arithmetic.immediate.ADD</code> provides a definition for <code>R[dst] = R[src0] + imm</code>.</li>
+<li><code>B64.arithmetic.immediate.SUB</code> provides a definition for <code>R[dst] = R[src0] - imm</code>.</li>
+</ul>
+<p>The first and second operands of each are:</p>
+<ul>
+<li><code>dst</code> (short for "destination register").</li>
+<li><code>src0</code> (short for "first source register").</li>
+</ul>
+<p>The third operand of <code>B64.arithmetic.register</code> instructions is <code>src1</code> (short for "second source register").
+The third operand of <code>B64.arithmetic.immediate</code> instructions is <code>imm</code> (short for "immediate").</p>
+<h3 id="b64arithmetic"><code>B64.arithmetic</code></h3>
+<p>The <code>B64.arithmetic</code> group is first defined as follows:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.InstructionGroup",
+    "name": "arithmetic",
+    "encoding": {
+        "_type": "Instruction.Encodeset.Encodeset",
+        "width": 32,
+        "values": [
+            {
+                "_type": "Instruction.Encodeset.Bits",
+                "range": {
+                    "_type": "Range",
+                    "start": 30,
+                    "width": 2
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'00'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'00'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "op0",
+                "range": {
+                    "_type": "Range",
+                    "start": 26,
+                    "width": 4
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'xxxx'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0000'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Bits",
+                "range": {
+                    "_type": "Range",
+                    "start": 25,
+                    "width": 1
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'0'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "subtype",
+                "range": {
+                    "_type": "Range",
+                    "start": 24,
+                    "width": 1
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'x'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "dst",
+                "range": {
+                    "_type": "Range",
+                    "start": 16,
+                    "width": 8
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'xxxxxxxx'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'00000000'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "src0",
+                "range": {
+                    "_type": "Range",
+                    "start": 8,
+                    "width": 8
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'xxxxxxxx'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'00000000'"
+                }
+            }
+        ]
+    },
+    "children": []
+}
+</code></pre>
+<p>In the above:</p>
+<ul>
+<li>The concatenation of bits <code>31:30, 25</code> is set to <code>'000'</code>, which is the opcode for all
+   <code>arithmetic</code> instructions.</li>
+<li>Bits <code>29:26</code> are redefined as <code>op0</code> and are used later to distinguish <code>ADD</code> and <code>SUB</code>.</li>
+<li>The following fields are created:<ul>
+<li><code>subtype</code> at bit <code>24</code> to distinguish between <code>register</code> and <code>immediate</code>
+  variants.</li>
+<li><code>dst</code> at bits <code>23:16</code>.</li>
+<li><code>src0</code> at bits <code>15:8</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="b64arithmeticregister-and-b64arithmeticimmediate"><code>B64.arithmetic.register</code> and <code>B64.arithmetic.immediate</code></h3>
+<p><code>B64.arithmetic.register</code> (a child of <code>B64.arithmetic</code>) is shown below:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.InstructionGroup",
+    "name": "register",
+    "encoding": {
+        "_type": "Instruction.Encodeset.Encodeset",
+        "width": 32,
+        "values": [
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "subtype",
+                "range": {
+                    "_type": "Range",
+                    "start": 24,
+                    "width": 1
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'0'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "src1",
+                "range": {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'xxxxxxxx'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'00000000'"
+                }
+            }
+        ]
+    },
+    "children": []
+}
+</code></pre>
+<p>In the above:</p>
+<ul>
+<li>Bit <code>24</code> is set to <code>'0'</code> to show the path to the <code>B64.arithmetic.register</code> group.</li>
+<li>Bits <code>7:0</code> define the <code>src1</code> field.</li>
+</ul>
+<p><code>B64.arithmetic.immediate</code> (another child of <code>B64.arithmetic</code>) is shown below:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.InstructionGroup",
+    "name": "immediate",
+    "encoding": {
+        "_type": "Instruction.Encodeset.Encodeset",
+        "width": 32,
+        "values": [
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "subtype",
+                "range": {
+                    "_type": "Range",
+                    "start": 24,
+                    "width": 1
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'1'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "invert",
+                "range": {
+                    "_type": "Range",
+                    "start": 7,
+                    "width": 1
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'x'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0'"
+                }
+            },
+            {
+                "_type": "Instruction.Encodeset.Field",
+                "name": "imm",
+                "range": {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 7
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'xxxxxxx'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'0000000'"
+                }
+            }
+        ]
+    },
+    "children": []
+}
+</code></pre>
+<p>In the above:</p>
+<ul>
+<li>Bit <code>24</code> is set to <code>'1'</code> to show the path to the <code>B64.arithmetic.immediate</code> group.</li>
+<li>Bit <code>7</code> is defined as <code>invert</code>. (When set to <code>'1'</code>, this is used to invert the results in the <code>dst</code>
+    register.)</li>
+<li>Bits <code>6:0</code> define the <code>imm</code> field.</li>
+</ul>
+<h3 id="b64arithmeticregisteradd"><code>B64.arithmetic.register.ADD</code></h3>
+<h4 id="add_reg-operation"><code>ADD_reg</code> operation</h4>
+<p>To reduce duplication of information in the data, <a class="schema_link" href="../Instruction/Operation_schema.html" title="Instruction.Operation">Instruction.Operation</a> contains a single definition of
+execute behavior that can be attached to more than one instruction.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is only a compression technique - defining the same behavior independently for each instruction
+would be semantically equivalent.</p>
+</div>
+<p>The following shows the "ADD (register)" operation (referenced as <code>ADD_reg</code>):</p>
+<pre class="includes"><code class="language-json">{
+    "ADD_reg": {
+        "_type": "Instruction.Operation",
+        "title": "ADD (register)",
+        "operation": "R[d] = R[s0] + R[s1]",
+        "brief": "Add values",
+        "description": "Add registers at locations `s0` and `s1` and store the result in the register located at `d`."
+    }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The names <code>d</code>, <code>s0</code>, and <code>s1</code> come from the decode in the instruction, which is shown in the next
+section. The <code>R</code> refers to a general-purpose register in the <code>B64</code> architecture.</p>
+</div>
+<h4 id="add-instruction"><code>ADD</code> instruction</h4>
+<p>The <code>ADD</code> instruction is defined under <code>B64.arithmetic.register</code> and then connected to its operation via the
+<code>operation_id</code> key <code>"ADD_reg"</code>:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.Instruction",
+    "name": "ADD",
+    "operation_id": "ADD_reg",
+    "decode": [
+        [
+            "integer d = UInt(dst);,",
+            "integer s0 = UInt(src0)",
+            "integer s1 = UInt(src1);"
+        ]
+    ],
+    "encoding": {
+        "_type": "Instruction.Encodeset.Encodeset",
+        "width": 32,
+        "values": [
+            {
+                "_type": "Instruction.Encodeset.Bits",
+                "range": {
+                    "_type": "Range",
+                    "start": 26,
+                    "width": 4
+                },
+                "value": {
+                    "_type": "Values.Value",
+                    "value": "'0000'",
+                    "meaning": null
+                },
+                "should_be_mask": {
+                    "_type": "Values.Value",
+                    "value": "'1000'"
+                }
+            }
+        ]
+    },
+    "properties": {
+        "operands": {
+            "destination": {
+                "isread": false,
+                "iswritten": true,
+                "index": null
+            },
+            "source0": {
+                "isread": true,
+                "iswritten": false,
+                "index": null
+            },
+            "source1": {
+                "isread": true,
+                "iswritten": false,
+                "index": null
+            }
+        }
+    },
+    "assembly": {
+        "_type": "Instruction.Assembly",
+        "symbols": [
+            {
+                "_type": "Instruction.Symbols.Literal",
+                "value": "ADD"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "SPACE"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "Rd"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "COMMA"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "Rs0"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "COMMA"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "Rs1"
+            }
+        ]
+    },
+    "assemble": [
+        "dst = operands.destination.index[7:0];",
+        "src0 = operands.source0.index[7:0];",
+        "src1 = operands.source1.index[7:0];"
+    ],
+    "disassemble": [
+        "operands.destination.index = UInt(dst);",
+        "operands.source0.index = UInt(src0);",
+        "operands.source1.index = UInt(src1);"
+    ],
+    "children": []
+}
+</code></pre>
+<p>The example above includes the following concepts:</p>
+<ul>
+<li>A <code>decode</code> key, which defines the <code>ADD_reg</code> operation arguments. The decode key converts encoding
+  fields <code>dst</code>, <code>src0</code>, and <code>src1</code> into integer values <code>d</code>, <code>s0</code>, and <code>s1</code>, respectively, so that they can
+  be used to reference part of the <code>ADD_reg</code> operation:</li>
+</ul>
+<pre><code>R[d] = R[s0] + R[s1]
+</code></pre>
+<ul>
+<li>A should-be bit, on bit 29, denoted by the <code>should_be_mask</code> property.</li>
+<li><code>assemble</code>, which shows the translation from property to encoding (note the integer to bit conversions,
+    as the value of the <code>operand.*.index</code> property is an integer but the encoding is bits).</li>
+<li><code>disassemble</code>, which shows the translation from encoding to property (note the inverse of the
+    conversion that was done in <code>assemble</code>).</li>
+<li><code>properties</code> that further define the instruction. The meanings of these properties can be architecture
+    specific, so they are not given in this schema. In the <code>B64</code> architecture, the following properties are used:<ul>
+<li><code>isread</code> is true, meaning the register is read.</li>
+<li><code>iswritten</code> is true, meaning the register is written.</li>
+<li><code>index</code> is the index of the register file <code>R</code> that is accessed.</li>
+</ul>
+</li>
+</ul>
+<h2 id="adding-assembly-to-b64">Adding assembly to <code>B64</code></h2>
+<p>An assembly layer can be added to an instruction, defining a human-friendly representation of the underlying
+machine instruction. There might not be a one-to-one relationship between an assembly symbol and an encoding
+field. For this reason, the property section of an <a class="schema_link" href="../Instruction/Instruction_schema.html" title="Instruction.Instruction">Instruction</a> is used to hold intermediate
+assembly data.</p>
+<p>Here are some of the possible ways to describe the "ADD (register)" assembly:</p>
+<pre><code>ADD R5, R6, R9
+ADD R[5], R[6], R[9]
+ADD register 6 and register 9 and store the result in register 5
+R5 = R6 + R9
+</code></pre>
+<p>This User Guide uses the first assembly notation - <code>ADD R5, R6, R9</code>. To define the assembly in the
+<code>B64.arithmetic.register.ADD</code> instruction, the following are defined:</p>
+<pre class="includes"><code class="language-json">{
+    "COMMA": {
+        "_type": "Instruction.Rules.Token",
+        "pattern": ",\\s+",
+        "default": ", "
+    },
+    "SPACE": {
+        "_type": "Instruction.Rules.Token",
+        "pattern": "\\s+",
+        "default": " "
+    },
+    "UInteger": {
+        "_type": "Instruction.Rules.Token",
+        "pattern": "[1-9][0-9]*|0"
+    },
+    "Rd": {
+        "_type": "Instruction.Rules.Rule",
+        "display": "Rd",
+        "description": "Is the index of the general-purpose destination register.",
+        "symbols": {
+            "_type": "Instruction.Assembly",
+            "symbols": [
+                {
+                    "_type": "Instruction.Symbols.Literal",
+                    "value": "R"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "UInteger"
+                }
+            ]
+        },
+        "assemble": "operands.destination.index = UInteger;",
+        "disassemble": "return \"R\" ++ operands.destination.index;"
+    },
+    "Rs0": {
+        "_type": "Instruction.Rules.Rule",
+        "display": "Rs0",
+        "description": "Is the index of the first general-purpose source register.",
+        "symbols": {
+            "_type": "Instruction.Assembly",
+            "symbols": [
+                {
+                    "_type": "Instruction.Symbols.Literal",
+                    "value": "R"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "UInteger"
+                }
+            ]
+        },
+        "assemble": "operands.source0.index = UInteger;",
+        "disassemble": "return \"R\" ++ operands.source0.index;"
+    },
+    "Rs1": {
+        "_type": "Instruction.Rules.Rule",
+        "display": "Rs1",
+        "description": "Is the index of the second general-purpose source register.",
+        "symbols": {
+            "_type": "Instruction.Assembly",
+            "symbols": [
+                {
+                    "_type": "Instruction.Symbols.Literal",
+                    "value": "R"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "UInteger"
+                }
+            ]
+        },
+        "assemble": "operands.source1.index = UInteger;",
+        "disassemble": "return \"R\" ++ operands.source1.index;"
+    }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The content of the above example is added to the <code>assembly_rules</code> property of the
+<a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instruction.Instructions</a> mentioned in the "<a class="schema_link" href="../Instruction/Instructions_schema.html" title="Instruction.Instructions">Instruction.Instructions</a> wrapper" section, above.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>assemble</code> and <code>disassemble</code> properties shown above are represented as strings, but in the data
+model they are represented as <a class="schema_link" href="../AST/StatementBlock_schema.html" title="AST.StatementBlock">AST.StatementBlock</a>. Strings are used here for readability.</p>
+</div>
+<p>The above example contains two types of <a class="schema_link" href="../Instruction/Rules/" title="Instruction.Rules">Instruction.Rules</a>:</p>
+<ul>
+<li><a class="schema_link" href="../Instruction/Rules/Token_schema.html" title="Instruction.Rules.Token">Instruction.Rules.Token</a>:<ul>
+<li><code>COMMA</code> is any token that matches the comma, followed by any trailing spaces.</li>
+<li><code>SPACE</code> is any token that matches one or more space characters.</li>
+<li><code>UInteger</code> is any token that matches an unsigned integer.</li>
+</ul>
+</li>
+<li><a class="schema_link" href="../Instruction/Rules/Rule_schema.html" title="Instruction.Rules.Rule">Instruction.Rules.Rule</a>, for <code>Rd</code> (destination), <code>Rs0</code> (source1), and <code>Rs1</code> (source2):<ul>
+<li><code>symbols</code> defines a parse rule in the following order:<ul>
+<li><code>"R"</code>, which is an <a class="schema_link" href="../Instruction/Symbols/Literal_schema.html" title="Instruction.Symbols.Literal">Instruction.Symbols.Literal</a>.</li>
+<li><code>UInteger</code>, which is an <a class="schema_link" href="../Instruction/Symbols/RuleReference_schema.html" title="Instruction.Symbols.RuleReference">Instruction.Symbols.RuleReference</a> that points to the <code>UInteger</code> token
+  defined earlier.</li>
+</ul>
+</li>
+<li><code>display</code> is an aid for rendering in documentation.</li>
+<li><code>assemble</code> shows the translation from symbol to property. The <code>UInteger</code>
+  <a class="schema_link" href="../Instruction/Rules/Token_schema.html" title="Instruction.Rules.Token">Instruction.Rules.Token</a> allows the integer from the assembly stream to be taken into the
+  <code>operands.*.index</code> property.</li>
+<li><code>disassemble</code> shows the translation from property to symbol. It prints <code>"R"</code>, then the value
+  stored in the <code>operands.*.index</code> property.</li>
+</ul>
+</li>
+</ul>
+<p>The defined rules are then connected to the assembly property of the <code>B64.arithmetic.register.ADD</code>
+instruction using <a class="schema_link" href="../Instruction/Symbols/RuleReference_schema.html" title="Instruction.Symbols.RuleReference">RuleReference</a> as shown in the <code>assembly</code> of the instruction.</p>
+<p>This allows rules to be reused when creating a <code>SUB (register)</code> instruction. For <code>ADD (immediate)</code>, the only
+new rule required is for <code>"immediate"</code>.</p>
+<h2 id="alias">Alias</h2>
+<p>An example of an alias is "DOUBLE", which is an "ADD (register)" instruction where the <code>dst</code>, <code>src0</code>,
+and <code>src1</code> fields have the same value. One operand is sufficient to disassemble this alias.</p>
+<p>The following assemblies disassemble to the same instruction encoding:</p>
+<pre><code>DOUBLE X5
+ADD X5, X5, X5
+</code></pre>
+<p>Both assemblies have the same behavior:</p>
+<pre><code>R[5] = R[5] + R[5]
+</code></pre>
+<p>To create this alias, a new rule, <code>RdRs0Rs1</code>, is needed:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.Rules.Rule",
+    "display": "RdRs0Rs1",
+    "description": "Is the index of the destination and first and second general-purpose source registers.",
+    "symbols": {
+        "_type": "Instruction.Assembly",
+        "symbols": [
+            {
+                "_type": "Instruction.Symbols.Literal",
+                "value": "R"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "UInteger"
+            }
+        ]
+    },
+    "assemble": [
+        "operands.destination.index = UInteger;",
+        "operands.source0.index = UInteger;",
+        "operands.source1.index = UInteger;"
+    ],
+    "disassemble": "return \"R\" ++ operands.destination.index;"
+}
+</code></pre>
+<p>The main difference is that, to assemble, the rule <code>RdRs0Rs1</code> sets all the <code>operands.*.index</code> to the same
+value. This is because the operand in the <code>DOUBLE</code> assembly maps to all three operand properties.</p>
+<p>The alias <code>DOUBLE</code>, under <code>B64.arithmetic.register.ADD</code>, is now introduced:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Instruction.InstructionAlias",
+    "name": "DOUBLE",
+    "condition": {
+        "_type": "AST.BinaryOp",
+        "left": {
+            "_type": "AST.BinaryOp",
+            "left": {
+                "_type": "AST.Identifier",
+                "value": "dst"
+            },
+            "op": "==",
+            "right": {
+                "_type": "AST.Identifier",
+                "value": "src0"
+            }
+        },
+        "op": "==",
+        "right": {
+            "_type": "AST.Identifier",
+            "value": "src1"
+        }
+    },
+    "preferred": {
+        "_type": "AST.Bool",
+        "value": true
+    },
+    "operation_id": "ADD_reg",
+    "assembly": {
+        "_type": "Instruction.Assembly",
+        "symbols": [
+            {
+                "_type": "Instruction.Symbols.Literal",
+                "value": "DOUBLE"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "SPACE"
+            },
+            {
+                "_type": "Instruction.Symbols.RuleReference",
+                "rule_id": "RdRs0Rs1"
+            }
+        ]
+    }
+}
+</code></pre>
+<p>In the above example:</p>
+<ul>
+<li><code>condition</code> indicates when the <code>B64.arithmetic.register.ADD.DOUBLE</code> alias is valid under
+    <code>B64.arithmetic.register.ADD</code>.</li>
+<li><code>preferred</code> is set to true, which means in disassembly the <code>DOUBLE</code> alias is always preferred.</li>
+<li><code>operation_id</code> is set to <code>ADD_reg</code>, which is the same as <code>B64.arithmetic.register.ADD</code>.</li>
+<li>Unlike <a class="schema_link" href="../Instruction/Instruction_schema.html" title="Instruction.Instruction">Instruction</a>, the <a class="schema_link" href="../Instruction/InstructionAlias_schema.html" title="Instruction.InstructionAlias">Instruction.InstructionAlias</a> node cannot redefine the
+    properties, as the behavior is the same.</li>
+<li><code>B64.arithmetic.register.ADD.DOUBLE</code> assembly is similar to <code>B64.arithmetic.register.ADD</code>, but rule
+    <code>RdRs0Rs1</code> writes all the operands to the same value.</li>
+</ul>
+<h2 id="sub-instruction">Sub-instruction</h2>
+<p>A sub-instruction is a parent-child relationship between <a class="schema_link" href="../Instruction/Instruction_schema.html" title="Instruction.Instruction">Instruction.Instruction</a> objects in which a child
+node can override the behavior of its parent. This principle can be expanded to create many ancestor-child
+relationships, permitting more than one level of sub-instruction.</p>
+<hr />
+<p><strong>See the following for more information:</strong></p>
+<ul>
+<li><a href="Assembly_schema.html">Assembly</a></li>
+<li><a href="Instruction_schema.html">Instruction</a></li>
+<li><a href="InstructionAlias_schema.html">InstructionAlias</a></li>
+<li><a href="InstructionGroup_schema.html">InstructionGroup</a></li>
+<li><a href="InstructionInstance_schema.html">InstructionInstance</a></li>
+<li><a href="InstructionSet_schema.html">InstructionSet</a></li>
+<li><a href="Instructions_schema.html">Instructions</a></li>
+<li><a href="Operation_schema.html">Operation</a></li>
+<li><a href="OperationAbstract_schema.html">OperationAbstract</a></li>
+<li><a href="OperationAlias_schema.html">OperationAlias</a></li>
+<li><strong><a href="Encodeset/index.html">Encodeset</a></strong><ul>
+<li><a href="Encodeset/Bits_schema.html">Bits</a></li>
+<li><a href="Encodeset/Encodeset_schema.html">Encodeset</a></li>
+<li><a href="Encodeset/Field_schema.html">Field</a></li>
+<li><a href="Encodeset/FieldAbstract_schema.html">FieldAbstract</a></li>
+<li><a href="Encodeset/ShouldBeBits_schema.html" class="deprecated" title="Schema is deprecated">ShouldBeBits</a></li>
+</ul>
+</li>
+<li><strong><a href="Rules/index.html">Rules</a></strong><ul>
+<li><a href="Rules/Choice_schema.html">Choice</a></li>
+<li><a href="Rules/Rule_schema.html">Rule</a></li>
+<li><a href="Rules/Token_schema.html">Token</a></li>
+</ul>
+</li>
+<li><strong>Symbols</strong><ul>
+<li><a href="Symbols/Literal_schema.html">Literal</a></li>
+<li><a href="Symbols/RuleReference_schema.html">RuleReference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./../js/highlight/highlight.js"></script>
+    <script src="./../js/highlight/languages/json.min.js"></script>
+    <script src="./../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./../js/highlight/languages/yaml.min.js"></script>
+    <script src="./../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

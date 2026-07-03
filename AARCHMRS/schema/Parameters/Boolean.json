@@ -1,0 +1,103 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Parameters.Boolean",
+            "name": "FEAT_A",
+            "constraints": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_A"
+                    },
+                    "op": "==>",
+                    "right": {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_B"
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Parameters.Boolean",
+            "name": "FEAT_B",
+            "values": [
+                true
+            ]
+        }
+    ],
+    "info": [
+        "A boolean parameter, with possible values being `true` or `false`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Parameters.Boolean"
+            ]
+        },
+        "name": {
+            "$ref": "ParameterAbstract.json#/definitions/name"
+        },
+        "title": {
+            "$ref": "ParameterAbstract.json#/definitions/title"
+        },
+        "description": {
+            "$ref": "ParameterAbstract.json#/definitions/description"
+        },
+        "constraints": {
+            "$ref": "ParameterAbstract.json#/definitions/constraints"
+        },
+        "configured_by": {
+            "$ref": "ParameterAbstract.json#/definitions/configured_by"
+        },
+        "values": {
+            "info": [
+                "The current domain (possible values) of this $(Parameters.Boolean).",
+                [
+                    "By default this is set to both `TRUE` and `FALSE`, meaning that the value of this $(Parameters.Boolean) is",
+                    "in an unknown state, and can be set to either `TRUE` or `FALSE` directly (by writing a single value to the parameter) or indirectly (through a constraint that requires a particular value)."
+                ]
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "type": "boolean"
+                }
+            ],
+            "examples": [
+                true,
+                false,
+                [
+                    false
+                ],
+                [
+                    true,
+                    false
+                ]
+            ],
+            "default": [
+                true,
+                false
+            ]
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "title": "Parameters.Boolean",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

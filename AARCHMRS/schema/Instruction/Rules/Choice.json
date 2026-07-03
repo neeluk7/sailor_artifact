@@ -1,0 +1,135 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A $(~Instruction.Rules.Choice) contains a list of symbol-streams, exactly one of which matches part of an associated assembly stream.",
+            "The list of symbols is ordered, so that the instances of $(Instruction.Symbols.RuleReference) in the first matched symbols entry are invoked."
+        ],
+        [
+            "A $(~Instruction.Rules.Choice) has a choices property (a list of permitted assembly streams), an optional description property,",
+            "and an optional display property."
+        ],
+        [
+            "The first example below is a $(~Instruction.Rules.Choice) that states that 'foo' is optional in the",
+            "associated assembly stream. Of the two choices, if the `COMMA foo` option is not invoked, then the `EMPTY` option is invoked."
+        ],
+        [
+            "The second example is a $(~Instruction.Rules.Choice) that states that `#` may be present at this point in the assembly stream.",
+            "The first option is a `#` Literal. The second choice is null (no symbol)."
+        ]
+    ],
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Instruction.Rules.Choice",
+            "choices": [
+                {
+                    "_type": "Instruction.Assembly",
+                    "symbols": [
+                        {
+                            "_type": "Instruction.Symbols.RuleReference",
+                            "rule_id": "COMMA"
+                        },
+                        {
+                            "_type": "Instruction.Symbols.RuleReference",
+                            "rule_id": "foo"
+                        }
+                    ]
+                },
+                {
+                    "_type": "Instruction.Assembly",
+                    "symbols": [
+                        {
+                            "_type": "Instruction.Symbols.RuleReference",
+                            "rule_id": "EMPTY"
+                        }
+                    ]
+                }
+            ],
+            "display": "{, foo}"
+        },
+        {
+            "_type": "Instruction.Rules.Choice",
+            "display": "{#}",
+            "choices": [
+                {
+                    "_type": "Instruction.Assembly",
+                    "symbols": [
+                        {
+                            "_type": "Instruction.Symbols.Literal",
+                            "value": "#"
+                        }
+                    ]
+                },
+                null
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Rules.Choice"
+            ]
+        },
+        "choices": {
+            "info": [
+                [
+                    "The list of options available for this $(~Instruction.Rules.Choice). An option is either an instance",
+                    "of $(Instruction.Assembly) containing one or more symbols, or null.",
+                    "The sequence of options in the list is the sequence in which they are considered",
+                    "(the first match succeeds and the others are ignored)."
+                ]
+            ],
+            "minItems": 2,
+            "items": [
+                {
+                    "oneOf": [
+                        {
+                            "$ref": "../Assembly.json"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            ]
+        },
+        "description": {
+            "$ref": "../../Description.json",
+            "info": [
+                "Optional human-readable text describing this $(~Instruction.Rules.Choice)."
+            ]
+        },
+        "display": {
+            "info": [
+                [
+                    "The string representation that is used for this $(~Instruction.Rules.Choice) when it is",
+                    "rendered into an assembly string."
+                ]
+            ],
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "required": [
+        "choices"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Rules.Choice"
+}

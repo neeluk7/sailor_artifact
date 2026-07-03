@@ -1,0 +1,413 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The ConditionalField is used to specify a field which has different properties under different conditions."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.ConditionalField"
+            ]
+        },
+        "description": {
+            "info": [
+                "Provides the description of this conditional field."
+            ],
+            "$ref": "../Traits/HasDescription.json#/definitions/description",
+            "see": "../Fields/Field.json"
+        },
+        "display": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "fields": {
+            "additionalItems": false,
+            "info": [
+                "A list of objects with a field and condition, where the ConditionalField can resolve to one of the fields. Each field is accompanied by a condition to indicate when this field applies.",
+                "The objects are resolved sequentially, meaning the ConditionalField resolves to the first field with a condition that evaluates True. If all conditions are False then the default reserved_type property is used as a shorthand.",
+                "If a condition is null, then that Field will be considered the default.",
+                "**WARNING**: Since conditions are resolved sequentially the default (null) condition should be last.",
+                [
+                    "Also note that the rangeset of the individual fields should be set relative ",
+                    "the `ConditionalField` rangeset. For example, if the ConditionalField's ",
+                    "[Rangeset](../Rangeset_schema.html) is `30:25`, then all internal fields should ",
+                    "have ranges `5:0`."
+                ],
+                "Further note that a ConditionalField could resolve to a field or a list of fields (limited to all field types except Vectors and Arrays).",
+                "This is primarily to allow an Array or Vector to be replaced by a the list of fields they create when expanded."
+            ],
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "condition": {
+                        "$ref": "../Traits/HasCondition.json#/definitions/condition"
+                    },
+                    "field": {
+                        "oneOf": [
+                            {
+                                "$ref": "Field.json"
+                            },
+                            {
+                                "$ref": "ImplementationDefined.json"
+                            },
+                            {
+                                "$ref": "Reserved.json"
+                            },
+                            {
+                                "$ref": "ReservedInternal.json"
+                            },
+                            {
+                                "$ref": "Array.json"
+                            },
+                            {
+                                "$ref": "Dynamic.json"
+                            },
+                            {
+                                "$ref": "Vector.json"
+                            },
+                            {
+                                "$ref": "ConstantField.json"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "Field.json"
+                                        },
+                                        {
+                                            "$ref": "ImplementationDefined.json"
+                                        },
+                                        {
+                                            "$ref": "Reserved.json"
+                                        },
+                                        {
+                                            "$ref": "ReservedInternal.json"
+                                        },
+                                        {
+                                            "$ref": "Dynamic.json"
+                                        },
+                                        {
+                                            "$ref": "ConstantField.json"
+                                        }
+                                    ]
+                                },
+                                "minItems": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "condition",
+                    "field"
+                ],
+                "type": "object"
+            },
+            "type": "array",
+            "examples": [
+                [
+                    {
+                        "condition": {
+                            "_type": "AST.Function",
+                            "arguments": [
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "MYFEATURE"
+                                }
+                            ],
+                            "name": "IsFeatureImplemented"
+                        },
+                        "field": {
+                            "_type": "Fields.Field",
+                            "name": "F1",
+                            "rangeset": [
+                                {
+                                    "_type": "Range",
+                                    "start": 0,
+                                    "width": 2
+                                }
+                            ],
+                            "description": {
+                                "_type": "Description",
+                                "after": null,
+                                "before": "A field that exist when MYFEATURE is implemented"
+                            },
+                            "values": {
+                                "_type": "Valuesets.Values",
+                                "values": [
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "First value",
+                                        "value": "'00'"
+                                    },
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "Second value",
+                                        "value": "'10'"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "condition": null,
+                        "field": {
+                            "_type": "Fields.Field",
+                            "name": "F1",
+                            "rangeset": [
+                                {
+                                    "_type": "Range",
+                                    "start": 0,
+                                    "width": 2
+                                }
+                            ],
+                            "description": {
+                                "_type": "Description",
+                                "after": null,
+                                "before": [
+                                    [
+                                        "A field that exists when all previous conditions fail. ",
+                                        "In this case, this field exists when ",
+                                        "MYFEATURE is not implemented"
+                                    ]
+                                ]
+                            },
+                            "values": {
+                                "_type": "Valuesets.Values",
+                                "values": [
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "First value",
+                                        "value": "'00'"
+                                    },
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "Second value",
+                                        "value": "'10'"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            ]
+        },
+        "volatile": {
+            "see": "../Fields/Field.json",
+            "type": "boolean"
+        },
+        "name": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "reservedtype": {
+            "info": [
+                [
+                    "If no default conditional field is represented, then a Reserved field with the ",
+                    "value of `reservedtype` is used to define the default case."
+                ]
+            ],
+            "$ref": "../Enums/ReservedTypes.json"
+        },
+        "resets": {
+            "see": "../Fields/Field.json",
+            "$ref": "../FieldResets.json"
+        }
+    },
+    "required": [
+        "name",
+        "rangeset",
+        "fields",
+        "reservedtype"
+    ],
+    "title": "ConditionalField",
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Fields.ConditionalField",
+            "name": "FOO",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 10,
+                    "width": 11
+                }
+            ],
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": [
+                    [
+                        "A conditional field, where the field F1 (when MYFEATURE is implemented)",
+                        "is located at 11:10 (absolute position), and bits 20:12 are RES0 due",
+                        "to the reservedtype property."
+                    ],
+                    [
+                        "When MYFEATURE is not implemented then bits 20:10 are RES0 which comes",
+                        "from the reservedtype"
+                    ]
+                ]
+            },
+            "fields": [
+                {
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "MYFEATURE"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "field": {
+                        "_type": "Fields.Field",
+                        "name": "F1",
+                        "rangeset": [
+                            {
+                                "_type": "Range",
+                                "start": 0,
+                                "width": 2
+                            }
+                        ],
+                        "description": {
+                            "_type": "Description",
+                            "after": null,
+                            "before": "A field that exists when MYFEATURE is implemented"
+                        },
+                        "values": {
+                            "_type": "Valuesets.Values",
+                            "values": [
+                                {
+                                    "_type": "Values.Value",
+                                    "meaning": "First value",
+                                    "value": "'00'"
+                                },
+                                {
+                                    "_type": "Values.Value",
+                                    "meaning": "Second value",
+                                    "value": "'10'"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "reservedtype": "RES0"
+        },
+        {
+            "_type": "Fields.ConditionalField",
+            "name": "BAR",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 20,
+                    "width": 10
+                }
+            ],
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": [
+                    [
+                        "A conditional field, which resolves to a list of fields.",
+                        "The field F1's rangeset will change to 23:20 and the field F2's rangeset",
+                        "will change to 29:26 after the conditional field is resolved.",
+                        "The remaning rangeset of 25:24, will be filled with RES0."
+                    ]
+                ]
+            },
+            "fields": [
+                {
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "field": [
+                        {
+                            "_type": "Fields.Field",
+                            "name": "F1",
+                            "rangeset": [
+                                {
+                                    "_type": "Range",
+                                    "start": 0,
+                                    "width": 4
+                                }
+                            ],
+                            "description": {
+                                "_type": "Description",
+                                "after": null,
+                                "before": "After resolving, this field's rangeset becomes 23:20"
+                            },
+                            "values": {
+                                "_type": "Valuesets.Values",
+                                "values": [
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "First value",
+                                        "value": "'00'"
+                                    },
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "Second value",
+                                        "value": "'10'"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_type": "Fields.Field",
+                            "name": "F2",
+                            "rangeset": [
+                                {
+                                    "_type": "Range",
+                                    "start": 6,
+                                    "width": 4
+                                }
+                            ],
+                            "description": {
+                                "_type": "Description",
+                                "after": null,
+                                "before": "After resolving, this field's rangeset becomes 29:26"
+                            },
+                            "values": {
+                                "_type": "Valuesets.Values",
+                                "values": [
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "First value",
+                                        "value": "'00'"
+                                    },
+                                    {
+                                        "_type": "Values.Value",
+                                        "meaning": "Second value",
+                                        "value": "'10'"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "reservedtype": "RES0"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

@@ -1,0 +1,54 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Range",
+            "start": 2,
+            "width": 3
+        }
+    ],
+    "info": [
+        [
+            "The $(Range) schema defines a slice position of a binary number. For example `4:2` ",
+            "of a 8-bit binary number `'00001110'` references 3-bits at position 4",
+            "(most significant bit) to position 2 (least significant bit). To achieve this the",
+            "$(Range) schema references a `start` position (referencing the least significant bit),",
+            "in this case 2, and the `width` to scan (towards the most significant bit), in this case 3."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Range"
+            ]
+        },
+        "start": {
+            "info": [
+                "The position to start the scan of a bitstring."
+            ],
+            "minimum": 0,
+            "type": "integer"
+        },
+        "width": {
+            "info": [
+                "The number of bits to scan in the direction of most significant bit."
+            ],
+            "minimum": 1,
+            "type": "integer"
+        }
+    },
+    "required": [
+        "start",
+        "width"
+    ],
+    "title": "Range",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

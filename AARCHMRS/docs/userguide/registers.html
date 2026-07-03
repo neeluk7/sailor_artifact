@@ -1,0 +1,1122 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="registers">Registers</h1>
+<p>The <a class="schema_link" href="../Register_schema.html" title="Register">Register</a> schema defines the layout of Arm Architecture registers.
+Below is a guide that represents the general concepts in a register.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#a-named-field">A named field</a><ul>
+<li><a href="#values">Values</a></li>
+<li><a href="#resets">Resets</a></li>
+</ul>
+</li>
+<li><a href="#a-constant-field">A constant field</a></li>
+<li><a href="#a-conditional-field">A conditional field</a></li>
+<li><a href="#a-dynamic-field">A dynamic field</a></li>
+<li><a href="#an-implementation-defined-field">An implementation defined field</a></li>
+<li><a href="#an-array-of-fields">An array of fields</a></li>
+<li><a href="#a-reserved-field">A reserved field</a></li>
+<li><a href="#before-and-after-descriptions">Before and After descriptions</a></li>
+</ul>
+</div>
+<p>A register defines a named layout of fields. For example:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Register",
+    "state": "AArch64",
+    "name": "REG0",
+    "title": "Register 0",
+    "purpose": "To describe a simple register in the user guide.",
+    "fieldsets": [
+        {
+            "_type": "Fieldset",
+            "width": 32,
+            "values": [
+                {
+                    "_type": "Fields.Reserved",
+                    "value": "RES0",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 1,
+                            "width": 31
+                        }
+                    ]
+                },
+                {
+                    "_type": "Fields.Field",
+                    "name": "F0",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 1
+                        }
+                    ],
+                    "values": {
+                        "_type": "Valuesets.Values",
+                        "values": [
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "Value 0.",
+                                "value": "'0'"
+                            },
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "Value 1.",
+                                "value": "'1'"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<p>This example shows a 32-bit register called <code>REG0</code> in the <code>AArch64</code>
+state, which has two fields:</p>
+<ul>
+<li><code>RES0</code> located at bits <code>31:1</code>, <em>where <code>RES0</code> is an
+   architecturally reserved field type which can return any value which
+   must be read by software as <code>0</code>. You can read more about this
+   concept in the Arm architecture.</em></li>
+<li><code>F0</code> located at bit <code>0</code>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Field bit positions are always represented with the most
+significant bit first, followed by the least significant bit.
+For example: <code>MSB:LSB</code>, or <code>31:1</code>.</p>
+</div>
+<p>Registers are uniquely qualified by the combination of the <code>state</code>
+and <code>name</code>, which is denoted by joining the two with <code>-</code>. For
+example: <code>AArch64-REG0</code>. Therefore, a register in the external
+state which shares the name <code>REG0</code>, <code>ext-REG0</code>, is distinct from
+<code>AArch64-REG0</code> in MRS.</p>
+<p>See the <a class="schema_link" href="../Register_schema.html" title="Register">Register</a> schema definition for a full
+list of properties and their usage.</p>
+<h1 id="fieldsets">Fieldsets</h1>
+<p>A fieldset in MRS describes an arrangement of bits in a register.
+Fieldsets are children of registers, and a register can contain many
+Fieldsets.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Register",
+    "state": "AArch64",
+    "name": "REG0",
+    "purpose": "To describe a register containing fieldsets.",
+    "fieldsets": [
+        {
+            "_type": "Fieldset",
+            "width": 64,
+            "condition": "IsFeatureImplemented(FEAT_A)",
+            "values": [
+                {
+                    "_type": "Fields.Reserved",
+                    "value": "RES0",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 4,
+                            "width": 60
+                        }
+                    ]
+                },
+                {
+                    "_type": "Fields.Field",
+                    "description": {
+                        "_type": "Description",
+                        "after": null,
+                        "before": "A description of the F1 field."
+                    },
+                    "name": "F1",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 4
+                        }
+                    ],
+                    "values": {
+                        "_type": "Valuesets.Values",
+                        "values": [
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "The first defined value.",
+                                "value": "'0000'"
+                            },
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "The second defined value.",
+                                "value": "'0011'"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Fieldset",
+            "condition": null,
+            "values": [
+                {
+                    "_type": "Fields.Reserved",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 64
+                        }
+                    ],
+                    "value": "RES1"
+                }
+            ],
+            "width": 64
+        }
+    ]
+}
+</code></pre>
+<p>In this example, two fieldsets are contained within a <code>fieldsets</code>
+array, defining two distinct layouts of the same register. Where:</p>
+<ul>
+<li>the first fieldset is only valid if <code>FEAT_A</code> is implemented.</li>
+<li>the second fieldset represents the otherwise case (i.e. when <code>FEAT_A</code> is not implemented).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Conditions can be defined for both <code>Register</code> and <code>Fieldset</code>
+models, in addition to other models in MRS. If the condition
+for a register is not met, and there is no <code>null</code> condition
+specified, the register is absent. However, if defining
+conditional fieldsets, you must also specify a <code>null</code> condition
+fieldset.</p>
+</div>
+<p>The sum of the widths of the fields in a fieldset must equal the
+width of the fieldset.</p>
+<h1 id="fields">Fields</h1>
+<h2 id="a-named-field">A named field</h2>
+<p>A field in MRS gives the meaning of a specified range of bits
+within a fieldset. Fields are children of the <code>values</code> property
+of fieldsets. The following example demonstrates a simple field:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Field",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "A description of the F1 field."
+    },
+    "name": "F1",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+        }
+    ],
+    "values": {
+        "_type": "Valuesets.Values",
+        "values": [
+            {
+                "_type": "Values.Value",
+                "meaning": "The first defined value.",
+                "value": "'0000'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "The second defined value.",
+                "value": "'0011'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "The third defined value.",
+                "value": "'0100'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "The fourth defined value.",
+                "value": "'1110'"
+            }
+        ]
+    }
+}
+</code></pre>
+<p>Where:</p>
+<ul>
+<li>the <code>name</code> property is the unique name of bits 3:0, and must
+    be unique within the fieldset.</li>
+<li>the <code>description</code> describes the field, written in
+    <a href="../aml.html">Arm Markdown Language (AML)</a>.</li>
+<li>the <code>values</code> are architecturally defined bit-patterns with defined meanings
+    (which are also defined in <a href="../aml.html">AML</a>).</li>
+</ul>
+<p>The above example should produce an output of the form:</p>
+<blockquote>
+<p><strong>F1, bits[3:0]</strong></p>
+<p>A description of the F1 field.</p>
+<ul>
+<li><code>'0000'</code>: The first defined value.</li>
+<li><code>'0011'</code>: The second defined value.</li>
+<li><code>'0100'</code>: The third defined value.</li>
+<li><code>'1110'</code>: The fourth defined value</li>
+</ul>
+</blockquote>
+<p>While different <a class="schema_link" href="../Fields/" title="Fields">Fields</a> schemas have different required
+properties, all fields must have a specified <code>rangeset</code>.
+The rangeset encodes the size of the field in bits, and specifies
+the location of this field in the containing Fieldset.</p>
+<p>See the <a class="schema_link" href="../Fields/" title="Fields">Fields</a> schema definition for a
+full list of properties and their usage, including optional
+properties and default implied values.</p>
+<h3 id="values">Values</h3>
+<p>An architecture defines bit-patterns which are expressed as values, and which can have an architectural
+meaning associated to them. Values defined in a field must fit the
+range of the field, for example the field <code>F1</code> is 4-bits (<code>3:0</code>),
+therefore it can only contain values within this range.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above output shows the short form of values, The
+<a class="schema_link" href="../Fields/Field_schema.html" title="Fields.Field">Fields.Field</a><code>.values</code> property is fully defined as a <a class="schema_link" href="../Valuesets/Values_schema.html" title="Valuesets.Values">Valuesets.Values</a>
+(a set of <a class="schema_link" href="../Values/" title="Values">Values</a> types), you can see the full canonical
+usage in the next example.</p>
+</div>
+<p>You can define conditional values using a <a class="schema_link" href="../Values/ConditionalValue_schema.html" title="Values.ConditionalValue">Values.ConditionalValue</a>
+model. In the example below, the conditional values only have
+meaning when <code>FEAT_A</code> is implemented. When <code>FEAT_A</code> is not
+implemented these values do not exist.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Field",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "An example field with conditional fields."
+    },
+    "name": "FS",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+        }
+    ],
+    "values": {
+        "_type": "Valuesets.Values",
+        "values": [
+            {
+                "_type": "Values.Value",
+                "meaning": "The first defined value.",
+                "value": "'0001'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "The second defined value.",
+                "value": "'0010'"
+            },
+            {
+                "_type": "Values.ConditionalValue",
+                "condition": "IsFeatureImplemented(FEAT_A)",
+                "values": {
+                    "_type": "Valuesets.Values",
+                    "values": [
+                        {
+                            "_type": "Values.Value",
+                            "meaning": "The third defined value, conditioned on FEAT_A.",
+                            "value": "'1110'"
+                        },
+                        {
+                            "_type": "Values.Value",
+                            "meaning": "The third defined value, conditioned on FEAT_A.",
+                            "value": "'1111'"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>F1, bits[3:0]</strong></p>
+<p>An example field with conditional fields.</p>
+<ul>
+<li><code>'0000'</code>: The first defined value.</li>
+<li><code>'0011'</code>: The second defined value.</li>
+<li><strong>when <code>FEAT_A</code> is implemented</strong>, <code>'0100'</code>:
+  The third defined value, conditioned on FEAT_A.</li>
+<li><strong>when <code>FEAT_A</code> is implemented</strong>, <code>'1110'</code>:
+  The fourth defined value, conditioned on FEAT_A.</li>
+</ul>
+</blockquote>
+<p>See the <a class="schema_link" href="../Values/ConditionalValue_schema.html" title="Values.ConditionalValue">Values.ConditionalValue</a> for more
+information</p>
+<h3 id="resets">Resets</h3>
+<p>A field may have an architecturally defined reset value, to which it is set when
+the CPU is booted or reset. This is specified using the <code>reset</code> property in fields.
+For example:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Field",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "An example field with conditional fields."
+    },
+    "name": "FS",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+        }
+    ],
+    "values": {
+        "_type": "Valuesets.Values",
+        "values": [
+            {
+                "_type": "Values.Value",
+                "meaning": "The value that is set during reset.",
+                "value": "'0000'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "Another value set during runtime.",
+                "value": "'0011'"
+            }
+        ]
+    },
+    "resets": {
+        "_type": "FieldResets",
+        "domains": {
+            "warm": {
+                "_type": "Values.Value",
+                "meaning": null,
+                "value": "'0000'"
+            }
+        }
+    }
+}
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>domain</code> is under which domain does a reset apply, most commonly
+   a <code>warm</code> or <code>cold</code> domain is defined which generally relates
+   a cold (power cycle) reset, vs a warm (during runtime) reset.
+   These domains and their meaning are defined by the
+   architecture and not by MRS.</li>
+<li>The value in the example is defined to be <code>'0000'</code>.  Reset values may or may not be one of the architecturally
+   defined values that are valid for this field, but must be within the range of the field (4-bits in this
+   case)</li>
+</ul>
+<p>The <code>resets</code> property of a field is used to contain a <a class="schema_link" href="../FieldResets_schema.html" title="FieldResets">FieldResets</a>
+model, which defines the reset value for the field. You must
+usually specify reset behavior for each field, even if the reset
+behavior of the field is the default.</p>
+<p>As shown in the <a class="schema_link" href="../Fields/Field_schema.html" title="Fields.Field">Fields.Field</a> and <a class="schema_link" href="../Values/ConditionalValue_schema.html" title="Values.ConditionalValue">Values.ConditionalValue</a>
+examples above, the <code>resets</code> property of the field specifies which
+domain the reset is defined for (warm), and the value of the
+field following a reset of that specified domain
+(architecturally unknown).</p>
+<h2 id="a-constant-field">A constant field</h2>
+<p>A  <a class="schema_link" href="../Fields/ConstantField_schema.html" title="Fields.ConstantField">Fields.ConstantField</a> model
+in MRS defines a <strong>named read-only field</strong> which holds one constant
+value in an implementation. Here is an example:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.ConstantField",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "An 8-bit value set by an implementation, to define the version"
+    },
+    "name": "Version",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 8
+        }
+    ],
+    "value": {
+        "_type": "Values.ImplementationDefined"
+    }
+}
+</code></pre>
+<p>In the example above,
+<a class="schema_link" href="../Values/ImplementationDefined_schema.html" title="Values.ImplementationDefined">Values.ImplementationDefined</a> allows
+the implementation to specify any constant value.</p>
+<p>In some cases, an architecture can create constraints, this is
+done using the constraint property on <a class="schema_link" href="../Values/ImplementationDefined_schema.html" title="Values.ImplementationDefined">Values.ImplementationDefined</a>:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.ConstantField",
+    "description": "An 8-bit value set by an implementation, defined by the architecture.",
+    "name": "Version",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 8
+        }
+    ],
+    "value": {
+        "_type": "Values.ImplementationDefined",
+        "constraints": {
+            "_type": "Valuesets.Values",
+            "values": [
+                {
+                    "_type": "Values.Value",
+                    "meaning": "vMercury architecture.",
+                    "value": "'00000000'"
+                },
+                {
+                    "_type": "Values.Value",
+                    "meaning": "vVenus architecture.",
+                    "value": "'00000001'"
+                },
+                {
+                    "_type": "Values.Value",
+                    "meaning": "vEarth architecture.",
+                    "value": "'00000010'"
+                },
+                {
+                    "_type": "Values.Value",
+                    "meaning": "vMars architecture.",
+                    "value": "'00000011'"
+                }
+            ]
+        }
+    }
+}
+</code></pre>
+<p>Alternatively, architecture may define a constant field with a
+known value:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.ConstantField",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "An 8-bit value set by the architecture."
+    },
+    "name": "Constant",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 8
+        }
+    ],
+    "value": {
+        "_type": "Values.Value",
+        "meaning": "vEarth architecture.",
+        "value": "'00000010'"
+    }
+}
+</code></pre>
+<h2 id="a-conditional-field">A conditional field</h2>
+<p>A <a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a>
+model allows you to define different layouts on a specific range of bits.</p>
+<p>You can use <a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a>, for example, in cases where
+a field is added by a feature and is reserved otherwise, or in
+cases where a field might be different depending on the properties
+of the implementation. For example:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.ConditionalField",
+    "fields": [
+        {
+            "condition": "IsFeatureImplemented(FEAT_A)",
+            "field": {
+                "_type": "Fields.Field",
+                "name": "F1",
+                "description": {
+                    "_type": "Description",
+                    "after": null,
+                    "before": "F1 when FEAT_A is implemented"
+                },
+                "rangeset": [
+                    {
+                        "_type": "Range",
+                        "start": 0,
+                        "width": 4
+                    }
+                ],
+                "values": {}
+            }
+        },
+        {
+            "condition": null,
+            "field": {
+                "_type": "Fields.Field",
+                "name": "F2",
+                "description": {
+                    "_type": "Description",
+                    "after": null,
+                    "before": "F2 otherwise"
+                },
+                "rangeset": [
+                    {
+                        "_type": "Range",
+                        "start": 0,
+                        "width": 4
+                    }
+                ],
+                "values": {}
+            }
+        }
+    ],
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 50,
+            "width": 4
+        }
+    ],
+    "reservedtype": "RES0"
+}
+</code></pre>
+<p>Where:</p>
+<ul>
+<li>the <code>fields</code> array specifies an object with two properties:<ul>
+<li><code>condition</code>: The condition under which this field applies.
+  A <code>null</code> condition is the way to specify an otherwise clause.</li>
+<li><code>field</code>: A <code>Fields.*</code> type.</li>
+</ul>
+</li>
+<li>The <code>reservedtype</code> property is a shorthand for the otherwise clause, equivalent to defining a
+    <a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a> with a null condition and containing a field with the specified reserved type.
+    This can be used to shorthand the otherwise clause. In our example
+    this property is ignored because the otherwise clause is specified
+    explicitly in the <code>fields</code> array.</li>
+<li>The <code>rangeset</code> defined in <code>fields</code> is relative to the <code>rangeset</code>
+    defined in the <a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a>, so <code>F1</code> when resolved is at
+    <code>53:50</code>.</li>
+</ul>
+<h2 id="a-dynamic-field">A dynamic field</h2>
+<p>A <a class="schema_link" href="../Fields/Dynamic_schema.html" title="Fields.Dynamic">Fields.Dynamic</a> model allows you to define different layouts of
+multiple fields <em>(unlike <a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a> which allows you to
+specify one varying field)</em>. Similar to the <code>fields</code> array in
+<a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a>, the fieldset that exists at any given
+instant is determined by a condition, and you can specify
+different properties for each fieldset and the fields it contains.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Register",
+    "state": "AArch64",
+    "name": "REG0",
+    "purpose": "To describe a register containing a dynamic field.",
+    "fieldsets": [
+        {
+            "_type": "Fieldset",
+            "width": 32,
+            "condition": null,
+            "values": [
+                {
+                    "_type": "Fields.Dynamic",
+                    "description": {
+                        "_type": "Description",
+                        "after": null,
+                        "before": "A Dynamic field called F_DYNAMIC with layout D1 and D2"
+                    },
+                    "name": "F_DYNAMIC",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 1,
+                            "width": 31
+                        }
+                    ],
+                    "instances": [
+                        {
+                            "_type": "Fieldset",
+                            "name": "D1",
+                            "values": [
+                                {
+                                    "_type": "Fields.Reserved",
+                                    "rangeset": [
+                                        {
+                                            "_type": "Range",
+                                            "start": 2,
+                                            "width": 29
+                                        }
+                                    ],
+                                    "value": "RES0"
+                                },
+                                {
+                                    "_type": "Fields.Field",
+                                    "rangeset": [
+                                        {
+                                            "_type": "Range",
+                                            "start": 0,
+                                            "width": 2
+                                        }
+                                    ],
+                                    "name": "F1",
+                                    "values": {
+                                        "_type": "Valuesets.Values",
+                                        "values": [
+                                            {
+                                                "_type": "Values.Value",
+                                                "meaning": "Value 0.",
+                                                "value": "'00'"
+                                            },
+                                            {
+                                                "_type": "Values.Value",
+                                                "meaning": "Value 1.",
+                                                "value": "'01'"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "width": 31
+                        },
+                        {
+                            "_type": "Fieldset",
+                            "name": "D2",
+                            "condition": "IsFeatureImplemented(FEAT_A)",
+                            "values": [
+                                {
+                                    "_type": "Fields.Reserved",
+                                    "rangeset": [
+                                        {
+                                            "_type": "Range",
+                                            "start": 4,
+                                            "width": 27
+                                        }
+                                    ],
+                                    "value": "RES0"
+                                },
+                                {
+                                    "_type": "Fields.Field",
+                                    "rangeset": [
+                                        {
+                                            "_type": "Range",
+                                            "start": 0,
+                                            "width": 4
+                                        }
+                                    ],
+                                    "name": "F5",
+                                    "values": {
+                                        "_type": "Valuesets.Values",
+                                        "values": [
+                                            {
+                                                "_type": "Values.Value",
+                                                "meaning": "Value 0.",
+                                                "value": "'0000'"
+                                            },
+                                            {
+                                                "_type": "Values.Value",
+                                                "meaning": "Value 1.",
+                                                "value": "'0001'"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "width": 31
+                        }
+                    ]
+                },
+                {
+                    "_type": "Fields.Reserved",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 1
+                        }
+                    ],
+                    "value": "RES0"
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<p>Here you see a dynamic field called <code>F_DYNAMIC</code> with two layouts
+<code>D1</code> and <code>D2</code>. <code>D2</code> only exists when <code>FEAT_A</code> is implemented and
+the fields <code>D1.F1</code> and <code>D2.F1</code> are completely different fields.</p>
+<p>In some cases a layout may apply, given a value of another field.
+For example <code>D1</code> may apply if a value of <code>FOTHER == '00000'</code>. To
+specify this behavior we use a <a href="../Values/Link_schema.html"><code>Values.Link</code></a> within the <code>FOTHER</code> field.</p>
+<h2 id="an-implementation-defined-field">An implementation defined field</h2>
+<p>A <a class="schema_link" href="../Fields/ImplementationDefined_schema.html" title="Fields.ImplementationDefined">Fields.ImplementationDefined</a>
+model in MRS allocates space in a fieldset for
+implementation-specific fields. Use an implementation defined field
+to specify bits in a register that an implementation can use as
+required.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.ImplementationDefined",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 8,
+            "width": 4
+        }
+    ]
+}
+</code></pre>
+<p>The allocated space for implementation defined fields can be
+divided into as many distinct fields as the implementation
+requires.</p>
+<h2 id="an-array-of-fields">An array of fields</h2>
+<p>A <a class="schema_link" href="../Fields/Array_schema.html" title="Fields.Array">Fields.Array</a> model defines a fixed
+number of fields as an array. This is a shorthand method of
+creating multiple similar fields, which are generated from a single
+<a class="schema_link" href="../Fields/Array_schema.html" title="Fields.Array">Fields.Array</a> model.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Array",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "Array of F&lt;n&gt; fields, where n = 0 to 15."
+    },
+    "index_variable": "n",
+    "indexes": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 16
+        }
+    ],
+    "name": "F&lt;n&gt;",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 32
+        }
+    ],
+    "values": {
+        "_type": "Valuesets.Values",
+        "values": [
+            {
+                "_type": "Values.Value",
+                "meaning": "Value 0.",
+                "value": "'00'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "Value 1.",
+                "value": "'01'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "Value 3.",
+                "value": "'11'"
+            }
+        ]
+    }
+}
+</code></pre>
+<p>In the example above, the <code>index_variable</code>, <code>indexes</code>,
+<code>name</code>, and <code>rangeset</code> properties determine how the array of
+fields is generated. For each individual field within the array,
+the rangeset is expressed in terms of the index value.
+For example:</p>
+<ul>
+<li>a <code>rangeset</code> of <code>15:0</code> and <code>indexes</code> of <code>15:0</code> means that
+  index value <code>n</code> corresponds to bit <code>n</code>, and each field is 1-bit
+  long.</li>
+<li>a <code>rangeset</code> of <code>17, 0</code> and <code>indexes</code> of <code>1:0</code> means that index
+  value <code>n</code> corresponds to bit <code>17n</code>. Therefore, when the array is expanded
+  you will have two fields <code>F17</code> at bit <code>17</code> and <code>F0</code> at bit <code>0</code>,
+  and each field is 1 bit long.</li>
+<li>a <code>rangeset</code> of <code>31:0</code> for <code>indexes</code> of <code>15:0</code>, as above, means
+  that index value <code>n</code> corresponds to bits <code>2n+1:2n</code>, and each field
+  is 2 bits long.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above, the <a class="schema_link" href="../Fields/Array_schema.html" title="Fields.Array">Fields.Array</a> model automatically
+generates 16 fields, named <code>F(0-15)</code>. This means that no other
+fields within the same fieldset are permitted to share the
+name of a field that would be generated from the <a class="schema_link" href="../Fields/Array_schema.html" title="Fields.Array">Fields.Array</a>
+model.</p>
+</div>
+<h2 id="a-reserved-field">A reserved field</h2>
+<p>A <a class="schema_link" href="../Fields/Reserved_schema.html" title="Fields.Reserved">Fields.Reserved</a> model specifies a
+range of bits that are reserved by Arm for future use.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Reserved",
+    "value": "RES0",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 56,
+            "width": 8
+        }
+    ]
+}
+</code></pre>
+<p>The above example defines a <code>RES0</code> field at bits <code>63:56</code>.</p>
+<h1 id="descriptions">Descriptions</h1>
+<p>A <a class="schema_link" href="../Description_schema.html" title="Description">Description</a> model in MRS allows you to add descriptive
+text within another model, such as a register, fieldset, or
+field, etc. A simple description, where text is only required before
+the content, can be implemented in a short-hand form as a
+property of a model:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Field",
+    "description": {
+        "_type": "Description",
+        "after": null,
+        "before": [
+            "The first paragraph of the F1 field description.",
+            "The second paragraph of the F1 field description.",
+            [
+                "The third paragraph.",
+                "This line is also part of the third paragraph."
+            ]
+        ]
+    },
+    "name": "F1",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+        }
+    ],
+    "values": {}
+}
+</code></pre>
+<p>An array notation is used to provide multiline support in JSON, where:</p>
+<ul>
+<li>First level of array represents a break between lines using two
+   <code>\n\n</code>, this is due to AARCHMRS using AML, and in markdown
+   two <code>\n\n</code> denote a split in paragraph.</li>
+<li>Second level of array represent one <code>\n</code> break. This is useful when
+   defining concepts like lists (which require <code>\n</code>), or reduce the
+   very long lines when writing large paragraphs.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You could have used <code>\n</code> inside one long string explicitly and
+it will result in the same output</p>
+</div>
+<h2 id="before-and-after-descriptions">Before and After descriptions</h2>
+<p>In some cases you need to define some text that appears before
+values, and other text that appears after them. For example if you
+wanted to represent the following:</p>
+<blockquote>
+<p><strong>F1, bits[3:0]</strong></p>
+<p>My F1 fields with two values</p>
+<ul>
+<li><code>'0000'</code>: The first defined value.</li>
+<li><code>'0011'</code>: The second defined value.</li>
+</ul>
+<p><u>My favourite value is '0000'</u></p>
+</blockquote>
+<p>Here saying "My favourite value is '0000'" before the value
+is defined may lead to confusion. Because of this, a description
+object can be stored as a dictionary, with <code>before</code> and <code>after</code>
+keys.</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Fields.Field",
+    "description": {
+        "_type": "Description",
+        "before": "My F1 fields with two values",
+        "after": "My favourite value is '0000'"
+    },
+    "name": "F1",
+    "rangeset": [
+        {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+        }
+    ],
+    "values": {
+        "_type": "Valuesets.Values",
+        "values": [
+            {
+                "_type": "Values.Value",
+                "meaning": "The first defined value.",
+                "value": "'0000'"
+            },
+            {
+                "_type": "Values.Value",
+                "meaning": "The second defined value.",
+                "value": "'0011'"
+            }
+        ]
+    }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the array notation for multiline support within
+<code>before</code> and <code>after</code> values</p>
+</div>
+<h1 id="mapset">Mapset</h1>
+<p>A mapset array in MRS captures architectural mappings between
+registers or register blocks, as a property of a <a class="schema_link" href="../Register_schema.html" title="Register">Register</a>
+model. This information automatically generates text in the
+Configuration section of the System register page, that states
+which mappings a register has, if any.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When specifying a bi-directional mapping between registers,
+you must specify the mapsets in both registers. The
+appropriate mapping information is then automatically
+rendered as text in the Configuration of both mapped
+registers. Specifying a mapset in only one register
+represents a uni-directional mapping.</p>
+</div>
+<p>A register can be mapped to multiple registers, such as
+equivalent AArch64, AArch32, and External registers which are
+all mapped to each other. However, as mappings can only be
+uni-directional or bi-directional, each pairwise mapping must
+be individually specified, if more than two registers are
+mapped to each other. For example, you must define mapsets
+in both <code>AArch64-REG0</code> and <code>ext-REG0</code> to capture an
+architectural mapping between them in MRS, even if both specify
+bi-directional mappings to a <code>AArch32-REG0</code> register.</p>
+<p>Below is an example of a mapset specified in <code>AArch64-REG0</code>:</p>
+<pre class="includes"><code class="language-json">{
+    "_type": "Register",
+    "state": "AArch64",
+    "name": "REG0",
+    "title": "Register 0",
+    "purpose": "To describe a simple register in the user guide.",
+    "fieldsets": [
+        {
+            "_type": "Fieldset",
+            "width": 32,
+            "values": [
+                {
+                    "_type": "Fields.Field",
+                    "name": "F0",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 32
+                        }
+                    ],
+                    "values": {
+                        "_type": "Valuesets.Values",
+                        "values": [
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "The only known value.",
+                                "value": "'00000000000000000000000000000000'"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "mapset": [
+        {
+            "_type": "Mapping.RegisterMapping",
+            "condition": null,
+            "instance": null,
+            "mapping_type": "Architectural",
+            "maps": [
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "Types.RegisterType",
+                        "value": {
+                            "instance": null,
+                            "name": "REG0",
+                            "slices": null,
+                            "state": "ext"
+                        }
+                    }
+                }
+            ],
+            "slices": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 32
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <code>ext-REG0</code> you would need a corresponding mapset mapping back
+to <code>AArch64-REG0</code></p>
+</div>
+<p>You can define a <a class="schema_link" href="../Mapping/RegisterMapping_schema.html" title="Mapping.RegisterMapping">Mapping.RegisterMapping</a> or
+<code>Mapping.RegisterBlockMapping</code> model within a <code>mapset</code> array.
+See the <a class="schema_link" href="../Mapping/RegisterMapping_schema.html" title="Mapping.RegisterMapping">Mapping.RegisterMapping</a> and <a class="schema_link" href="../Mapping/RegisterBlockMapping_schema.html" title="Mapping.RegisterBlockMapping">Mapping.RegisterBlockMapping</a>
+schema definitions for a full list of properties and their usage.</p>
+<h1 id="register-blocks">Register Blocks</h1>
+<p>A <a class="schema_link" href="../RegisterBlock_schema.html" title="RegisterBlock">RegisterBlock</a> encapsulates an array of <a class="schema_link" href="../Register_schema.html" title="Register">Register</a> or <a class="schema_link" href="../RegisterBlock_schema.html" title="RegisterBlock">RegisterBlock</a> object
+that occupy a contiguous range of the address map, and share a common set of
+accessors. The accessors define the access behaviors for each of the Registers and
+RegisterBlocks present in the blocks property.</p>
+<p>For examples of the RegisterBlock and a full list of properties and their
+usage, refer to the <a class="schema_link" href="../RegisterBlock_schema.html" title="RegisterBlock">RegisterBlock</a> schema definition.</p>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

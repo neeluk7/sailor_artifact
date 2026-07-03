@@ -1,0 +1,94 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalItems": false,
+    "examples": [
+        [
+            {
+                "_type": "Parameters.Integer",
+                "name": "NUM_VERSIONS",
+                "constraints": [
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.Identifier",
+                                "value": "NUM_VERSIONS"
+                            },
+                            "op": ">",
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 23
+                            }
+                        },
+                        "op": "==>",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "FEAT_ACTION"
+                        }
+                    }
+                ],
+                "values": [
+                    20,
+                    {
+                        "_type": "Index",
+                        "start": 22,
+                        "end": 25
+                    },
+                    {
+                        "_type": "Index",
+                        "start": 50,
+                        "end": 60
+                    },
+                    100
+                ]
+            },
+            {
+                "_type": "Parameters.Boolean",
+                "name": "FEAT_FOO",
+                "constraints": [
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "FEAT_X"
+                        },
+                        "op": "==>",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "v8Ap2"
+                        }
+                    }
+                ]
+            }
+        ]
+    ],
+    "info": [
+        [
+            "$(Parameterset) provides a set-like container to store all types of $(Parameters.)",
+            "uniquely identified by their name property."
+        ]
+    ],
+    "items": {
+        "oneOf": [
+            {
+                "$ref": "Parameters/Boolean.json"
+            },
+            {
+                "$ref": "Parameters/Integer.json"
+            },
+            {
+                "$ref": "Parameters/String.json"
+            },
+            {
+                "$ref": "Parameters/Group.json"
+            }
+        ]
+    },
+    "title": "Parameterset",
+    "type": "array",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

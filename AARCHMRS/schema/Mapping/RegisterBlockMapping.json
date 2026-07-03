@@ -1,0 +1,65 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "RegisterBlockMapping",
+    "type": "object",
+    "additionalProperties": false,
+    "info": [
+        "`RegisterBlockMapping` provides a bi-directional mapping between Registers, RegisterBlocks, and Field types and individual bits within Registers.",
+        [
+            "For example, if the maps property lists `REGBLOCK1.REG1`, `REGBLOCK1.REG2` and",
+            "`AArch32-ACTRL`, then there exists a bidirectional mapping between all three items."
+        ]
+    ],
+    "properties": {
+        "_type": {
+            "enum": [
+                "Mapping.RegisterBlockMapping"
+            ]
+        },
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "This condition must be true for the mapping to exist."
+            ]
+        },
+        "maps": {
+            "info": [
+                "A list of items that maps to one another.",
+                [
+                    "Individual mapped bit(s) can be defined in the slices property of the ",
+                    "given items. Note if `A[10, 5:0]` maps to B (no range specified), ",
+                    "then it is implied that `A[10, 5:0]` maps to `B[6:0]`."
+                ]
+            ],
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "../Types/RegisterType.json"
+                    },
+                    {
+                        "$ref": "../AST/Identifier.json"
+                    },
+                    {
+                        "$ref": "../AST/DotAtom.json"
+                    },
+                    {
+                        "$ref": "../AST/SquareOp.json"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "maps"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "deprecated": "RegisterBlockMapping has been renamed to `Map`."
+}

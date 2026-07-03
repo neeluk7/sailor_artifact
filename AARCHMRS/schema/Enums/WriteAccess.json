@@ -1,0 +1,52 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "This enumeration represents the Write Access types.",
+        [
+            " - `W`   - Write (only).",
+            " - `WI`  - Writes Ignored.",
+            " - `RES0` - Reserved, will be read as 0.",
+            " - `RES1` - Reserved, will be read as 1.",
+            " - `W1S` - Write 1 to Set (Write with side effect).",
+            " - `W1C` - Write 1 to Clear (Write with side effect).",
+            " - `W1T` - Write 1 to Toggle (write with side effect).",
+            " - `W0S` - Write 0 to Set (Write with side effect).",
+            " - `W0C` - Write 0 to Clear (Write with side effect).",
+            " - `W0T` - Write 0 to Toggle (write with side effect).",
+            " - `WS`  - Write to Set (Write with side effect).",
+            " - `WC`  - Write to Clear (Write with side effect).",
+            " - `SBZ` - Should-be-Zero.",
+            " - `SBO` - Should-be-One.",
+            " - `SBZP` - Should-be-Zero-or-Preserved.",
+            " - `SBOP` - Should-be-One-or-Preserved.",
+            " - `RESERVED` - Implies Do-not-write and do-not-read.",
+            " - `ERROR` - Writing will issue an Error."
+        ]
+    ],
+    "enum": [
+        "W",
+        "WI",
+        "RES0",
+        "RES1",
+        "W1S",
+        "W1C",
+        "W1T",
+        "W0S",
+        "W0C",
+        "W0T",
+        "WS",
+        "WC",
+        "SBZ",
+        "SBO",
+        "SBZP",
+        "SBOP",
+        "RESERVED",
+        "ERROR"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Enums.WriteAccess"
+}

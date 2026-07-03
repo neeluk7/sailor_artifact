@@ -1,0 +1,61 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "`ParameterAbstract` is a reference schema for other Parameters."
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "name": {
+            "info": [
+                "The unique (case-sensitive) name used to reference this parameter."
+            ],
+            "$ref": "../Types/Variable.json#/definitions/variable_regex",
+            "examples": [
+                "FEAT_X",
+                "v8Ap1",
+                "NUM_CORES"
+            ]
+        },
+        "title": {
+            "info": [
+                "A title describing this parameter."
+            ],
+            "type": [
+                "string",
+                "null"
+            ],
+            "examples": [
+                "A feature parameter"
+            ]
+        },
+        "description": {
+            "$ref": "../Description.json"
+        },
+        "constraints": {
+            "$ref": "../Traits/HasConstraints.json#/definitions/constraints"
+        },
+        "configured_by": {
+            "info": [
+                "State if the parameter can be configured by the user or not. Possible values are `user` or `port`:",
+                [
+                    " - `user`: The parameter is configurable by the user.",
+                    " - `port`: The parameter is dynamic and it is configurable by a signal port. Note that in port mode the domain cannot be reduced to one value."
+                ]
+            ],
+            "enum": [
+                "user",
+                "port"
+            ],
+            "default": "user"
+        }
+    },
+    "title": "Parameters.ParameterAbstract",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

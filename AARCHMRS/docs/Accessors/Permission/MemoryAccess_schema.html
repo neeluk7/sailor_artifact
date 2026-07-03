@@ -1,0 +1,394 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../../img/mstile-144x144.png">
+    <link rel="icon" href="../../img/favicon.ico">
+
+        <title>MemoryAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../../index.html"><img src="../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Accessors.Permission.</span><span class=" title-type">MemoryAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>The access property defines the logic behind memory mapped register access.</p>
+<h3>Example</h3>
+<pre><code>if boolean IMPLEMENTATION_DEFINED &quot;Allow Register Writes&quot; then
+   RW
+else
+   RO
+</code></pre>
+<p>The MemoryAccess can be written as:</p>
+<pre><code>{
+   &quot;_type&quot;: &quot;Accessors.Permission.MemoryAccess&quot;,
+   &quot;access&quot;: [
+       {
+           &quot;_type&quot;: &quot;Accessors.Permission.MemoryAccess&quot;,
+           &quot;condition&quot;: &quot;boolean IMPLEMENTATION_DEFINED \&quot;Allow Register Writes\&quot;&quot;
+           &quot;access&quot;: &quot;RW&quot;
+       },
+       {
+           &quot;_type&quot;: &quot;Accessors.Permission.MemoryAccess&quot;,
+           &quot;condition&quot;: null,
+           &quot;access&quot;: &quot;RO&quot;
+       },
+   ]
+}
+</code></pre>
+<p>Note, a <code>null</code> condition defines the otherwise clause. When omitted the parent's permission applies.</p>
+<h3>Nesting</h3>
+<p>Memory Accesses can be nested inside other Memory Accesses to represent complex nested conditions.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Metadata</p></div>
+                    
+    <div>
+        See
+            <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Accessors.Permission.MemoryAccess</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/access" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/access">access<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                        array
+            </div>
+            <div class="items-oneOf">
+                    <a href="AccessTypes/Memory/ReadWriteAccess_schema.html" class="schema_link">AccessTypes.Memory.ReadWriteAccess</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="AccessTypes/Memory/ImplementationDefined_schema.html" class="schema_link">AccessTypes.Memory.ImplementationDefined</a>
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The access which occurs when the condition is satisfied. This is effectively the contents of the <code>if</code> branch.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is an array -->
+                    <span class="type"><span class="Xof">oneOf</span> array</span>
+                
+
+                
+
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="AccessTypes/Memory/ReadWriteAccess_schema.html">AccessTypes.Memory.ReadWriteAccess</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="AccessTypes/Memory/ImplementationDefined_schema.html">AccessTypes.Memory.ImplementationDefined</a></span>
+            
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The condition under which the current access applies. This is effectively the <code>if</code> statement in the rendered pseudocode.</p></div>
+                    
+    <div>
+        See
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">definitions.condition</a> in
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "The access property defines the logic behind memory mapped register access.",
+    "### Example",
+    [
+      "```",
+      "if boolean IMPLEMENTATION_DEFINED \"Allow Register Writes\" then",
+      "   RW",
+      "else",
+      "   RO",
+      "```"
+    ],
+    "The MemoryAccess can be written as:",
+    [
+      "```",
+      "{",
+      "   \"_type\": \"Accessors.Permission.MemoryAccess\",",
+      "   \"access\": [",
+      "       {",
+      "           \"_type\": \"Accessors.Permission.MemoryAccess\",",
+      "           \"condition\": \"boolean IMPLEMENTATION_DEFINED \\\"Allow Register Writes\\\"\"",
+      "           \"access\": \"RW\"",
+      "       },",
+      "       {",
+      "           \"_type\": \"Accessors.Permission.MemoryAccess\",",
+      "           \"condition\": null,",
+      "           \"access\": \"RO\"",
+      "       },",
+      "   ]",
+      "}",
+      "```"
+    ],
+    "Note, a `null` condition defines the otherwise clause. When omitted the parent's permission applies.",
+    "### Nesting",
+    "Memory Accesses can be nested inside other Memory Accesses to represent complex nested conditions."
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../../Meta.json",
+      "info": [
+        "Metadata"
+      ]
+    },
+    "_type": {
+      "enum": [
+        "Accessors.Permission.MemoryAccess"
+      ]
+    },
+    "access": {
+      "info": [
+        "The access which occurs when the condition is satisfied. This is effectively the contents of the `if` branch."
+      ],
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#"
+          }
+        },
+        {
+          "$ref": "AccessTypes/Memory/ReadWriteAccess.json"
+        },
+        {
+          "$ref": "AccessTypes/Memory/ImplementationDefined.json"
+        }
+      ]
+    },
+    "condition": {
+      "info": [
+        "The condition under which the current access applies. This is effectively the `if` statement in the rendered pseudocode."
+      ],
+      "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+    }
+  },
+  "required": [
+    "access"
+  ],
+  "title": "MemoryAccess",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../../js/highlight/highlight.js"></script>
+    <script src="../../js/highlight/languages/json.min.js"></script>
+    <script src="../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../../js/highlight/languages/yaml.min.js"></script>
+    <script src="../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

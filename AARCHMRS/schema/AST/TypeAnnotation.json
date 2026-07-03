@@ -1,0 +1,76 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A model representing a type annotation in ASL, for example `ARBITRARY:bits(32)`."
+    ],
+    "examples": [
+        {
+            "_type": "AST.TypeAnnotation",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "ARBITRARY"
+            },
+            "type": {
+                "_type": "AST.Type",
+                "name": {
+                    "_type": "AST.Function",
+                    "name": "bits",
+                    "arguments": [
+                        {
+                            "_type": "AST.Integer",
+                            "value": 32
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "oneOf": [
+        {
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "AST.TypeAnnotation"
+                    ]
+                },
+                "var": {
+                    "info": [
+                        "The Identifier that is annotated."
+                    ],
+                    "anyOf": [
+                        {
+                            "$ref": "Identifier.json"
+                        },
+                        {
+                            "$ref": "DotAtom.json"
+                        }
+                    ]
+                },
+                "type": {
+                    "info": [
+                        "The type of annotation being applied to the variable."
+                    ],
+                    "$ref": "Type.json"
+                }
+            },
+            "required": [
+                "var",
+                "type"
+            ],
+            "type": "object"
+        },
+        {
+            "type": "string",
+            "pattern": ".+::.+"
+        }
+    ],
+    "title": "TypeAnnotation",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

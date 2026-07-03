@@ -1,0 +1,99 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Valuesets.Values",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "A set of __Value__ objects.  Each object indicates one of the valid architectural ",
+            "values, along with a textual description of its meaning."
+        ]
+    ],
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Valuesets.Values"
+            ]
+        },
+        "values": {
+            "type": "array",
+            "items": {
+                "$ref": "ValuesetAbstract.json#/definitions/values"
+            },
+            "info": [
+                [
+                    "An array of values as specified by ",
+                    "[ValuesetAbstract](ValuesetAbstract_schema.html#/definitions/values)."
+                ]
+            ]
+        }
+    },
+    "required": [
+        "values"
+    ],
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Valuesets.Values",
+            "values": [
+                {
+                    "_type": "Values.Value",
+                    "value": "'000'",
+                    "meaning": "First Value"
+                },
+                {
+                    "_type": "Values.ConditionalValue",
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "MY_FEAT"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "values": {
+                        "_type": "Valuesets.Values",
+                        "values": [
+                            {
+                                "_type": "Values.Value",
+                                "value": "'001'",
+                                "meaning": "Second Value"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_type": "Values.Value",
+                    "value": "'010'",
+                    "meaning": "Third Value"
+                },
+                {
+                    "_type": "Values.ValueRange",
+                    "start": {
+                        "_type": "Values.Value",
+                        "value": "'011'"
+                    },
+                    "end": {
+                        "_type": "Values.Value",
+                        "value": "'111'"
+                    },
+                    "meaning": "A range of values from '011' to '111'"
+                },
+                {
+                    "_type": "Values.NamedValue",
+                    "name": "RN",
+                    "value": "'01101'",
+                    "meaning": "First Value"
+                }
+            ]
+        }
+    ]
+}

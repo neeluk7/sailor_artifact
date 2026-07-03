@@ -1,0 +1,34 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Traits.HasIndexes",
+    "info": [
+        "`HasIndexes` provides an abstract definition for schemata that provide an array-like definition of an object."
+    ],
+    "definitions": {
+        "indexes": {
+            "$ref": "../Rangeset.json",
+            "info": [
+                "The range of values that the containing model can expand to, in order."
+            ]
+        },
+        "index_variable": {
+            "info": [
+                "The variable that must be present in the models access in the form `<index_variable>` to be replaced with an index defined in the indexes property.",
+                "`x` by default."
+            ],
+            "type": "string",
+            "pattern": "[A-Za-z][A-Za-z0-9_]*"
+        }
+    },
+    "examples": [
+        {
+            "indexes": "3:0",
+            "index_variable": "n"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

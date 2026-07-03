@@ -1,0 +1,184 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Enums.WriteAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Enums.</span><span class=" title-type">WriteAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">*</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>This enumeration represents the Write Access types.</p>
+<ul>
+<li><code>W</code>   - Write (only).</li>
+<li><code>WI</code>  - Writes Ignored.</li>
+<li><code>RES0</code> - Reserved, will be read as 0.</li>
+<li><code>RES1</code> - Reserved, will be read as 1.</li>
+<li><code>W1S</code> - Write 1 to Set (Write with side effect).</li>
+<li><code>W1C</code> - Write 1 to Clear (Write with side effect).</li>
+<li><code>W1T</code> - Write 1 to Toggle (write with side effect).</li>
+<li><code>W0S</code> - Write 0 to Set (Write with side effect).</li>
+<li><code>W0C</code> - Write 0 to Clear (Write with side effect).</li>
+<li><code>W0T</code> - Write 0 to Toggle (write with side effect).</li>
+<li><code>WS</code>  - Write to Set (Write with side effect).</li>
+<li><code>WC</code>  - Write to Clear (Write with side effect).</li>
+<li><code>SBZ</code> - Should-be-Zero.</li>
+<li><code>SBO</code> - Should-be-One.</li>
+<li><code>SBZP</code> - Should-be-Zero-or-Preserved.</li>
+<li><code>SBOP</code> - Should-be-One-or-Preserved.</li>
+<li><code>RESERVED</code> - Implies Do-not-write and do-not-read.</li>
+<li><code>ERROR</code> - Writing will issue an Error.</li>
+</ul></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "additionalProperties": false,
+  "info": [
+    "This enumeration represents the Write Access types.",
+    [
+      " - `W`   - Write (only).",
+      " - `WI`  - Writes Ignored.",
+      " - `RES0` - Reserved, will be read as 0.",
+      " - `RES1` - Reserved, will be read as 1.",
+      " - `W1S` - Write 1 to Set (Write with side effect).",
+      " - `W1C` - Write 1 to Clear (Write with side effect).",
+      " - `W1T` - Write 1 to Toggle (write with side effect).",
+      " - `W0S` - Write 0 to Set (Write with side effect).",
+      " - `W0C` - Write 0 to Clear (Write with side effect).",
+      " - `W0T` - Write 0 to Toggle (write with side effect).",
+      " - `WS`  - Write to Set (Write with side effect).",
+      " - `WC`  - Write to Clear (Write with side effect).",
+      " - `SBZ` - Should-be-Zero.",
+      " - `SBO` - Should-be-One.",
+      " - `SBZP` - Should-be-Zero-or-Preserved.",
+      " - `SBOP` - Should-be-One-or-Preserved.",
+      " - `RESERVED` - Implies Do-not-write and do-not-read.",
+      " - `ERROR` - Writing will issue an Error."
+    ]
+  ],
+  "enum": [
+    "W",
+    "WI",
+    "RES0",
+    "RES1",
+    "W1S",
+    "W1C",
+    "W1T",
+    "W0S",
+    "W0C",
+    "W0T",
+    "WS",
+    "WC",
+    "SBZ",
+    "SBO",
+    "SBZP",
+    "SBOP",
+    "RESERVED",
+    "ERROR"
+  ],
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Enums.WriteAccess"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

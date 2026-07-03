@@ -1,0 +1,267 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "additionalProperties": false,
+    "definitions": {
+        "slices": {
+            "oneOf": [
+                {
+                    "$ref": "../Rangeset.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "info": [
+                "When `slices` is specified:",
+                [
+                    " - It represents the current registers mapped bit(s).",
+                    " - If no slices are specified in the destination register then the current ",
+                    "   register bit(s), map to the lowest sequential bits at the destination.",
+                    "   For example: current bits `[10, 5:0]` (specified) map to the destination",
+                    "   `[6:0]` (implied)."
+                ],
+                "When set to `null`, the mapping represents the full size of the current register."
+            ]
+        },
+        "instance": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "info": [
+                "When specified this represents the instance of the current register. `AArch64-REG0:NS` points to the non-secure instance of AArch64-REG0."
+            ]
+        },
+        "mapping_type": {
+            "enum": [
+                "Architectural",
+                "Functional",
+                "Optional"
+            ],
+            "info": [
+                "mapping_type should always be Architectural for mappings between Registers that have states, and Functional for those which do not."
+            ]
+        },
+        "maps": {
+            "info": [
+                "A list of `RegisterType` or `Identifier` which the current register maps to.",
+                "You can use the slices property in `RegisterType` or `Identifier` to specify explicit mapped bits."
+            ],
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "../Types/RegisterType.json"
+                    },
+                    {
+                        "$ref": "../AST/Identifier.json"
+                    },
+                    {
+                        "$ref": "../AST/DotAtom.json"
+                    },
+                    {
+                        "$ref": "../AST/SquareOp.json"
+                    }
+                ]
+            }
+        }
+    },
+    "info": [
+        "`RegisterMapping` maps bits of the current register to other register(s).",
+        [
+            "This mapping represents a uni-directional mapping. To define a bi-directional mapping",
+            "you must specify a reverse mapping in the destination register(s)."
+        ],
+        "For example, in order to specify that `AArch64-REG0:NS[63:32]` is mapped to `AArch32-REG0[31:0]` and `ext-REG0[31:0]` bi-directionally you would write the following:",
+        [
+            "**In AArch64-REG0's mapset**",
+            "```",
+            "{",
+            "    \"_type\": \"Mapping.RegisterMapping\",",
+            "    \"condition\": \"HaveAnyAArch32()\",",
+            "    \"slices\": \"63:32\",",
+            "    \"instance\": \"NS\",",
+            "    \"mapping_type\": \"Architectural\",",
+            "    \"maps\": [",
+            "        \"AArch32-REG0[31:0]\",",
+            "        \"ext-REG0[31:0]\"",
+            "    ]",
+            "}",
+            "```",
+            "**In AArch32-REG0's mapset**",
+            "```",
+            "{",
+            "    \"_type\": \"Mapping.RegisterMapping\",",
+            "    \"condition\": \"HaveAnyAArch32()\",",
+            "    \"slices\": \"31:0\",",
+            "    \"mapping_type\": \"Architectural\",",
+            "    \"maps\": [",
+            "        \"AArch64-REG0:NS[63:32]\",",
+            "        \"ext-REG0[31:0]\"",
+            "    ]",
+            "}",
+            "```",
+            "**In ext-REG0's mapset**",
+            "```",
+            "{",
+            "    \"_type\": \"Mapping.RegisterMapping\",",
+            "    \"condition\": \"HaveAnyAArch32()\",",
+            "    \"slices\": \"31:0\",",
+            "    \"mapping_type\": \"Architectural\",",
+            "    \"maps\": [",
+            "        \"AArch64-REG0:NS[63:32]\",",
+            "        \"AArch32-REG0[31:0]\"",
+            "    ]",
+            "}",
+            "```"
+        ]
+    ],
+    "properties": {
+        "_type": {
+            "enum": [
+                "Mapping.RegisterMapping"
+            ]
+        },
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "This condition must be true for the mapping to exist."
+            ]
+        },
+        "slices": {
+            "$ref": "#/definitions/slices"
+        },
+        "instance": {
+            "$ref": "#/definitions/instance"
+        },
+        "mapping_type": {
+            "$ref": "#/definitions/mapping_type"
+        },
+        "maps": {
+            "$ref": "#/definitions/maps"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Mapping.RegisterMapping",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "EL1"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "maps": [
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REGTO_A"
+                    }
+                },
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "Types.RegisterType",
+                        "value": {
+                            "instance": null,
+                            "name": "REGTO_B",
+                            "slices": null,
+                            "state": "AArch64"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Mapping.RegisterMapping",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "EL1"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "maps": [
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REGTO"
+                    }
+                }
+            ],
+            "slices": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 32
+                }
+            ],
+            "instance": "REGFROM_NS",
+            "mapping_type": "Functional"
+        }
+    ],
+    "required": [
+        "maps"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "RegisterMapping"
+}

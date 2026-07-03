@@ -1,0 +1,335 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>Text - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class=" title-type">Text</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type Xof">oneOf [ ... ]</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>The <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object lets you build multiline text with ease in <code>JSON</code>. 
+It is equivalent to a single string element with <code>\n</code> in textual content, 
+but makes it easier to enter and maintain formatted text.</p>
+<p><a class="schema_link" href="Text_schema.html" title="Text">Text</a> objects can take different forms, depending on the complexity of the 
+formatting being entered. The different forms that are supported are listed below:</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is an array -->
+                    <h3 class="type"><span class="Xof">oneOf</span> array</h3>
+                
+    <div class="static-markdown"><p>Writing multiline content in <code>JSON</code> can be difficult! A <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object 
+solves this by allowing multiline input using arrays.</p>
+<p>The contents of a <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object are stored as an array in JSON. Elements at 
+this first level of array are paragraphs, and will be separated by two 
+line breaks when rendered (a paragraph break). As such, a string (of any length) followed by 
+another string will render as a pair of paragraphs, one per string. To write a 
+multiline <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object that should render as a single paragraph, you can enter 
+an array of strings within the <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object's array. You can enter multiple 
+lines of text that are part of the same paragraph as sequential strings in 
+this second-level array.</p>
+<p>You can also use Markdown's standard list formatting: starting a line with a 
+space-hyphen-space string to indicate a bullet in a bulleted list. Second- 
+and subsequent-level lists can be created by entering four leading spaces 
+before the space-hyphen-space string.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The array formulation is not semantically different to a single string with many <code>\n</code> characters.</p>
+</div>
+<p>To produce the following markdown content in a <a class="schema_link" href="Text_schema.html" title="Text">Text</a> object:</p>
+<pre><code>This is a first paragraph
+
+This is the second paragraph and it is separated by two new lines from the first paragraph.
+
+ - A list is separated by two new lines from the previous block.
+ - But subsequent elements inside a list are only one line breaks.
+ - First level list:
+     - Second level list item.
+     - Second level list item.
+
+Another paragraph
+that is multiline but part
+of the same paragraph
+</code></pre>
+<p>You can enter the <code>JSON</code> given in the example below:</p></div>
+
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    &#34;This is a first paragraph&#34;, 
+    &#34;This is the second paragraph and it is separated by two new lines from the first paragraph.&#34;, 
+    [
+        &#34; - A list is separated by two new lines from the previous block.&#34;, 
+        &#34; - But subsequent elements inside a list are only one line breaks.&#34;, 
+        &#34; - First level list:&#34;, 
+        &#34;     - Second level list item.&#34;, 
+        &#34;     - Second level list item.&#34;
+    ], 
+    [
+        &#34;Another paragraph&#34;, 
+        &#34;that is multiline but part&#34;, 
+        &#34;of the same paragraph&#34;
+    ]
+]</code></pre>
+        </div>
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is a string -->
+                    <h3 class="type"><span class="Xof">oneOf</span> string</h3>
+                
+
+                
+    <div class="static-markdown"><p>A single string of markdown content can be entered as a single string in <code>JSON</code>.</p></div>
+
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;A one line example of Text&#34;</code></pre>
+            <pre class="schema-json"><code class="language-json">&#34;An example of Text\n\nWith multiline written inline&#34;</code></pre>
+        </div>
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <h3 class="type"><span class="Xof">oneOf</span> null</h3>
+                
+    <div class="static-markdown"><p>By default, models that have no authored content can be left as <code>null</code>.</p></div>
+
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">null</code></pre>
+        </div>
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "title": "Text",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "info": [
+    [
+      "The $(Text) object lets you build multiline text with ease in `JSON`. ",
+      "It is equivalent to a single string element with `\\n` in textual content, ",
+      "but makes it easier to enter and maintain formatted text."
+    ],
+    [
+      "$(Text) objects can take different forms, depending on the complexity of the ",
+      "formatting being entered. The different forms that are supported are listed below:"
+    ]
+  ],
+  "oneOf": [
+    {
+      "type": "array",
+      "info": [
+        [
+          "Writing multiline content in `JSON` can be difficult! A $(Text) object ",
+          "solves this by allowing multiline input using arrays."
+        ],
+        [
+          "The contents of a $(Text) object are stored as an array in JSON. Elements at ",
+          "this first level of array are paragraphs, and will be separated by two ",
+          "line breaks when rendered (a paragraph break). As such, a string (of any length) followed by ",
+          "another string will render as a pair of paragraphs, one per string. To write a ",
+          "multiline $(Text) object that should render as a single paragraph, you can enter ",
+          "an array of strings within the $(Text) object's array. You can enter multiple ",
+          "lines of text that are part of the same paragraph as sequential strings in ",
+          "this second-level array."
+        ],
+        [
+          "You can also use Markdown's standard list formatting: starting a line with a ",
+          "space-hyphen-space string to indicate a bullet in a bulleted list. Second- ",
+          "and subsequent-level lists can be created by entering four leading spaces ",
+          "before the space-hyphen-space string."
+        ],
+        [
+          "!!! note",
+          "    ",
+          "    The array formulation is not semantically different to a single string with many `\\n` characters."
+        ],
+        "To produce the following markdown content in a $(Text) object:",
+        [
+          "```",
+          "This is a first paragraph"
+        ],
+        "This is the second paragraph and it is separated by two new lines from the first paragraph.",
+        [
+          " - A list is separated by two new lines from the previous block.",
+          " - But subsequent elements inside a list are only one line breaks.",
+          " - First level list:",
+          "     - Second level list item.",
+          "     - Second level list item."
+        ],
+        [
+          "Another paragraph",
+          "that is multiline but part",
+          "of the same paragraph",
+          "```"
+        ],
+        "You can enter the `JSON` given in the example below:"
+      ],
+      "items": {
+        "oneOf": [
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "examples": [
+        [
+          "This is a first paragraph",
+          "This is the second paragraph and it is separated by two new lines from the first paragraph.",
+          [
+            " - A list is separated by two new lines from the previous block.",
+            " - But subsequent elements inside a list are only one line breaks.",
+            " - First level list:",
+            "     - Second level list item.",
+            "     - Second level list item."
+          ],
+          [
+            "Another paragraph",
+            "that is multiline but part",
+            "of the same paragraph"
+          ]
+        ]
+      ]
+    },
+    {
+      "type": "string",
+      "info": [
+        "A single string of markdown content can be entered as a single string in `JSON`."
+      ],
+      "examples": [
+        "A one line example of Text",
+        "An example of Text\n\nWith multiline written inline"
+      ]
+    },
+    {
+      "type": "null",
+      "info": [
+        "By default, models that have no authored content can be left as `null`."
+      ],
+      "examples": [
+        null
+      ]
+    }
+  ]
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

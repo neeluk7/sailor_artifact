@@ -1,0 +1,117 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "AST.Function",
+            "name": "IsSecure"
+        },
+        {
+            "_type": "AST.Function",
+            "name": "HaveEL",
+            "arguments": [
+                {
+                    "_type": "AST.Identifier",
+                    "value": "EL2"
+                }
+            ]
+        },
+        {
+            "_type": "AST.Function",
+            "name": "HaveEL",
+            "arguments": [
+                {
+                    "_type": "AST.Identifier",
+                    "value": "EL2"
+                }
+            ]
+        },
+        {
+            "_type": "AST.Function",
+            "name": "SomeFunction",
+            "arguments": [
+                {
+                    "_type": "AST.Function",
+                    "name": "SomeNestedFunction",
+                    "arguments": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "EL1"
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "n"
+                    },
+                    "op": ">",
+                    "right": {
+                        "_type": "AST.Integer",
+                        "value": 5
+                    }
+                }
+            ],
+            "parameters": [
+                {
+                    "_type": "AST.Integer",
+                    "value": 64
+                }
+            ]
+        }
+    ],
+    "info": [
+        "A model representing an arbitrary function call:",
+        [
+            " - `IsSecure()`",
+            " - `HaveEL(EL2)`",
+            " - `SomeFunction(SomeNestedFunction(EL1, 0x10), n > 5)`"
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Function"
+            ]
+        },
+        "name": {
+            "info": [
+                "The function name."
+            ],
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)*$"
+        },
+        "arguments": {
+            "info": [
+                "The function's arguments."
+            ],
+            "default": [],
+            "type": "array",
+            "items": {
+                "$ref": "BinaryOp.json#/definitions/expression"
+            }
+        },
+        "parameters": {
+            "info": [
+                "The function's parameters."
+            ],
+            "default": [],
+            "type": "array",
+            "items": {
+                "$ref": "BinaryOp.json#/definitions/expression"
+            }
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "title": "Function",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

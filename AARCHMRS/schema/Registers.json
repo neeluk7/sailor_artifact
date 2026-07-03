@@ -1,0 +1,193 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Registers",
+    "info": [
+        "An array of $(Register), $(RegisterArray), or $(RegisterBlock)."
+    ],
+    "examples": [
+        [
+            {
+                "_type": "Register",
+                "state": "AArch64",
+                "name": "REG0",
+                "title": "Register 0",
+                "purpose": "To represent a simple register in this test case.",
+                "fieldsets": [
+                    {
+                        "_type": "Fieldset",
+                        "width": 32,
+                        "values": [
+                            {
+                                "_type": "Fields.Reserved",
+                                "value": "RES0",
+                                "rangeset": [
+                                    {
+                                        "_type": "Range",
+                                        "start": 1,
+                                        "width": 31
+                                    }
+                                ]
+                            },
+                            {
+                                "_type": "Fields.Field",
+                                "name": "F0",
+                                "rangeset": [
+                                    {
+                                        "_type": "Range",
+                                        "start": 0,
+                                        "width": 1
+                                    }
+                                ],
+                                "values": {
+                                    "_type": "Valuesets.Values",
+                                    "values": [
+                                        {
+                                            "_type": "Values.Value",
+                                            "meaning": "First value",
+                                            "value": "'0'"
+                                        },
+                                        {
+                                            "_type": "Values.Value",
+                                            "meaning": "Second value",
+                                            "value": "'1'"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "_type": "RegisterArray",
+                "state": "AArch64",
+                "name": "REG0<n>",
+                "title": "Register Array 0",
+                "purpose": "To represent a simple register array in this test case.",
+                "fieldsets": [
+                    {
+                        "_type": "Fieldset",
+                        "width": 32,
+                        "values": [
+                            {
+                                "_type": "Fields.Reserved",
+                                "value": "RES0",
+                                "rangeset": [
+                                    {
+                                        "_type": "Range",
+                                        "start": 1,
+                                        "width": 31
+                                    }
+                                ]
+                            },
+                            {
+                                "_type": "Fields.Field",
+                                "name": "F0",
+                                "rangeset": [
+                                    {
+                                        "_type": "Range",
+                                        "start": 0,
+                                        "width": 1
+                                    }
+                                ],
+                                "values": {
+                                    "_type": "Valuesets.Values",
+                                    "values": [
+                                        {
+                                            "_type": "Values.Value",
+                                            "meaning": "First value",
+                                            "value": "'0'"
+                                        },
+                                        {
+                                            "_type": "Values.Value",
+                                            "meaning": "Second value",
+                                            "value": "'1'"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "index_variable": "n",
+                "indexes": [
+                    {
+                        "_type": "Range",
+                        "start": 0,
+                        "width": 4
+                    }
+                ]
+            },
+            {
+                "_type": "RegisterBlock",
+                "size": "32000",
+                "name": "RB",
+                "default_access": "RAZ/WI",
+                "purpose": "To represent a simple register block in this test case.",
+                "accessors": [
+                    {
+                        "_type": "Accessors.ReadOffsetAccessor",
+                        "offset": [
+                            {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        ],
+                        "access": {
+                            "_type": "Accessors.Permission.SystemAccess",
+                            "access": {
+                                "_type": "AST.Return",
+                                "val": {
+                                    "_type": "AST.Identifier",
+                                    "value": "REG_S"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "_type": "Accessors.WriteOffsetAccessor",
+                        "offset": [
+                            {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        ],
+                        "access": {
+                            "_type": "Accessors.Permission.SystemAccess",
+                            "access": {
+                                "_type": "AST.Assignment",
+                                "val": {
+                                    "_type": "AST.Identifier",
+                                    "value": "value"
+                                },
+                                "var": {
+                                    "_type": "AST.Identifier",
+                                    "value": "REG_S"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    ],
+    "items": {
+        "oneOf": [
+            {
+                "$ref": "Register.json"
+            },
+            {
+                "$ref": "RegisterArray.json"
+            },
+            {
+                "$ref": "RegisterBlock.json"
+            }
+        ]
+    },
+    "type": "array",
+    "minItems": 1,
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

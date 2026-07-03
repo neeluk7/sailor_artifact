@@ -1,0 +1,47 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "This contains functionality that is common between $(~Instruction.Operation) and $(~Instruction.OperationAlias).",
+            "$(~Instruction.OperationAbstract) is not used on its own."
+        ]
+    ],
+    "type": "object",
+    "definitions": {
+        "description": {
+            "$ref": "../Text.json",
+            "info": [
+                [
+                    "Human-readable text that describes the operation. For example, 'ADD adds the value",
+                    "of the two source registers together and writes the result back to the destination register.'"
+                ]
+            ]
+        },
+        "brief": {
+            "examples": [
+                "Add scaled register"
+            ],
+            "info": [
+                "A string that describes the instruction in a few words."
+            ],
+            "type": "string",
+            "maxLength": 200
+        },
+        "title": {
+            "examples": [
+                "ADD (register)"
+            ],
+            "info": [
+                "A string that describes the instruction, using at least part of its mnemonic."
+            ],
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.OperationAbstract"
+}

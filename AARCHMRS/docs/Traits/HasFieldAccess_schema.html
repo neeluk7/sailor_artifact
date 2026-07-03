@@ -1,0 +1,350 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Traits.HasFieldAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Traits.</span><span class=" title-type">HasFieldAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">*</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p><code>HasFieldAccess</code> provides an abstract definition for schemata that provide field access.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/access" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/access">access</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="../Accessors/Permission/FieldAccess_schema.html" class="schema_link">Accessors.Permission.FieldAccess</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Accessors/Permission/FieldHardwareSoftwareAccess_schema.html" class="schema_link">Accessors.Permission.FieldHardwareSoftwareAccess</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Accessors/Permission/InstanceAccess_schema.html" class="schema_link">Accessors.Permission.InstanceAccess</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Accessors/Permission/FieldGetterSetter_schema.html" class="schema_link">Accessors.Permission.FieldGetterSetter</a>
+            </div>
+            <div class="items-oneOf">
+                        array
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Defines a field level access. Where:</p>
+<ul>
+<li><code>null</code> means the access is inherited from the parent.</li>
+<li>A Field level access cannot be more permissive than its parent. 
+   If Field.access is defined to be more permissive, then the parent 
+   access takes precedence.
+   For example, a register may define access to be <code>RW</code> and a field 
+   may override this to be less permissive for example <code>RO</code>.</li>
+<li>You can create recursive objects to represent an <code>if</code> <code>else</code> block.</li>
+<li>If none of the access conditions are met, then <code>null</code> is implied.</li>
+</ul></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Accessors/Permission/FieldAccess_schema.html">Accessors.Permission.FieldAccess</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Accessors/Permission/FieldHardwareSoftwareAccess_schema.html">Accessors.Permission.FieldHardwareSoftwareAccess</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Accessors/Permission/InstanceAccess_schema.html">Accessors.Permission.InstanceAccess</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Accessors/Permission/FieldGetterSetter_schema.html">Accessors.Permission.FieldGetterSetter</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- type is an array -->
+                    <span class="type"><span class="Xof">oneOf</span> array</span>
+                
+
+                
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    {
+        &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+        &#34;condition&#34;: &#34;IsFeatureImplemented(MYFEATURE)&#34;, 
+        &#34;access&#34;: [
+            {
+                &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+                &#34;condition&#34;: &#34;REG.F1 == &#39;00&#39;&#34;, 
+                &#34;access&#34;: &#34;RW&#34;
+            }, 
+            {
+                &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+                &#34;condition&#34;: null, 
+                &#34;access&#34;: &#34;RES0/WI&#34;
+            }
+        ]
+    }, 
+    {
+        &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+        &#34;condition&#34;: null, 
+        &#34;access&#34;: &#34;RES1/WI&#34;
+    }
+]</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+    &#34;condition&#34;: &#34;IsFeatureImplemented(MYFEATURE)&#34;, 
+    &#34;access&#34;: &#34;RO&#34;
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">null</code></pre>
+        </div>
+
+
+
+
+                    <div>
+                        <b>Default</b>
+                        <pre class="schema-json"><code class="language-json">null</code></pre>
+                    </div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "`HasFieldAccess` provides an abstract definition for schemata that provide field access."
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "access": {
+      "info": [
+        "Defines a field level access. Where:",
+        [
+          " - `null` means the access is inherited from the parent.",
+          " - A Field level access cannot be more permissive than its parent. ",
+          "   If Field.access is defined to be more permissive, then the parent ",
+          "   access takes precedence.",
+          "   For example, a register may define access to be `RW` and a field ",
+          "   may override this to be less permissive for example `RO`.",
+          " - You can create recursive objects to represent an `if` `else` block.",
+          " - If none of the access conditions are met, then `null` is implied."
+        ]
+      ],
+      "default": null,
+      "oneOf": [
+        {
+          "$ref": "../Accessors/Permission/FieldAccess.json"
+        },
+        {
+          "$ref": "../Accessors/Permission/FieldHardwareSoftwareAccess.json"
+        },
+        {
+          "$ref": "../Accessors/Permission/InstanceAccess.json"
+        },
+        {
+          "$ref": "../Accessors/Permission/FieldGetterSetter.json"
+        },
+        {
+          "additionalItems": false,
+          "minItems": 1,
+          "items": {
+            "$ref": "../Accessors/Permission/FieldAccess.json"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "examples": [
+        [
+          {
+            "_type": "Accessors.Permission.FieldAccess",
+            "condition": "IsFeatureImplemented(MYFEATURE)",
+            "access": [
+              {
+                "_type": "Accessors.Permission.FieldAccess",
+                "condition": "REG.F1 == '00'",
+                "access": "RW"
+              },
+              {
+                "_type": "Accessors.Permission.FieldAccess",
+                "condition": null,
+                "access": "RES0/WI"
+              }
+            ]
+          },
+          {
+            "_type": "Accessors.Permission.FieldAccess",
+            "condition": null,
+            "access": "RES1/WI"
+          }
+        ],
+        {
+          "_type": "Accessors.Permission.FieldAccess",
+          "condition": "IsFeatureImplemented(MYFEATURE)",
+          "access": "RO"
+        },
+        null
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Traits.HasFieldAccess"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

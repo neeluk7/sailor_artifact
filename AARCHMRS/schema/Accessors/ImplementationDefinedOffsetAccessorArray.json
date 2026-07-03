@@ -1,0 +1,96 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "An array of `ImplementationDefinedOffsetAccessor` for a given `RegisterBlock`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.ImplementationDefinedOffsetAccessorArray"
+            ]
+        },
+        "condition": {
+            "$ref": "ImplementationDefinedOffsetAccessor.json#/properties/condition"
+        },
+        "offset": {
+            "$ref": "ImplementationDefinedOffsetAccessor.json#/properties/offset"
+        },
+        "access": {
+            "$ref": "ImplementationDefinedOffsetAccessor.json#/properties/access"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Accessors.ImplementationDefinedOffsetAccessorArray",
+            "offset": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Integer",
+                        "value": 0
+                    },
+                    "op": "+",
+                    "right": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Integer",
+                            "value": 4
+                        },
+                        "op": "*",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "n"
+                        }
+                    }
+                }
+            ],
+            "access": {
+                "_type": "Accessors.Permission.MemoryAccess",
+                "access": {
+                    "_type": "Accessors.Permission.AccessTypes.Memory.ImplementationDefined",
+                    "constraints": [
+                        {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "RESERVED"
+                        },
+                        {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "W"
+                        }
+                    ]
+                }
+            },
+            "indexes": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 6
+                }
+            ],
+            "index_variable": "n"
+        }
+    ],
+    "required": [
+        "offset",
+        "indexes",
+        "index_variable"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ImplementationDefinedOffsetAccessorArray"
+}

@@ -1,0 +1,87 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        [
+            "The $(AST.DotAtom) schema provides a mechanism to reference an element within a ",
+            "complex data structure, as an array of sequential decision-points. This is equivalent to the ",
+            "dotted-object notation in ASL. For example, a $(~AST.DotAtom) might refer to the baz ",
+            "element of the bar element in the foo data structure, or to the bar property of the ",
+            "nth element in the foo array:"
+        ],
+        [
+            " - `foo.bar.baz`",
+            " - `foo[n].bar`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.DotAtom",
+            "values": [
+                {
+                    "_type": "AST.Identifier",
+                    "value": "foo"
+                },
+                {
+                    "_type": "AST.Identifier",
+                    "value": "bar"
+                },
+                {
+                    "_type": "AST.Identifier",
+                    "value": "baz"
+                }
+            ]
+        },
+        {
+            "_type": "AST.DotAtom",
+            "values": [
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "n"
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "foo"
+                    }
+                },
+                {
+                    "_type": "AST.Identifier",
+                    "value": "bar"
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.DotAtom"
+            ]
+        },
+        "values": {
+            "info": [
+                "The values of the DotAtom."
+            ],
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "$ref": "BinaryOp.json#/definitions/expression"
+            }
+        }
+    },
+    "required": [
+        "values"
+    ],
+    "title": "DotAtom",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

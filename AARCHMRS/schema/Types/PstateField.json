@@ -1,0 +1,59 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This object is used to link to a PSTATE field, it holds all the components required for the linking."
+    ],
+    "title": "Types.PstateField",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "deprecated": "Replaced with $(AST.Concat) and $(Types.Variable).",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Types.PstateField"
+            ]
+        },
+        "value": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "info": [
+                        "The name of the PSTATE field, for example `PSTATE.EL`, `PSTATE.D`."
+                    ],
+                    "pattern": "^PSTATE\\.[A-Za-z][A-Za-z0-9_]*$"
+                },
+                "slices": {
+                    "oneOf": [
+                        {
+                            "$ref": "../Rangeset.json",
+                            "info": [
+                                "The bit slice on the `PSTATE` value."
+                            ]
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ]
+        }
+    },
+    "required": [
+        "value"
+    ]
+}

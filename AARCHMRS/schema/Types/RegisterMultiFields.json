@@ -1,0 +1,67 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Types.RegisterMultiFields",
+    "deprecated": "This has been superseded by an $(AST.Concat) containing $(Types.RegisterType).",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        ""
+    ],
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Types.RegisterMultiFields"
+            ]
+        },
+        "value": {
+            "properties": {
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                    },
+                    "minItems": 2,
+                    "uniqueItems": true
+                },
+                "register": {
+                    "$ref": "RegisterType.json#/definitions/name",
+                    "deprecated": true,
+                    "see": "RegisterMultiFields.json#/definitions/name"
+                },
+                "name": {
+                    "$ref": "RegisterType.json#/definitions/name"
+                },
+                "state": {
+                    "$ref": "RegisterType.json#/definitions/state"
+                },
+                "slices": {
+                    "oneOf": [
+                        {
+                            "$ref": "../Rangeset.json"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "state",
+                "name",
+                "fields"
+            ],
+            "type": "object"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "additionalProperties": false
+}

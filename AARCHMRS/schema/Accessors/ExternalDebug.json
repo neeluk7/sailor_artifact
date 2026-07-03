@@ -1,0 +1,91 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "An External Debug accessor indicates that the containing Register can be accessed through ",
+        "an external debug interface. An External Debug accessor must have Component and Offset properties."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.ExternalDebug"
+            ]
+        },
+        "component": {
+            "info": [
+                "The component in which the accessor exists, e.g. 'GIC CPU interface' or 'PMU'."
+            ],
+            "type": "string"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "instance": {
+            "info": [
+                "The System register or instance of said register the Accessor is for."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "offset": {
+            "info": [
+                "The offset within the component at which the accessor exists."
+            ],
+            "$ref": "../AST/BinaryOp.json#/definitions/expression"
+        },
+        "access": {
+            "$ref": "./Permission/MemoryAccess.json",
+            "see": "./Permission/MemoryAccess.json",
+            "type": [
+                "object",
+                "null"
+            ]
+        },
+        "power_domain": {
+            "oneOf": [
+                {
+                    "enum": [
+                        "Unknown",
+                        "Core",
+                        "Any",
+                        "Debug",
+                        "ImplementationDefined",
+                        "Mixed"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "range": {
+            "oneOf": [
+                {
+                    "$ref": "../Range.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "required": [
+        "component",
+        "offset",
+        "access"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ExternalDebug"
+}

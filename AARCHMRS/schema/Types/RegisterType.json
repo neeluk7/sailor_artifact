@@ -1,0 +1,153 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Types.RegisterType",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "The $(Types.RegisterType) schema provides a mechanism to reference a register.",
+            "If you wish to reference a Field within a register, you should instead use $(Types.Field)."
+        ]
+    ],
+    "definitions": {
+        "state": {
+            "info": [
+                "The register-state in which the register being referred will be accessed."
+            ],
+            "enum": [
+                "AArch32",
+                "AArch64",
+                "ext"
+            ]
+        },
+        "name": {
+            "info": [
+                "The name of the register being referred to."
+            ],
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_\\s]*(?:<[^>]+>)?[A-Za-z0-9_]*$",
+            "examples": [
+                "REG0",
+                "REG<n>_EL1"
+            ]
+        },
+        "instance": {
+            "oneOf": [
+                {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:<[^>]+>)?[A-Za-z0-9_]*$"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "info": [
+                "The instance of the register being referred to. If it is `null` then the instance is the same as the register name."
+            ],
+            "examples": [
+                "REG0",
+                "REG<n>_EL1",
+                null
+            ]
+        }
+    },
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Types.RegisterType"
+            ]
+        },
+        "value": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/name",
+                    "info": [
+                        "The `name` is the register that is being referenced."
+                    ]
+                },
+                "instance": {
+                    "$ref": "#/definitions/instance",
+                    "info": [
+                        "The `instance` (where applicable) is the instance of the register being referenced."
+                    ]
+                },
+                "state": {
+                    "$ref": "#/definitions/state",
+                    "info": [
+                        "The `state` can be set to `AArch32`, `AArch64` or `ext` (short for external)."
+                    ]
+                },
+                "slices": {
+                    "oneOf": [
+                        {
+                            "$ref": "../Rangeset.json",
+                            "info": [
+                                "The `slices` provides the bitstring slice of the full register reference."
+                            ]
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "state",
+                "name"
+            ],
+            "examples": [
+                {
+                    "state": "AArch64",
+                    "name": "REG0"
+                },
+                {
+                    "state": "AArch32",
+                    "name": "REG0",
+                    "instance": "REG0_S",
+                    "slices": [
+                        {
+                            "_type": "Range",
+                            "start": 4,
+                            "width": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "examples": [
+        {
+            "_type": "Types.RegisterType",
+            "value": {
+                "state": "AArch64",
+                "name": "REG0"
+            }
+        },
+        {
+            "_type": "Types.RegisterType",
+            "value": {
+                "state": "AArch32",
+                "name": "REGISTER",
+                "instance": "INSTANCE",
+                "slices": [
+                    {
+                        "_type": "Range",
+                        "start": 4,
+                        "width": 1
+                    }
+                ]
+            }
+        }
+    ]
+}

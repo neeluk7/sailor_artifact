@@ -1,0 +1,73 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The value of this reset is `IMPLEMENTATION DEFINED`."
+    ],
+    "examples": [
+        {
+            "_type": "Resets.ImplementationDefined",
+            "constraints": [
+                {
+                    "_type": "Resets.Unknown"
+                },
+                {
+                    "_type": "Values.Value",
+                    "value": "'000'"
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Resets.ImplementationDefined"
+            ]
+        },
+        "constraints": {
+            "info": [
+                "Provides a list of constraints."
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "Unknown.json"
+                            },
+                            {
+                                "$ref": "ConditionalReset.json"
+                            },
+                            {
+                                "$ref": "../Types/Field.json"
+                            },
+                            {
+                                "$ref": "../Values/Value.json"
+                            }
+                        ]
+                    },
+                    "info": [
+                        "The implementation of this reset is restricted to one of the defined resets."
+                    ]
+                },
+                {
+                    "type": "null",
+                    "info": [
+                        "When set to null, no constraints apply."
+                    ]
+                }
+            ]
+        }
+    },
+    "title": "ImplementationDefined",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

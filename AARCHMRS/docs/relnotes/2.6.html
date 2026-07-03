@@ -1,0 +1,78 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="26">2.6</h1>
+<h2 id="highlights">Highlights</h2>
+<h3 id="aarchmrs-5022-update-typesfield-schema-to-be-correct">AARCHMRS-5022: update Types.Field schema to be correct</h3>
+<p>Updated <a class="schema_link" href="../Types/Field_schema.html" title="Types.Field">Types.Field</a> schema to properly support the <a class="schema_link" href="../Features_schema.html" title="Features">Features</a> schema. Changes <code>rangeset</code> key of
+<code>value</code> to be <code>slices</code> and updates the string input mode pattern. Corrected miscellaneous errors
+with nested objects.</p>
+<h3 id="aarchmrs-4957-update-tooling-for-the-asl1-alp2">AARCHMRS-4957: Update Tooling for the ASL1 ALP2</h3>
+<p>To accommodate the changes to ASL1 from the ALP2 release, the following changes were made
+to the schema:</p>
+<ul>
+<li><code><a class="schema_link" href="../AST/ArrayAccessOp_schema.html" title="AST.ArrayAccessOp">AST.ArrayAccessOp</a></code> has been created to describe arrays (<code>MYARRAY[[m]]</code>).</li>
+<li><code><a class="schema_link" href="../AST/Assignment_schema.html" title="AST.Assignment">AST.Assignment</a></code> has been modified to allow arrays and functions (setters) in variables (<code>FOO() = BAR</code>).</li>
+<li><code><a class="schema_link" href="../AST/Function_schema.html" title="AST.Function">AST.Function</a></code> has been modified to specify parameters in addition to arguments (<code>FOO{foo, bar}(baz, fee)</code>).</li>
+<li><code><a class="schema_link" href="../AST/Identifier_schema.html" title="AST.Identifier">AST.Identifier</a></code> 'regex' and 'c_identifier_regex' definitions have been modified to not match names starting with double-underscores (<code>__MY_IDENTIFIER</code> will no longer be matched).</li>
+</ul>
+<h3 id="schema-fixes">Schema fixes</h3>
+<p>The <code>SystemAccessor</code> schema was incorrectly representing encodings as an array of an array. This has been corrected to reduce the erroneous double array and now allow an array of Encodings.</p>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

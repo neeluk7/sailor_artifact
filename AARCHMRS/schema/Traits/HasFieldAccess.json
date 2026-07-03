@@ -1,0 +1,86 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "`HasFieldAccess` provides an abstract definition for schemata that provide field access."
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "access": {
+            "info": [
+                "Defines a field level access. Where:",
+                [
+                    " - `null` means the access is inherited from the parent.",
+                    " - A Field level access cannot be more permissive than its parent. ",
+                    "   If Field.access is defined to be more permissive, then the parent ",
+                    "   access takes precedence.",
+                    "   For example, a register may define access to be `RW` and a field ",
+                    "   may override this to be less permissive for example `RO`.",
+                    " - You can create recursive objects to represent an `if` `else` block.",
+                    " - If none of the access conditions are met, then `null` is implied."
+                ]
+            ],
+            "default": null,
+            "oneOf": [
+                {
+                    "$ref": "../Accessors/Permission/FieldAccess.json"
+                },
+                {
+                    "$ref": "../Accessors/Permission/FieldHardwareSoftwareAccess.json"
+                },
+                {
+                    "$ref": "../Accessors/Permission/InstanceAccess.json"
+                },
+                {
+                    "$ref": "../Accessors/Permission/FieldGetterSetter.json"
+                },
+                {
+                    "additionalItems": false,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "../Accessors/Permission/FieldAccess.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "examples": [
+                [
+                    {
+                        "_type": "Accessors.Permission.FieldAccess",
+                        "condition": "IsFeatureImplemented(MYFEATURE)",
+                        "access": [
+                            {
+                                "_type": "Accessors.Permission.FieldAccess",
+                                "condition": "REG.F1 == '00'",
+                                "access": "RW"
+                            },
+                            {
+                                "_type": "Accessors.Permission.FieldAccess",
+                                "condition": null,
+                                "access": "RES0/WI"
+                            }
+                        ]
+                    },
+                    {
+                        "_type": "Accessors.Permission.FieldAccess",
+                        "condition": null,
+                        "access": "RES1/WI"
+                    }
+                ],
+                {
+                    "_type": "Accessors.Permission.FieldAccess",
+                    "condition": "IsFeatureImplemented(MYFEATURE)",
+                    "access": "RO"
+                },
+                null
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Traits.HasFieldAccess"
+}

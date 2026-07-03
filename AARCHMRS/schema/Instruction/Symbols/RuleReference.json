@@ -1,0 +1,46 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A $(~Instruction.Symbols.RuleReference) is a Symbol that refers to an assembly $(~Instruction.Rules.Rule)",
+            "that is defined elsewhere."
+        ],
+        "",
+        "The example below contains a reference to the `Wd` rule."
+    ],
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Instruction.Symbols.RuleReference",
+            "rule_id": "Wd"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Symbols.RuleReference"
+            ]
+        },
+        "rule_id": {
+            "info": [
+                "The ID of the referenced assembly rule."
+            ],
+            "$ref": "../../AST/Identifier.json#/definitions/c_identifier_regex"
+        }
+    },
+    "required": [
+        "rule_id"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Symbols.RuleReference"
+}

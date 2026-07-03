@@ -1,0 +1,55 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "SystemAccessorArray",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.SystemAccessorArray"
+            ]
+        },
+        "name": {
+            "$ref": "SystemAccessor.json#/definitions/name"
+        },
+        "condition": {
+            "$ref": "SystemAccessor.json#/definitions/condition"
+        },
+        "encoding": {
+            "info": [
+                "`index_variable` must appear in the `asmvalue` for all encodings surrounded by `<>`."
+            ],
+            "$ref": "SystemAccessor.json#/definitions/encoding"
+        },
+        "access": {
+            "$ref": "SystemAccessor.json#/definitions/access"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "required": [
+        "encoding",
+        "access",
+        "name",
+        "indexes",
+        "index_variable"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        "Like SystemAccessor except expandable based on an index.",
+        "When expanded, the values defined in the `indexes` property will be used to generate multiple SystemAccessors, one for each index."
+    ]
+}

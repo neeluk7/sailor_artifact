@@ -1,0 +1,88 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This object holds one encoding for a register. For example,",
+        "> `REG0/opc1:0b000 opc2:0b001 CRn:0b0111 coproc:0b1111 CRm:0b1000`",
+        "_This shows the string representation of an encoding_, where the ASM name is shown as `ATS1CPW`.",
+        "----",
+        "When used within index relative models such as [RegisterArray](RegisterArray_schema.html), the encoding could be represented as:",
+        "> `REG<n>/opc1:0b000 opc2:0b001 CRn:0b0<n:4:2> coproc:0b11<n:1:0> CRm:0b1000`",
+        "Where the index value of `n` changes the canonical encoding value.",
+        [
+            "For example: if the value of `n` is `12` then the binary representation of",
+            "`12` will be `0b01100` making the value of `CRn` to be `0b0011`",
+            "(`011` is inserted as the bit value of `n[4:2]`) and `coproc` to be `0b1100`",
+            "(`00` is inserted as a the bit value of `n[1:0]`)."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json",
+            "info": [
+                "Metadata."
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Encoding"
+            ]
+        },
+        "asmvalue": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "info": [
+                "This is the aliased name for the encoding, For example for the `MRS` instruction this will be the value of `<systemreg>`."
+            ]
+        },
+        "encodings": {
+            "patternProperties": {
+                ".*": {
+                    "oneOf": [
+                        {
+                            "$ref": "Values/Group.json"
+                        },
+                        {
+                            "$ref": "Values/Value.json"
+                        },
+                        {
+                            "$ref": "Values/EquationValue.json"
+                        }
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "info": [
+                [
+                    "The encoding object is an object where the key is the encoding name (`opcode`)",
+                    "and the value is one of the value objects."
+                ],
+                [
+                    "```",
+                    "{",
+                    "   \"_type\": \"Encoding\",",
+                    "   \"encoding\": {",
+                    "   \"CRn\": {",
+                    "       \"_type\": \"Value\",",
+                    "       \"value\": \"'0111'\",",
+                    "       \"meaning\": \"The CRn value\",",
+                    "    }",
+                    "}",
+                    "```"
+                ]
+            ]
+        }
+    },
+    "title": "Encoding",
+    "required": [
+        "encodings"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

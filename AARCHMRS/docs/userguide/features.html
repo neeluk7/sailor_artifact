@@ -1,0 +1,209 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="features">Features</h1>
+<p>The <a class="schema_link" href="../Features_schema.html" title="Features">Features</a> model stores information about the architectural configuration
+using constraints, where constraints can be relationships between multiple <strong>features</strong> (<code>FEAT_X</code>),
+multiple <strong>architectural versions</strong> (<code>v8Ap1</code>) and register ID fields.
+For example, see below for a <a class="schema_link" href="../Features_schema.html" title="Features">Features</a> file that tries to express all these relationships:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this documentation for ease, we write constraints <strong>as strings</strong> <code>A ==&gt; B</code>. However,
+in the data, this is stored as <a class="schema_link" href="../AST/BinaryOp_schema.html" title="AST.BinaryOp">AST.BinaryOp</a>.</p>
+</div>
+<pre class="includes"><code class="language-json">{
+    "_type": "Features",
+    "parameters": [
+        {
+            "_type": "Parameters.Boolean",
+            "name": "v8Ap1",
+            "title": "v8.1 A-Profile"
+        },
+        {
+            "_type": "Parameters.Boolean",
+            "name": "v8Ap2",
+            "title": "v8.2 A-Profile"
+        },
+        {
+            "_type": "Parameters.Boolean",
+            "name": "FEAT_A",
+            "title": "Feature A",
+            "constraints": [
+                "FEAT_A ==&gt; v8Ap2",
+                "FEAT_A &lt;=&gt; UInt(AArch64-IDREG.A) &gt;= 1"
+            ]
+        },
+        {
+            "_type": "Parameters.Boolean",
+            "name": "FEAT_B",
+            "title": "Feature B",
+            "constraints": [
+                "v8Ap2 ==&gt; FEAT_B",
+                "FEAT_B ==&gt; v8Ap1",
+                "FEAT_B ==&gt; FEAT_A"
+            ]
+        },
+        {
+            "_type": "Parameters.Integer",
+            "name": "NUM_COUNTERS",
+            "title": "Number of Counters",
+            "values": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "constraints": [
+                "NUM_COUNTERS == UInt(AArch64-IDREG.Counters)"
+            ]
+        },
+        {
+            "_type": "Parameters.Integer",
+            "name": "DEBUG_LEVEL",
+            "title": "Debugger verbosity Level",
+            "values": [
+                0,
+                1,
+                2
+            ],
+            "constraints": [
+                "DEBUG_LEVEL == UInt(Configuration.Debugger.Verbosity)"
+            ]
+        }
+    ],
+    "constraints": [
+        "v8Ap2 ==&gt; v8Ap1"
+    ]
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Features model does not make any differentiation between an <strong>architecture version</strong> or a
+<strong>feature</strong>. They are all represented as <code>Parameters.*</code>, and boolean logic connects them
+together using <code>&lt;=&gt;</code> (if-and-only-if) and <code>==&gt;</code> (if-then).</p>
+</div>
+<p>The Features model holds two main keys:</p>
+<ul>
+<li><code>parameters</code>: A list of all named <a class="schema_link" href="../Parameters/" title="Parameters">Parameters</a> types.
+   For detail around all types of supported parameters.</li>
+<li><code>constraints</code>: A list of constraints specified in ASL, shown here as string but stored as an AST
+   in the data model</li>
+</ul>
+<h2 id="parameters">Parameters</h2>
+<p>The <code>parameters</code> property provides a list of <a class="schema_link" href="../Parameters/" title="Parameters">Parameters</a> types,  where each parameter contains:</p>
+<ul>
+<li><code>_type</code>, which defines the type of the parameter,</li>
+<li><code>name</code>, a unique name associated with this parameter. All names (irrelevant of their types) must
+   be unique.</li>
+<li><code>title</code>, a human-readable title for the feature.</li>
+<li><code>values</code>, the allowed domain of the current parameter.</li>
+<li><code>description</code> (not shown), a human-readable descriptive content.</li>
+</ul>
+<p>See <a class="schema_link" href="../Parameters/" title="Parameters">Parameters</a> for more detail around each property above
+and different types of parameters.</p>
+<h2 id="constraints">Constraints</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above, the <code>constraint</code> property can be found attached to a <code>Parameter</code>
+  or attached to the top <code>Features</code> level. This is done as an aid to help users
+  define constraints closer to the context. However the system does not make any distinction
+  and <strong>treats all constraints globally.</strong></p>
+</div>
+<p>In the example above you see the following concepts expressed:</p>
+<ul>
+<li>Four definitions of boolean parameters are made, where:<ul>
+<li><code>v8Ap1</code> and <code>v8Ap2</code> are architecture extensions.</li>
+<li><code>FEAT_A</code> and <code>FEAT_B</code> are features.</li>
+</ul>
+</li>
+<li>The <code>v8Ap2</code> parameter has a constraint (which is defined globally) expressed as <code>v8Ap2 ==&gt; v8Ap1</code>,
+  which signifies that <code>v8Ap2</code> architecture extension is <code>v8Ap1</code> compliant.  Formally:<ul>
+<li>When <code>v8Ap2</code> is set to <code>true</code> ('implemented' in architectural terms) then <code>v8Ap1</code> must be
+ <code>true</code> (implemented).</li>
+<li>When <code>v8Ap1</code> is <code>false</code> then <code>v8Ap2</code> cannot be <code>true</code>.</li>
+<li>When <code>v8Ap1</code> is <code>true</code>, no assumption can be made about <code>v8Ap2</code>.</li>
+</ul>
+</li>
+<li>The <code>FEAT_A</code> parameter has the following constraints:<ul>
+<li><code>FEAT_A ==&gt; v8Ap2</code> which is equivalent to <code>FEAT_A is OPTIONAL from Armv8.2</code>.</li>
+<li><code>FEAT_A &lt;=&gt; UInt(AArch64-IDREG.A) &gt;= 1'</code> which is <code>FEAT_A is implemented if and only if IDREG.A holds a value &gt;= 1</code>.   This means that:<ul>
+<li>If <code>FEAT_A</code> is true then the value of <code>AArch64-IDREG.A</code> is <code>&gt;= 1</code>.</li>
+<li>If the value of <code>AArch64-IDREG.A</code> is <code>'0001'</code> then <code>FEAT_A</code> must be true.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The <code>FEAT_B</code> parameter has the following constraints:<ul>
+<li><code>v8Ap2 ==&gt; FEAT_B</code> : <code>FEAT_B is mandatory from Armv8.2</code></li>
+<li>Mandatory features are usually permitted in an earlier version <code>FEAT_B ==&gt; v8Ap1</code> : <code>FEAT_B is OPTIONAL from Armv8.1</code>.</li>
+<li>Features sometimes require other features to be implemented.  <code>FEAT_B ==&gt; FEAT_A</code> : <code>If FEAT_B is implemented, then FEAT_A is implemented</code>.</li>
+</ul>
+</li>
+<li>In <code>NUM_COUNTERS</code> we see an integer parameter that is equal to the <code>AArch64-IDREG.Counters</code> <a class="schema_link" href="../Types/Field_schema.html" title="Types.Field">Field</a>.
+  Noting that the <code>UInt</code> cast is important because in ASL <code>AArch64-IDREG.Counters</code> is
+  represented as bits, and <code>NUM_COUNTERS</code> is represented as an integer meaning that for
+  <code>NUM_COUNTERS == UInt(AArch64-IDREG.Counters)</code> to work the domains on both sides should match.</li>
+<li>In <code>DEBUG_LEVEL</code> we see an integer parameter that is equal to the <code>Configuration.Debugger.Verbosity</code> <a class="schema_link" href="../AST/DotAtom_schema.html" title="AST.DotAtom">DotAtom</a>.
+  This DotAtom refers to the "Verbosity" property of the "Debugger" object, which is accessed as a property of the "Configuration" object.
+  As with <code>NUM_COUNTERS</code> above, the property is stored as bits and must be cast to <code>UInt</code> for comparison.</li>
+</ul>
+<p>To understand complex relationships that can be expressed please see
+<a class="schema_link" href="../Traits/HasConstraints_schema.html" title="Traits.HasConstraints">Traits.HasConstraints</a> documentation.</p>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

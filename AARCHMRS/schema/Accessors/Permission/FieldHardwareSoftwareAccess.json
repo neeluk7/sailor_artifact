@@ -1,0 +1,124 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The hardware software access defines logic for specifying the behavior ",
+        "of accessing a register field from both the software and hardware perspective."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.FieldHardwareSoftwareAccess"
+            ]
+        },
+        "software": {
+            "info": [
+                "Optional software access behavior."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "FieldAccess.json"
+                },
+                {
+                    "$ref": "InstanceAccess.json"
+                },
+                {
+                    "$ref": "FieldGetterSetter.json"
+                },
+                {
+                    "additionalItems": false,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "FieldAccess.json"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "hardware": {
+            "info": [
+                "Hardware access: this can be used to specify pseudocode or hardware debugger access."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "FieldAccess.json"
+                },
+                {
+                    "$ref": "InstanceAccess.json"
+                },
+                {
+                    "$ref": "FieldGetterSetter.json"
+                },
+                {
+                    "additionalItems": false,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "FieldAccess.json"
+                    },
+                    "type": "array"
+                }
+            ]
+        },
+        "condition": {
+            "info": [
+                "The condition under which the current access applies. This is effectively the `if` statement in the rendered pseudocode."
+            ],
+            "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Accessors.Permission.FieldHardwareSoftwareAccess",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_MTE"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "hardware": {
+                "_type": "Accessors.Permission.FieldAccess",
+                "condition": {
+                    "_type": "AST.Bool",
+                    "value": true
+                },
+                "access": "RW"
+            },
+            "software": {
+                "_type": "Accessors.Permission.FieldAccess",
+                "condition": {
+                    "_type": "AST.Function",
+                    "arguments": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "IMPLEMENTED_XYZ"
+                        }
+                    ],
+                    "name": "ImpDefBool"
+                },
+                "access": "RO"
+            }
+        }
+    ],
+    "required": [
+        "hardware"
+    ],
+    "title": "FieldHardwareSoftwareAccess",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

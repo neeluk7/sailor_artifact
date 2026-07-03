@@ -1,0 +1,46 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "`FieldAbstract` is an abstract base class from which any object that should be",
+            "contained in an `Encodeset` is derived. `FieldAbstract` is not used on its own."
+        ]
+    ],
+    "type": "object",
+    "definitions": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "range": {
+            "$ref": "../../Range.json",
+            "info": [
+                "The range of bits that this object occupies in its `Encodeset`."
+            ]
+        },
+        "value": {
+            "$ref": "../../Values/Value.json",
+            "info": [
+                "The value taken by the range of bits that this object occupies."
+            ]
+        },
+        "should_be_mask": {
+            "$ref": "../../Values/Value.json",
+            "info": [
+                "The bitmask to determine which bits are ShouldBe."
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "range",
+        "value"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Encodeset.FieldAbstract"
+}

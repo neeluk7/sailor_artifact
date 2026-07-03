@@ -1,0 +1,82 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A model representing a unary operation over an expression, for example:",
+        [
+            " - `!TRUE`",
+            " - `!(A == 2)`",
+            " - `-15`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.UnaryOp",
+            "op": "!",
+            "expr": {
+                "_type": "AST.Bool",
+                "value": true
+            }
+        },
+        {
+            "_type": "AST.UnaryOp",
+            "op": "!",
+            "expr": {
+                "_type": "AST.BinaryOp",
+                "left": {
+                    "_type": "AST.Identifier",
+                    "value": "A"
+                },
+                "op": "==",
+                "right": {
+                    "_type": "AST.Integer",
+                    "value": 2
+                }
+            }
+        },
+        {
+            "_type": "AST.UnaryOp",
+            "op": "-",
+            "expr": {
+                "_type": "AST.Integer",
+                "value": 15
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.UnaryOp"
+            ]
+        },
+        "op": {
+            "info": [
+                "The operation to be performed on `expr`."
+            ],
+            "enum": [
+                "!",
+                "-",
+                "NOT"
+            ]
+        },
+        "expr": {
+            "info": [
+                "The expression to which the unary operation will be applied."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        }
+    },
+    "required": [
+        "expr",
+        "op"
+    ],
+    "title": "UnaryOp",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

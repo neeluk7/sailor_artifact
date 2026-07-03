@@ -1,0 +1,57 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Rangeset",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "info": [
+        [
+            "The $(Rangeset) schema contains an array of $(Range) objects which allow us to reference",
+            "multiple bits in a bitstring (or binary number)."
+        ],
+        [
+            "For example to reference the set bits in an 8-bit number `'01001110'`, you can use two ",
+            "$(Range) objects, where the first $(Range) object references 1-bit at position `6` ",
+            "(most significant bit), and the next $(Range) object references 3-bits at position ",
+            "`4:2`. See $(Range) object for more details on a single bit reference."
+        ],
+        [
+            "!!! note",
+            "    The order is important, because referencing `4:2, 6` returns a different answer!",
+            "    ",
+            "    For example `'abcdefgh'` represent a bitstring where the characters represent ",
+            "    the position. Where:",
+            "    ",
+            "      - `6, 4:2` returns the bits in the order of `'bdef'`.",
+            "      - `4:2, 6` returns the bits in the order of `'defb'`.",
+            "      - `2, 3, 4, 6` returns the bits in the order of `'fedb'`."
+        ]
+    ],
+    "items": {
+        "oneOf": [
+            {
+                "$ref": "Range.json"
+            },
+            {
+                "$ref": "ExpressionRange.json"
+            }
+        ]
+    },
+    "examples": [
+        [
+            {
+                "_type": "Range",
+                "start": 6,
+                "width": 1
+            },
+            {
+                "_type": "Range",
+                "start": 2,
+                "width": 3
+            }
+        ]
+    ],
+    "additionalItems": false
+}

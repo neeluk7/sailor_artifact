@@ -1,0 +1,98 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./../img/mstile-144x144.png">
+    <link rel="icon" href="./../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./../index.html"><img src="./../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="abstract-syntax-tree">Abstract Syntax Tree</h1>
+<p>Expressions describing conditionality or constraints of the AARCHMRS data are expressed using an Abstract Syntax Tree (AST) format.
+This format mainly stems from two base AST nodes:</p>
+<h2 id="astbinaryop"><a class="schema_link" href="../AST/BinaryOp_schema.html" title="AST.BinaryOp">AST.BinaryOp</a></h2>
+<p>To represent expressions such as <code>A ==&gt; B</code> or <code>A == B</code> etc. we  use <a class="schema_link" href="../AST/BinaryOp_schema.html" title="AST.BinaryOp">AST.BinaryOp</a>.</p>
+<h2 id="astunaryop"><a class="schema_link" href="../AST/UnaryOp_schema.html" title="AST.UnaryOp">AST.UnaryOp</a></h2>
+<p>To represent expressions such as <code>NOT x</code>, <code>-2</code> or <code>!(A)</code> we use  <a class="schema_link" href="../AST/UnaryOp_schema.html" title="AST.UnaryOp">AST.UnaryOp</a>.</p>
+<p>The rest of the AST models are used within these contexts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While this <code>AST</code> is based on ASL, it is technically not ASL. It is only intended for use in AARCHMRS data.
+Please see <a href="https://github.com/herd/herdtools7/blob/master/asllib/AST.mli">the ASL reference specification</a> if you need an official ASL AST.</p>
+</div>
+<ul>
+<li><a href="ArrayAccessOp_schema.html">ArrayAccessOp</a></li>
+<li><a href="Assignment_schema.html">Assignment</a></li>
+<li><a href="BinaryOp_schema.html">BinaryOp</a></li>
+<li><a href="Bool_schema.html">Bool</a></li>
+<li><a href="Concat_schema.html">Concat</a></li>
+<li><a href="DotAtom_schema.html">DotAtom</a></li>
+<li><a href="ForLoop_schema.html">ForLoop</a></li>
+<li><a href="Function_schema.html">Function</a></li>
+<li><a href="Identifier_schema.html">Identifier</a></li>
+<li><a href="If_schema.html">If</a></li>
+<li><a href="Integer_schema.html">Integer</a></li>
+<li><a href="Real_schema.html">Real</a></li>
+<li><a href="Return_schema.html">Return</a></li>
+<li><a href="Set_schema.html">Set</a></li>
+<li><a href="Slice_schema.html">Slice</a></li>
+<li><a href="SquareOp_schema.html">SquareOp</a></li>
+<li><a href="StatementBlock_schema.html">StatementBlock</a></li>
+<li><a href="Tuple_schema.html">Tuple</a></li>
+<li><a href="Type_schema.html">Type</a></li>
+<li><a href="TypeAnnotation_schema.html">TypeAnnotation</a></li>
+<li><a href="UnaryOp_schema.html">UnaryOp</a></li>
+<li><a href="VariableDeclaration_schema.html">VariableDeclaration</a></li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./../js/highlight/highlight.js"></script>
+    <script src="./../js/highlight/languages/json.min.js"></script>
+    <script src="./../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./../js/highlight/languages/yaml.min.js"></script>
+    <script src="./../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

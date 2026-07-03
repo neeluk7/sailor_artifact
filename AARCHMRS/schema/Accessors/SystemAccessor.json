@@ -1,0 +1,212 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "definitions": {
+        "name": {
+            "type": "string",
+            "info": [
+                "Name of the SystemAccessor. For example: A64.MRS"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "encoding": {
+            "info": [
+                "This defines the encodings for the current register.",
+                "An encoding is a unique address that points to the current register, for example:",
+                [
+                    " - **opc1**: `0b000`",
+                    " - **opc2**: `0b010`",
+                    " - **CRn**: `0b1001`",
+                    " - **coproc**: `0b1111`",
+                    " - **CRm**: `0b1101`"
+                ],
+                "When encoding is set to a string it can have the string form that can be read by the system",
+                "> opc1:0b000 opc2:0b010 CRn:0b1001 coproc:0b1111 CRm:0b1101",
+                "The order of the string representation is not important."
+            ],
+            "items": {
+                "$ref": "../Encoding.json"
+            },
+            "type": "array"
+        },
+        "access": {
+            "oneOf": [
+                {
+                    "$ref": "./Permission/SystemAccess.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "info": [
+                "The access property defines the logic behind the access of this accessor, for example:",
+                "> When calling **MSR** with a given **encoding** you get **access to this register at EL0**, otherwise accesses are **UNDEFINED**",
+                "Where `in EL0` is a condition, and otherwise is the default access defined by no condition."
+            ]
+        }
+    },
+    "title": "SystemAccessor",
+    "oneOf": [
+        {
+            "deprecated": true,
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json",
+                    "info": [
+                        "Metadata"
+                    ]
+                },
+                "_type": {
+                    "enum": [
+                        "Accessors.A64.AT_SYS",
+                        "Accessors.A64.DC_SYS",
+                        "Accessors.A64.IC_SYS",
+                        "Accessors.A64.MRS",
+                        "Accessors.A64.MSRimmediate",
+                        "Accessors.A64.MSRregister",
+                        "Accessors.A64.MSRcapability",
+                        "Accessors.A64.MRScapability",
+                        "Accessors.A64.SYS",
+                        "Accessors.A64.SYSL",
+                        "Accessors.A64.TLBI_SYS",
+                        "Accessors.A64.CFP_SYS",
+                        "Accessors.A64.CSR_SYS",
+                        "Accessors.A64.CPP_SYS",
+                        "Accessors.A64.BRB_SYS",
+                        "Accessors.A64.DVP_SYS",
+                        "Accessors.A32.MCR",
+                        "Accessors.A32.MCRR",
+                        "Accessors.A32.MRC",
+                        "Accessors.A32.MRRC",
+                        "Accessors.A32.MRS",
+                        "Accessors.A32.MRSbanked",
+                        "Accessors.A32.MSRbanked",
+                        "Accessors.A32.MSRimmediate",
+                        "Accessors.A32.MSRregister",
+                        "Accessors.A32.VMRS",
+                        "Accessors.A32.VMSR",
+                        "Accessors.A32.STC",
+                        "Accessors.A32.LDC"
+                    ],
+                    "info": [
+                        "The possible set of system instructions that can be used to access a register"
+                    ]
+                },
+                "condition": {
+                    "$ref": "../Traits/HasCondition.json#/definitions/condition",
+                    "info": [
+                        "The condition which must be true for this accessor to be used."
+                    ]
+                },
+                "encoding": {
+                    "info": [
+                        "This defines the encodings for the current register.",
+                        "An encoding is a unique address that points to the current register, for example:",
+                        [
+                            " - **opc1**: `0b000`",
+                            " - **opc2**: `0b010`",
+                            " - **CRn**: `0b1001`",
+                            " - **coproc**: `0b1111`",
+                            " - **CRm**: `0b1101`"
+                        ],
+                        "When encoding is set to a string it can have the string form that can be read by the system:",
+                        "> opc1:0b000 opc2:0b010 CRn:0b1001 coproc:0b1111 CRm:0b1101",
+                        "The order of the string representation is not important."
+                    ],
+                    "items": {
+                        "oneOf": [
+                            {
+                                "items": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "../Encoding.json"
+                                        }
+                                    ]
+                                },
+                                "type": "array"
+                            }
+                        ]
+                    }
+                },
+                "access": {
+                    "oneOf": [
+                        {
+                            "$ref": "./Permission/SystemAccess.json"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "info": [
+                        "The access property defines the logic behind the access of this accessor, for example:",
+                        "> When calling **MSR** with a given **encoding** you get **access to this register at EL0**, otherwise accesses are **UNDEFINED**",
+                        "Where `in EL0` is a condition, and otherwise is the default access defined by no condition"
+                    ]
+                }
+            },
+            "required": [
+                "encoding",
+                "access"
+            ],
+            "info": [
+                "The possible set of system instructions that can be used to access a register"
+            ]
+        },
+        {
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json",
+                    "info": [
+                        "Metadata"
+                    ]
+                },
+                "_type": {
+                    "enum": [
+                        "Accessors.SystemAccessor"
+                    ]
+                },
+                "name": {
+                    "$ref": "#/definitions/name"
+                },
+                "condition": {
+                    "$ref": "../Traits/HasCondition.json#/definitions/condition",
+                    "info": [
+                        "The condition which must be true for this accessor to be used."
+                    ]
+                },
+                "encoding": {
+                    "$ref": "#/definitions/encoding"
+                },
+                "access": {
+                    "$ref": "#/definitions/access"
+                }
+            },
+            "required": [
+                "encoding",
+                "access",
+                "name"
+            ],
+            "type": "object"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        "A SystemAccessor contains the **system instruction**, **encoding** and the **permissions** (permissionset).",
+        [
+            "The name of the system instruction can be one of the `_type` properties,",
+            "the encoding is the unique address to get to this register and",
+            "permissionset provides a list of conditions under which this instruction has access to ",
+            "this register."
+        ],
+        "_The accessor is unique for the `_type` and `encoding`_."
+    ]
+}

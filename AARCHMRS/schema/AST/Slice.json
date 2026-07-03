@@ -1,0 +1,54 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A model representing a slice of a value, used in SquareOp:",
+        "For example: `31:16`",
+        "Unless otherwise stated, all slices refer to bits and bit addresses."
+    ],
+    "examples": [
+        {
+            "_type": "AST.Slice",
+            "left": {
+                "_type": "AST.Integer",
+                "value": 31
+            },
+            "right": {
+                "_type": "AST.Integer",
+                "value": 16
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Slice"
+            ]
+        },
+        "left": {
+            "info": [
+                "The starting index of the slice, inclusive."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        },
+        "right": {
+            "info": [
+                "The ending index of the slice, inclusive."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        }
+    },
+    "required": [
+        "left",
+        "right"
+    ],
+    "title": "Slice",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

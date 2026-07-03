@@ -1,0 +1,87 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "`HasCondition` provides an abstract definition for schemata that provide model conditionality."
+    ],
+    "definitions": {
+        "condition": {
+            "info": [
+                "Defines a condition under which the model is present."
+            ],
+            "default": {
+                "_type": "AST.Bool",
+                "value": true
+            },
+            "examples": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "FEAT_FOO"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "op": "&&",
+                    "right": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "REG"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "F1"
+                                    }
+                                ]
+                            },
+                            "op": "==",
+                            "right": {
+                                "_type": "Values.Value",
+                                "meaning": null,
+                                "value": "'0'"
+                            }
+                        },
+                        "op": "||",
+                        "right": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "REG"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "F2"
+                                    }
+                                ]
+                            },
+                            "op": "==",
+                            "right": {
+                                "_type": "Values.Value",
+                                "meaning": null,
+                                "value": "'0'"
+                            }
+                        }
+                    }
+                }
+            ],
+            "$ref": "../AST/BinaryOp.json#/definitions/expression"
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Traits.HasCondition"
+}

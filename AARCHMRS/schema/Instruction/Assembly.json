@@ -1,0 +1,99 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "An instance of $(~Instruction.Assembly) is a stream of symbols that",
+            "represents an $(Instruction.Rules.Rule) or an $(~Instruction.Instruction)."
+        ],
+        [
+            "$(~Instruction.Assembly) contains an optional human-readable description and",
+            "a list of symbols (each symbol is an instance of $(Instruction.Symbols.Literal)",
+            "or $(Instruction.Symbols.RuleReference))."
+        ],
+        "The example below is for the assembly stream `ADD Xd, Xs1, Xs2`."
+    ],
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Instruction.Assembly",
+            "symbols": [
+                {
+                    "_type": "Instruction.Symbols.Literal",
+                    "value": "ADD"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "SPACE"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "Xd"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "COMMA"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "Xs1"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "COMMA"
+                },
+                {
+                    "_type": "Instruction.Symbols.RuleReference",
+                    "rule_id": "Xs2"
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Assembly"
+            ]
+        },
+        "description": {
+            "$ref": "../Description.json",
+            "info": [
+                "A human-readable description for this stream of symbols."
+            ]
+        },
+        "symbols": {
+            "info": [
+                [
+                    "A list of symbols, each of which is an instance of $(~Instruction.Symbols.Literal) or",
+                    "$(~Instruction.Symbols.RuleReference)."
+                ]
+            ],
+            "type": "array",
+            "items": {
+                "type": "object",
+                "oneOf": [
+                    {
+                        "$ref": "Symbols/Literal.json"
+                    },
+                    {
+                        "$ref": "Symbols/RuleReference.json"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "symbols"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Assembly"
+}

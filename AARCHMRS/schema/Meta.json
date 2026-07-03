@@ -1,0 +1,24 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The `_meta` property is a scratchpad for user-defined data. ",
+        [
+            "!!! warning",
+            "    AARCHMRS makes no guarantees about the structure of this data, and it",
+            "    should be used mainly for guidance purposes."
+        ]
+    ],
+    "examples": [
+        {
+            "user-defined-property1": "user-defined-value",
+            "user-defined-property2": true,
+            "...": "..."
+        }
+    ],
+    "title": "Meta",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

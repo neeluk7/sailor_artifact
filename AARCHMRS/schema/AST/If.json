@@ -1,0 +1,171 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "If Block",
+    "info": [
+        "A model representing an ASL conditional statement. Models the following structures:",
+        [
+            "* Simple If statements",
+            "```",
+            "if a == '00' then",
+            "    return '00';",
+            "end",
+            "```",
+            "* Nested If blocks",
+            "```",
+            "if a == '00' then",
+            "    return '00';",
+            "elsif a == '01' then",
+            "    return '01';",
+            "else",
+            "    return '11';",
+            "end",
+            "```"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.If",
+            "condition": {
+                "_type": "AST.BinaryOp",
+                "left": {
+                    "_type": "AST.Identifier",
+                    "value": "a"
+                },
+                "op": "==",
+                "right": {
+                    "_type": "Values.Value",
+                    "value": "'00'"
+                }
+            },
+            "if_clause": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Return",
+                        "val": {
+                            "_type": "Values.Value",
+                            "value": "'00'"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "AST.If",
+            "condition": {
+                "_type": "AST.BinaryOp",
+                "left": {
+                    "_type": "AST.Identifier",
+                    "value": "a"
+                },
+                "op": "==",
+                "right": {
+                    "_type": "Values.Value",
+                    "value": "'00'"
+                }
+            },
+            "if_clause": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Return",
+                        "val": {
+                            "_type": "Values.Value",
+                            "value": "'00'"
+                        }
+                    }
+                ]
+            },
+            "else_clause": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.If",
+                        "condition": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.Identifier",
+                                "value": "a"
+                            },
+                            "op": "==",
+                            "right": {
+                                "_type": "Values.Value",
+                                "value": "'01'"
+                            }
+                        },
+                        "if_clause": {
+                            "_type": "AST.StatementBlock",
+                            "statements": [
+                                {
+                                    "_type": "AST.Return",
+                                    "val": {
+                                        "_type": "Values.Value",
+                                        "value": "'01'"
+                                    }
+                                }
+                            ]
+                        },
+                        "else_clause": {
+                            "_type": "AST.StatementBlock",
+                            "statements": [
+                                {
+                                    "_type": "AST.Return",
+                                    "val": {
+                                        "_type": "Values.Value",
+                                        "value": "'11'"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.If"
+            ]
+        },
+        "condition": {
+            "info": [
+                "The condition determining the branch to take."
+            ],
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "if_clause": {
+            "info": [
+                "The clause to execute if the condition is satisfied."
+            ],
+            "$ref": "StatementBlock.json"
+        },
+        "else_clause": {
+            "info": [
+                "The clause to execute if the condition is not satisfied."
+            ],
+            "default": null,
+            "oneOf": [
+                {
+                    "$ref": "StatementBlock.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "required": [
+        "condition",
+        "if_clause"
+    ],
+    "type": "object",
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

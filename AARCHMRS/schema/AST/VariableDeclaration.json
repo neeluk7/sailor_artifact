@@ -1,0 +1,53 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A model representing a declaration statement in ASL.",
+        "An example rendering would be: `var x = 42`."
+    ],
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "AST.VariableDeclaration",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "x"
+            },
+            "val": {
+                "_type": "AST.Integer",
+                "value": 42
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.VariableDeclaration"
+            ]
+        },
+        "var": {
+            "info": [
+                "The variable to be declared."
+            ],
+            "$ref": "Identifier.json"
+        },
+        "val": {
+            "info": [
+                "The value to initialise the variable to."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        }
+    },
+    "required": [
+        "var",
+        "val"
+    ],
+    "type": "object",
+    "title": "VariableDeclaration",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

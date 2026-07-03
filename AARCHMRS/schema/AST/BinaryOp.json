@@ -1,0 +1,268 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "definitions": {
+        "expression": {
+            "info": [
+                "A definition used to easily compose all of the known $(AST.) in different parts of the schema."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../Types/String.json"
+                },
+                {
+                    "$ref": "../Types/Field.json"
+                },
+                {
+                    "$ref": "../Types/PstateField.json"
+                },
+                {
+                    "$ref": "../Types/RegisterType.json"
+                },
+                {
+                    "$ref": "../Types/RegisterMultiFields.json"
+                },
+                {
+                    "$ref": "../Values/Value.json"
+                },
+                {
+                    "$ref": "Bool.json"
+                },
+                {
+                    "$ref": "Real.json"
+                },
+                {
+                    "$ref": "Integer.json"
+                },
+                {
+                    "$ref": "Set.json"
+                },
+                {
+                    "$ref": "Function.json"
+                },
+                {
+                    "$ref": "SquareOp.json"
+                },
+                {
+                    "$ref": "ArrayAccessOp.json"
+                },
+                {
+                    "$ref": "Concat.json"
+                },
+                {
+                    "$ref": "Tuple.json"
+                },
+                {
+                    "$ref": "DotAtom.json"
+                },
+                {
+                    "$ref": "Identifier.json"
+                },
+                {
+                    "$ref": "TypeAnnotation.json"
+                },
+                {
+                    "$ref": "UnaryOp.json"
+                },
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    },
+    "info": [
+        "A model representing binary operations such as `A == B`, `A ==> B` etc."
+    ],
+    "oneOf": [
+        {
+            "info": [
+                "A BinaryOp composition (only valid when composing constraints) allows the following:",
+                [
+                    " - `FEAT_A ==> FEAT_B`",
+                    " - `FEAT_A <=> FEAT_B`"
+                ]
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "AST.BinaryOp"
+                    ]
+                },
+                "left": {
+                    "info": [
+                        "The left-hand-side of the constraint."
+                    ],
+                    "$ref": "#/definitions/expression"
+                },
+                "op": {
+                    "info": [
+                        [
+                            "The operation to be performed between `left` and `right`. ",
+                            "See $(Traits.HasConstraints) for more detail around the meaning of ",
+                            "the enums listed below."
+                        ]
+                    ],
+                    "enum": [
+                        "==>",
+                        "<=>"
+                    ]
+                },
+                "right": {
+                    "info": [
+                        "The right-hand-side of the constraint."
+                    ],
+                    "$ref": "#/definitions/expression"
+                }
+            },
+            "examples": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_A"
+                    },
+                    "op": "==>",
+                    "right": {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_B"
+                    }
+                }
+            ],
+            "required": [
+                "left",
+                "op",
+                "right"
+            ]
+        },
+        {
+            "type": "object",
+            "info": [
+                "A BinaryOp composition (used for every other expression other than constraints) allows the following:",
+                [
+                    " - `A || B`",
+                    " - `A << 2`",
+                    " - `B IN {1, 2, 3}`"
+                ]
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "AST.BinaryOp"
+                    ]
+                },
+                "left": {
+                    "info": [
+                        "The left-hand-side of the expression"
+                    ],
+                    "$ref": "#/definitions/expression"
+                },
+                "op": {
+                    "info": [
+                        "The operation to be performed between `left` and `right`."
+                    ],
+                    "enum": [
+                        "||",
+                        "&&",
+                        "<=",
+                        ">=",
+                        "==",
+                        "!=",
+                        "<",
+                        ">",
+                        "<<",
+                        ">>",
+                        "+",
+                        "-",
+                        "OR",
+                        "XOR",
+                        "AND",
+                        "*",
+                        "/",
+                        "^",
+                        "::",
+                        "++",
+                        "IN",
+                        "MOD",
+                        "DIV",
+                        "DIVRM"
+                    ]
+                },
+                "right": {
+                    "info": [
+                        "The right-hand-side of the expression"
+                    ],
+                    "$ref": "#/definitions/expression"
+                }
+            },
+            "examples": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "A"
+                    },
+                    "op": "||",
+                    "right": {
+                        "_type": "AST.Identifier",
+                        "value": "B"
+                    }
+                },
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "A"
+                    },
+                    "op": "<<",
+                    "right": {
+                        "_type": "AST.Integer",
+                        "value": 2
+                    }
+                },
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.Identifier",
+                        "value": "B"
+                    },
+                    "op": "IN",
+                    "right": {
+                        "_type": "AST.Set",
+                        "values": [
+                            {
+                                "_type": "AST.Integer",
+                                "value": 1
+                            },
+                            {
+                                "_type": "AST.Integer",
+                                "value": 2
+                            },
+                            {
+                                "_type": "AST.Integer",
+                                "value": 3
+                            }
+                        ]
+                    }
+                }
+            ],
+            "required": [
+                "left",
+                "op",
+                "right"
+            ]
+        }
+    ],
+    "title": "BinaryOp",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

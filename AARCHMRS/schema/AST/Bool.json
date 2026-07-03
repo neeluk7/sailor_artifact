@@ -1,0 +1,38 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A boolean AST representing concepts of `TRUE` or `FALSE`."
+    ],
+    "examples": [
+        {
+            "_type": "AST.Bool",
+            "value": true
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Bool"
+            ]
+        },
+        "value": {
+            "info": [
+                "The boolean value of this model."
+            ],
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "title": "Bool",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

@@ -1,0 +1,38 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Instanceset",
+    "info": [
+        "The Instanceset model is used to contain Instances.Instance models while checking for duplications."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instances.Instanceset"
+            ]
+        },
+        "values": {
+            "type": "array",
+            "info": [
+                "An array of Instances.Instance where each element must be unique."
+            ],
+            "items": {
+                "$ref": "Instance.json"
+            }
+        }
+    },
+    "required": [
+        "values"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

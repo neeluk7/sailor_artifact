@@ -1,0 +1,57 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A reset value which applies to the Register."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "RegisterReset"
+            ]
+        },
+        "description": {
+            "$ref": "Text.json"
+        },
+        "restrictions": {
+            "info": [
+                "Reset applies to the specified Exception Levels."
+            ],
+            "items": {
+                "enum": [
+                    "EL0",
+                    "EL1",
+                    "EL2",
+                    "EL3"
+                ]
+            },
+            "type": "array"
+        },
+        "type": {
+            "info": [
+                "Whether this reset description applies to a Warm or a Cold reset."
+            ],
+            "oneOf": [
+                {
+                    "enum": [
+                        "Warm",
+                        "Cold"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "title": "RegisterReset",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "deprecated": true
+}

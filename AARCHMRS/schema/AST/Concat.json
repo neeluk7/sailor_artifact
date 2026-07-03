@@ -1,0 +1,144 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A model representing a concatenation of multiple values:",
+        [
+            " - `REG[31:0] :: REG[63:32]`",
+            " - `PSTATE.[D, A, I, F]` which is a shorthand for `PSTATE.D :: PSTATE.A :: PSTATE.I :: PSTATE.F`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.Concat",
+            "values": [
+                {
+                    "_type": "AST.SquareOp",
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REG"
+                    },
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.SquareOp",
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REG"
+                    },
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 63
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 32
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_type": "AST.Concat",
+            "values": [
+                {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "PSTATE"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "D"
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "PSTATE"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "A"
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "PSTATE"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "I"
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "PSTATE"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "F"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Concat"
+            ]
+        },
+        "values": {
+            "info": [
+                "The values to concatenate."
+            ],
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "$ref": "BinaryOp.json#/definitions/expression"
+            }
+        }
+    },
+    "required": [
+        "values"
+    ],
+    "title": "Concat",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

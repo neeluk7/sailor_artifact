@@ -1,0 +1,172 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A Fieldset provides a container for an array of fields.",
+        [
+            "If a fieldset is used inside an context of an array, then the condition property is used",
+            "to define conditional layouts."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Fieldset"
+            ]
+        },
+        "condition": {
+            "$ref": "Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition that must be true for this fieldset to be present.",
+                [
+                    "Conditions are unique when `Fieldset` are used inside an array container, ",
+                    "this is because two field layouts with the same condition cannot coexist."
+                ]
+            ]
+        },
+        "description": {
+            "$ref": "Traits/HasDescription.json#/definitions/description",
+            "info": [
+                "The descriptive text, which is used to identify information about the `Fieldset`."
+            ]
+        },
+        "name": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+            "info": [
+                "A named identifier used for referencing a `Fieldset`."
+            ]
+        },
+        "display": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "info": [
+                "A short display name of the `Fieldset`."
+            ]
+        },
+        "values": {
+            "additionalItems": false,
+            "info": [
+                "An array of fields that, when considered together, compose the fieldset.",
+                [
+                    "The ranges of all the fields in a fieldset must sum to the width of the fieldset, ",
+                    "and all named fields (as an example, see [Field](Fields/Field_schema.html) which has a named property) must be unique within a Fieldset."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "Fields/Field.json"
+                    },
+                    {
+                        "$ref": "Fields/Reserved.json"
+                    },
+                    {
+                        "$ref": "Fields/ReservedInternal.json"
+                    },
+                    {
+                        "$ref": "Fields/ImplementationDefined.json"
+                    },
+                    {
+                        "$ref": "Fields/Array.json"
+                    },
+                    {
+                        "$ref": "Fields/Vector.json"
+                    },
+                    {
+                        "$ref": "Fields/ConditionalField.json"
+                    },
+                    {
+                        "$ref": "Fields/ConstantField.json"
+                    },
+                    {
+                        "$ref": "Fields/Dynamic.json"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "width": {
+            "info": [
+                [
+                    "The count of bits that this fieldset spans.",
+                    "This will typically be 32 or 64 bits in an ARM implementation,",
+                    "but Fieldset supports any integer value greater than 0."
+                ]
+            ],
+            "minimum": 1,
+            "type": "integer"
+        }
+    },
+    "required": [
+        "width",
+        "values"
+    ],
+    "title": "Fieldset",
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Fieldset",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "MY_FEAT"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "width": 32,
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": "A 32-bit fieldset"
+            },
+            "values": [
+                {
+                    "_type": "Fields.Reserved",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 2,
+                            "width": 30
+                        }
+                    ],
+                    "value": "RES0"
+                },
+                {
+                    "_type": "Fields.Field",
+                    "name": "F1",
+                    "description": {
+                        "_type": "Description",
+                        "after": null,
+                        "before": "A 2-bit filed"
+                    },
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

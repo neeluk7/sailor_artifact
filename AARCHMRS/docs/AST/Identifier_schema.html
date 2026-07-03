@@ -1,0 +1,338 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Identifier - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">AST.</span><span class=" title-type">Identifier</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>An AST model wrapper for an identifier, such as <code>REG0</code> or <code>a32</code>.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/c_identifier_regex" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/c_identifier_regex">c_identifier_regex</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                  <dl>
+                      <dt>Pattern</dt>
+                      <dd><code title="Regex">/^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$/</code></dd>
+                  </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/regex" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/regex">regex</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                  <dl>
+                      <dt>Pattern</dt>
+                      <dd><code title="Regex">/^((?!__)[a-zA-Z_][a-zA-Z0-9_]*(&lt;[^&gt;]+&gt;)?[a-zA-Z0-9_]*$)/</code></dd>
+                  </dl>
+                
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>AST.Identifier</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/value" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/value">value<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="#/definitions/regex" class="schema_link"></a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The string value of this identifier.</p></div>
+                    
+    <div>
+        See
+            <a href="#/definitions/regex" class="schema_link">definitions.regex</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+    &#34;value&#34;: &#34;REG0&#34;
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+    &#34;value&#34;: &#34;A32&#34;
+}</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "An AST model wrapper for an identifier, such as `REG0` or `a32`."
+  ],
+  "definitions": {
+    "regex": {
+      "type": "string",
+      "pattern": "^((?!__)[a-zA-Z_][a-zA-Z0-9_]*(<[^>]+>)?[a-zA-Z0-9_]*$)"
+    },
+    "c_identifier_regex": {
+      "type": "string",
+      "pattern": "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$"
+    }
+  },
+  "examples": [
+    {
+      "_type": "AST.Identifier",
+      "value": "REG0"
+    },
+    {
+      "_type": "AST.Identifier",
+      "value": "A32"
+    }
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../Meta.json"
+    },
+    "_type": {
+      "enum": [
+        "AST.Identifier"
+      ]
+    },
+    "value": {
+      "info": [
+        "The string value of this identifier."
+      ],
+      "$ref": "#/definitions/regex"
+    }
+  },
+  "required": [
+    "value"
+  ],
+  "title": "Identifier",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

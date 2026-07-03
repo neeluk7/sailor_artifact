@@ -1,0 +1,256 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        "An $(~Instruction.InstructionSet) object is the root of a tree of instructions. It defines the following for an instruction set:",
+        [
+            "* The conditions under which it is available.",
+            "* An implicit bit pattern width, which is the width of the encoding property.",
+            "* A read_width, which is the width of an instruction within the bit pattern.",
+            "* A root encoding, which is described in the encoding property.",
+            "* A list of its direct children.",
+            "* The default operation when an encoding is not specified in the instruction set."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.InstructionSet",
+            "name": "QUILL",
+            "read_width": 32,
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": [
+                    {
+                        "_type": "Instruction.Encodeset.Field",
+                        "range": {
+                            "_type": "Range",
+                            "start": 29,
+                            "width": 3
+                        },
+                        "name": "op",
+                        "value": {
+                            "_type": "Values.Value",
+                            "value": "'xxx'"
+                        },
+                        "should_be_mask": {
+                            "_type": "Values.Value",
+                            "value": "'000'"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "Instruction.InstructionSet",
+            "name": "PEN",
+            "read_width": 32,
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": [
+                    {
+                        "_type": "Instruction.Encodeset.Field",
+                        "range": {
+                            "_type": "Range",
+                            "start": 29,
+                            "width": 3
+                        },
+                        "name": "op",
+                        "value": {
+                            "_type": "Values.Value",
+                            "value": "'xxx'"
+                        },
+                        "should_be_mask": {
+                            "_type": "Values.Value",
+                            "value": "'000'"
+                        }
+                    }
+                ]
+            },
+            "operation_id": "NOP",
+            "children": [
+                {
+                    "_type": "Instruction.Instruction",
+                    "name": "ADD",
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": [
+                            {
+                                "_type": "Instruction.Encodeset.Bits",
+                                "range": {
+                                    "_type": "Range",
+                                    "start": 29,
+                                    "width": 3
+                                },
+                                "value": {
+                                    "_type": "Values.Value",
+                                    "value": "'011'",
+                                    "meaning": null
+                                },
+                                "should_be_mask": {
+                                    "_type": "Values.Value",
+                                    "value": "'000'"
+                                }
+                            },
+                            {
+                                "_type": "Instruction.Encodeset.Field",
+                                "range": {
+                                    "_type": "Range",
+                                    "start": 10,
+                                    "width": 5
+                                },
+                                "name": "Rn",
+                                "value": {
+                                    "_type": "Values.Value",
+                                    "value": "'xxxxx'"
+                                },
+                                "should_be_mask": {
+                                    "_type": "Values.Value",
+                                    "value": "'00000'"
+                                }
+                            },
+                            {
+                                "_type": "Instruction.Encodeset.Field",
+                                "range": {
+                                    "_type": "Range",
+                                    "start": 5,
+                                    "width": 5
+                                },
+                                "name": "Rm",
+                                "value": {
+                                    "_type": "Values.Value",
+                                    "value": "'xxxxx'"
+                                },
+                                "should_be_mask": {
+                                    "_type": "Values.Value",
+                                    "value": "'00000'"
+                                }
+                            },
+                            {
+                                "_type": "Instruction.Encodeset.Field",
+                                "range": {
+                                    "_type": "Range",
+                                    "start": 0,
+                                    "width": 5
+                                },
+                                "name": "Rd",
+                                "value": {
+                                    "_type": "Values.Value",
+                                    "value": "'xxxxx'"
+                                },
+                                "should_be_mask": {
+                                    "_type": "Values.Value",
+                                    "value": "'00000'"
+                                }
+                            }
+                        ]
+                    },
+                    "operation_id": "add_sub_imm"
+                },
+                {
+                    "_type": "Instruction.InstructionGroup",
+                    "name": "not_ADD",
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": [
+                            {
+                                "_type": "Instruction.Encodeset.Bits",
+                                "range": {
+                                    "_type": "Range",
+                                    "start": 29,
+                                    "width": 3
+                                },
+                                "value": {
+                                    "_type": "Values.Value",
+                                    "value": "'111'",
+                                    "meaning": null
+                                },
+                                "should_be_mask": {
+                                    "_type": "Values.Value",
+                                    "value": "'000'"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.InstructionSet"
+            ]
+        },
+        "name": {
+            "info": [
+                "The name of the `InstructionSet`."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "encoding": {
+            "$ref": "Encodeset/Encodeset.json"
+        },
+        "read_width": {
+            "info": [
+                "How many bits a decoder must read to determine the encoding. Must evenly divide the width of the encoding for this $(~Instruction.InstructionSet)."
+            ],
+            "type": "integer",
+            "minimum": 1
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "operation_id": {
+            "info": [
+                "The ID of an operation that describes the default behavior of unspecified encodings within the $(~Instruction.InstructionSet)."
+            ],
+            "type": [
+                "string",
+                "null"
+            ],
+            "pattern": "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$",
+            "default": null
+        },
+        "children": {
+            "type": "array",
+            "info": [
+                "Defines children nodes.",
+                [
+                    "Any child node that redefines the `operation_id` overwrites",
+                    "the behavior that is defined by the `operation_id` of this $(~Instruction.InstructionSet)."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "InstructionGroup.json"
+                    },
+                    {
+                        "$ref": "Instruction.json"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "encoding",
+        "read_width",
+        "name"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.InstructionSet"
+}

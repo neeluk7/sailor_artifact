@@ -1,0 +1,72 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Parameters.Group",
+            "name": "FEAT",
+            "values": [
+                {
+                    "_type": "Parameters.Boolean",
+                    "name": "X"
+                }
+            ]
+        },
+        {
+            "_type": "Parameters.Group",
+            "name": "FEAT",
+            "values": [
+                {
+                    "_type": "Parameters.Group",
+                    "name": "X",
+                    "values": [
+                        {
+                            "_type": "Parameters.Boolean",
+                            "name": "Y"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "info": [
+        "The $(Parameters.Group) is a way to namespace parameters, for example: `FEAT.X`, or `FEAT.X.Y`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Parameters.Group"
+            ]
+        },
+        "name": {
+            "$ref": "ParameterAbstract.json#/definitions/name"
+        },
+        "title": {
+            "$ref": "ParameterAbstract.json#/definitions/title"
+        },
+        "description": {
+            "$ref": "ParameterAbstract.json#/definitions/description"
+        },
+        "constraints": {
+            "$ref": "ParameterAbstract.json#/definitions/constraints"
+        },
+        "configured_by": {
+            "$ref": "ParameterAbstract.json#/definitions/configured_by"
+        },
+        "values": {
+            "$ref": "../Parameterset.json"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "title": "Parameters.Group",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

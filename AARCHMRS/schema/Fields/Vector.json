@@ -1,0 +1,231 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "Field vector is a rolled up representation of an array of fields with a variable size.",
+        "Unused space is denoted by the `reserved_type` property."
+    ],
+    "examples": [
+        {
+            "_type": "Fields.Vector",
+            "name": "C<x>",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 32
+                }
+            ],
+            "indexes": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 4
+                }
+            ],
+            "index_variable": "x",
+            "size": [
+                {
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "EL2"
+                            }
+                        ],
+                        "name": "HaveEL"
+                    },
+                    "value": {
+                        "_type": "Types.Field",
+                        "value": {
+                            "field": "BAR",
+                            "instance": null,
+                            "name": "FOO",
+                            "slices": null,
+                            "state": "AArch64"
+                        }
+                    }
+                },
+                {
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "value": {
+                        "_type": "AST.Integer",
+                        "value": 4
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Fields.Vector",
+            "access": null,
+            "display": null,
+            "index_variable": "x",
+            "indexes": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 2
+                }
+            ],
+            "name": "Pasta<m>",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 10,
+                    "width": 4
+                }
+            ],
+            "reserved_type": "RES0",
+            "resets": {
+                "_type": "FieldResets",
+                "domains": {},
+                "text": null
+            },
+            "size": [
+                {
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "EL2"
+                            }
+                        ],
+                        "name": "HaveEL"
+                    },
+                    "value": {
+                        "_type": "Types.Field",
+                        "value": {
+                            "field": "BAR",
+                            "instance": null,
+                            "name": "FOO",
+                            "slices": null,
+                            "state": "AArch64"
+                        }
+                    }
+                },
+                {
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "value": {
+                        "_type": "AST.Integer",
+                        "value": 4
+                    }
+                }
+            ],
+            "values": {
+                "_type": "Valuesets.Values",
+                "values": []
+            },
+            "volatile": false
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.Vector"
+            ]
+        },
+        "access": {
+            "default": null,
+            "$ref": "../Traits/HasFieldAccess.json#/definitions/access"
+        },
+        "description": {
+            "$ref": "../Traits/HasDescription.json#/definitions/description",
+            "see": "Field.json"
+        },
+        "display": {
+            "see": "Field.json",
+            "type": [
+                "string",
+                "null"
+            ],
+            "default": null
+        },
+        "volatile": {
+            "see": "Field.json",
+            "type": "boolean"
+        },
+        "name": {
+            "see": "Array.json",
+            "$ref": "Array.json#/properties/name"
+        },
+        "rangeset": {
+            "$ref": "../Rangeset.json",
+            "see": "Field.json"
+        },
+        "reserved_type": {
+            "info": [
+                "This is used to represent the access behavior of the space not utilised by the vector."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../Enums/ReservedTypes.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "resets": {
+            "$ref": "../FieldResets.json",
+            "see": "Field.json"
+        },
+        "size": {
+            "additionalItems": false,
+            "info": [
+                "This holds the size of the vector, which can be conditional. And the size itself can be an expression."
+            ],
+            "items": {
+                "properties": {
+                    "condition": {
+                        "$ref": "../Traits/HasCondition.json#/definitions/condition"
+                    },
+                    "value": {
+                        "$ref": "../AST/BinaryOp.json#/definitions/expression"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        },
+        "values": {
+            "$ref": "../Valuesets/ValuesetAbstract.json#/definitions/children",
+            "info": [
+                "A set of __Value__ objects.  Each object indicates one of the valid values that may be present in an element of this field, along with a textual description of its meaning."
+            ]
+        }
+    },
+    "required": [
+        "name",
+        "rangeset",
+        "indexes",
+        "size",
+        "index_variable"
+    ],
+    "title": "Vector",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

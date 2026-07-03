@@ -1,0 +1,49 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A `WriteOffsetAccess` for a given `RegisterBlock` describes write accessor for a single child `Register` or `RegisterBlock`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.WriteOffsetAccessor"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "offset": {
+            "info": [
+                "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "../AST/BinaryOp.json#/definitions/expression"
+            },
+            "minItems": 1
+        },
+        "access": {
+            "info": [
+                "Provides accessibility information for the access."
+            ],
+            "$ref": "./Permission/SystemAccess.json"
+        }
+    },
+    "required": [
+        "offset",
+        "access"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "WriteOffsetAccessor"
+}

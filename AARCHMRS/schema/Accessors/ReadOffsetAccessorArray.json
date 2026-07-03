@@ -1,0 +1,53 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "An array of `ReadOffsetAccess` for a given `RegisterBlock` describes read accessors for an array of child `Registers` or `RegisterBlocks`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.ReadOffsetAccessorArray"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "offset": {
+            "info": [
+                "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+            ],
+            "$ref": "ReadOffsetAccessor.json#/properties/offset"
+        },
+        "access": {
+            "info": [
+                "Provides accessibility information for the access."
+            ],
+            "$ref": "./Permission/SystemAccess.json"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "required": [
+        "offset",
+        "access",
+        "indexes",
+        "index_variable"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ReadOffsetAccessorArray"
+}

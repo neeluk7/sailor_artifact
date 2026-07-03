@@ -1,0 +1,107 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="27">2.7</h1>
+<h2 id="highlights">Highlights</h2>
+<h3 id="aarchmrs-5447-improve-the-registers-schema-274">AARCHMRS-5447: Improve the Registers schema (2.7.4)</h3>
+<p>The <code><a class="schema_link" href="../Registers_schema.html" title="Registers">Registers</a></code> schema has been improved to include information about the schema.</p>
+<h3 id="aarchmrs-5366-disallow-additional-properties-for-conditionalfieldfields-and-resets-273">AARCHMRS-5366: Disallow additional properties for ConditionalField.fields and Resets (2.7.3)</h3>
+<p>The schema has been improved to use the correct <code>additionalProperties</code> for the following schemas:</p>
+<ul>
+<li><code><a class="schema_link" href="../Fields/ConditionalField_schema.html" title="Fields.ConditionalField">Fields.ConditionalField</a></code>: <code>additionalProperties</code> have been disallowed for items in "fields"</li>
+<li><code><a class="schema_link" href="../Resets/ArchitecturallyUnknown_schema.html" title="Resets.ArchitecturallyUnknown">Resets.ArchitecturallyUnknown</a></code>: <code>additionalProperties</code> have been  disallowed for the model</li>
+<li><code><a class="schema_link" href="../Resets/ConditionalReset_schema.html" title="Resets.ConditionalReset">Resets.ConditionalReset</a></code>: <code>additionalProperties</code> have been disallowed for the model and for items in "resets"</li>
+<li><code><a class="schema_link" href="../Resets/InstanceReset_schema.html" title="Resets.InstanceReset">Resets.InstanceReset</a></code>: <code>additionalProperties</code> have been  disallowed for the model</li>
+<li><code><a class="schema_link" href="../Resets/Unknown_schema.html" title="Resets.Unknown">Resets.Unknown</a></code>: <code>additionalProperties</code> have been  disallowed for the model</li>
+</ul>
+<h3 id="aarchmrs-5420-add-registers-schema-to-support-an-array-of-register-registerarray-or-registerblock-273">AARCHMRS-5420: Add Registers schema to support an array of Register, RegisterArray, or RegisterBlock (2.7.3)</h3>
+<p>A <a class="schema_link" href="../Registers_schema.html" title="Registers">Registers</a> schema has been added to represent an array that can contain the following objects:</p>
+<ul>
+<li><code><a class="schema_link" href="../Register_schema.html" title="Register">Register</a></code></li>
+<li><code><a class="schema_link" href="../RegisterArray_schema.html" title="RegisterArray">RegisterArray</a></code></li>
+<li><code><a class="schema_link" href="../RegisterBlock_schema.html" title="RegisterBlock">RegisterBlock</a></code></li>
+</ul>
+<h3 id="aarchmrs-5239-support-for-additional-combinations-of-readwrite-accesses-and-side-effects">AARCHMRS-5239: Support for additional combinations of read/write accesses and side effects</h3>
+<p>Support has been added for the following shorthand read/write accesses:</p>
+<ol>
+<li><strong>RC/WS</strong> (W: sets all bits, R: clears all bits)</li>
+<li><strong>RS/WC</strong> (W: clears all bits, R: sets all bits)</li>
+<li><strong>RC/W1S</strong> (W: 1/0 sets/no effect on matching bit, R: clears all bits)</li>
+<li><strong>RS/W1C</strong> (W: 1/0 clears/no effect on matching bit, R: sets all bits)</li>
+<li><strong>RC/W0S</strong> (W: 1/0 no effect on/sets matching bit, R: clears all bits)</li>
+<li><strong>RS/W0C</strong> (W: 1/0 no effect on/clears matching bit, R: sets all bits)</li>
+<li><strong>ERROR/W</strong> (W: as-is, R: error)</li>
+<li><strong>ERROR/W0C</strong> (W: clears all bits, R: error)</li>
+<li><strong>ERROR/W0S</strong> (W: sets all bits, R: error)</li>
+</ol>
+<h3 id="aarchmrs-5227-update-asl1-implication-and-logical-equivalence-syntax">AARCHMRS-5227: Update ASL1 implication and logical equivalence syntax</h3>
+<p>The syntax of the implication and logical equivalence has been updated in the BinaryOp schema
+to align with the latest ASL reference documentation as the following:</p>
+<ul>
+<li>Implication: --&gt; becomes ==&gt;</li>
+<li>Biconditional: &lt;-&gt; becomes &lt;=&gt;</li>
+</ul>
+<p>For more details refer to Chapter 3 of <a href="https://developer.arm.com/documentation/ddi0626/00bet0/?lang=en">ASLRef BET0</a>.</p>
+<h3 id="aarchmrs-5226-change-astconcat-into-an-astbinaryop-operator">AARCHMRS-5226: Change AST.Concat into an AST.BinaryOp operator (<code>::</code>)</h3>
+<p>In order to align more closely with the ASL Reference manual we have updated bit concatenation
+to an AST.BinaryOp operator.</p>
+<p>AST.Concat will remain in use when specifying mulit-bit field accesses of the form <code>REG.[F1,F2]</code> and is
+planned for deprecation in a future version when a better model is made available.</p>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

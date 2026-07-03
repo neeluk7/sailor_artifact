@@ -1,0 +1,64 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "$(~Instruction.OperationAlias) contains human-readable descriptions and a link to the $(~Instruction.Operation)",
+            "that contains the relevant ASL operation pseudocode."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.OperationAlias"
+            ]
+        },
+        "operation_id": {
+            "info": [
+                [
+                    "The ID of the $(~Instruction.Operation) that stores the descriptions and pseudocode for",
+                    "this $(~Instruction.OperationAlias). The $(~Instruction.Operation) is a value in the `operations`",
+                    "property of the top-level `Instruction.Instructions` element, and this",
+                    "operation_id matches its key."
+                ]
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "description": {
+            "$ref": "OperationAbstract.json#/definitions/description"
+        },
+        "brief": {
+            "$ref": "OperationAbstract.json#/definitions/brief"
+        },
+        "title": {
+            "$ref": "OperationAbstract.json#/definitions/title"
+        }
+    },
+    "required": [
+        "operation_id",
+        "brief",
+        "title",
+        "description"
+    ],
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Instruction.OperationAlias",
+            "operation_id": "SBC",
+            "description": "Negate with Carry negates the sum of a register value and the value of NOT (Carry flag), and writes the result to the destination register.",
+            "brief": "NGC",
+            "title": "NGC"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.OperationAlias"
+}

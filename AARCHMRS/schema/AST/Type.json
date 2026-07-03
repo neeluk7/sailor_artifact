@@ -1,0 +1,73 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A model representing a type in ASL.",
+        "An example rendering would be: ",
+        [
+            " -  `bits(32)`",
+            " -  `integer`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.Type",
+            "name": {
+                "_type": "AST.Function",
+                "name": "bits",
+                "arguments": [
+                    {
+                        "_type": "AST.Integer",
+                        "value": 32
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "AST.Type",
+            "name": {
+                "_type": "AST.Identifier",
+                "value": "integer"
+            }
+        }
+    ],
+    "oneOf": [
+        {
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "AST.Type"
+                    ]
+                },
+                "name": {
+                    "info": [
+                        "The type definition."
+                    ],
+                    "oneOf": [
+                        {
+                            "$ref": "Identifier.json"
+                        },
+                        {
+                            "$ref": "Function.json"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        },
+        {
+            "type": "string"
+        }
+    ],
+    "title": "Type",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

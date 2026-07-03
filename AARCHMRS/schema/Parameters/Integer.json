@@ -1,0 +1,120 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A signed integer parameter."
+    ],
+    "examples": [
+        {
+            "_type": "Parameters.Integer",
+            "name": "NUM_CORES",
+            "constraints": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "NUM_CORES"
+                        },
+                        "op": ">",
+                        "right": {
+                            "_type": "AST.Integer",
+                            "value": 1
+                        }
+                    },
+                    "op": "==>",
+                    "right": {
+                        "_type": "AST.Identifier",
+                        "value": "MULTICORE"
+                    }
+                }
+            ],
+            "values": [
+                {
+                    "_type": "Index",
+                    "start": 1,
+                    "end": 8
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Parameters.Integer"
+            ]
+        },
+        "name": {
+            "$ref": "ParameterAbstract.json#/definitions/name"
+        },
+        "title": {
+            "$ref": "ParameterAbstract.json#/definitions/title"
+        },
+        "description": {
+            "$ref": "ParameterAbstract.json#/definitions/description"
+        },
+        "constraints": {
+            "$ref": "ParameterAbstract.json#/definitions/constraints"
+        },
+        "configured_by": {
+            "$ref": "ParameterAbstract.json#/definitions/configured_by"
+        },
+        "values": {
+            "info": [
+                "The current domain (possible values) of this $(Parameters.Integer)."
+            ],
+            "examples": [
+                1,
+                [
+                    -1,
+                    {
+                        "_type": "Index",
+                        "start": 5,
+                        "end": 8
+                    }
+                ],
+                [
+                    2,
+                    4,
+                    8,
+                    16
+                ]
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "../Index.json"
+                            },
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "$ref": "../Index.json"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        }
+    },
+    "required": [
+        "name",
+        "values"
+    ],
+    "title": "Parameters.Integer",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

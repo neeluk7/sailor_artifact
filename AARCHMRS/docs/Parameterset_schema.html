@@ -1,0 +1,310 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>Parameterset - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class=" title-type">Parameterset</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">array</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p><a class="schema_link" href="Parameterset_schema.html" title="Parameterset">Parameterset</a> provides a set-like container to store all types of <a class="schema_link" href="Parameters/" title="Parameters">Parameters</a>
+uniquely identified by their name property.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+                            <h3 class="type">array</h3>
+                            <ul>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Parameters/Boolean_schema.html" class="schema_link">Parameters.Boolean</a>
+
+
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Parameters/Integer_schema.html" class="schema_link">Parameters.Integer</a>
+
+
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Parameters/String_schema.html" class="schema_link">Parameters.String</a>
+
+
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Parameters/Group_schema.html" class="schema_link">Parameters.Group</a>
+
+
+
+
+                                </li>
+                            </ul>
+
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    {
+        &#34;_type&#34;: &#34;Parameters.Integer&#34;, 
+        &#34;name&#34;: &#34;NUM_VERSIONS&#34;, 
+        &#34;constraints&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+                &#34;left&#34;: {
+                    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+                    &#34;left&#34;: {
+                        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                        &#34;value&#34;: &#34;NUM_VERSIONS&#34;
+                    }, 
+                    &#34;op&#34;: &#34;&gt;&#34;, 
+                    &#34;right&#34;: {
+                        &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                        &#34;value&#34;: 23
+                    }
+                }, 
+                &#34;op&#34;: &#34;==&gt;&#34;, 
+                &#34;right&#34;: {
+                    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                    &#34;value&#34;: &#34;FEAT_ACTION&#34;
+                }
+            }
+        ], 
+        &#34;values&#34;: [
+            20, 
+            {
+                &#34;_type&#34;: &#34;Index&#34;, 
+                &#34;start&#34;: 22, 
+                &#34;end&#34;: 25
+            }, 
+            {
+                &#34;_type&#34;: &#34;Index&#34;, 
+                &#34;start&#34;: 50, 
+                &#34;end&#34;: 60
+            }, 
+            100
+        ]
+    }, 
+    {
+        &#34;_type&#34;: &#34;Parameters.Boolean&#34;, 
+        &#34;name&#34;: &#34;FEAT_FOO&#34;, 
+        &#34;constraints&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+                &#34;left&#34;: {
+                    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                    &#34;value&#34;: &#34;FEAT_X&#34;
+                }, 
+                &#34;op&#34;: &#34;==&gt;&#34;, 
+                &#34;right&#34;: {
+                    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                    &#34;value&#34;: &#34;v8Ap2&#34;
+                }
+            }
+        ]
+    }
+]</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "additionalItems": false,
+  "examples": [
+    [
+      {
+        "_type": "Parameters.Integer",
+        "name": "NUM_VERSIONS",
+        "constraints": [
+          {
+            "_type": "AST.BinaryOp",
+            "left": {
+              "_type": "AST.BinaryOp",
+              "left": {
+                "_type": "AST.Identifier",
+                "value": "NUM_VERSIONS"
+              },
+              "op": ">",
+              "right": {
+                "_type": "AST.Integer",
+                "value": 23
+              }
+            },
+            "op": "==>",
+            "right": {
+              "_type": "AST.Identifier",
+              "value": "FEAT_ACTION"
+            }
+          }
+        ],
+        "values": [
+          20,
+          {
+            "_type": "Index",
+            "start": 22,
+            "end": 25
+          },
+          {
+            "_type": "Index",
+            "start": 50,
+            "end": 60
+          },
+          100
+        ]
+      },
+      {
+        "_type": "Parameters.Boolean",
+        "name": "FEAT_FOO",
+        "constraints": [
+          {
+            "_type": "AST.BinaryOp",
+            "left": {
+              "_type": "AST.Identifier",
+              "value": "FEAT_X"
+            },
+            "op": "==>",
+            "right": {
+              "_type": "AST.Identifier",
+              "value": "v8Ap2"
+            }
+          }
+        ]
+      }
+    ]
+  ],
+  "info": [
+    [
+      "$(Parameterset) provides a set-like container to store all types of $(Parameters.)",
+      "uniquely identified by their name property."
+    ]
+  ],
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "Parameters/Boolean.json"
+      },
+      {
+        "$ref": "Parameters/Integer.json"
+      },
+      {
+        "$ref": "Parameters/String.json"
+      },
+      {
+        "$ref": "Parameters/Group.json"
+      }
+    ]
+  },
+  "title": "Parameterset",
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

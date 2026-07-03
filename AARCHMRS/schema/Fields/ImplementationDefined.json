@@ -1,0 +1,171 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Fields.ImplementationDefined",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                }
+            ]
+        },
+        {
+            "_type": "Fields.ImplementationDefined",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                }
+            ],
+            "constraints": [
+                {
+                    "_type": "Fields.Field",
+                    "name": "F",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 8
+                        }
+                    ],
+                    "values": {
+                        "_type": "Valuesets.Values",
+                        "values": [
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "The first value",
+                                "value": "'00'"
+                            },
+                            {
+                                "_type": "Values.Value",
+                                "meaning": "The second value",
+                                "value": "'01'"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_type": "Fields.Reserved",
+                    "rangeset": [
+                        {
+                            "_type": "Range",
+                            "start": 0,
+                            "width": 8
+                        }
+                    ],
+                    "value": "RES0"
+                }
+            ]
+        }
+    ],
+    "info": [
+        "An `IMPLEMENTATION DEFINED` field is a field that is not fully defined by the architecture, so that implementations can insert their own fields."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.ImplementationDefined"
+            ]
+        },
+        "constraints": {
+            "info": [
+                [
+                    "If the `constraints` are defined (not null), then the implementer must choose the fields",
+                    "specified in the `constraints`."
+                ]
+            ],
+            "type": [
+                "array",
+                "null"
+            ],
+            "default": null,
+            "items": {
+                "uniqueItems": true,
+                "oneOf": [
+                    {
+                        "$ref": "Array.json"
+                    },
+                    {
+                        "$ref": "ConditionalField.json"
+                    },
+                    {
+                        "$ref": "ConstantField.json"
+                    },
+                    {
+                        "$ref": "Dynamic.json"
+                    },
+                    {
+                        "$ref": "Field.json"
+                    },
+                    {
+                        "$ref": "Reserved.json"
+                    },
+                    {
+                        "$ref": "ReservedInternal.json"
+                    },
+                    {
+                        "$ref": "Vector.json"
+                    }
+                ]
+            }
+        },
+        "description": {
+            "info": [
+                [
+                    "If defined by the architecture, an implementation is allowed to edit this field,",
+                    "however an implementation must not change the original architectural meaning."
+                ]
+            ],
+            "see": "../Fields/Field.json",
+            "$ref": "../Traits/HasDescription.json#/definitions/description"
+        },
+        "display": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "volatile": {
+            "see": "../Fields/Field.json",
+            "type": "boolean"
+        },
+        "name": {
+            "see": "../Fields/Field.json",
+            "info": [
+                "If the `name` is defined by the architecture (not null), an implementer cannot change the name of the implemented field."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "resets": {
+            "see": "../Fields/Field.json",
+            "$ref": "../FieldResets.json",
+            "info": [
+                "If reset is defined an implementer must use the reset provided."
+            ]
+        }
+    },
+    "required": [
+        "rangeset"
+    ],
+    "title": "ImplementationDefined",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

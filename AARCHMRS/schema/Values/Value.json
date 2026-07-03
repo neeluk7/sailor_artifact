@@ -1,0 +1,60 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "definitions": {
+        "value": {
+            "pattern": "^(0(b[01x]+|x[0-9A-Fa-f]+)|'[01x]+')$",
+            "type": "string"
+        }
+    },
+    "info": [
+        [
+            "A value object defines a bitstring. A meaning can be optionally defined to",
+            "describe the context of this bitstring."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Values.Value"
+            ]
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "info": [
+                "The meaning associated with this bitstring."
+            ]
+        },
+        "value": {
+            "info": [
+                "The bitstring representing the value.",
+                "This must be a string of bits (each bit of which may take values `0`, `1` or `x`, this last indicating \"could be either 0 or 1\"), wrapped in single-quotes."
+            ],
+            "type": "string",
+            "pattern": "^'[01x]+'$",
+            "examples": [
+                "'10'",
+                "'1x'"
+            ]
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "title": "Value",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Values.Value",
+            "value": "'00001'",
+            "meaning": "The first defined value"
+        }
+    ]
+}

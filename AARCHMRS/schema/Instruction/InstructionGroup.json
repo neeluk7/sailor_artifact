@@ -1,0 +1,135 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An $(~Instruction.InstructionGroup) object is a subset of its parent encoding space.",
+            "$(~Instruction.InstructionGroup) is used mainly for grouping similar instructions together",
+            "and allowing all instructions in a group to be conditional on the same feature."
+        ],
+        [
+            "The example below shows both of these uses of $(~Instruction.InstructionGroup). Note that",
+            "instances of $(~Instruction.InstructionGroup) may be nested to arbitrary depth, provided that",
+            "the encoding space of the parent can be subdivided."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.InstructionGroup",
+            "name": "load_store",
+            "condition": {
+                "_type": "AST.Function",
+                "name": "IsFeatureImplemented",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_Persistence"
+                    }
+                ]
+            },
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": []
+            },
+            "title": "Load/Store",
+            "children": [
+                {
+                    "_type": "Instruction.Instruction",
+                    "name": "LOAD",
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": []
+                    },
+                    "operation_id": "load_bytes"
+                },
+                {
+                    "_type": "Instruction.InstructionGroup",
+                    "name": "stores",
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": []
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.InstructionGroup"
+            ]
+        },
+        "name": {
+            "info": [
+                "The machine-readable name of the $(~Instruction.InstructionGroup)."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "title": {
+            "info": [
+                "The human-readable name of the $(~Instruction.InstructionGroup)."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "encoding": {
+            "$ref": "Encodeset/Encodeset.json"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "children": {
+            "type": "array",
+            "info": [
+                "Defines children nodes.",
+                [
+                    "Any child node with a unique `name` that inherits its parent's `operation_id`,",
+                    "unless it redefines the `operation_id`, in which case it overwrites",
+                    "the behavior that is defined by the `operation_id` of this $(~Instruction.InstructionGroup)."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#"
+                    },
+                    {
+                        "$ref": "Instruction.json"
+                    }
+                ]
+            }
+        },
+        "operation_id": {
+            "info": [
+                "The ID of an operation that describes the default behavior of unspecified encodings within the $(~Instruction.InstructionGroup). When absent, the `operation_id` of the parent node is implied."
+            ],
+            "type": [
+                "string",
+                "null"
+            ],
+            "pattern": "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$",
+            "default": null
+        }
+    },
+    "required": [
+        "name",
+        "encoding"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.InstructionGroup"
+}

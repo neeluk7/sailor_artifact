@@ -1,0 +1,52 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "An AST model wrapper for an identifier, such as `REG0` or `a32`."
+    ],
+    "definitions": {
+        "regex": {
+            "type": "string",
+            "pattern": "^((?!__)[a-zA-Z_][a-zA-Z0-9_]*(<[^>]+>)?[a-zA-Z0-9_]*$)"
+        },
+        "c_identifier_regex": {
+            "type": "string",
+            "pattern": "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+    },
+    "examples": [
+        {
+            "_type": "AST.Identifier",
+            "value": "REG0"
+        },
+        {
+            "_type": "AST.Identifier",
+            "value": "A32"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Identifier"
+            ]
+        },
+        "value": {
+            "info": [
+                "The string value of this identifier."
+            ],
+            "$ref": "#/definitions/regex"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "title": "Identifier",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

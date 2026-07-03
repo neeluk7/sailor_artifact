@@ -1,0 +1,158 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        [
+            "This field represents a `RO` constant field with a specific value. For example a 4",
+            "bit constant field `'0101'`."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.ConstantField"
+            ]
+        },
+        "name": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "value": {
+            "info": [
+                "The constant value of this ConstantField, which can be:",
+                [
+                    " - A single `Value` (or string) such as `'0000'`",
+                    " - An IMPLEMENTATION DEFINED value, which:",
+                    "       - can be open ended to any value that fits within the size of this field.",
+                    "       - or restricted to a set of allowed constraints defined by the architecture."
+                ]
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../Values/Value.json"
+                },
+                {
+                    "$ref": "../Values/ImplementationDefined.json"
+                }
+            ],
+            "examples": [
+                {
+                    "_type": "Values.Value",
+                    "value": "'00'",
+                    "meaning": "A defined constant value with a custom meaning"
+                },
+                {
+                    "_type": "Values.ImplementationDefined",
+                    "constraints": {
+                        "'00'": "A possible value chosen by an implementation.",
+                        "'01'": "A second possible value chosen by an implementation."
+                    }
+                }
+            ]
+        },
+        "access": {
+            "default": null,
+            "$ref": "../Traits/HasFieldAccess.json#/definitions/access",
+            "info": [
+                [
+                    "Constant fields are by nature `RO` in an implementation. ",
+                    "This means that once implemented, the value cannot be changed. However in some cases,",
+                    "software reads may return another value."
+                ],
+                [
+                    "For example, a constant value with the value of `1` may have a ",
+                    "Read-As-Zero accessor (RAZ), meaning that even though the value is set to ",
+                    "`1` software must interpret it as `0`."
+                ],
+                "Note:",
+                [
+                    " - The write counterpart of the access must always be `WI` as ",
+                    "   `ConstantFields` are not writable.",
+                    " - If the value of access is set to null (or omitted), then ",
+                    "   `RO/WI` is implied."
+                ]
+            ]
+        },
+        "description": {
+            "$ref": "../Traits/HasDescription.json#/definitions/description",
+            "see": "../Fields/Field.json"
+        }
+    },
+    "required": [
+        "value",
+        "rangeset"
+    ],
+    "title": "ConstantField",
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Fields.ConstantField",
+            "name": "C1",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 2
+                }
+            ],
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": "A constant field that does not change its value during runtime"
+            },
+            "value": {
+                "_type": "Values.Value",
+                "value": "'00'",
+                "meaning": null
+            }
+        },
+        {
+            "_type": "Fields.ConstantField",
+            "name": "C2",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 2
+                }
+            ],
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": "Constant value with possible architecture values which must be configured during an implementation"
+            },
+            "value": {
+                "_type": "Values.ImplementationDefined",
+                "constraints": {
+                    "_type": "Valuesets.Values",
+                    "values": [
+                        {
+                            "_type": "Values.Value",
+                            "value": "'00'",
+                            "meaning": "A possible value chosen by an implementation."
+                        },
+                        {
+                            "_type": "Values.Value",
+                            "value": "'01'",
+                            "meaning": "A second possible value chosen by an implementation."
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

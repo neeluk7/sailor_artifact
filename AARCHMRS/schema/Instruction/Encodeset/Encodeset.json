@@ -1,0 +1,124 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An `Encodeset` object represents a fixed-width encoding group. It may contain",
+            "instances of `Bits` and `Field`, each of which has a range attribute."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.Encodeset.Encodeset",
+            "width": 8,
+            "values": [
+                {
+                    "_type": "Instruction.Encodeset.Bits",
+                    "range": {
+                        "_type": "Range",
+                        "start": 4,
+                        "width": 4
+                    },
+                    "value": {
+                        "_type": "Values.Value",
+                        "value": "'1101'",
+                        "meaning": null
+                    },
+                    "should_be_mask": {
+                        "_type": "Values.Value",
+                        "value": "'0110'"
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Instruction.Encodeset.Encodeset",
+            "width": 8,
+            "values": [
+                {
+                    "_type": "Instruction.Encodeset.Bits",
+                    "range": {
+                        "_type": "Range",
+                        "start": 5,
+                        "width": 1
+                    },
+                    "value": {
+                        "_type": "Values.Value",
+                        "value": "'0'",
+                        "meaning": null
+                    },
+                    "should_be_mask": {
+                        "_type": "Values.Value",
+                        "value": "'0'"
+                    }
+                },
+                {
+                    "_type": "Instruction.Encodeset.Field",
+                    "range": {
+                        "_type": "Range",
+                        "start": 1,
+                        "width": 2
+                    },
+                    "name": "c",
+                    "value": {
+                        "_type": "Values.Value",
+                        "value": "'xx'"
+                    },
+                    "should_be_mask": {
+                        "_type": "Values.Value",
+                        "value": "'00'"
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Encodeset.Encodeset"
+            ]
+        },
+        "values": {
+            "info": [
+                "The bits or fields in the `Encodeset`."
+            ],
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "Bits.json"
+                    },
+                    {
+                        "$ref": "Field.json"
+                    },
+                    {
+                        "$ref": "ShouldBeBits.json"
+                    }
+                ]
+            }
+        },
+        "width": {
+            "type": "number",
+            "minimum": 1,
+            "info": [
+                "Width of the `Encodeset` in bits."
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "values",
+        "width"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Encodeset.Encodeset"
+}

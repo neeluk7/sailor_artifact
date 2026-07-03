@@ -1,0 +1,68 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Memory.ReadWriteAccess",
+    "info": [
+        "The ReadWriteAccess is used to represent the Read and Write behavior of an access at the Memory level."
+    ],
+    "oneOf": [
+        {
+            "enum": [
+                "RW",
+                "RO",
+                "WO/RAZ",
+                "RAZ/WI",
+                "WO/RAO",
+                "RAO/WI",
+                "WO/RES0",
+                "RES0/WI",
+                "RES0",
+                "WO/RES1",
+                "RES1/WI",
+                "RES1",
+                "WO/UNKNOWN",
+                "UNKNOWN/WI",
+                "IGNORE",
+                "WO",
+                "WI",
+                "RESERVED",
+                "WO/ERROR",
+                "RO/ERROR",
+                "ERROR",
+                "ERROR/RESERVED",
+                "RESERVED/ERROR"
+            ]
+        },
+        {
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../../../../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess"
+                    ]
+                },
+                "read": {
+                    "info": [
+                        "Defines the read behavior of this access."
+                    ],
+                    "default": "UNKNOWN",
+                    "$ref": "../../../../Enums/ReadAccess.json"
+                },
+                "write": {
+                    "info": [
+                        "Defines the write behavior of this access."
+                    ],
+                    "default": "WI",
+                    "$ref": "../../../../Enums/WriteAccess.json"
+                }
+            },
+            "type": "object"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

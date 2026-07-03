@@ -1,0 +1,457 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "The RegisterBlock class captures all the information about an MMIO",
+            "register block for an architecture specification or peripheral IP."
+        ],
+        [
+            "It is a contiguous range of the address map of length **size**, where only the",
+            "least-significant bits affect the decoding of addresses inside it."
+        ],
+        [
+            "Accesses inside the address range of the RegisterBlock that do not",
+            "resolve to a register behave as specified in the **default_access**",
+            "field."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "RegisterBlock",
+            "name": "RB",
+            "size": "64000",
+            "default_access": {
+                "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                "read": "RAZ",
+                "write": "WI"
+            },
+            "accessors": [
+                {
+                    "_type": "Accessors.BlockAccess",
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "S"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "references": {
+                        "_type": "AST.Identifier",
+                        "value": "S"
+                    },
+                    "offset": [
+                        {
+                            "_type": "AST.Integer",
+                            "value": 0
+                        }
+                    ],
+                    "access": {
+                        "_type": "Accessors.Permission.MemoryAccess",
+                        "access": {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "W"
+                        }
+                    }
+                },
+                {
+                    "_type": "Accessors.BlockAccess",
+                    "references": {
+                        "_type": "AST.Identifier",
+                        "value": "NS"
+                    },
+                    "offset": [
+                        {
+                            "_type": "AST.Integer",
+                            "value": 32000
+                        }
+                    ],
+                    "access": {
+                        "_type": "Accessors.Permission.MemoryAccess",
+                        "access": {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "W"
+                        }
+                    }
+                }
+            ],
+            "mapset": [
+                {
+                    "_type": "Mapping.Map",
+                    "maps": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "REG_S"
+                        },
+                        {
+                            "_type": "AST.SquareOp",
+                            "arguments": [
+                                {
+                                    "_type": "AST.Slice",
+                                    "left": {
+                                        "_type": "AST.Integer",
+                                        "value": 31
+                                    },
+                                    "right": {
+                                        "_type": "AST.Integer",
+                                        "value": 0
+                                    }
+                                }
+                            ],
+                            "var": {
+                                "_type": "Types.RegisterType",
+                                "value": {
+                                    "instance": null,
+                                    "name": "REG",
+                                    "slices": null,
+                                    "state": "AArch64"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "blocks": [
+                {
+                    "_type": "RegisterBlock",
+                    "condition": {
+                        "_type": "AST.Function",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "S"
+                            }
+                        ],
+                        "name": "IsFeatureImplemented"
+                    },
+                    "size": "32000",
+                    "name": "S",
+                    "default_access": "RAZ/WI",
+                    "accessors": [
+                        {
+                            "_type": "Accessors.ReadOffsetAccessor",
+                            "offset": [
+                                {
+                                    "_type": "AST.Integer",
+                                    "value": 0
+                                }
+                            ],
+                            "access": {
+                                "_type": "Accessors.Permission.SystemAccess",
+                                "access": {
+                                    "_type": "AST.Return",
+                                    "val": {
+                                        "_type": "AST.Identifier",
+                                        "value": "REG_S"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "_type": "Accessors.WriteOffsetAccessor",
+                            "offset": [
+                                {
+                                    "_type": "AST.Integer",
+                                    "value": 0
+                                }
+                            ],
+                            "access": {
+                                "_type": "Accessors.Permission.SystemAccess",
+                                "access": {
+                                    "_type": "AST.Assignment",
+                                    "val": {
+                                        "_type": "AST.Identifier",
+                                        "value": "value"
+                                    },
+                                    "var": {
+                                        "_type": "AST.Identifier",
+                                        "value": "REG_S"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "_type": "RegisterBlock",
+                    "size": "32000",
+                    "name": "NS",
+                    "default_access": "RAZ/WI",
+                    "accessors": [
+                        {
+                            "_type": "Accessors.ReadOffsetAccessor",
+                            "offset": [
+                                {
+                                    "_type": "AST.Integer",
+                                    "value": 0
+                                }
+                            ],
+                            "access": {
+                                "_type": "Accessors.Permission.SystemAccess",
+                                "access": {
+                                    "_type": "AST.Return",
+                                    "val": {
+                                        "_type": "AST.Identifier",
+                                        "value": "REG_NS"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "_type": "Register",
+                    "purpose": "Being an example",
+                    "name": "REG",
+                    "state": null,
+                    "instances": {
+                        "_type": "Instances.Instanceset",
+                        "values": [
+                            {
+                                "_type": "Instances.Instance",
+                                "instance": "REG_NS"
+                            },
+                            {
+                                "_type": "Instances.Instance",
+                                "condition": {
+                                    "_type": "AST.Function",
+                                    "arguments": [
+                                        {
+                                            "_type": "AST.Identifier",
+                                            "value": "S"
+                                        }
+                                    ],
+                                    "name": "IsFeatureImplemented"
+                                },
+                                "instance": "REG_S"
+                            }
+                        ]
+                    },
+                    "fieldsets": [
+                        {
+                            "_type": "Fieldset",
+                            "width": 32,
+                            "values": [
+                                {
+                                    "_type": "Fields.Field",
+                                    "name": "F1",
+                                    "rangeset": [
+                                        {
+                                            "_type": "Range",
+                                            "start": 0,
+                                            "width": 32
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "RegisterBlock"
+            ]
+        },
+        "accessors": {
+            "info": [
+                "Defines the access behaviors for each of the Registers and RegisterBlocks present in the `blocks` property.",
+                "Note that the contents of `blocks` should not contain any register accessors. It can, however, contain field level access information."
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "Accessors/BlockAccess.json"
+                    },
+                    {
+                        "$ref": "Accessors/WriteOffsetAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/ReadOffsetAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/SystemAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/ImplementationDefinedOffsetAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/BlockAccessArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/WriteOffsetAccessorArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/ReadOffsetAccessorArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/SystemAccessorArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/ImplementationDefinedOffsetAccessorArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/Getter.json"
+                    },
+                    {
+                        "$ref": "Accessors/Setter.json"
+                    },
+                    {
+                        "$ref": "Accessors/WriteFunction.json"
+                    },
+                    {
+                        "$ref": "Accessors/ReadFunction.json"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "blocks": {
+            "info": [
+                "Array of all the Registers and RegisterBlocks in this RegisterBlock.",
+                "All the names within `blocks` must be unique. For example:",
+                "BLK0.BLK1 and BLK1.BLK1 would be valid as BLK1 does not appear twice in BLK0's context, but BLK0.BLK1 and BLK0.BLK1 would be invalid."
+            ],
+            "type": "array",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "Register.json"
+                    },
+                    {
+                        "$ref": "RegisterArray.json"
+                    },
+                    {
+                        "$ref": "#"
+                    }
+                ]
+            }
+        },
+        "default_access": {
+            "info": [
+                [
+                    "Behaviour of accesses that are inside the register block, but",
+                    "do not resolve to a register."
+                ]
+            ],
+            "oneOf": [
+                {
+                    "$ref": "Accessors/Permission/AccessTypes/Memory/ReadWriteAccess.json"
+                },
+                {
+                    "$ref": "Accessors/Permission/AccessTypes/Memory/ImplementationDefined.json"
+                }
+            ]
+        },
+        "name": {
+            "info": [
+                "The canonical name of the register block. Should be globally unique."
+            ],
+            "type": "string"
+        },
+        "purpose": {
+            "$ref": "Text.json",
+            "info": [
+                "A short human-readable description of purpose of this register block."
+            ]
+        },
+        "size": {
+            "info": [
+                "Size of the address space in bytes as a hex string or equation.",
+                "Example strings are: `0x0F`, `0x0F + (4 * n)` or `GIC + 0xFF`."
+            ],
+            "type": "string"
+        },
+        "title": {
+            "info": [
+                "The display name of the register block."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "condition": {
+            "$ref": "Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition that must be true for this registerblock to be present.",
+                [
+                    "Certain registerblocks are only present based on the value of this property",
+                    "being evaluated to true. If the value is evaluated false see the `default_access` property."
+                ]
+            ]
+        },
+        "mapset": {
+            "info": [
+                "Architecturally registers may be mapped to other registers or register blocks. `mapset` provides an array of unique mappings for this `RegisterBlock`.",
+                "Only `RegisterBlockMapping` is allowed in this Mapset."
+            ],
+            "$ref": "Mapset.json"
+        },
+        "references": {
+            "info": [
+                "A mapping between aliases and the Registers they are referring to. Mostly used for keeping track of expanded RegisterArrays by their array name."
+            ],
+            "examples": [
+                {
+                    "REGA1_EL1": {
+                        "_type": "References.References",
+                        "indexes": {
+                            "0": {
+                                "_type": "References.Reference",
+                                "ref": "REGA10_EL1"
+                            },
+                            "3": {
+                                "_type": "References.Reference",
+                                "ref": "REGA13_EL1"
+                            }
+                        }
+                    },
+                    "REG_EL1": {
+                        "_type": "References.Reference",
+                        "ref": "EL1REG"
+                    }
+                }
+            ],
+            "type": "object",
+            "propertyNames": {
+                "$ref": "Types/Variable.json#/definitions/name_part_regex"
+            },
+            "patternProperties": {
+                ".+": {
+                    "oneOf": [
+                        {
+                            "$ref": "References/References.json"
+                        },
+                        {
+                            "$ref": "References/Reference.json"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "required": [
+        "name",
+        "size",
+        "default_access"
+    ],
+    "title": "RegisterBlock",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

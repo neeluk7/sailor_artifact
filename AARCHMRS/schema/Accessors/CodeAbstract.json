@@ -1,0 +1,32 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A common set of definitions for all CodeAbstract implementations."
+    ],
+    "definitions": {
+        "access": {
+            "info": [
+                "The string defining the ASL that runs when this side effect comes into effect."
+            ],
+            "type": "string"
+        },
+        "condition": {
+            "info": [
+                "The condition that must be True for this side effect to be applicable."
+            ],
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "name": {
+            "info": [
+                "The name identifying the instance or entity that this side effect is acting upon."
+            ],
+            "$ref": "../Types/Variable.json#/definitions/name_part_regex"
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Accessors.CodeAbstract"
+}

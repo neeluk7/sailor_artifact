@@ -1,0 +1,653 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>RegisterArray - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class=" title-type">RegisterArray</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>A RegisterArray is an array of registers, all of which have the same structure.
+The implementer should treat this register array as many registers rolled into one.</p>
+<p>For example the register REG0, REG1, REG2, ..., REGN could be formulated as the RegisterArray <code>REG&lt;n&gt;</code> 
+where <code>&lt;n&gt;</code> is the nth value to use when talking about the canonical register, and the rangeset is used to define 
+the index range.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>RegisterArray</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/access_text" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/access_text">access_text</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/access_text" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/access_text" class="schema_link">properties.access_text</a> in
+            <a href="Register_schema.html#/properties/access_text" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/accessors" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/accessors">accessors</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/accessors" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The accessors work exactly like the accessors in a normal <a href="Register_schema.html">Register</a> except
+the encoding values include references to the <code>&lt;n&gt;</code> index value. This is because the encoding applies to
+each of the <code>&lt;n&gt;</code> registers.</p>
+<p>When using a <a href="Accessors/MemoryMapped_schema.html">MemoryMapped</a> accessor, the <code>n</code> value in its offset property is the index into this register array.</p></div>
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/accessors" class="schema_link">properties.accessors</a> in
+            <a href="Register_schema.html#/properties/accessors" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/condition" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/condition" class="schema_link">properties.condition</a> in
+            <a href="Register_schema.html#/properties/condition" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/configuration" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/configuration">configuration</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/configuration" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/configuration" class="schema_link">properties.configuration</a> in
+            <a href="Register_schema.html#/properties/configuration" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/fieldsets" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/fieldsets">fieldsets</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/fieldsets" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/fieldsets" class="schema_link">properties.fieldsets</a> in
+            <a href="Register_schema.html#/properties/fieldsets" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/groups" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/groups">groups</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/groups" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/groups" class="schema_link">properties.groups</a> in
+            <a href="Register_schema.html#/properties/groups" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/index_variable" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/index_variable">index_variable<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">Traits.HasIndexes</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">definitions.index_variable</a> in
+            <a href="Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">Traits.HasIndexes</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/indexes" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/indexes">indexes<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">Traits.HasIndexes</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">definitions.indexes</a> in
+            <a href="Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">Traits.HasIndexes</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/instances" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/instances">instances</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/instances" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/instances" class="schema_link">properties.instances</a> in
+            <a href="Register_schema.html#/properties/instances" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/mapset" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/mapset">mapset</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/mapset" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/mapset" class="schema_link">properties.mapset</a> in
+            <a href="Register_schema.html#/properties/mapset" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/name" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/name">name<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/name" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The name of a RegisterArray must contain an index variable, e.g. <code>&lt;n&gt;</code>, exactly once.</p>
+<ul>
+<li><code>REG&lt;n&gt;</code></li>
+<li><code>REG&lt;n&gt;_EL1</code></li>
+</ul></div>
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/name" class="schema_link">properties.name</a> in
+            <a href="Register_schema.html#/properties/name" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                  <dl>
+                      <dt>Pattern</dt>
+                      <dd><code title="Regex">/&lt;([^&gt;]+)&gt;/</code></dd>
+                  </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/purpose" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/purpose">purpose</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/purpose" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/purpose" class="schema_link">properties.purpose</a> in
+            <a href="Register_schema.html#/properties/purpose" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/reset" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/reset">reset</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/reset" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/reset" class="schema_link">properties.reset</a> in
+            <a href="Register_schema.html#/properties/reset" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/state" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/state">state</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/state" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/state" class="schema_link">properties.state</a> in
+            <a href="Register_schema.html#/properties/state" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/title" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/title">title</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Register_schema.html#/properties/title" class="schema_link">Register</a>
+            </td>
+            <td class="col-md-4">
+                        
+    <div>
+        See
+            <a href="Register_schema.html#/properties/title" class="schema_link">properties.title</a> in
+            <a href="Register_schema.html#/properties/title" class="schema_link">Register</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    [
+      "A RegisterArray is an array of registers, all of which have the same structure.",
+      "The implementer should treat this register array as many registers rolled into one."
+    ],
+    [
+      "For example the register REG0, REG1, REG2, ..., REGN could be formulated as the RegisterArray `REG<n>` ",
+      "where `<n>` is the nth value to use when talking about the canonical register, and the rangeset is used to define ",
+      "the index range."
+    ]
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "Meta.json"
+    },
+    "_type": {
+      "enum": [
+        "RegisterArray"
+      ]
+    },
+    "access_text": {
+      "$ref": "Register.json#/properties/access_text",
+      "see": "Register.json"
+    },
+    "accessors": {
+      "see": "Register.json",
+      "info": [
+        [
+          "The accessors work exactly like the accessors in a normal [Register](Register_schema.html) except",
+          "the encoding values include references to the `<n>` index value. This is because the encoding applies to",
+          "each of the `<n>` registers."
+        ],
+        "When using a [MemoryMapped](Accessors/MemoryMapped_schema.html) accessor, the `n` value in its offset property is the index into this register array."
+      ],
+      "$ref": "Register.json#/properties/accessors"
+    },
+    "condition": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/condition"
+    },
+    "configuration": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/configuration"
+    },
+    "fieldsets": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/fieldsets"
+    },
+    "groups": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/groups"
+    },
+    "instances": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/instances"
+    },
+    "mapset": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/mapset"
+    },
+    "name": {
+      "see": "Register.json",
+      "info": [
+        "The name of a RegisterArray must contain an index variable, e.g. `<n>`, exactly once.",
+        [
+          " - `REG<n>`",
+          " - `REG<n>_EL1`"
+        ]
+      ],
+      "pattern": "<([^>]+)>",
+      "$ref": "Register.json#/properties/name"
+    },
+    "purpose": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/purpose"
+    },
+    "reset": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/reset"
+    },
+    "state": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/state"
+    },
+    "title": {
+      "see": "Register.json",
+      "$ref": "Register.json#/properties/title"
+    },
+    "indexes": {
+      "$ref": "Traits/HasIndexes.json#/definitions/indexes"
+    },
+    "index_variable": {
+      "$ref": "Traits/HasIndexes.json#/definitions/index_variable"
+    }
+  },
+  "title": "RegisterArray",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "index_variable",
+    "indexes"
+  ]
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

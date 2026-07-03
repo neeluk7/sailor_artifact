@@ -1,0 +1,284 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <p>The <strong>A</strong>rm <strong>Arch</strong>itecture <strong>M</strong>achine <strong>R</strong>eadable <strong>S</strong>pecification <em>(AARCHMRS for short)</em>
+provides a JSON representation of the Arm Architecture, this documentation describes the schema
+for each architectural component.</p>
+<h2 id="user-guides">User Guides</h2>
+<p>A list of user guides to explain how the main components of AARCHMRS are used to represent
+an Arm Architecture.</p>
+<ul>
+<li><strong><a href="userguide/features.html">Features</a></strong></li>
+<li><strong><a href="userguide/isa-top-level.html">Instructions</a></strong></li>
+<li><strong><a href="userguide/registers.html">Registers</a></strong></li>
+</ul>
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+<li><strong><a href="schema_specification.html">AARCHMRS Schema specification</a></strong></li>
+<li><strong><a href="aml.html">Arm Markdown Language (AML)</a></strong></li>
+<li><strong><a href="relnotes/index.html">Release notes</a></strong></li>
+<li><strong><a href="notice.html">Proprietary Notice</a></strong></li>
+</ul>
+<h2 id="index-of-aarchmrs-schema">Index of AARCHMRS Schema</h2>
+<ul>
+<li><a href="Description_schema.html">Description</a></li>
+<li><a href="Encoding_schema.html">Encoding</a></li>
+<li><a href="ExpressionRange_schema.html">ExpressionRange</a></li>
+<li><a href="Features_schema.html">Features</a></li>
+<li><a href="FieldResets_schema.html">FieldResets</a></li>
+<li><a href="Fieldset_schema.html">Fieldset</a></li>
+<li><a href="Index_schema.html">Index</a></li>
+<li><a href="Mapset_schema.html">Mapset</a></li>
+<li><a href="Meta_schema.html">Meta</a></li>
+<li><a href="Parameterset_schema.html">Parameterset</a></li>
+<li><a href="Range_schema.html">Range</a></li>
+<li><a href="Rangeset_schema.html">Rangeset</a></li>
+<li><a href="Register_schema.html">Register</a></li>
+<li><a href="RegisterArray_schema.html">RegisterArray</a></li>
+<li><a href="RegisterBlock_schema.html">RegisterBlock</a></li>
+<li><a href="RegisterReset_schema.html" class="deprecated" title="Schema is deprecated">RegisterReset</a></li>
+<li><a href="Registers_schema.html">Registers</a></li>
+<li><a href="StructureReference_schema.html">StructureReference</a></li>
+<li><a href="Text_schema.html">Text</a></li>
+<li><strong><a href="AST/index.html">AST</a></strong><ul>
+<li><a href="AST/ArrayAccessOp_schema.html">ArrayAccessOp</a></li>
+<li><a href="AST/Assignment_schema.html">Assignment</a></li>
+<li><a href="AST/BinaryOp_schema.html">BinaryOp</a></li>
+<li><a href="AST/Bool_schema.html">Bool</a></li>
+<li><a href="AST/Concat_schema.html">Concat</a></li>
+<li><a href="AST/DotAtom_schema.html">DotAtom</a></li>
+<li><a href="AST/ForLoop_schema.html">ForLoop</a></li>
+<li><a href="AST/Function_schema.html">Function</a></li>
+<li><a href="AST/Identifier_schema.html">Identifier</a></li>
+<li><a href="AST/If_schema.html">If</a></li>
+<li><a href="AST/Integer_schema.html">Integer</a></li>
+<li><a href="AST/Real_schema.html">Real</a></li>
+<li><a href="AST/Return_schema.html">Return</a></li>
+<li><a href="AST/Set_schema.html">Set</a></li>
+<li><a href="AST/Slice_schema.html">Slice</a></li>
+<li><a href="AST/SquareOp_schema.html">SquareOp</a></li>
+<li><a href="AST/StatementBlock_schema.html">StatementBlock</a></li>
+<li><a href="AST/Tuple_schema.html">Tuple</a></li>
+<li><a href="AST/Type_schema.html">Type</a></li>
+<li><a href="AST/TypeAnnotation_schema.html">TypeAnnotation</a></li>
+<li><a href="AST/UnaryOp_schema.html">UnaryOp</a></li>
+<li><a href="AST/VariableDeclaration_schema.html">VariableDeclaration</a></li>
+</ul>
+</li>
+<li><strong>Accessors</strong><ul>
+<li><a href="Accessors/BlockAccess_schema.html">BlockAccess</a></li>
+<li><a href="Accessors/BlockAccessArray_schema.html">BlockAccessArray</a></li>
+<li><a href="Accessors/CodeAbstract_schema.html">CodeAbstract</a></li>
+<li><a href="Accessors/ExternalDebug_schema.html">ExternalDebug</a></li>
+<li><a href="Accessors/Getter_schema.html">Getter</a></li>
+<li><a href="Accessors/ImplementationDefinedOffsetAccessor_schema.html">ImplementationDefinedOffsetAccessor</a></li>
+<li><a href="Accessors/ImplementationDefinedOffsetAccessorArray_schema.html">ImplementationDefinedOffsetAccessorArray</a></li>
+<li><a href="Accessors/MemoryMapped_schema.html">MemoryMapped</a></li>
+<li><a href="Accessors/ReadFunction_schema.html">ReadFunction</a></li>
+<li><a href="Accessors/ReadOffsetAccessor_schema.html">ReadOffsetAccessor</a></li>
+<li><a href="Accessors/ReadOffsetAccessorArray_schema.html">ReadOffsetAccessorArray</a></li>
+<li><a href="Accessors/Setter_schema.html">Setter</a></li>
+<li><a href="Accessors/SystemAccessor_schema.html">SystemAccessor</a></li>
+<li><a href="Accessors/SystemAccessorArray_schema.html">SystemAccessorArray</a></li>
+<li><a href="Accessors/WriteFunction_schema.html">WriteFunction</a></li>
+<li><a href="Accessors/WriteOffsetAccessor_schema.html">WriteOffsetAccessor</a></li>
+<li><a href="Accessors/WriteOffsetAccessorArray_schema.html">WriteOffsetAccessorArray</a></li>
+<li><strong>Permission</strong><ul>
+<li><a href="Accessors/Permission/FieldAccess_schema.html">FieldAccess</a></li>
+<li><a href="Accessors/Permission/FieldGetterSetter_schema.html">FieldGetterSetter</a></li>
+<li><a href="Accessors/Permission/FieldHardwareSoftwareAccess_schema.html">FieldHardwareSoftwareAccess</a></li>
+<li><a href="Accessors/Permission/InstanceAccess_schema.html">InstanceAccess</a></li>
+<li><a href="Accessors/Permission/MemoryAccess_schema.html">MemoryAccess</a></li>
+<li><a href="Accessors/Permission/SystemAccess_schema.html">SystemAccess</a><ul>
+<li><strong>Field</strong><ul>
+<li><a href="Accessors/Permission/AccessTypes/Field/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Accessors/Permission/AccessTypes/Field/ReadWriteAccess_schema.html">ReadWriteAccess</a></li>
+</ul>
+</li>
+<li><strong>Memory</strong><ul>
+<li><a href="Accessors/Permission/AccessTypes/Memory/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Accessors/Permission/AccessTypes/Memory/ReadWriteAccess_schema.html">ReadWriteAccess</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Enums</strong><ul>
+<li><a href="Enums/ReadAccess_schema.html">ReadAccess</a></li>
+<li><a href="Enums/ReservedTypes_schema.html">ReservedTypes</a></li>
+<li><a href="Enums/WriteAccess_schema.html">WriteAccess</a></li>
+</ul>
+</li>
+<li><strong>Fields</strong><ul>
+<li><a href="Fields/Array_schema.html">Array</a></li>
+<li><a href="Fields/ConditionalField_schema.html">ConditionalField</a></li>
+<li><a href="Fields/ConstantField_schema.html">ConstantField</a></li>
+<li><a href="Fields/Dynamic_schema.html">Dynamic</a></li>
+<li><a href="Fields/Field_schema.html">Field</a></li>
+<li><a href="Fields/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Fields/Reserved_schema.html">Reserved</a></li>
+<li><a href="Fields/ReservedInternal_schema.html">ReservedInternal</a></li>
+<li><a href="Fields/Vector_schema.html">Vector</a></li>
+</ul>
+</li>
+<li><strong>Instances</strong><ul>
+<li><a href="Instances/Instance_schema.html">Instance</a></li>
+<li><a href="Instances/Instanceset_schema.html">Instanceset</a></li>
+</ul>
+</li>
+<li><strong><a href="Instruction/index.html">Instruction</a></strong><ul>
+<li><a href="Instruction/Assembly_schema.html">Assembly</a></li>
+<li><a href="Instruction/Instruction_schema.html">Instruction</a></li>
+<li><a href="Instruction/InstructionAlias_schema.html">InstructionAlias</a></li>
+<li><a href="Instruction/InstructionGroup_schema.html">InstructionGroup</a></li>
+<li><a href="Instruction/InstructionInstance_schema.html">InstructionInstance</a></li>
+<li><a href="Instruction/InstructionSet_schema.html">InstructionSet</a></li>
+<li><a href="Instruction/Instructions_schema.html">Instructions</a></li>
+<li><a href="Instruction/Operation_schema.html">Operation</a></li>
+<li><a href="Instruction/OperationAbstract_schema.html">OperationAbstract</a></li>
+<li><a href="Instruction/OperationAlias_schema.html">OperationAlias</a></li>
+<li><strong><a href="Instruction/Encodeset/index.html">Encodeset</a></strong><ul>
+<li><a href="Instruction/Encodeset/Bits_schema.html">Bits</a></li>
+<li><a href="Instruction/Encodeset/Encodeset_schema.html">Encodeset</a></li>
+<li><a href="Instruction/Encodeset/Field_schema.html">Field</a></li>
+<li><a href="Instruction/Encodeset/FieldAbstract_schema.html">FieldAbstract</a></li>
+<li><a href="Instruction/Encodeset/ShouldBeBits_schema.html" class="deprecated" title="Schema is deprecated">ShouldBeBits</a></li>
+</ul>
+</li>
+<li><strong><a href="Instruction/Rules/index.html">Rules</a></strong><ul>
+<li><a href="Instruction/Rules/Choice_schema.html">Choice</a></li>
+<li><a href="Instruction/Rules/Rule_schema.html">Rule</a></li>
+<li><a href="Instruction/Rules/Token_schema.html">Token</a></li>
+</ul>
+</li>
+<li><strong>Symbols</strong><ul>
+<li><a href="Instruction/Symbols/Literal_schema.html">Literal</a></li>
+<li><a href="Instruction/Symbols/RuleReference_schema.html">RuleReference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Mapping</strong><ul>
+<li><a href="Mapping/Map_schema.html">Map</a></li>
+<li><a href="Mapping/MapArray_schema.html">MapArray</a></li>
+<li><a href="Mapping/RegisterBlockMapping_schema.html" class="deprecated" title="Schema is deprecated">RegisterBlockMapping</a></li>
+<li><a href="Mapping/RegisterMapping_schema.html">RegisterMapping</a></li>
+</ul>
+</li>
+<li><strong><a href="Parameters/index.html">Parameters</a></strong><ul>
+<li><a href="Parameters/Boolean_schema.html">Boolean</a></li>
+<li><a href="Parameters/Group_schema.html">Group</a></li>
+<li><a href="Parameters/Integer_schema.html">Integer</a></li>
+<li><a href="Parameters/ParameterAbstract_schema.html">ParameterAbstract</a></li>
+<li><a href="Parameters/String_schema.html">String</a></li>
+</ul>
+</li>
+<li><strong>References</strong><ul>
+<li><a href="References/Reference_schema.html">Reference</a></li>
+<li><a href="References/References_schema.html">References</a></li>
+</ul>
+</li>
+<li><strong>Resets</strong><ul>
+<li><a href="Resets/ArchitecturallyUnknown_schema.html">ArchitecturallyUnknown</a></li>
+<li><a href="Resets/ConditionalReset_schema.html">ConditionalReset</a></li>
+<li><a href="Resets/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Resets/InstanceReset_schema.html">InstanceReset</a></li>
+<li><a href="Resets/Unknown_schema.html">Unknown</a></li>
+</ul>
+</li>
+<li><strong><a href="Traits/index.html">Traits</a></strong><ul>
+<li><a href="Traits/HasCondition_schema.html">HasCondition</a></li>
+<li><a href="Traits/HasConstraints_schema.html">HasConstraints</a></li>
+<li><a href="Traits/HasDescription_schema.html">HasDescription</a></li>
+<li><a href="Traits/HasFieldAccess_schema.html">HasFieldAccess</a></li>
+<li><a href="Traits/HasIndexes_schema.html">HasIndexes</a></li>
+</ul>
+</li>
+<li><strong><a href="Types/index.html">Types</a></strong><ul>
+<li><a href="Types/Field_schema.html">Field</a></li>
+<li><a href="Types/PstateField_schema.html" class="deprecated" title="Schema is deprecated">PstateField</a></li>
+<li><a href="Types/RegisterMultiFields_schema.html" class="deprecated" title="Schema is deprecated">RegisterMultiFields</a></li>
+<li><a href="Types/RegisterType_schema.html">RegisterType</a></li>
+<li><a href="Types/String_schema.html">String</a></li>
+<li><a href="Types/Variable_schema.html" class="deprecated" title="Schema is deprecated">Variable</a></li>
+</ul>
+</li>
+<li><strong><a href="Values/index.html">Values</a></strong><ul>
+<li><a href="Values/ConditionalValue_schema.html">ConditionalValue</a></li>
+<li><a href="Values/EquationValue_schema.html">EquationValue</a></li>
+<li><a href="Values/Group_schema.html">Group</a></li>
+<li><a href="Values/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Values/Link_schema.html">Link</a></li>
+<li><a href="Values/NamedValue_schema.html">NamedValue</a></li>
+<li><a href="Values/Value_schema.html">Value</a></li>
+<li><a href="Values/ValueRange_schema.html">ValueRange</a></li>
+</ul>
+</li>
+<li><strong>Valuesets</strong><ul>
+<li><a href="Valuesets/ImplementationDefined_schema.html">ImplementationDefined</a></li>
+<li><a href="Valuesets/Values_schema.html">Values</a></li>
+<li><a href="Valuesets/ValuesetAbstract_schema.html">ValuesetAbstract</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

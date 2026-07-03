@@ -1,0 +1,151 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A Field defines a named field with the meaning definition of each of its known values."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.Field"
+            ]
+        },
+        "access": {
+            "$ref": "../Traits/HasFieldAccess.json#/definitions/access"
+        },
+        "description": {
+            "$ref": "../Traits/HasDescription.json#/definitions/description",
+            "info": [
+                "Provides an architectural description of this field.",
+                "You can use a dictionary that contains `before` and `after` keys, where:",
+                [
+                    " - The `before` key is used to define architectural information that should be rendered before the values are represented.",
+                    " - The `after` key is used to define architectural information that should be rendered description after the values are represented."
+                ],
+                [
+                    "If the property value is of type `string`, this behaves as having a description with just the _before_ key, ",
+                    "`before` and `after` have no architectural significance, this is just for rendering."
+                ]
+            ]
+        },
+        "display": {
+            "info": [
+                "The display name of the field.",
+                "When null the `name` property is used as the display name.",
+                "Some architectural fields use this property, it is preferred to use the `name` property instead."
+            ],
+            "deprecated": true,
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "volatile": {
+            "info": [
+                "The volatile property indicates whether a field's value may change between different accesses, even if it does not appear to be modified. In general, it means that the field's value might be updated by the hardware.",
+                "For Example:",
+                [
+                    "- A status register field changing value.",
+                    "- A counter incrementing."
+                ]
+            ],
+            "default": false,
+            "type": "boolean"
+        },
+        "name": {
+            "info": [
+                "The canonical name of the field. The name must be unique within this fieldset."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "rangeset": {
+            "$ref": "../Rangeset.json",
+            "info": [
+                "A rangeset indicates the location this field appears in it's parent.",
+                [
+                    " - `0`: This field appears at the 0th location.",
+                    " - `3:0`: This field is a 4 bit field spanning from the 3rd most significant bit (msb) to the 0th least significant bit (lsb) of it's parent.",
+                    " - `5, 3:2, 0`: This field's msb is at 5th bit and lsb is at the 0th bit, with 4th bit and 1st bit not being a part of this field."
+                ],
+                "The width of the rangeset represents the width of this field."
+            ]
+        },
+        "resets": {
+            "$ref": "../FieldResets.json",
+            "info": [
+                "The reset value that applies to this field"
+            ]
+        },
+        "values": {
+            "$ref": "../Valuesets/ValuesetAbstract.json#/definitions/children",
+            "info": [
+                "A set of __Value__ objects.  Each object indicates one of the valid values that may be present in this field, along with a textual description of its meaning."
+            ]
+        }
+    },
+    "required": [
+        "name",
+        "rangeset"
+    ],
+    "title": "Field",
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Fields.Field",
+            "name": "F1",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 2,
+                    "width": 4
+                }
+            ],
+            "description": {
+                "_type": "Description",
+                "before": "A field in a register called F1",
+                "after": "All other values are reserved"
+            },
+            "values": {
+                "_type": "Valuesets.Values",
+                "values": [
+                    {
+                        "_type": "Values.Value",
+                        "meaning": "First value",
+                        "value": "'00'"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "meaning": "Second value",
+                        "value": "'10'"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "meaning": "Third value",
+                        "value": "'01'"
+                    }
+                ]
+            },
+            "resets": {
+                "_type": "FieldResets",
+                "domains": {
+                    "cold": {
+                        "_type": "Values.Value",
+                        "value": "'00'",
+                        "meaning": "The reset value, which resets to First value"
+                    }
+                }
+            },
+            "volatile": false
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

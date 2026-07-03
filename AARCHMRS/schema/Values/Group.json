@@ -1,0 +1,99 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A Group allows a value to be represented by the concatenation of different elements.",
+        "For example, `0b00`, `'xx10'`, and `foo[2:0]` can be concatenated using the `:` symbol as `0b00:'xx10':foo[2:0]`.",
+        [
+            "If `foo` is set to `12`",
+            "then foo's binary representation is `'1100'` and the `[2:0]` slice of that is `'100'`.",
+            "This makes the Group example `0b00:'xx10':foo[2:0]` represent the bitstring `'00xx10100'`."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Values.Group",
+            "value": "'00':'xx10':foo[2:0]",
+            "meaning": "Group meaning",
+            "values": {
+                "_type": "Valuesets.Values",
+                "values": [
+                    {
+                        "_type": "Values.Value",
+                        "value": "'00'",
+                        "meaning": "First Value"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "value": "'xx10'",
+                        "meaning": "First Value"
+                    },
+                    {
+                        "_type": "Values.EquationValue",
+                        "value": "foo",
+                        "slice": [
+                            {
+                                "_type": "Range",
+                                "start": 0,
+                                "width": 3
+                            }
+                        ],
+                        "meaning": "First three bits of the `foo` variable"
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "Values.Group",
+            "value": "foo[1:0]:'xxxx10'",
+            "meaning": "Group meaning"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Values.Group"
+            ]
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "info": [
+                "The meaning of this group value."
+            ]
+        },
+        "value": {
+            "info": [
+                "The string representation of the values property. ",
+                "It is invalid to write this differently to how `values` are represented."
+            ],
+            "examples": [
+                "'00':foo[3:0]:'x10'",
+                "foo[1:0]:'xxxx10'"
+            ],
+            "type": "string"
+        },
+        "values": {
+            "$ref": "../Valuesets/Values.json",
+            "info": [
+                "Valueset with the resolved values for this variable.",
+                "This data object can be used to elaborate the values in detail."
+            ]
+        }
+    },
+    "required": [
+        "value",
+        "meaning"
+    ],
+    "title": "Group",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

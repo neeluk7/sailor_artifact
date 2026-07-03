@@ -1,0 +1,92 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An instance of $(~Instruction.Operation) defines an operation in the instruction set and",
+            "includes operation ASL pseudocode that is used by one or more instructions."
+        ],
+        [
+            "If an $(~Instruction.Operation) is referred to by more than one instruction, it may contain",
+            "decode ASL pseudocode, which defines the shared decode for all of those instructions."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Operation"
+            ]
+        },
+        "operation": {
+            "info": [
+                "ASL code describing the operation of one or more instructions."
+            ],
+            "$ref": "../Text.json"
+        },
+        "decode": {
+            "info": [
+                "Shared decode. null when no shared decode applies."
+            ],
+            "$ref": "../Text.json"
+        },
+        "description": {
+            "$ref": "OperationAbstract.json#/definitions/description"
+        },
+        "brief": {
+            "$ref": "OperationAbstract.json#/definitions/brief"
+        },
+        "title": {
+            "$ref": "OperationAbstract.json#/definitions/title"
+        }
+    },
+    "required": [
+        "operation",
+        "brief",
+        "title",
+        "description"
+    ],
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Instruction.Operation",
+            "operation": [
+                [
+                    "bits(datasize) result;",
+                    "bits(datasize) operand1 = X[n, datasize];",
+                    "bits(datasize) operand2 = X[m, datasize];",
+                    "bits(4) nzcv;",
+                    "if sub_op then",
+                    "   operand2 = NOT(operand2);",
+                    "(result, nzcv) = AddWithCarry(operand1, operand2, PSTATE.C);",
+                    "if setflags then",
+                    "   PSTATE.<N,Z,C,V> = nzcv;",
+                    "X[d, datasize] = result;"
+                ]
+            ],
+            "decode": [
+                [
+                    "integer d = UInt(Rd);",
+                    "integer n = UInt(Rn);",
+                    "integer m = UInt(Rm);",
+                    "integer datasize = if sf == '1' then 64 else 32;",
+                    "boolean sub_op = (op == '1');",
+                    "boolean setflags = (S == '1');"
+                ]
+            ],
+            "description": "Subtract with Carry subtracts a register value and the value of NOT (Carry flag) from a register value, and writes the result to the destination register.",
+            "brief": "SBC",
+            "title": "SBC"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Operation"
+}

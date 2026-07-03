@@ -1,0 +1,81 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./../../img/mstile-144x144.png">
+    <link rel="icon" href="./../../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./../../index.html"><img src="./../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="encodeset">Encodeset</h1>
+<p>Each instruction node uses a bit pattern that represents its encoding shape at that level.
+It has two main properties:</p>
+<ul>
+<li><code>width</code>, which is the width of the encodeset in bits.</li>
+<li><code>values</code>, which is a list of fields (representing fields or bits) defined at the current level.</li>
+</ul>
+<p>If part of an <a class="schema_link" href="../Encodeset/Encodeset_schema.html" title="Encodeset.Encodeset">Encodeset</a> is unspecified in both the current instruction node
+and all of its parent nodes, that part is considered to be an "any-bit"
+(<code>'1'</code> or <code>'0'</code>, usually denoted as <code>'x'</code>).</p>
+<p>If part of the local <a class="schema_link" href="../Encodeset/Encodeset_schema.html" title="Encodeset.Encodeset">Encodeset</a> is unspecified but that same part has a
+value specified in a parent node, the value of that part is inherited in the local <a class="schema_link" href="../Encodeset/Encodeset_schema.html" title="Encodeset.Encodeset">Encodeset</a>.</p>
+<p>For more information about the types of field, see the following:</p>
+<ul>
+<li><a href="Bits_schema.html">Bits</a></li>
+<li><a href="Encodeset_schema.html">Encodeset</a></li>
+<li><a href="Field_schema.html">Field</a></li>
+<li><a href="FieldAbstract_schema.html">FieldAbstract</a></li>
+<li><a href="ShouldBeBits_schema.html" class="deprecated" title="Schema is deprecated">ShouldBeBits</a></li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./../../js/highlight/highlight.js"></script>
+    <script src="./../../js/highlight/languages/json.min.js"></script>
+    <script src="./../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./../../js/highlight/languages/yaml.min.js"></script>
+    <script src="./../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

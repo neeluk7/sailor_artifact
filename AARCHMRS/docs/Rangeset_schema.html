@@ -1,0 +1,220 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>Rangeset - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class=" title-type">Rangeset</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">array</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>The <a class="schema_link" href="Rangeset_schema.html" title="Rangeset">Rangeset</a> schema contains an array of <a class="schema_link" href="Range_schema.html" title="Range">Range</a> objects which allow us to reference
+multiple bits in a bitstring (or binary number).</p>
+<p>For example to reference the set bits in an 8-bit number <code>'01001110'</code>, you can use two 
+<a class="schema_link" href="Range_schema.html" title="Range">Range</a> objects, where the first <a class="schema_link" href="Range_schema.html" title="Range">Range</a> object references 1-bit at position <code>6</code> 
+(most significant bit), and the next <a class="schema_link" href="Range_schema.html" title="Range">Range</a> object references 3-bits at position 
+<code>4:2</code>. See <a class="schema_link" href="Range_schema.html" title="Range">Range</a> object for more details on a single bit reference.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The order is important, because referencing <code>4:2, 6</code> returns a different answer!</p>
+<p>For example <code>'abcdefgh'</code> represent a bitstring where the characters represent 
+the position. Where:</p>
+<ul>
+<li><code>6, 4:2</code> returns the bits in the order of <code>'bdef'</code>.</li>
+<li><code>4:2, 6</code> returns the bits in the order of <code>'defb'</code>.</li>
+<li><code>2, 3, 4, 6</code> returns the bits in the order of <code>'fedb'</code>.</li>
+</ul>
+</div></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+                            <h3 class="type">array</h3>
+                            <ul>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Range_schema.html" class="schema_link">Range</a>
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="ExpressionRange_schema.html" class="schema_link">ExpressionRange</a>
+
+
+                                </li>
+                            </ul>
+
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    {
+        &#34;_type&#34;: &#34;Range&#34;, 
+        &#34;start&#34;: 6, 
+        &#34;width&#34;: 1
+    }, 
+    {
+        &#34;_type&#34;: &#34;Range&#34;, 
+        &#34;start&#34;: 2, 
+        &#34;width&#34;: 3
+    }
+]</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "title": "Rangeset",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "info": [
+    [
+      "The $(Rangeset) schema contains an array of $(Range) objects which allow us to reference",
+      "multiple bits in a bitstring (or binary number)."
+    ],
+    [
+      "For example to reference the set bits in an 8-bit number `'01001110'`, you can use two ",
+      "$(Range) objects, where the first $(Range) object references 1-bit at position `6` ",
+      "(most significant bit), and the next $(Range) object references 3-bits at position ",
+      "`4:2`. See $(Range) object for more details on a single bit reference."
+    ],
+    [
+      "!!! note",
+      "    The order is important, because referencing `4:2, 6` returns a different answer!",
+      "    ",
+      "    For example `'abcdefgh'` represent a bitstring where the characters represent ",
+      "    the position. Where:",
+      "    ",
+      "      - `6, 4:2` returns the bits in the order of `'bdef'`.",
+      "      - `4:2, 6` returns the bits in the order of `'defb'`.",
+      "      - `2, 3, 4, 6` returns the bits in the order of `'fedb'`."
+    ]
+  ],
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "Range.json"
+      },
+      {
+        "$ref": "ExpressionRange.json"
+      }
+    ]
+  },
+  "examples": [
+    [
+      {
+        "_type": "Range",
+        "start": 6,
+        "width": 1
+      },
+      {
+        "_type": "Range",
+        "start": 2,
+        "width": 3
+      }
+    ]
+  ],
+  "additionalItems": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

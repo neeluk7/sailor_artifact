@@ -1,0 +1,70 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./../img/mstile-144x144.png">
+    <link rel="icon" href="./../img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./../index.html"><img src="./../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="traits">Traits</h1>
+<p>Traits are purpose-specific additional schema elements. The name indicates which schema element it affects. For example, the HasCondition trait is used within the Condition schema element.</p>
+<ul>
+<li><a href="HasCondition_schema.html">HasCondition</a></li>
+<li><a href="HasConstraints_schema.html">HasConstraints</a></li>
+<li><a href="HasDescription_schema.html">HasDescription</a></li>
+<li><a href="HasFieldAccess_schema.html">HasFieldAccess</a></li>
+<li><a href="HasIndexes_schema.html">HasIndexes</a></li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./../js/highlight/highlight.js"></script>
+    <script src="./../js/highlight/languages/json.min.js"></script>
+    <script src="./../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./../js/highlight/languages/yaml.min.js"></script>
+    <script src="./../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

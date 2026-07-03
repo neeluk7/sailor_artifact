@@ -1,0 +1,26 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "This represents any ReservedType specified in the ArmARM."
+    ],
+    "enum": [
+        "RES0",
+        "RES0H",
+        "RES1",
+        "RAZ",
+        "RAO",
+        "WI",
+        "RW",
+        "RAZ/WI",
+        "RAO/WI",
+        "RAZ/SBZ",
+        "UNKNOWN",
+        "RESS"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Enums.ReservedTypes"
+}

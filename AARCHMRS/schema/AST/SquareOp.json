@@ -1,0 +1,101 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "AST.SquareOp",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "VMID"
+            },
+            "arguments": []
+        },
+        {
+            "_type": "AST.SquareOp",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "NVMem"
+            },
+            "arguments": [
+                {
+                    "_type": "AST.Integer",
+                    "value": 42
+                }
+            ]
+        },
+        {
+            "_type": "AST.SquareOp",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "REG0"
+            },
+            "arguments": [
+                {
+                    "_type": "AST.Slice",
+                    "left": {
+                        "_type": "AST.Integer",
+                        "value": 31
+                    },
+                    "right": {
+                        "_type": "AST.Integer",
+                        "value": 16
+                    }
+                },
+                {
+                    "_type": "AST.Integer",
+                    "value": 12
+                }
+            ]
+        }
+    ],
+    "info": [
+        "A model representing a bit slice of a value or a function call:",
+        [
+            " - `VMID[]`",
+            " - `NVMem[42]`",
+            " - `REG0[31:16, 12]`"
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.SquareOp"
+            ]
+        },
+        "var": {
+            "info": [
+                "The SquareOp name. Either a function name or an object to be sliced."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        },
+        "arguments": {
+            "info": [
+                "The SquareOp's arguments."
+            ],
+            "default": [],
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "BinaryOp.json#/definitions/expression"
+                    },
+                    {
+                        "$ref": "Slice.json"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "var"
+    ],
+    "title": "SquareOp",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

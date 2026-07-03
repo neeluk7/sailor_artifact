@@ -1,0 +1,117 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "MapArray",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Mapping.MapArray"
+            ]
+        },
+        "maps": {
+            "$ref": "Map.json#/definitions/maps"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "This condition must be true for the mapping to exist."
+            ]
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Mapping.MapArray",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "EL1"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "indexes": [
+                {
+                    "_type": "Range",
+                    "start": 4,
+                    "width": 1
+                }
+            ],
+            "index_variable": "x",
+            "maps": [
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "Types.RegisterType",
+                        "value": {
+                            "instance": null,
+                            "name": "REG<x>",
+                            "slices": null,
+                            "state": "AArch64"
+                        }
+                    }
+                },
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REG<x>"
+                    }
+                }
+            ]
+        }
+    ],
+    "required": [
+        "maps",
+        "indexes",
+        "index_variable"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        "Provides mapping between Registers, RegisterBlocks, and Field types and individual bits within Registers like Map, except it is expandable based on an index.",
+        "When expanded, the values defined in the `indexes` property are used to generate multiple Map objects, one for each index."
+    ]
+}

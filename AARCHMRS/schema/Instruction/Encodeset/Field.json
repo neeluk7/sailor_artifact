@@ -1,0 +1,70 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "A `Field` object represents a field in an `Encodeset`. The `range` property",
+            "states how many bits wide the field is and where it is in the `Encodeset`."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.Encodeset.Field",
+            "range": {
+                "_type": "Range",
+                "start": 0,
+                "width": 4
+            },
+            "name": "alice",
+            "value": {
+                "_type": "Values.Value",
+                "value": "'0x11'"
+            },
+            "should_be_mask": {
+                "_type": "Values.Value",
+                "value": "'0000'"
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "FieldAbstract.json#/definitions/_meta"
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Encodeset.Field"
+            ]
+        },
+        "name": {
+            "info": [
+                "The name of this field."
+            ],
+            "$ref": "../../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "range": {
+            "$ref": "FieldAbstract.json#/definitions/range"
+        },
+        "value": {
+            "info": [
+                "Represents the value that the Field takes, based on the conditions that constrain the Field.",
+                "An `x` indicates that this bit can be `0` or `1`. All bits in a Field are set to `x` if the value is unconstrained."
+            ],
+            "$ref": "FieldAbstract.json#/definitions/value"
+        },
+        "should_be_mask": {
+            "$ref": "FieldAbstract.json#/definitions/should_be_mask"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "name",
+        "range",
+        "value",
+        "should_be_mask"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Encodeset.Field"
+}

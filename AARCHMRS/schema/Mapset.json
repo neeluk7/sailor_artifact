@@ -1,0 +1,29 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "An array of mappings, used to map two registers or RegisterBlocks together."
+    ],
+    "items": {
+        "oneOf": [
+            {
+                "$ref": "Mapping/RegisterMapping.json"
+            },
+            {
+                "$ref": "Mapping/RegisterBlockMapping.json"
+            },
+            {
+                "$ref": "Mapping/Map.json"
+            },
+            {
+                "$ref": "Mapping/MapArray.json"
+            }
+        ]
+    },
+    "title": "Mapset",
+    "type": "array",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalItems": false
+}

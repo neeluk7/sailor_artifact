@@ -1,0 +1,438 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../../img/mstile-144x144.png">
+    <link rel="icon" href="../../img/favicon.ico">
+
+        <title>SystemAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../../index.html"><img src="../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Accessors.Permission.</span><span class=" title-type">SystemAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>This access property holds access logic used inside SystemAccessors, such as MSR or, MRS, for example:</p>
+<h3>Example</h3>
+<p>To represent the following access of a system accessor:</p>
+<pre><code>if PSTATE.EL == EL0 then
+   return REG0
+elif PSTATE.EL == EL1 then
+   AArch64_SystemAccessTrap(0x0F)
+else
+   Undefined()
+</code></pre>
+<p>The SystemAccess can be written as:</p>
+<pre><code>{
+   &quot;_type&quot;: &quot;Accessors.Permission.SystemAccess&quot;,
+   &quot;access&quot;: [
+       {
+           &quot;_type&quot;: &quot;Accessors.Permission.SystemAccess&quot;,
+           &quot;condition&quot;: &quot;PSTATE.EL == EL0&quot;
+           &quot;access&quot;: &quot;return REG0&quot;
+       },
+       {
+           &quot;_type&quot;: &quot;Accessors.Permission.SystemAccess&quot;,
+           &quot;condition&quot;: &quot;PSTATE.EL == EL1&quot;
+           &quot;access&quot;: &quot;AArch64_SystemAccessTrap(0x0F)&quot;
+       },
+       {
+           &quot;_type&quot;: &quot;Accessors.Permission.SystemAccess&quot;,
+           &quot;condition&quot;: null,
+           &quot;access&quot;: &quot;Undefined()&quot;
+       },
+   ]
+}
+</code></pre>
+<p>Note, a <code>null</code> condition defines the otherwise clause. This can be omitted to mean UNDEFINED by default.</p>
+<h3>Nesting</h3>
+<p>System Accesses can be nested inside other System Accesses to represent complex nested conditions.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Metadata</p></div>
+                    
+    <div>
+        See
+            <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Accessors.Permission.SystemAccess</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/access" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/access">access<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">anyOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-anyOf">
+                        array
+            </div>
+            <div class="items-anyOf">
+                    <a href="../../AST/Return_schema.html" class="schema_link">AST.Return</a>
+            </div>
+            <div class="items-anyOf">
+                    <a href="../../AST/Assignment_schema.html" class="schema_link">AST.Assignment</a>
+            </div>
+            <div class="items-anyOf">
+                    <a href="../../AST/Function_schema.html" class="schema_link">AST.Function</a>
+            </div>
+            <div class="items-anyOf">
+                        string
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The access which occurs when the condition is satisfied. This is effectively the contents of the <code>if</code> branch.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is an array -->
+                    <span class="type"><span class="Xof">anyOf</span> array</span>
+                
+
+                
+
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">anyOf</span> <a class="title-type" href="../../AST/Return_schema.html">AST.Return</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">anyOf</span> <a class="title-type" href="../../AST/Assignment_schema.html">AST.Assignment</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">anyOf</span> <a class="title-type" href="../../AST/Function_schema.html">AST.Function</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- type is a string -->
+                    <span class="type"><span class="Xof">anyOf</span> string</span>
+                
+
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The condition under which the current access applies. This is effectively the <code>if</code> statement in the rendered pseudocode.</p></div>
+                    
+    <div>
+        See
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">definitions.condition</a> in
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "This access property holds access logic used inside SystemAccessors, such as MSR or, MRS, for example:",
+    "### Example",
+    "To represent the following access of a system accessor:",
+    [
+      "```",
+      "if PSTATE.EL == EL0 then",
+      "   return REG0",
+      "elif PSTATE.EL == EL1 then",
+      "   AArch64_SystemAccessTrap(0x0F)",
+      "else",
+      "   Undefined()",
+      "```"
+    ],
+    "The SystemAccess can be written as:",
+    [
+      "```",
+      "{",
+      "   \"_type\": \"Accessors.Permission.SystemAccess\",",
+      "   \"access\": [",
+      "       {",
+      "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+      "           \"condition\": \"PSTATE.EL == EL0\"",
+      "           \"access\": \"return REG0\"",
+      "       },",
+      "       {",
+      "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+      "           \"condition\": \"PSTATE.EL == EL1\"",
+      "           \"access\": \"AArch64_SystemAccessTrap(0x0F)\"",
+      "       },",
+      "       {",
+      "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+      "           \"condition\": null,",
+      "           \"access\": \"Undefined()\"",
+      "       },",
+      "   ]",
+      "}",
+      "```"
+    ],
+    "Note, a `null` condition defines the otherwise clause. This can be omitted to mean UNDEFINED by default.",
+    "### Nesting",
+    "System Accesses can be nested inside other System Accesses to represent complex nested conditions."
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../../Meta.json",
+      "info": [
+        "Metadata"
+      ]
+    },
+    "_type": {
+      "enum": [
+        "Accessors.Permission.SystemAccess"
+      ]
+    },
+    "access": {
+      "info": [
+        "The access which occurs when the condition is satisfied. This is effectively the contents of the `if` branch."
+      ],
+      "anyOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#"
+          }
+        },
+        {
+          "$ref": "../../AST/Return.json"
+        },
+        {
+          "$ref": "../../AST/Assignment.json"
+        },
+        {
+          "$ref": "../../AST/Function.json"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "condition": {
+      "info": [
+        "The condition under which the current access applies. This is effectively the `if` statement in the rendered pseudocode."
+      ],
+      "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+    }
+  },
+  "required": [
+    "access"
+  ],
+  "title": "SystemAccess",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../../js/highlight/highlight.js"></script>
+    <script src="../../js/highlight/languages/json.min.js"></script>
+    <script src="../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../../js/highlight/languages/yaml.min.js"></script>
+    <script src="../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "FieldReset holds the reset behavior that occurs in a specific domain.",
+        [
+            " - `cold` and `warm` domains are reserved, where:",
+            "       - `cold`: A cold reset is invoked when a component is powered on from no power.",
+            "       - `warm`: A warm reset is invoked when a component is told to reset while powered.",
+            " - Domains are case sensitive. So `cold` is not the same as `Cold`.",
+            " - Users can keep building custom reset domains by defining new domain keys. ",
+            " - The domain should preferably be lower case only and not include any spaces, this is",
+            "   allowed for legacy reasons, and support may end for this in the future."
+        ]
+    ],
+    "definitions": {
+        "allowed_resets": {
+            "oneOf": [
+                {
+                    "$ref": "Resets/ImplementationDefined.json"
+                },
+                {
+                    "$ref": "Resets/Unknown.json"
+                },
+                {
+                    "$ref": "Resets/ConditionalReset.json"
+                },
+                {
+                    "$ref": "Resets/ArchitecturallyUnknown.json"
+                },
+                {
+                    "$ref": "AST/BinaryOp.json#/definitions/expression"
+                }
+            ]
+        }
+    },
+    "examples": [
+        {
+            "_type": "FieldResets",
+            "domains": {
+                "warm": {
+                    "_type": "Resets.ArchitecturallyUnknown"
+                }
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "FieldResets"
+            ]
+        },
+        "text": {
+            "$ref": "Text.json",
+            "info": [
+                "Descriptive information about the reset to help reader better understand the context of this reset."
+            ]
+        },
+        "domains": {
+            "info": [
+                "Define a list of reset per reset domain.",
+                [
+                    "The most common cases are",
+                    "`cold` and `warm`. However specific components can define custom",
+                    "reset domains for example `debug`."
+                ]
+            ],
+            "patternProperties": {
+                "^[A-Za-z][A-Za-z0-9_]*$": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/allowed_resets"
+                        },
+                        {
+                            "$ref": "Resets/InstanceReset.json"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        }
+    },
+    "additionalProperties": false,
+    "title": "FieldReset",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

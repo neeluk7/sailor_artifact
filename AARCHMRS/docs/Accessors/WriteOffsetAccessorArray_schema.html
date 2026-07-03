@@ -1,0 +1,361 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>WriteOffsetAccessorArray - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Accessors.</span><span class=" title-type">WriteOffsetAccessorArray</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>An array of <code>WriteOffsetAccess</code> for a given <code>RegisterBlock</code> describes write accessors for a list of child <code>Registers</code> or <code>RegisterBlocks</code>.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Accessors.WriteOffsetAccessorArray</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/access" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/access">access<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="./Permission/SystemAccess_schema.html" class="schema_link">..Permission.SystemAccess</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Provides accessibility information for the access.</p></div>
+                    
+    <div>
+        See
+            <a href="./Permission/SystemAccess_schema.html" class="schema_link">..Permission.SystemAccess</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The condition which must be true for this accessor to be used.</p></div>
+                    
+    <div>
+        See
+            <a href="../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">definitions.condition</a> in
+            <a href="../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/index_variable" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/index_variable">index_variable<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">Traits.HasIndexes</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">definitions.index_variable</a> in
+            <a href="../Traits/HasIndexes_schema.html#/definitions/index_variable" class="schema_link">Traits.HasIndexes</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/indexes" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/indexes">indexes<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">Traits.HasIndexes</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">definitions.indexes</a> in
+            <a href="../Traits/HasIndexes_schema.html#/definitions/indexes" class="schema_link">Traits.HasIndexes</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/offset" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/offset">offset<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="WriteOffsetAccessor_schema.html#/properties/offset" class="schema_link">WriteOffsetAccessor</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Specifies the memory offset (or offsets) at which the referenced <code>Register</code> or <code>RegisterBlock</code> exists.</p></div>
+                    
+    <div>
+        See
+            <a href="WriteOffsetAccessor_schema.html#/properties/offset" class="schema_link">properties.offset</a> in
+            <a href="WriteOffsetAccessor_schema.html#/properties/offset" class="schema_link">WriteOffsetAccessor</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "additionalProperties": false,
+  "info": [
+    "An array of `WriteOffsetAccess` for a given `RegisterBlock` describes write accessors for a list of child `Registers` or `RegisterBlocks`."
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../Meta.json"
+    },
+    "_type": {
+      "enum": [
+        "Accessors.WriteOffsetAccessorArray"
+      ]
+    },
+    "condition": {
+      "$ref": "../Traits/HasCondition.json#/definitions/condition",
+      "info": [
+        "The condition which must be true for this accessor to be used."
+      ]
+    },
+    "offset": {
+      "info": [
+        "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+      ],
+      "$ref": "WriteOffsetAccessor.json#/properties/offset"
+    },
+    "access": {
+      "info": [
+        "Provides accessibility information for the access."
+      ],
+      "$ref": "./Permission/SystemAccess.json"
+    },
+    "indexes": {
+      "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+    },
+    "index_variable": {
+      "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+    }
+  },
+  "required": [
+    "offset",
+    "access",
+    "indexes",
+    "index_variable"
+  ],
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WriteOffsetAccessorArray"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

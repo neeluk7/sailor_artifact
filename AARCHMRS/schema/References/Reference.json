@@ -1,0 +1,61 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A reference to a Register, usually from expanding a RegisterArray."
+    ],
+    "examples": [
+        {
+            "_type": "References.Reference",
+            "ref": {
+                "_type": "AST.Identifier",
+                "value": "REG_EL1"
+            }
+        },
+        {
+            "_type": "References.Reference",
+            "ref": {
+                "_type": "AST.Identifier",
+                "value": "REG7_EL2"
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "References.Reference"
+            ]
+        },
+        "ref": {
+            "info": [
+                "The name of the Register this reference is referring to."
+            ],
+            "anyOf": [
+                {
+                    "$ref": "../Types/RegisterType.json"
+                },
+                {
+                    "$ref": "../AST/DotAtom.json"
+                },
+                {
+                    "$ref": "../AST/Identifier.json"
+                },
+                {
+                    "$ref": "../AST/SquareOp.json"
+                }
+            ]
+        }
+    },
+    "required": [
+        "ref"
+    ],
+    "title": "Reference",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

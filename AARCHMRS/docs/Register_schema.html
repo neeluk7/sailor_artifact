@@ -1,0 +1,936 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>Register - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class=" title-type">Register</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>This data structure encapsulates all the information about a register in the Arm architecture.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Register</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/access_text" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/access_text">access_text</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Text_schema.html" class="schema_link">Text</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Any information architecturally describing the access should be placed here.</p></div>
+                    
+    <div>
+        See
+            <a href="Text_schema.html" class="schema_link">Text</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/accessors" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/accessors">accessors</a>
+            </th>
+            <td class="col-md-4">
+                        <div><span class="type">array</span> [</div>
+                          
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="Accessors/SystemAccessor_schema.html" class="schema_link">Accessors.SystemAccessor</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/SystemAccessorArray_schema.html" class="schema_link">Accessors.SystemAccessorArray</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/MemoryMapped_schema.html" class="schema_link">Accessors.MemoryMapped</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/ExternalDebug_schema.html" class="schema_link">Accessors.ExternalDebug</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/WriteOffsetAccessor_schema.html" class="schema_link">Accessors.WriteOffsetAccessor</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/ReadOffsetAccessor_schema.html" class="schema_link">Accessors.ReadOffsetAccessor</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/Getter_schema.html" class="schema_link">Accessors.Getter</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/Setter_schema.html" class="schema_link">Accessors.Setter</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/WriteFunction_schema.html" class="schema_link">Accessors.WriteFunction</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Accessors/ReadFunction_schema.html" class="schema_link">Accessors.ReadFunction</a>
+            </div>
+    
+
+                            <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>This property holds an array of accessors defining how to access this register.</p>
+<ul>
+<li><a class="schema_link" href="Accessors/SystemAccessor_schema.html" title="Accessors.SystemAccessor">Accessors.SystemAccessor</a>: Provides a list of system instruction that can access this register.</li>
+<li><a class="schema_link" href="Accessors/MemoryMapped_schema.html" title="Accessors.MemoryMapped">Accessors.MemoryMapped</a>: This accessor is used to define a memory address to access this register.</li>
+<li><a class="schema_link" href="Accessors/ExternalDebug_schema.html" title="Accessors.ExternalDebug">Accessors.ExternalDebug</a>: This is used for debug registers.</li>
+</ul>
+<p>A register can have multiple accessors, however each accessor must be unique.</p>
+<p>For example, a system accessor is unique by name, encoding and instance. Where as <a class="schema_link" href="Accessors/MemoryMapped_schema.html" title="Accessors.MemoryMapped">Accessors.MemoryMapped</a> 
+and <a class="schema_link" href="Accessors/ExternalDebug_schema.html" title="Accessors.ExternalDebug">Accessors.ExternalDebug</a> are unique by frame (because two memory mapped registers can have the same 
+offset as long as they are in a unique frame).</p></div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The condition which must be true for this register is present.</p>
+<p>When false the default access behavior is defined by the architecture.</p></div>
+                    
+    <div>
+        See
+            <a href="Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">definitions.condition</a> in
+            <a href="Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/configuration" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/configuration">configuration</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Text_schema.html" class="schema_link">Text</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>This field is used to represent the architectural configuration of the register. For example:</p>
+<blockquote>
+<p>Under certain conditions a write to ICC_SGI1R_EL1 can generate Group 0 interrupts, see Forwarding an SGI to a target PE.</p>
+</blockquote></div>
+                    
+    <div>
+        See
+            <a href="Text_schema.html" class="schema_link">Text</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/fieldsets" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/fieldsets">fieldsets<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                        <div><span class="type">array</span> [</div>
+                          
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="Fieldset_schema.html" class="schema_link">Fieldset</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="StructureReference_schema.html" class="schema_link">StructureReference</a>
+            </div>
+    
+
+                            <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>An array of <a class="schema_link" href="Fieldset_schema.html" title="Fieldset">Fieldset</a> which defines the layout of the register.</p>
+<p>Multiple <a class="schema_link" href="Fieldset_schema.html" title="Fieldset">Fieldset</a> are used to represent different conditional layouts. All the 
+conditions in the <a class="schema_link" href="Fieldset_schema.html" title="Fieldset">Fieldset</a> must be mutually exclusive.</p></div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/groups" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/groups">groups</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">object</li>
+                                <li class="inline type">null</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The groups of which the register is a member.</p>
+<p>If <code>groups</code> is an object, then the primary group is required. The secondary groups (if any) are then listed as an array.</p></div>
+                    
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/primary" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/primary">primary<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                                <li class="inline type">null</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The primary group is the main group a register belongs to, one register can only have one primary group.</p></div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/secondary" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/secondary">secondary</a>
+            </th>
+            <td class="col-md-4">
+                        <div><span class="type">array</span> [</div>
+                          
+    
+
+
+                            <div>], <span class="type">null</span></div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A register can have many secondary groups.</p></div>
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd> Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+                    <div>
+                        <b>Default</b>
+                        <pre class="schema-json"><code class="language-json">null</code></pre>
+                    </div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/instances" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/instances">instances</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="Instances/Instanceset_schema.html" class="schema_link">Instances.Instanceset</a>
+            </div>
+            <div class="items-oneOf">
+                        boolean
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The list of register instances that this Register represents, or a boolean where True means the Registers instances is the same as its name. Which is identical to having one Instance with the same name as the register.</p>
+<p>False is identical to an empty Instanceset.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Instances/Instanceset_schema.html">Instances.Instanceset</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- Other types -->
+                <span>
+                        <span class="type Xof">oneOf</span>
+                    <ul class="inline list-type">
+                            <li class="inline type">boolean</li>
+                    </ul>
+                </span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+                    <div>
+                        <b>Default</b>
+                        <pre class="schema-json"><code class="language-json">true</code></pre>
+                    </div>
+            </td>
+        </tr>
+        
+        <tr id="/properties/mapset" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/mapset">mapset</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Mapset_schema.html" class="schema_link">Mapset</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Architecturally registers may be mapped to other registers. <code>mapset</code> provides an array of unique mappings for this register.</p></div>
+                    
+    <div>
+        See
+            <a href="Mapset_schema.html" class="schema_link">Mapset</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/name" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/name">name<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The canonical name of the register (must be unique within the set of registers).</p>
+<blockquote>
+<p>VBAR_EL3</p>
+</blockquote></div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/purpose" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/purpose">purpose<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="Text_schema.html" class="schema_link">Text</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A short description about the purpose of this register.</p>
+<blockquote>
+<p>Holds the vector base address for any exception that is taken to EL3.</p>
+</blockquote></div>
+                    
+    <div>
+        See
+            <a href="Text_schema.html" class="schema_link">Text</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/reset" class="property">
+                <th class="col-md-4 deprecated">
+                <a href="#/properties/reset">reset</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="RegisterReset_schema.html" class="schema_link">RegisterReset</a>
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Deprecated</dt>
+                        <dd>this property is deprecated and should not be used.</dd>
+                    </dl>
+                    <div><p>An overall reset value of this register. Field level reset will overwrite this property.</p>
+<p>When the property is set to null, no reset (or default architectural reset) applies.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="RegisterReset_schema.html">RegisterReset</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+                    <div>
+                        <b>Default</b>
+                        <pre class="schema-json"><code class="language-json">null</code></pre>
+                    </div>
+            </td>
+        </tr>
+        
+        <tr id="/properties/state" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/state">state<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <div><p>This property determines what state a register is used in.</p>
+<p><code>AArch64</code> and <code>AArch32</code> is used for system register given their respective state and
+<code>ext</code> is used for external memory mapped registers.</p></div>
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>AArch64</code>
+                            <code>AArch32</code>
+                            <code>ext</code>
+                            <code>None</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/title" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/title">title</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                                <li class="inline type">null</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The display name of the register. If <em>title</em> is not set, a renderer should use <em>name</em> as the display name.</p>
+<p>Note that the title should be treated as an extension of <code>description</code>, and may contain markdown or XML, and requires escaping of unsafe XML characters.</p></div>
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;Vector Base Address Register (EL3)&#34;</code></pre>
+            <pre class="schema-json"><code class="language-json">&#34;Trace Address Comparator Value Register &amp;lt;n&amp;gt;&#34;</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "This data structure encapsulates all the information about a register in the Arm architecture."
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "Meta.json"
+    },
+    "_type": {
+      "enum": [
+        "Register"
+      ]
+    },
+    "access_text": {
+      "$ref": "Text.json",
+      "info": [
+        "Any information architecturally describing the access should be placed here."
+      ]
+    },
+    "accessors": {
+      "info": [
+        "This property holds an array of accessors defining how to access this register.",
+        [
+          " - $(Accessors.SystemAccessor): Provides a list of system instruction that can access this register.",
+          " - $(Accessors.MemoryMapped): This accessor is used to define a memory address to access this register.",
+          " - $(Accessors.ExternalDebug): This is used for debug registers."
+        ],
+        "A register can have multiple accessors, however each accessor must be unique.",
+        [
+          "For example, a system accessor is unique by name, encoding and instance. Where as $(Accessors.MemoryMapped) ",
+          "and $(Accessors.ExternalDebug) are unique by frame (because two memory mapped registers can have the same ",
+          "offset as long as they are in a unique frame)."
+        ]
+      ],
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "Accessors/SystemAccessor.json"
+          },
+          {
+            "$ref": "Accessors/SystemAccessorArray.json"
+          },
+          {
+            "$ref": "Accessors/MemoryMapped.json"
+          },
+          {
+            "$ref": "Accessors/ExternalDebug.json"
+          },
+          {
+            "$ref": "Accessors/WriteOffsetAccessor.json"
+          },
+          {
+            "$ref": "Accessors/ReadOffsetAccessor.json"
+          },
+          {
+            "$ref": "Accessors/Getter.json"
+          },
+          {
+            "$ref": "Accessors/Setter.json"
+          },
+          {
+            "$ref": "Accessors/WriteFunction.json"
+          },
+          {
+            "$ref": "Accessors/ReadFunction.json"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "condition": {
+      "$ref": "Traits/HasCondition.json#/definitions/condition",
+      "info": [
+        "The condition which must be true for this register is present.",
+        "When false the default access behavior is defined by the architecture."
+      ]
+    },
+    "configuration": {
+      "$ref": "Text.json",
+      "info": [
+        "This field is used to represent the architectural configuration of the register. For example:",
+        "> Under certain conditions a write to ICC\\_SGI1R\\_EL1 can generate Group 0 interrupts, see Forwarding an SGI to a target PE."
+      ]
+    },
+    "fieldsets": {
+      "info": [
+        "An array of $(Fieldset) which defines the layout of the register.",
+        [
+          "Multiple $(Fieldset) are used to represent different conditional layouts. All the ",
+          "conditions in the $(Fieldset) must be mutually exclusive."
+        ]
+      ],
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "Fieldset.json"
+          },
+          {
+            "$ref": "StructureReference.json"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "groups": {
+      "info": [
+        "The groups of which the register is a member.",
+        "If `groups` is an object, then the primary group is required. The secondary groups (if any) are then listed as an array."
+      ],
+      "properties": {
+        "primary": {
+          "info": [
+            "The primary group is the main group a register belongs to, one register can only have one primary group."
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "secondary": {
+          "info": [
+            "A register can have many secondary groups."
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "primary"
+      ],
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null
+    },
+    "instances": {
+      "info": [
+        "The list of register instances that this Register represents, or a boolean where True means the Registers instances is the same as its name. Which is identical to having one Instance with the same name as the register.",
+        "False is identical to an empty Instanceset."
+      ],
+      "oneOf": [
+        {
+          "$ref": "Instances/Instanceset.json"
+        },
+        {
+          "type": "boolean"
+        }
+      ],
+      "default": true
+    },
+    "mapset": {
+      "info": [
+        "Architecturally registers may be mapped to other registers. `mapset` provides an array of unique mappings for this register."
+      ],
+      "$ref": "Mapset.json"
+    },
+    "name": {
+      "info": [
+        "The canonical name of the register (must be unique within the set of registers).",
+        "> VBAR_EL3"
+      ],
+      "type": "string"
+    },
+    "purpose": {
+      "$ref": "Text.json",
+      "info": [
+        "A short description about the purpose of this register.",
+        "> Holds the vector base address for any exception that is taken to EL3."
+      ]
+    },
+    "reset": {
+      "info": [
+        "An overall reset value of this register. Field level reset will overwrite this property.",
+        "When the property is set to null, no reset (or default architectural reset) applies."
+      ],
+      "oneOf": [
+        {
+          "$ref": "RegisterReset.json"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "deprecated": true
+    },
+    "state": {
+      "info": [
+        "This property determines what state a register is used in.",
+        [
+          "`AArch64` and `AArch32` is used for system register given their respective state and",
+          "`ext` is used for external memory mapped registers."
+        ]
+      ],
+      "enum": [
+        "AArch64",
+        "AArch32",
+        "ext",
+        null
+      ]
+    },
+    "title": {
+      "examples": [
+        "Vector Base Address Register (EL3)",
+        "Trace Address Comparator Value Register &lt;n&gt;"
+      ],
+      "info": [
+        "The display name of the register. If _title_ is not set, a renderer should use _name_ as the display name.",
+        "Note that the title should be treated as an extension of `description`, and may contain markdown or XML, and requires escaping of unsafe XML characters."
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "fieldsets",
+    "purpose",
+    "state"
+  ],
+  "title": "Register",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

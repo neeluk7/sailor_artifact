@@ -1,0 +1,502 @@
+# This is a config file for the Sail generated from ARM-ASL
+
+pc = "_PC"
+
+comment_prefixes = ["@", "//"]
+
+translation_function = "AArch64_TranslateAddress"
+
+# TODO: BS: implement in isla-axiomatic properly...
+# bit to set to inject an interrupt.
+interrupt_status_bit = "ISR_EL1.I"
+
+in_program_order = ["sail_barrier", "sail_cache_op", "sail_take_exception", "sail_return_exception", "sail_tlbi", "sail_system_register_write"]
+
+# litmus variables have type uint32_t by default
+default_sizeof = 4
+
+# The assembler is used for assembling the code in litmus tests. We
+# assume it takes arguments like GNU as.
+[[toolchain]]
+name = "macos-aarch64"
+os = "macos"
+arch = "aarch64"
+assembler = "as -march=armv8.3-a --target=aarch64-unknown-linux-gnu"
+objdump = "/opt/homebrew/opt/llvm/bin/llvm-objdump"
+nm = "/opt/homebrew/opt/llvm/bin/llvm-nm"
+linker = "/opt/homebrew/bin/ld.lld"
+
+[[toolchain]]
+name = "default"
+assembler = "aarch64-linux-gnu-as -march=armv8.3-a"
+objdump = "aarch64-linux-gnu-objdump"
+nm = "aarch64-linux-gnu-nm"
+linker = "aarch64-linux-gnu-ld"
+
+[mmu]
+page_table_base = "0x300000"
+page_size = "4096"
+s2_page_table_base = "0x200000"
+s2_page_size = "4096"
+
+# This section contains the base address for loading the code for each
+# thread in a litmus test, and the stride which is the distance
+# between each thread in bytes. The overall range for thread memory is
+# the half-open range [base,top)"
+[threads]
+base = "0x400000"
+top = "0x500000"
+stride = "0x1000"
+
+# If we want to give symbolic addresses concrete values, then we start
+# with a base address and increment by stride for each new symbolic
+# address.
+[symbolic_addrs]
+base = "0x600000"
+top = "0x700000"
+stride = "0x10"
+
+[registers]
+ignore = [
+  "_PC",
+  # SEE must NOT be ignored: it is the pseudo-register the ASL decode uses
+  # for "SEE <other encoding>" redirects. With "__isla_continue_on_see"
+  # restored below, leaving SEE tracked is the known-good setting that the
+  # earlier Sailor runs relied on. Ignoring it (the previous revision) can
+  # turn benign SEE redirects into premature stops/throws.
+  #"SEE",
+  "InGuardedPage",
+  "__trickbox_enabled",
+  "v8Ap1_IMPLEMENTED",
+  "v8Ap2_IMPLEMENTED",
+  "v8Ap3_IMPLEMENTED",
+  "v8Ap4_IMPLEMENTED",
+  "v8Ap5_IMPLEMENTED",
+  "v8Ap6_IMPLEMENTED",
+  "v8Ap7_IMPLEMENTED",
+  "v8Ap8_IMPLEMENTED",
+  "v8Ap9_IMPLEMENTED",
+  "v9Ap0_IMPLEMENTED",
+  "v9Ap1_IMPLEMENTED",
+  "v9Ap2_IMPLEMENTED",
+  "v9Ap3_IMPLEMENTED",
+  "v9Ap4_IMPLEMENTED",
+  "__isla_vector_gpr",
+  "__monomorphize_writes",
+  "__monomorphize_reads",
+]
+
+# These registers are set before any symbolic execution occurs
+[registers.defaults]
+"__isla_vector_gpr" = false
+# Restored: continue past SEE redirects during decode. The earlier config
+# noted "This changes everything for the parse analyser of sailor"; the
+# subsequent revision disabled it, which can reintroduce SEE-related
+# stops/throws on aliased encodings. Keep it on for the batch runs.
+"__isla_continue_on_see" = true
+"__monomorphize_reads" = false
+"__monomorphize_writes" = false
+"VBAR_EL1" = "0x0000000000000000"
+"VBAR_EL2" = "0x0000000000000000"
+# Causes CNTCV to be incremented every cycle if bit 0 is 1
+"CNTCR" = "{ bits = 0x00000001 }"
+# SSAdvance?
+"MDSCR_EL1" = "{ bits = 0x0000000000000000 }"
+"InGuardedPage" = false
+"__highest_el_aarch32" = false
+"__CNTControlBase" = "0x00000000000000"
+"__supported_pa_size" = 52
+"__supported_va_size" = 52
+"__max_implemented_smeveclen" = 512
+# HCR_EL2.RW
+"HCR_EL2" = "{ bits = 0x0000000080000000 }"
+"TCR_EL1" = "{ bits = 0x0000000000000000 }"
+"TCR_EL2" = "{ bits = 0x0000000000000000 }"
+"TCR_EL3" = "{ bits = 0x0000000000000000 }"
+# SCR_EL3.{RW,NS}
+"SCR_EL3" = "{ bits = 0x0000000000000401 }"
+"SCTLR_EL3" = "{ bits = 0x0000000000000000 }"
+"SMCR_EL3" = "{ bits = 0x0000000000000000 }"
+"ZCR_EL3" = "{ bits = 0x0000000000000000 }"
+"CPTR_EL3" = "{ bits = 0x0000000000000000 }"
+"CNTP_CTL_EL0" = "{ bits = 0x0000000000000000 }"
+"CNTV_CTL_EL0" = "{ bits = 0x0000000000000000 }"
+"CNTHP_CTL_EL2" = "{ bits = 0x0000000000000000 }"
+"CNTHV_CTL_EL2" = "{ bits = 0x0000000000000000 }"
+"CNTHPS_CTL_EL2" = "{ bits = 0x0000000000000000 }"
+"CNTHVS_CTL_EL2" = "{ bits = 0x0000000000000000 }"
+"CNTPS_CTL_EL1" = "{ bits = 0x0000000000000000 }"
+"CNTHCTL_EL2" = "{ bits = 0x0000000000000000 }"
+"CNTKCTL_EL1" = "{ bits = 0x0000000000000000 }"
+"MPAMIDR_EL1" = "{ bits = 0x0000000000000000 }"
+"GPCCR_EL3" = "{ bits = 0x0000000000000000 }"
+
+# CPACR_EL1.FPEN = 0b11 (bits 21:20): FP/SIMD register-file accesses no
+# longer trap at EL0/EL1. The original value (0x0) trapped every scalar
+# FP/SIMD load/store at EL0/EL1, which surfaced in batch runs as
+# EL0/EL1-only "builtins.sail:52" throws (EndOfInstruction ->
+# Error_ExceptionTaken) on LDR_B/H/S/D/Q, LDUR_*, STUR_*, STLUR_* and
+# LDAPUR_* SIMD forms. Tracing (TTA, bit 28) remains disabled.
+"CPACR_EL1" = "{ bits = 0x0000000000300000 }"
+
+# Pin CPTR_EL2 explicitly. The CPACR comment above assumes CPTR_EL2 is
+# non-trapping, but nothing pinned it, so it could be UNKNOWN/symbolic and
+# fork an FP-trap path when instructions are executed at EL2. TFP (bit 10)
+# = 0 and TTA (bit 28) = 0 -> no FP/trace trap at EL2 (HCR_EL2.E2H = 0, so
+# the non-E2H CPTR_EL2 format applies).
+"CPTR_EL2" = "{ bits = 0x0000000000000000 }"
+
+# Pin the EL2 stage-1 system control register as well (SCTLR_EL1 is pinned
+# in [registers.reset], SCTLR_EL3 above). Leaving it symbolic lets the
+# executor fork onto satisfiable alignment/trap paths for ordinary
+# loads/stores executed at EL2, producing EL-inconsistent
+# Error_ExceptionTaken traces. Bit 1 unset = unaligned accesses allowed.
+"SCTLR_EL2" = "{ bits = 0x0000000004000200 }"
+
+# Turn off anything debugging/performance monitoring sounding
+"CTIDEVCTL" = "{ bits = 0x0000000000000000 }"
+"MDCR_EL2" = "{ bits = 0x0000000000000000 }"
+"PMCR_EL0" = "{ bits = 0x0000000000000000 }"
+"_HDCR" = "{ bits = 0x0000000000000000 }"
+"_PMCR" = "{ bits = 0x0000000000000000 }"
+
+"CFG_RMR_AA64" = "0b1"
+"CFG_RVBAR" = "0x0000000010300000"
+"CFG_ID_AA64PFR0_EL1_EL3" = "0x1"
+"CFG_ID_AA64PFR0_EL1_EL2" = "0x1"
+"CFG_ID_AA64PFR0_EL1_EL1" = "0x1"
+"CFG_ID_AA64PFR0_EL1_EL0" = "0x1"
+# Need to investigate BTI extension. Guard pages cause problems with
+# memory accesses.
+#
+# Architecture-version chain. The upstream config ships with everything
+# above v8.1 disabled, which makes every version-gated decode clause fall
+# through to the __DecodeA64_* catch-alls in decode_end.sail
+# (Error_Undefined at all four ELs) even though the instruction exists in
+# the model. Enable the full v9.4 chain; individually problematic
+# features (MTE, BTI, LSE2, TME, SPE, PMU, ...) remain pinned off via
+# their FEAT_*_IMPLEMENTED overrides below, which take precedence for
+# IsFeatureImplemented() checks. If enabling the chain noticeably
+# increases path counts for some instruction class, disable versions
+# selectively rather than reverting wholesale.
+"v8Ap1_IMPLEMENTED" = true
+"v8Ap2_IMPLEMENTED" = true
+"v8Ap3_IMPLEMENTED" = true
+"v8Ap4_IMPLEMENTED" = true
+"v8Ap5_IMPLEMENTED" = true
+"v8Ap6_IMPLEMENTED" = true
+"v8Ap7_IMPLEMENTED" = true
+"v8Ap8_IMPLEMENTED" = true
+"v8Ap9_IMPLEMENTED" = true
+"v9Ap0_IMPLEMENTED" = true
+"v9Ap1_IMPLEMENTED" = true
+"v9Ap2_IMPLEMENTED" = true
+"v9Ap3_IMPLEMENTED" = true
+"v9Ap4_IMPLEMENTED" = true
+"__unpred_tsize_aborts" = true
+# Trickbox has various features for debugging spec and running tests
+"__trickbox_enabled" = false
+"__tlb_enabled" = false
+
+# Synchronous external-abort trickbox flags.
+#
+# Footprint analysis does not model external aborts. With the MMU disabled
+# (SCTLR_ELx.M = 0) every data access is Device-nGnRnE, so the read-side
+# flags below cause a synchronous external abort on ordinary loads, which
+# routes through EndOfInstruction -> Error_ExceptionTaken at
+# builtins.sail:52 - the same throw site as the (now-fixed) FP traps and
+# the alignment forks. Turn the read/TTW/SO/prefetch side OFF so loads
+# complete cleanly. (The write-side flags were already off.) Re-enable
+# only if you specifically want to model external aborts.
+"__syncAbortOnTTWNonCache" = false
+"__syncAbortOnTTWCache" = false
+"__syncAbortOnSoWrite" = false
+"__syncAbortOnSoRead" = false
+"__syncAbortOnReadNormNonCache" = false
+"__syncAbortOnReadNormCache" = false
+"__syncAbortOnPrefetch" = false
+"__syncAbortOnDeviceRead" = false
+"__mte_implemented" = "0b0000"
+"FEAT_BRBEv1p1_IMPLEMENTED" = false
+"FEAT_RME_IMPLEMENTED" = false
+"FEAT_BRBE_IMPLEMENTED" = false
+"__empam_force_ns_implemented" = false
+"__empam_sdeflt_implemented" = false
+"__empam_tidr_implemented" = false
+"FEAT_CONSTPACFIELD_IMPLEMENTED" = false
+"FEAT_PACQARMA3_IMPLEMENTED" = false
+"FEAT_SME_IMPLEMENTED" = false
+"__mpam_has_hcr" = true
+"__mpam_has_altsp" = true
+#"__vmid16_implemented" = true
+"FEAT_PAN_IMPLEMENTED" = true
+"FEAT_FP16_IMPLEMENTED" = true
+"FEAT_DotProd_IMPLEMENTED" = true
+"FEAT_CRC32_IMPLEMENTED" = true
+"FEAT_AA32HPD_IMPLEMENTED" = true
+"FEAT_AES_IMPLEMENTED" = true
+"FEAT_PMULL_IMPLEMENTED" = true
+"FEAT_SHA256_IMPLEMENTED" = true
+"FEAT_SHA1_IMPLEMENTED" = true
+"__syncAbortOnWriteNormNonCache" = false
+"__syncAbortOnWriteNormCache" = false
+"__syncAbortOnDeviceWrite" = false
+"FEAT_MPAM_IMPLEMENTED" = false
+"FEAT_SM4_IMPLEMENTED" = false
+"FEAT_SM3_IMPLEMENTED" = false
+"FEAT_SHA512_IMPLEMENTED" = false
+"FEAT_SHA3_IMPLEMENTED" = false
+"FEAT_LS64_V_IMPLEMENTED" = true
+"FEAT_LS64_ACCDATA_IMPLEMENTED" = true
+"FEAT_DoPD_IMPLEMENTED" = false
+
+# Explicitly enable the base-ISA extensions exercised by the ARM-JSON
+# batch runs. These FEAT_* registers already default to true inside the
+# model (see `register FEAT_* : bool = true` declarations in
+# arm-v9.4-a/src/v8_base.sail); they are listed here to make the
+# configuration explicit and stable across model rebuilds.
+"FEAT_MOPS_IMPLEMENTED" = true      # SETP/SETM/SETE + CPY* (memcms)
+"FEAT_RPRFM_IMPLEMENTED" = true     # RPRFM range prefetch
+"FEAT_LRCPC_IMPLEMENTED" = true     # LDAPR*
+"FEAT_LRCPC2_IMPLEMENTED" = true    # LDAPUR*/STLUR*
+"FEAT_LRCPC3_IMPLEMENTED" = true    # LDIAPP/STILP, LDAPR/STLR writeback
+"FEAT_LS64_IMPLEMENTED" = true      # LD64B/ST64B/ST64BV (with LS64_V/ACCDATA above)
+"FEAT_FlagM_IMPLEMENTED" = true     # CFINV/RMIF/SETF8/SETF16
+"FEAT_FlagM2_IMPLEMENTED" = true    # AXFLAG/XAFLAG
+"FEAT_HBC_IMPLEMENTED" = true       # BC.cond
+"FEAT_CHK_IMPLEMENTED" = true       # CHKFEAT
+"FEAT_CSSC_IMPLEMENTED" = true      # ABS/CNT/CTZ/SMAX/SMIN/UMAX/UMIN
+"FEAT_WFxT_IMPLEMENTED" = true      # WFET/WFIT
+
+# External debug registers that don't appear to be fully initialised in the current model (or at all on AArch64)
+"EDESR" = "{ bits = 0x00000000 }"
+"EDECR" = "{ bits = 0x00000000 }"
+
+# Avoid some extra complication
+"FEAT_TME_IMPLEMENTED" = false
+# As an alternative to the below, you could abstract the SPEBranch and
+# BRBEBranch functions.
+"FEAT_SPE_IMPLEMENTED" = false
+"FEAT_SPEv1p1_IMPLEMENTED" = false
+"FEAT_SPEv1p2_IMPLEMENTED" = false
+"FEAT_SPEv1p3_IMPLEMENTED" = false
+"FEAT_SPEv1p4_IMPLEMENTED" = false
+"FEAT_PMUv3_IMPLEMENTED" = false
+
+# LSE2 turns load/store-pair instructions on a 16-byte boundary
+# into single-copy-atomic updates.
+# this is unncessary branching in the footprint analysis
+"FEAT_LSE2_IMPLEMENTED" = false
+
+# BTI guards branches, maybe generating kinds of errors
+# this causes unncessary branching during footprint analysis.
+"FEAT_BTI_IMPLEMENTED" = false
+
+# memory tagging
+# this causes highly-symbolic addresses to go haywire
+# with spurious aborts during footprint analysis
+#
+# Kept OFF deliberately: with these false, the MTE tag-arithmetic
+# instructions (ADDG/SUBG/GMI/IRG/SUBP/SUBPS, STG*/LDG) throw
+# Error_Undefined at their HaveMTEExt() decode gate at every EL -
+# filter them out of the batch run instead (see the Rust-side filter).
+# Flip both to true (and set __mte_implemented above to e.g. "0b0010")
+# only if you accept the path explosion on symbolic addresses.
+"FEAT_MTE_IMPLEMENTED" = false
+"FEAT_MTE2_IMPLEMENTED" = false
+
+"SPESampleInFlight" = false
+
+"__g1_activity_monitor_implemented" = "0x0000"
+"__g1_activity_monitor_offset_implemented" = "0x0000"
+
+# These registers are set during symbolic execution by the special builtin "reset_registers"
+[registers.reset]
+# MMU-ON build (differs from armv9p4.toml only in this reset block).
+# Bit 0  (M)  set    -> stage-1 MMU enabled at EL1 (this is the whole point:
+#                       loads/stores now perform a real page-table walk and
+#                       READ TTBR0_EL1 / MAIR_EL1 / the descriptors, which is
+#                       what surfaces the translation registers in the
+#                       per-instruction footprints and fixes the *->EL0
+#                       TTBR0_EL1/TTBR1_EL1/MAIR_EL1 false negatives).
+# Bit 1  (A)  unset  -> allows unaligned accesses
+# Bit 2  (C)  set    -> data accesses cacheable (Normal memory)
+# Bit 9  (UMA) set  -> EL0 may MRS/MSR DAIF (User Mask Access). WITHOUT this,
+#                      MRS/MSR DAIF at EL0 traps to EL1, so the sweep records
+#                      DAIF as "Not allowed (exception)" at EL0 and DAIF wrongly
+#                      drops out of every *->EL0 set. The MMU-off config had
+#                      UMA set (0x04000200); the MMU-on value must keep bit 9.
+# Bit 23 (SPAN)      -> PSTATE.PAN unchanged on exception entry
+# Bit 26 (UCI) set   -> cache-maintenance ops allowed at EL0
+"SCTLR_EL1" = "{ bits = 0x0000000004800205 }"
+# EL2 stage-1 MMU on as well (M=1,C=1) so EL2 runs walk and read TTBR0_EL2
+# (via HTTBR). EL3 is deliberately left flat (SCTLR_EL3.M=0): EL3 can MRS every
+# register directly, so it needs no walk-based footprint enrichment.
+"SCTLR_EL2" = "{ bits = 0x0000000000000005 }"
+
+# CPACR_EL1.FPEN = 0b11 ALSO pinned here, not only in [registers.defaults].
+# The defaults value was being clobbered by the model's reset, so FP/SIMD
+# stayed trapped at EL0/EL1 (every FP op -> "Not allowed (exception)" at
+# EL0/EL1 while working at EL2/EL3, where CPTR_EL2/EL3 govern). Pinning it in
+# the reset set is what makes SCTLR_EL1 survive, and does the same for FP
+# access at EL0/EL1. CPTR_EL2/EL3 added too as belt-and-suspenders (TFP=0).
+"CPACR_EL1" = "{ bits = 0x0000000000300000 }"
+"CPTR_EL2"  = "{ bits = 0x0000000000000000 }"
+"CPTR_EL3"  = "{ bits = 0x0000000000000000 }"
+
+"CNTCR" = "{ bits = 0x00000000 }"
+# Set above, but ENABLE might be reset to UNKNOWN
+"CNTHP_CTL_EL2" = "{ bits = 0x0000000000000000 }"
+
+# Monitor Debug Configuration Register (EL2)
+# Turn HPME off to avoid even thinking about PMU events
+# (it's set to UNKNOWN on reset)
+"MDCR_EL2" = "{ bits = 0x00000000 }"
+
+"PSTATE.nRW" = "0b0"
+
+"SCR_EL3" = "{ bits = 0x0000000000000401 }"
+"HCR_EL2" = "{ bits = 0x0000000080000000 }"
+
+"VTCR_EL2" = "{ bits = 0x0000000000000000 }"
+
+# ---------------------------------------------------------------------------
+# Stage-1 translation setup (MMU-on). HCR_EL2.VM is left 0 above, so EL0/EL1
+# use stage-1 only -> a SINGLE set of tables at 0x300000 is enough and no
+# stage-2 (VTTBR) tables are required. (Trade-off: VTTBR_EL2 / VTCR_EL2 will
+# not appear as indirect channels in this run. To capture them, set
+# HCR_EL2 = 0x...80000001 and provide stage-2 tables at s2_page_table_base.)
+#
+# TCR_EL2: T0SZ = 0x10 (16) -> 48-bit VA, 4KB granule (TG0=0b00), EPD0=0
+# (TTBR0 walks enabled). Matches the 4-level / L1-1GB-block walk that the
+# harness's identity table services.
+#
+# TCR_EL1 ALSO enables the TTBR1 (high) half so --high-va-probe can make the
+# stage-1 walk read TTBR1_EL1 (Step 5 / surfacing TTBR1_EL1 as an EL*->EL0
+# channel). Field layout of 0x0000000080100010:
+#   T0SZ  [5:0]   = 0x10 (16)  -> 48-bit low (TTBR0) VA
+#   EPD0  [7]     = 0          -> TTBR0 walks enabled
+#   TG0   [15:14] = 0b00       -> 4KB granule (TTBR0)
+#   T1SZ  [21:16] = 0x10 (16)  -> 48-bit high (TTBR1) VA   <-- added (was 0=invalid)
+#   EPD1  [23]    = 0          -> TTBR1 walks enabled       <-- required for the probe
+#   TG1   [31:30] = 0b10       -> 4KB granule (TTBR1; note TG1 encoding != TG0)
+# Without T1SZ set to a legal value the TTBR1 walk faults before reading the
+# base, and the parser discards the faulting pass -> TTBR1_EL1 never surfaces.
+# TCR_EL2 keeps only the TTBR0 half: with HCR_EL2.E2H=0 the EL2 regime has no
+# TTBR1_EL2, so the high-VA probe is meaningful at EL0/EL1 only.
+"TCR_EL1" = "{ bits = 0x0000000080100010 }"
+"TCR_EL2" = "{ bits = 0x0000000080000010 }"
+
+# MAIR Attr0 = 0xFF -> Normal, Inner/Outer Write-Back non-transient RW-alloc.
+# The --mmu-on block descriptor uses AttrIndx=0, so Attr0 MUST be Normal or
+# every translated access becomes Device (alignment/ordering forks). Keep in
+# lockstep with footprint.rs.
+"MAIR_EL1" = "{ bits = 0xffffffffffffffff }"
+"MAIR_EL2" = "{ bits = 0xffffffffffffffff }"
+
+# MAIR2 (FEAT_AIE extended attribute indices 8..15). The real walk reads
+# MAIR2_EL1 too -- observed in a live trace as
+#   (read-reg |MAIR2_EL1| ((_ field |bits|)) (_ struct (|bits| v5151)))
+# i.e. with a SYMBOLIC value because it was unpinned, which can fork attribute
+# resolution in other instructions. Pin it Normal (same as MAIR_EL1) to keep the
+# walk concrete. Our descriptor uses AttrIndx=0 (-> MAIR_EL1 Attr0), so MAIR2 is
+# not actually consulted for the result, but pinning removes the symbolic fork.
+# NOTE(verify-on-isla): if this model build does not expose MAIR2_EL2, drop that
+# line; MAIR2_EL1 is the one confirmed present in the trace.
+"MAIR2_EL1" = "{ bits = 0xffffffffffffffff }"
+"MAIR2_EL2" = "{ bits = 0xffffffffffffffff }"
+
+# TTBR0 must resolve to the L0 table base the harness installs (0x300000).
+# Armv9 quirk (same as the stock isla ARM config): the architectural 64-bit
+# TTBR0_NS / HTTBR take primacy, while the 128-bit _TTBR0_EL{1,2} are zeroed so
+# isla zero-extends the upper half on read.
+"TTBR0_NS"   = "{ bits = 0x0000000000300000 }"
+"HTTBR"      = "{ bits = 0x0000000000300000 }"
+"_TTBR0_EL1" = "{ bits = 0x00000000000000000000000000000000 }"
+"_TTBR0_EL2" = "{ bits = 0x00000000000000000000000000000000 }"
+
+# TTBR1 (high half) for --high-va-probe. It points at the SAME identity root
+# (0x300000) as TTBR0: with T1SZ=16 the TTBR1 walk indexes on VA bits[47:0], so
+# a high probe VA 0xFFFF_0000_0060_0000 (bits[63:48] all 1 -> selects TTBR1)
+# walks on 0x0000_0000_0060_0000 and resolves to the SAME leaf the builder
+# already created for 0x600000. So the walk completes cleanly AND emits the
+# TTBR1_EL1 read we want, with no separate high-half table needed. (A real OS
+# would use a distinct kernel table here; sharing the root is the minimal setup
+# that surfaces the register.) Same NS/_EL1 primacy quirk as TTBR0 above.
+#
+# NOTE(verify-on-isla): if the builder maps ONLY the single 0x600000 page (not a
+# 1GB block), confirm the high probe still resolves; otherwise widen the setup
+# string (e.g. add `identity 0xFFFF000000600000;`) or map at a larger level.
+"TTBR1_NS"   = "{ bits = 0x0000000000300000 }"
+"_TTBR1_EL1" = "{ bits = 0x00000000000000000000000000000000 }"
+
+# Concretize page-table descriptors when the walker reads them (the harness
+# writes them as concrete bytes, but this also collapses any residual fork on
+# the walk path).
+"__monomorphize_descriptors" = true
+
+# A map from register names that may appear in litmus files to Sail
+# register names
+[registers.renames]
+"X0" = "R0"
+"X1" = "R1"
+"X2" = "R2"
+"X3" = "R3"
+"X4" = "R4"
+"X5" = "R5"
+"X6" = "R6"
+"X7" = "R7"
+"X8" = "R8"
+"X9" = "R9"
+"X10" = "R10"
+"X11" = "R11"
+"X12" = "R12"
+"X13" = "R13"
+"X14" = "R14"
+"X15" = "R15"
+"X16" = "R16"
+"X17" = "R17"
+"X18" = "R18"
+"X19" = "R19"
+"X20" = "R20"
+"X21" = "R21"
+"X22" = "R22"
+"X23" = "R23"
+"X24" = "R24"
+"X25" = "R25"
+"X26" = "R26"
+"X27" = "R27"
+"X28" = "R28"
+"X29" = "R29"
+"X30" = "R30"
+"W0" = "R0"
+"W1" = "R1"
+"W2" = "R2"
+"W3" = "R3"
+"W4" = "R4"
+"W5" = "R5"
+"W6" = "R6"
+"W7" = "R7"
+"W8" = "R8"
+"W9" = "R9"
+"W10" = "R10"
+"W11" = "R11"
+"W12" = "R12"
+"W13" = "R13"
+"W14" = "R14"
+"W15" = "R15"
+"W16" = "R16"
+"W17" = "R17"
+"W18" = "R18"
+"W19" = "R19"
+"W20" = "R20"
+"W21" = "R21"
+"W22" = "R22"
+"W23" = "R23"
+"W24" = "R24"
+"W25" = "R25"
+"W26" = "R26"
+"W27" = "R27"
+"W28" = "R28"
+"W29" = "R29"
+"W30" = "R30"

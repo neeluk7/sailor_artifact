@@ -1,0 +1,95 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A Memory-Mapped accessor indicates that the containing Register can be accessed through ",
+        "a memory-mapped interface. A Memory-Mapped accessor must have Component and Offset ",
+        "properties, and may have a Frame."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.MemoryMapped"
+            ]
+        },
+        "component": {
+            "info": [
+                "The component that contains the memory-map in which the accessor exists, e.g. 'GIC CPU interface' or 'PMU'."
+            ],
+            "type": "string"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "frame": {
+            "info": [
+                "If the component has more than one frame in its memory map, then this property specifies which frame contains the accessor."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "instance": {
+            "info": [
+                "The System register or instance of said register the Accessor is for."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "offset": {
+            "info": [
+                "The offset within the memory map (relative to the frame, if one is present) at which the accessor exists."
+            ],
+            "$ref": "../AST/BinaryOp.json#/definitions/expression"
+        },
+        "access": {
+            "$ref": "./Permission/MemoryAccess.json",
+            "see": "./Permission/MemoryAccess.json",
+            "type": [
+                "object",
+                "null"
+            ]
+        },
+        "power_domain": {
+            "enum": [
+                "Unknown",
+                "Core",
+                "Any",
+                "Debug",
+                "ImplementationDefined",
+                "Mixed",
+                null
+            ]
+        },
+        "range": {
+            "oneOf": [
+                {
+                    "$ref": "../Range.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "required": [
+        "component",
+        "offset",
+        "access"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MemoryMapped"
+}

@@ -1,0 +1,163 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A `BlockAccess` for a given `RegisterBlock` describes accessor for a single child `Register` or `RegisterBlock`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.BlockAccess"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "offset": {
+            "info": [
+                "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "../AST/BinaryOp.json#/definitions/expression"
+            },
+            "minItems": 1
+        },
+        "references": {
+            "info": [
+                "The name of the `Register` or `RegisterBlock` that the access reference to. E.g. REG0.",
+                "The Slices within SquareOp arguments are always referring to bits."
+            ],
+            "examples": [
+                {
+                    "_type": "AST.Identifier",
+                    "value": "REG"
+                },
+                {
+                    "_type": "AST.DotAtom",
+                    "values": [
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "REGBLOCK"
+                        },
+                        {
+                            "_type": "AST.Identifier",
+                            "value": "REG"
+                        }
+                    ]
+                },
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 31
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REG"
+                    }
+                },
+                {
+                    "_type": "AST.SquareOp",
+                    "arguments": [
+                        {
+                            "_type": "AST.Slice",
+                            "left": {
+                                "_type": "AST.Integer",
+                                "value": 7
+                            },
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "REG<n>_EL0"
+                    }
+                },
+                {
+                    "_type": "AST.Identifier",
+                    "value": "REG2"
+                }
+            ],
+            "anyOf": [
+                {
+                    "$ref": "../AST/Identifier.json"
+                },
+                {
+                    "$ref": "../AST/DotAtom.json"
+                },
+                {
+                    "$ref": "../AST/SquareOp.json"
+                }
+            ]
+        },
+        "access": {
+            "info": [
+                "Provides accessibility information for the access."
+            ],
+            "$ref": "./Permission/MemoryAccess.json"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Accessors.BlockAccess",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_X"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "offset": [
+                {
+                    "_type": "AST.Integer",
+                    "value": 252
+                }
+            ],
+            "references": {
+                "_type": "AST.Identifier",
+                "value": "REG_AT_OFFSET"
+            },
+            "access": {
+                "_type": "Accessors.Permission.MemoryAccess",
+                "access": {
+                    "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                    "read": "R",
+                    "write": "W"
+                }
+            }
+        }
+    ],
+    "required": [
+        "offset",
+        "references",
+        "access"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "BlockAccess"
+}

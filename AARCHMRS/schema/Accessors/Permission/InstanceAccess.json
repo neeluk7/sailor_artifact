@@ -1,0 +1,63 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The instance access describes a mapping between the various register instances and the way this field is accessed."
+    ],
+    "examples": [
+        {
+            "_type": "Accessors.Permission.InstanceAccess",
+            "instances": {
+                "REG_S": {
+                    "_type": "Accessors.Permission.FieldAccess",
+                    "access": "RW"
+                },
+                "REG_NS": {
+                    "_type": "Accessors.Permission.FieldAccess",
+                    "access": "RAZ/WI"
+                }
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.InstanceAccess"
+            ]
+        },
+        "instances": {
+            "info": [
+                "The instances for which this field is accessible and their respective accesses."
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Za-z][A-Za-z0-9_<>]*$": {
+                    "oneOf": [
+                        {
+                            "$ref": "FieldAccess.json"
+                        },
+                        {
+                            "$ref": "FieldGetterSetter.json"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        }
+    },
+    "required": [
+        "instances"
+    ],
+    "title": "InstanceAccess",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

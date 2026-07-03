@@ -1,0 +1,39 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "Defines the WriteFunction model, which is used to define a function that runs on a write access to an instance defined in the `name` property."
+    ],
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.WriteFunction"
+            ]
+        },
+        "access": {
+            "$ref": "CodeAbstract.json#/definitions/access"
+        },
+        "condition": {
+            "$ref": "CodeAbstract.json#/definitions/condition"
+        },
+        "name": {
+            "$ref": "CodeAbstract.json#/definitions/name"
+        }
+    },
+    "required": [
+        "access",
+        "name"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "WriteFunction"
+}

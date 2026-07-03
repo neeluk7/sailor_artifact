@@ -1,0 +1,158 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An $(~Instruction.InstructionInstance) object defines an instance of its parent",
+            "$(~Instruction.Instruction) by associating additional metadata with it. The only permitted children of",
+            "$(~Instruction.InstructionInstance) are other instances of $(~Instruction.InstructionInstance)."
+        ],
+        [
+            "In the first example below, a property that is not present on the parent is added to the instance.",
+            "In the second example, the value of a property on the parent instance is overridden by the child instance."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.InstructionInstance",
+            "name": "ADD32",
+            "properties": {
+                "my_property": true
+            }
+        },
+        {
+            "_type": "Instruction.InstructionInstance",
+            "name": "ADD_i1",
+            "properties": {
+                "writeNZCV": false,
+                "operands": {
+                    "Rd": {
+                        "assemble": {
+                            "_type": "AST.StatementBlock",
+                            "statements": [
+                                {
+                                    "_type": "AST.Assignment",
+                                    "val": {
+                                        "_type": "AST.DotAtom",
+                                        "values": [
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "operands"
+                                            },
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "Rd"
+                                            },
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "value"
+                                            }
+                                        ]
+                                    },
+                                    "var": {
+                                        "_type": "AST.Identifier",
+                                        "value": "Rd"
+                                    }
+                                }
+                            ]
+                        },
+                        "disassemble": {
+                            "_type": "AST.StatementBlock",
+                            "statements": [
+                                {
+                                    "_type": "AST.Assignment",
+                                    "val": {
+                                        "_type": "AST.Identifier",
+                                        "value": "Rd"
+                                    },
+                                    "var": {
+                                        "_type": "AST.DotAtom",
+                                        "values": [
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "operands"
+                                            },
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "Rd"
+                                            },
+                                            {
+                                                "_type": "AST.Identifier",
+                                                "value": "value"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "children": [
+                {
+                    "_type": "Instruction.InstructionInstance",
+                    "name": "ADD_i_override",
+                    "condition": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "Rd"
+                        },
+                        "op": "==",
+                        "right": {
+                            "_type": "Values.Value",
+                            "meaning": null,
+                            "value": "'11111'"
+                        }
+                    },
+                    "properties": {
+                        "writeNZCV": true
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.InstructionInstance"
+            ]
+        },
+        "name": {
+            "info": [
+                "The name of the InstructionInstance."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "properties": {
+            "$ref": "Instruction.json#properties/properties"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "children": {
+            "type": "array",
+            "info": [
+                "Any child nodes of this $(~Instruction.InstructionInstance) with a unique `name`. Each child node is an instance of $(~Instruction.InstructionInstance)."
+            ],
+            "items": {
+                "$ref": "#"
+            }
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.InstructionInstance"
+}

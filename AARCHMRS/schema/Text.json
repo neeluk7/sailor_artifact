@@ -1,0 +1,121 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Text",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "The $(Text) object lets you build multiline text with ease in `JSON`. ",
+            "It is equivalent to a single string element with `\\n` in textual content, ",
+            "but makes it easier to enter and maintain formatted text."
+        ],
+        [
+            "$(Text) objects can take different forms, depending on the complexity of the ",
+            "formatting being entered. The different forms that are supported are listed below:"
+        ]
+    ],
+    "oneOf": [
+        {
+            "type": "array",
+            "info": [
+                [
+                    "Writing multiline content in `JSON` can be difficult! A $(Text) object ",
+                    "solves this by allowing multiline input using arrays."
+                ],
+                [
+                    "The contents of a $(Text) object are stored as an array in JSON. Elements at ",
+                    "this first level of array are paragraphs, and will be separated by two ",
+                    "line breaks when rendered (a paragraph break). As such, a string (of any length) followed by ",
+                    "another string will render as a pair of paragraphs, one per string. To write a ",
+                    "multiline $(Text) object that should render as a single paragraph, you can enter ",
+                    "an array of strings within the $(Text) object's array. You can enter multiple ",
+                    "lines of text that are part of the same paragraph as sequential strings in ",
+                    "this second-level array."
+                ],
+                [
+                    "You can also use Markdown's standard list formatting: starting a line with a ",
+                    "space-hyphen-space string to indicate a bullet in a bulleted list. Second- ",
+                    "and subsequent-level lists can be created by entering four leading spaces ",
+                    "before the space-hyphen-space string."
+                ],
+                [
+                    "!!! note",
+                    "    ",
+                    "    The array formulation is not semantically different to a single string with many `\\n` characters."
+                ],
+                "To produce the following markdown content in a $(Text) object:",
+                [
+                    "```",
+                    "This is a first paragraph"
+                ],
+                "This is the second paragraph and it is separated by two new lines from the first paragraph.",
+                [
+                    " - A list is separated by two new lines from the previous block.",
+                    " - But subsequent elements inside a list are only one line breaks.",
+                    " - First level list:",
+                    "     - Second level list item.",
+                    "     - Second level list item."
+                ],
+                [
+                    "Another paragraph",
+                    "that is multiline but part",
+                    "of the same paragraph",
+                    "```"
+                ],
+                "You can enter the `JSON` given in the example below:"
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "examples": [
+                [
+                    "This is a first paragraph",
+                    "This is the second paragraph and it is separated by two new lines from the first paragraph.",
+                    [
+                        " - A list is separated by two new lines from the previous block.",
+                        " - But subsequent elements inside a list are only one line breaks.",
+                        " - First level list:",
+                        "     - Second level list item.",
+                        "     - Second level list item."
+                    ],
+                    [
+                        "Another paragraph",
+                        "that is multiline but part",
+                        "of the same paragraph"
+                    ]
+                ]
+            ]
+        },
+        {
+            "type": "string",
+            "info": [
+                "A single string of markdown content can be entered as a single string in `JSON`."
+            ],
+            "examples": [
+                "A one line example of Text",
+                "An example of Text\n\nWith multiline written inline"
+            ]
+        },
+        {
+            "type": "null",
+            "info": [
+                "By default, models that have no authored content can be left as `null`."
+            ],
+            "examples": [
+                null
+            ]
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "An array of `BlockAccess` for a given `RegisterBlock` describes accessors for an array of child `Registers` or `RegisterBlocks`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.BlockAccessArray"
+            ]
+        },
+        "condition": {
+            "$ref": "BlockAccess.json#/properties/condition"
+        },
+        "offset": {
+            "$ref": "BlockAccess.json#/properties/offset"
+        },
+        "references": {
+            "$ref": "BlockAccess.json#/properties/references"
+        },
+        "access": {
+            "$ref": "BlockAccess.json#/properties/access"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "required": [
+        "offset",
+        "references",
+        "access",
+        "indexes",
+        "index_variable"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "BlockAccessArray"
+}

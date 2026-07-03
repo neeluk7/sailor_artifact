@@ -1,0 +1,97 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A `ReadOffsetAccess` for a given `RegisterBlock` describes read accessor for a single child `Register` or `RegisterBlock`."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.ReadOffsetAccessor"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "offset": {
+            "info": [
+                "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "../AST/BinaryOp.json#/definitions/expression"
+            },
+            "minItems": 1
+        },
+        "access": {
+            "info": [
+                "Provides accessibility information for the access."
+            ],
+            "$ref": "./Permission/SystemAccess.json"
+        }
+    },
+    "examples": [
+        {
+            "_type": "Accessors.ReadOffsetAccessor",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "FEAT_X"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "offset": [
+                {
+                    "_type": "AST.Integer",
+                    "value": 252
+                }
+            ],
+            "access": {
+                "_type": "Accessors.Permission.SystemAccess",
+                "access": {
+                    "_type": "AST.Assignment",
+                    "val": {
+                        "_type": "AST.Identifier",
+                        "value": "REG_AT_OFFSET"
+                    },
+                    "var": {
+                        "_type": "AST.SquareOp",
+                        "arguments": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "t"
+                            }
+                        ],
+                        "var": {
+                            "_type": "AST.Identifier",
+                            "value": "R"
+                        }
+                    }
+                },
+                "condition": {
+                    "_type": "AST.Bool",
+                    "value": true
+                }
+            }
+        }
+    ],
+    "required": [
+        "offset",
+        "access"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ReadOffsetAccessor"
+}

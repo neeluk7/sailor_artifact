@@ -1,0 +1,56 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A Reserved field is a field that is reserved by the architecture for future use."
+    ],
+    "examples": [
+        {
+            "_type": "Fields.Reserved",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                }
+            ],
+            "value": "RES0"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.Reserved"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "value": {
+            "info": [
+                "A constant value for the the field representing the reserved type."
+            ],
+            "$ref": "../Enums/ReservedTypes.json"
+        },
+        "description": {
+            "info": [
+                "Optional architectural information about this reserved field."
+            ],
+            "$ref": "../Traits/HasDescription.json#/definitions/description"
+        }
+    },
+    "required": [
+        "rangeset",
+        "value"
+    ],
+    "title": "Reserved",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

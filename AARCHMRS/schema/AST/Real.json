@@ -1,0 +1,38 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "An AST model wrapper for a real number."
+    ],
+    "examples": [
+        {
+            "_type": "AST.Real",
+            "value": 8.2
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.Real"
+            ]
+        },
+        "value": {
+            "info": [
+                "The numeric value of the real."
+            ],
+            "type": "number"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "title": "Real",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

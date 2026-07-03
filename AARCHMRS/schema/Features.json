@@ -1,0 +1,132 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "The $(Features) schema describes how to define dependencies in the architecture.",
+            "To understand how a $(Features) schema is used please see [the Features userguide](./userguide/features.html)."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Features"
+            ]
+        },
+        "parameters": {
+            "info": [
+                "List of parameters used to facilitate Architecture configurability."
+            ],
+            "$ref": "Parameterset.json",
+            "examples": [
+                [
+                    {
+                        "_type": "Parameters.Boolean",
+                        "name": "v8Ap1"
+                    },
+                    {
+                        "_type": "Parameters.Boolean",
+                        "name": "v8Ap2"
+                    },
+                    {
+                        "_type": "Parameters.Boolean",
+                        "name": "FEAT_A",
+                        "constraints": [
+                            {
+                                "_type": "AST.BinaryOp",
+                                "left": {
+                                    "_type": "AST.Identifier",
+                                    "value": "FEAT_A"
+                                },
+                                "op": "==>",
+                                "right": {
+                                    "_type": "AST.Identifier",
+                                    "value": "v8Ap2"
+                                }
+                            },
+                            {
+                                "_type": "AST.BinaryOp",
+                                "left": {
+                                    "_type": "AST.Identifier",
+                                    "value": "FEAT_A"
+                                },
+                                "op": "<=>",
+                                "right": {
+                                    "_type": "AST.BinaryOp",
+                                    "left": {
+                                        "_type": "Types.Field",
+                                        "value": {
+                                            "state": "AArch64",
+                                            "name": "IDREG",
+                                            "field": "A"
+                                        }
+                                    },
+                                    "op": "==",
+                                    "right": {
+                                        "_type": "Values.Value",
+                                        "value": "'0001'"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            ]
+        },
+        "constraints": {
+            "$ref": "Traits/HasConstraints.json#/definitions/constraints",
+            "info": [
+                "Globally defined constraints."
+            ],
+            "examples": [
+                [
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "FEAT_A"
+                        },
+                        "op": "==>",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "v8Ap2"
+                        }
+                    },
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "FEAT_A"
+                        },
+                        "op": "<=>",
+                        "right": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "Types.Field",
+                                "value": {
+                                    "state": "AArch64",
+                                    "name": "IDREG",
+                                    "field": "A"
+                                }
+                            },
+                            "op": "==",
+                            "right": {
+                                "_type": "Values.Value",
+                                "value": "'0001'"
+                            }
+                        }
+                    }
+                ]
+            ]
+        }
+    },
+    "title": "Features",
+    "type": "object",
+    "additionalProperties": false
+}

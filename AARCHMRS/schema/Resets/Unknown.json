@@ -1,0 +1,31 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Resets.Unknown"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Resets.Unknown"
+            ]
+        }
+    },
+    "title": "Unknown",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "The reset value is `UNKNOWN`. On a cold reset this is the default behavior when ",
+            "no reset is defined."
+        ]
+    ]
+}

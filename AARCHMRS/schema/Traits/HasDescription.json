@@ -1,0 +1,41 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "HasDescription provides additional schema elements for descriptions. HasDescription should not be used on its own but instead used as a reference schema for classes that have descriptions."
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "description": {
+            "$ref": "../Description.json",
+            "examples": [
+                {
+                    "_type": "Description",
+                    "after": [
+                        "This is a description that appears after Values."
+                    ],
+                    "before": [
+                        "This is a description that appears before Values"
+                    ]
+                }
+            ],
+            "info": [
+                "Provides an architectural description of this field.",
+                "You can use a dictionary that contains `before` and `after` keys, where:",
+                [
+                    " - The `before` key is used to define architectural information before the values are represented.",
+                    " - The `after` key is used to define architectural description after the values are represented."
+                ],
+                [
+                    "If the property value is of type `string`, this behaves as having a description with just the _before_ key, ",
+                    "`before` and `after` have no architectural significance, this is just for rendering."
+                ]
+            ]
+        }
+    },
+    "title": "Traits.HasDescription",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

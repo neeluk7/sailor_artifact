@@ -1,0 +1,101 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This access property holds access logic used inside SystemAccessors, such as MSR or, MRS, for example:",
+        "### Example",
+        "To represent the following access of a system accessor:",
+        [
+            "```",
+            "if PSTATE.EL == EL0 then",
+            "   return REG0",
+            "elif PSTATE.EL == EL1 then",
+            "   AArch64_SystemAccessTrap(0x0F)",
+            "else",
+            "   Undefined()",
+            "```"
+        ],
+        "The SystemAccess can be written as:",
+        [
+            "```",
+            "{",
+            "   \"_type\": \"Accessors.Permission.SystemAccess\",",
+            "   \"access\": [",
+            "       {",
+            "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+            "           \"condition\": \"PSTATE.EL == EL0\"",
+            "           \"access\": \"return REG0\"",
+            "       },",
+            "       {",
+            "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+            "           \"condition\": \"PSTATE.EL == EL1\"",
+            "           \"access\": \"AArch64_SystemAccessTrap(0x0F)\"",
+            "       },",
+            "       {",
+            "           \"_type\": \"Accessors.Permission.SystemAccess\",",
+            "           \"condition\": null,",
+            "           \"access\": \"Undefined()\"",
+            "       },",
+            "   ]",
+            "}",
+            "```"
+        ],
+        "Note, a `null` condition defines the otherwise clause. This can be omitted to mean UNDEFINED by default.",
+        "### Nesting",
+        "System Accesses can be nested inside other System Accesses to represent complex nested conditions."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.SystemAccess"
+            ]
+        },
+        "access": {
+            "info": [
+                "The access which occurs when the condition is satisfied. This is effectively the contents of the `if` branch."
+            ],
+            "anyOf": [
+                {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "$ref": "../../AST/Return.json"
+                },
+                {
+                    "$ref": "../../AST/Assignment.json"
+                },
+                {
+                    "$ref": "../../AST/Function.json"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "condition": {
+            "info": [
+                "The condition under which the current access applies. This is effectively the `if` statement in the rendered pseudocode."
+            ],
+            "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "access"
+    ],
+    "title": "SystemAccess",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

@@ -1,0 +1,46 @@
+name: Ubuntu-22.04
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: 4.10.0
+        opam-repositories: |
+          default: https://github.com/ocaml/opam-repository.git
+          rems: https://github.com/rems-project/opam-repository.git
+    - name: Deps
+      run: |
+        sudo apt update
+        sudo apt install build-essential libgmp-dev z3 libz3-dev gcc-aarch64-linux-gnu gcc-riscv64-unknown-elf
+        z3 -version
+        opam install dune
+        git clone https://github.com/rems-project/sail.git
+        opam pin -y add sail
+    - name: Set Rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.70.0
+        default: true
+    - name: Build
+      run: |
+        eval `opam config env`
+        make
+        make isla-sail
+    - name: Run tests
+      run: |
+        eval `opam config env`
+        make test-github

@@ -1,0 +1,237 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This data structure encapsulates all the information about a register in the Arm architecture."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Register"
+            ]
+        },
+        "access_text": {
+            "$ref": "Text.json",
+            "info": [
+                "Any information architecturally describing the access should be placed here."
+            ]
+        },
+        "accessors": {
+            "info": [
+                "This property holds an array of accessors defining how to access this register.",
+                [
+                    " - $(Accessors.SystemAccessor): Provides a list of system instruction that can access this register.",
+                    " - $(Accessors.MemoryMapped): This accessor is used to define a memory address to access this register.",
+                    " - $(Accessors.ExternalDebug): This is used for debug registers."
+                ],
+                "A register can have multiple accessors, however each accessor must be unique.",
+                [
+                    "For example, a system accessor is unique by name, encoding and instance. Where as $(Accessors.MemoryMapped) ",
+                    "and $(Accessors.ExternalDebug) are unique by frame (because two memory mapped registers can have the same ",
+                    "offset as long as they are in a unique frame)."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "Accessors/SystemAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/SystemAccessorArray.json"
+                    },
+                    {
+                        "$ref": "Accessors/MemoryMapped.json"
+                    },
+                    {
+                        "$ref": "Accessors/ExternalDebug.json"
+                    },
+                    {
+                        "$ref": "Accessors/WriteOffsetAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/ReadOffsetAccessor.json"
+                    },
+                    {
+                        "$ref": "Accessors/Getter.json"
+                    },
+                    {
+                        "$ref": "Accessors/Setter.json"
+                    },
+                    {
+                        "$ref": "Accessors/WriteFunction.json"
+                    },
+                    {
+                        "$ref": "Accessors/ReadFunction.json"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "condition": {
+            "$ref": "Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this register is present.",
+                "When false the default access behavior is defined by the architecture."
+            ]
+        },
+        "configuration": {
+            "$ref": "Text.json",
+            "info": [
+                "This field is used to represent the architectural configuration of the register. For example:",
+                "> Under certain conditions a write to ICC\\_SGI1R\\_EL1 can generate Group 0 interrupts, see Forwarding an SGI to a target PE."
+            ]
+        },
+        "fieldsets": {
+            "info": [
+                "An array of $(Fieldset) which defines the layout of the register.",
+                [
+                    "Multiple $(Fieldset) are used to represent different conditional layouts. All the ",
+                    "conditions in the $(Fieldset) must be mutually exclusive."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "Fieldset.json"
+                    },
+                    {
+                        "$ref": "StructureReference.json"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "groups": {
+            "info": [
+                "The groups of which the register is a member.",
+                "If `groups` is an object, then the primary group is required. The secondary groups (if any) are then listed as an array."
+            ],
+            "properties": {
+                "primary": {
+                    "info": [
+                        "The primary group is the main group a register belongs to, one register can only have one primary group."
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "secondary": {
+                    "info": [
+                        "A register can have many secondary groups."
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "primary"
+            ],
+            "type": [
+                "object",
+                "null"
+            ],
+            "default": null
+        },
+        "instances": {
+            "info": [
+                "The list of register instances that this Register represents, or a boolean where True means the Registers instances is the same as its name. Which is identical to having one Instance with the same name as the register.",
+                "False is identical to an empty Instanceset."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "Instances/Instanceset.json"
+                },
+                {
+                    "type": "boolean"
+                }
+            ],
+            "default": true
+        },
+        "mapset": {
+            "info": [
+                "Architecturally registers may be mapped to other registers. `mapset` provides an array of unique mappings for this register."
+            ],
+            "$ref": "Mapset.json"
+        },
+        "name": {
+            "info": [
+                "The canonical name of the register (must be unique within the set of registers).",
+                "> VBAR_EL3"
+            ],
+            "type": "string"
+        },
+        "purpose": {
+            "$ref": "Text.json",
+            "info": [
+                "A short description about the purpose of this register.",
+                "> Holds the vector base address for any exception that is taken to EL3."
+            ]
+        },
+        "reset": {
+            "info": [
+                "An overall reset value of this register. Field level reset will overwrite this property.",
+                "When the property is set to null, no reset (or default architectural reset) applies."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "RegisterReset.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "deprecated": true
+        },
+        "state": {
+            "info": [
+                "This property determines what state a register is used in.",
+                [
+                    "`AArch64` and `AArch32` is used for system register given their respective state and",
+                    "`ext` is used for external memory mapped registers."
+                ]
+            ],
+            "enum": [
+                "AArch64",
+                "AArch32",
+                "ext",
+                null
+            ]
+        },
+        "title": {
+            "examples": [
+                "Vector Base Address Register (EL3)",
+                "Trace Address Comparator Value Register &lt;n&gt;"
+            ],
+            "info": [
+                "The display name of the register. If _title_ is not set, a renderer should use _name_ as the display name.",
+                "Note that the title should be treated as an extension of `description`, and may contain markdown or XML, and requires escaping of unsafe XML characters."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    },
+    "required": [
+        "name",
+        "fieldsets",
+        "purpose",
+        "state"
+    ],
+    "title": "Register",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

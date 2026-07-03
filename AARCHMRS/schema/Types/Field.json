@@ -1,0 +1,118 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Types.Field",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        [
+            "The $(Types.Field) schema provides a mechanism to reference a field in a register.",
+            "If you wish to refer to an entire Register, you should instead use $(Types.RegisterType)."
+        ]
+    ],
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Types.Field"
+            ]
+        },
+        "value": {
+            "info": [
+                [
+                    "This follows the same principle as a $(Types.RegisterType) with the ",
+                    "addition of the `field` property which defines the name of the field",
+                    "being referenced."
+                ]
+            ],
+            "type": "object",
+            "properties": {
+                "state": {
+                    "$ref": "RegisterType.json#/definitions/state"
+                },
+                "name": {
+                    "$ref": "RegisterType.json#/definitions/name"
+                },
+                "field": {
+                    "type": "string"
+                },
+                "slices": {
+                    "oneOf": [
+                        {
+                            "$ref": "../Rangeset.json"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "instance": {
+                    "$ref": "RegisterType.json#/definitions/instance"
+                }
+            },
+            "required": [
+                "state",
+                "name",
+                "field"
+            ],
+            "examples": [
+                {
+                    "state": "AArch64",
+                    "name": "REG0",
+                    "field": "F1"
+                },
+                {
+                    "state": "AArch32",
+                    "name": "REG0",
+                    "field": "F1",
+                    "slices": [
+                        {
+                            "_type": "Range",
+                            "start": 4,
+                            "width": 1
+                        }
+                    ],
+                    "instance": "REG0_S"
+                }
+            ],
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "examples": [
+        {
+            "_type": "Types.Field",
+            "value": {
+                "state": "AArch64",
+                "name": "REG0",
+                "field": "F1"
+            }
+        },
+        {
+            "_type": "Types.Field",
+            "value": {
+                "state": "AArch32",
+                "name": "REG0",
+                "field": "F1",
+                "slices": [
+                    {
+                        "_type": "Range",
+                        "start": 4,
+                        "width": 1
+                    }
+                ],
+                "instance": "REG0_S"
+            }
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A ConditionalValue is a value that is present if and only if the condition property evaluates to True."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Values.ConditionalValue"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "info": [
+                "The meaning associated to this value in the context it is used."
+            ]
+        },
+        "values": {
+            "$ref": "../Valuesets/Values.json",
+            "info": [
+                "The value that the parent field gets assigned when condition evaluates to True."
+            ]
+        }
+    },
+    "required": [
+        "condition"
+    ],
+    "title": "ConditionalValue",
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Values.ConditionalValue",
+            "condition": {
+                "_type": "AST.Function",
+                "arguments": [
+                    {
+                        "_type": "AST.Identifier",
+                        "value": "MY_FEAT"
+                    }
+                ],
+                "name": "IsFeatureImplemented"
+            },
+            "values": {
+                "_type": "Valuesets.Values",
+                "values": [
+                    {
+                        "_type": "Values.Value",
+                        "value": "'001'",
+                        "meaning": "First conditional Value"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "value": "'010'",
+                        "meaning": "Second conditional Value"
+                    }
+                ]
+            }
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

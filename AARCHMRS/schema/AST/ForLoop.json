@@ -1,0 +1,156 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "For Loop",
+    "info": [
+        "A model representing an ASL for statement. Models the following structures:",
+        [
+            "* An ascending For loop",
+            "```",
+            "for i = 0 to 15 do",
+            "    x = x + i;",
+            "end;",
+            "```",
+            "* A descending For loop",
+            "```",
+            "for i = 15 downto 0 do",
+            "    x = x + i;",
+            "end;",
+            "```"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.ForLoop",
+            "variable": {
+                "_type": "AST.Identifier",
+                "value": "i"
+            },
+            "start": {
+                "_type": "AST.Integer",
+                "value": 0
+            },
+            "ascending": true,
+            "end": {
+                "_type": "AST.Integer",
+                "value": 15
+            },
+            "statements": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "var": {
+                            "_type": "AST.Identifier",
+                            "value": "x"
+                        },
+                        "val": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.Identifier",
+                                "value": "x"
+                            },
+                            "op": "+",
+                            "right": {
+                                "_type": "AST.Identifier",
+                                "value": "i"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "_type": "AST.ForLoop",
+            "variable": {
+                "_type": "AST.Identifier",
+                "value": "i"
+            },
+            "start": {
+                "_type": "AST.Integer",
+                "value": 15
+            },
+            "ascending": false,
+            "end": {
+                "_type": "AST.Integer",
+                "value": 0
+            },
+            "statements": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "var": {
+                            "_type": "AST.Identifier",
+                            "value": "x"
+                        },
+                        "val": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.Identifier",
+                                "value": "x"
+                            },
+                            "op": "+",
+                            "right": {
+                                "_type": "AST.Identifier",
+                                "value": "i"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.ForLoop"
+            ]
+        },
+        "variable": {
+            "info": [
+                "The variable holding the value of the current iteration."
+            ],
+            "$ref": "Identifier.json"
+        },
+        "start": {
+            "info": [
+                "The value to begin iterating from."
+            ],
+            "$ref": "../AST/BinaryOp.json#/definitions/expression"
+        },
+        "ascending": {
+            "info": [
+                "If the for loop is iterating upwards or downwards."
+            ],
+            "type": "boolean"
+        },
+        "end": {
+            "info": [
+                "The value to stop iterating at (inclusive)."
+            ],
+            "$ref": "../AST/BinaryOp.json#/definitions/expression"
+        },
+        "statements": {
+            "info": [
+                "The statements to execute each loop iteration."
+            ],
+            "$ref": "StatementBlock.json"
+        }
+    },
+    "required": [
+        "variable",
+        "start",
+        "ascending",
+        "end",
+        "statements"
+    ],
+    "type": "object",
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

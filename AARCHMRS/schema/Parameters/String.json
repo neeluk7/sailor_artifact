@@ -1,0 +1,79 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Parameters.String",
+            "name": "STRING_PARAM",
+            "values": [
+                "SOME_VALUE",
+                "ANOTHER_VALUE"
+            ]
+        }
+    ],
+    "info": [
+        "String parameters are used to store a set of possible values."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Parameters.String"
+            ]
+        },
+        "name": {
+            "$ref": "ParameterAbstract.json#/definitions/name"
+        },
+        "title": {
+            "$ref": "ParameterAbstract.json#/definitions/title"
+        },
+        "description": {
+            "$ref": "ParameterAbstract.json#/definitions/description"
+        },
+        "constraints": {
+            "$ref": "ParameterAbstract.json#/definitions/constraints"
+        },
+        "configured_by": {
+            "$ref": "ParameterAbstract.json#/definitions/configured_by"
+        },
+        "values": {
+            "info": [
+                "The current domain (possible values) of this $(Parameters.String)."
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "examples": [
+                "DEFINED_VALUE",
+                "ANOTHER DEFINED VALUE"
+            ]
+        },
+        "allow_empty": {
+            "info": [
+                "When `true`, this parameter's domain can be empty."
+            ],
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "required": [
+        "name",
+        "values"
+    ],
+    "title": "Parameters.String",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

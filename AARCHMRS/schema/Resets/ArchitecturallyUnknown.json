@@ -1,0 +1,32 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Resets.ArchitecturallyUnknown"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Resets.ArchitecturallyUnknown"
+            ]
+        }
+    },
+    "title": "ArchitecturallyUnknown",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "info": [
+        "The reset value is architecturally `UNKNOWN`.",
+        "An implementation may choose to refine this, otherwise the reset value is `UNKNOWN`."
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A $(~Instruction.Symbols.Literal) is a string of characters that is present in the",
+            "assembly stream as it is written. For example, if the literal value is `\"ADD\"`,",
+            "then the characters `A`, `D`, `D` are present in the assembly stream with no intervening spaces."
+        ],
+        "The example below is for the $(~Instruction.Symbols.Literal) symbol `\"ADD\"`."
+    ],
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Instruction.Symbols.Literal",
+            "value": "ADD"
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Symbols.Literal"
+            ]
+        },
+        "value": {
+            "info": [
+                "The literal symbol to match when parsing assembly."
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Symbols.Literal"
+}

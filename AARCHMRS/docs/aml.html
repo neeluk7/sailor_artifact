@@ -1,0 +1,207 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="arm-markdown-language">Arm Markdown Language</h1>
+<p>MRS natively supports markdown in its descriptive content, with
+a few useful Arm related addons. It inherits from the <a href="https://daringfireball.net/projects/markdown/syntax.text">John 
+Gruber's Markdown</a>
+(<em>If you are new to markdown, please read the spec above</em>), 
+but does not overwrite the original spec. </p>
+<p>Below is a list of additions we have made to markdown to make life
+easier for Arm content:</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#arm-defined-words">Arm Defined Words</a></li>
+<li><a href="#binary-or-hex-numbers">Binary or Hex numbers</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#register-links">Register links</a></li>
+<li><a href="#linking">Linking</a></li>
+<li><a href="#tables">Tables</a></li>
+</ul>
+</div>
+<h2 id="arm-defined-words">Arm Defined Words</h2>
+<p>The following group of words are defined by Arm to have special or additional meaning:</p>
+<pre><code>IMPLEMENTATION DEFINED
+OPTIONAL
+RES0
+RES1
+UNDEFINED
+UNKNOWN
+CONSTRAINED UNPREDICTABLE
+UNPREDICTABLE
+</code></pre>
+<p>When they are used in Arm Markdown Language and rendered in output, they will be
+automatically wrapped in an <code>&lt;arm-defined-word/&gt;</code> XHTML element as demonstrated below.
+This element should be styled as small-caps in any rendered output.</p>
+<pre><code>&lt;arm-defined-word&gt;IMPLEMENTATION DEFINED&lt;/arm-defined-word&gt;
+</code></pre>
+<h2 id="binary-or-hex-numbers">Binary or Hex numbers</h2>
+<p><code>0b01100</code> will be automatically converted into:</p>
+<pre><code>&lt;binarynumber&gt;0b01100&lt;/binaryNumber&gt;
+</code></pre>
+<p>Hex numbers follow the same principle so the hex number 
+<code>0xABcdEf123</code> will be converted to (Note it is coerced to upper-case 
+for consistency):</p>
+<pre><code>&lt;hexnumber&gt;0xABCDEF123&lt;/hexnumber&gt;
+</code></pre>
+<h2 id="notes">Notes</h2>
+<p>Notes are usually used to define non architectural components
+in MRS models and so they need to be supported. For this we
+use [note] and [/note]. For example:</p>
+<pre><code>[note]This is a single line note[/note]
+</code></pre>
+<p>or </p>
+<pre><code>[note]
+This is multiline
+ - Item 1
+ - Item 2
+[/note]
+</code></pre>
+<p>Will be converted to an HTML representation of the note</p>
+<pre><code>&lt;note&gt;&lt;p&gt;This is a single line note&lt;/p&gt;&lt;/note&gt;
+&lt;note&gt;
+&lt;p&gt;This is multiline&lt;/p&gt;
+&lt;ul&gt;
+ &lt;li&gt;Item 1&lt;/li&gt;
+ &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/note&gt;
+</code></pre>
+<h2 id="register-links">Register links</h2>
+<p>It is important to link to another register in the MRS model, 
+but you don't want to write links all over the place, what if 
+you could use a format that would recognize a register and 
+auto-link it.</p>
+<p>Well there is one. If you had:</p>
+<blockquote>
+<p>The register AArch64-REG0_EL1 is also mapped to ext-REG0 but 
+not AArch32-REG0. And register arrays can be written as 
+AArch64-REG0&lt;n&gt;_EL1, and it will link correctly.</p>
+</blockquote>
+<p>Will be auto converted to HTML using <code>register_link</code> tags:</p>
+<pre><code>The register &lt;register_link state=&quot;AArch64&quot; id=&quot;AArch64-reg0_el1.txt&quot;&gt;REG0_EL1&lt;/register_link&gt; is also mapped to &lt;register_link state=&quot;ext&quot; id=&quot;ext-reg0_el1.txt&quot;&gt;REG0&lt;/register_link&gt; but not &lt;register_link state=&quot;AArch32&quot; id=&quot;AArch32-reg0.txt&quot;&gt;REG0&lt;/register_link&gt;. And register arrays can be written as 
+&lt;register_link state=&quot;AArch64&quot; id=&quot;AArch64-regn_el1.txt&quot;&gt;REG0&amp;lt;n&amp;gt;_EL1&lt;/register_link&gt;, and 
+it will link correctly.
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to uniquely identify the target of a register link, some 
+context is required. If the register exists within a register block, 
+it must be referred to as a child of that block, with syntax in the 
+form of <code>REGBLOCK1.REG0</code>. For more information about register blocks, 
+refer to <a href="userguide/registers.html#register_blocks">RegisterBlocks</a>.</p>
+<p>Outside of register blocks, the only supported prefixes are <code>AArch64</code>, 
+<code>AArch32</code> and <code>ext</code>. The prefix such as <code>AArch64</code> are shown to be 
+removed in the rendered output. Meaning the input <code>AArch64-REG0</code> is shown 
+as <code>REG0</code>, but linked using the prefix.</p>
+</div>
+<p>Therefore the final HTML output will render as:</p>
+<blockquote>
+<p>The register REG0_EL1 is also mapped to REG0 but not REG0. 
+And register arrays can be written as REG0<n>_EL1, and it will 
+link correctly.</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>.txt</code> file extension is determined during runtime, and 
+can be configured by the implementer. For example for 
+xml rendering of the ArmARM, it is configured to be <code>.xml</code></p>
+</div>
+<p>If you had <code>AArch64-REG0 WITH SPACE</code> this will recognize <code>REG0</code> 
+as a register and leave <code>WITH SPACE</code> alone, which can be annoying 
+so there is a way to be explicit about links by using the <code>r</code> 
+prefix in markdown linking syntax, for example:</p>
+<pre><code>The register r[REG0 WITH SPACES](AArch64-reg0-with-spaces) has spaces.
+</code></pre>
+<p>This will convert it into the following HTML:</p>
+<pre><code>The register &lt;register_link state=&quot;AArch64&quot; id=&quot;AArch64-reg0-with-spaces.txt&quot;&gt;REG0 WITH SPACES&lt;/register_link&gt; has spaces.
+</code></pre>
+<p>An example register name with a variable:</p>
+<h2 id="linking">Linking</h2>
+<p>In some cases you may want to link to create links between different types of content, for
+this you can use the <code>x</code> prefixed linking syntax, for example:</p>
+<pre><code>When x[FeatureName](linkid) is implemented, 
+the only permitted value is 0b0001.
+</code></pre>
+<p>Will be converted to the following HTML:</p>
+<pre><code>When &lt;xref linkend=&quot;linkid&quot;&gt;FeatureName&lt;/xref&gt; is implemented, 
+the only permitted value is 0b0001.
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>linkend</code> is an ID that can be used to reference different parts of your document, the
+AML does not define what an ID should be, and different renders should use this ID to 
+generate links that are appropriate for their formats, or alternatively ignore
+the link and just use the text</p>
+</div>
+<h2 id="tables">Tables</h2>
+<p>Writing tables is required in some cases due to the complexity 
+of the ARM architecture. To do this the following format can 
+be used:</p>
+<pre><code>+----------------------------------------------------+
+| Hello | World                                      |
++=======+============================================+
+| Mars  | Mars is the fourth planet from the Sun.    |
++-------+--------------------------------------------+
+| Earth | Earth is the third planet from the Sun.    |
++-------+--------------------------------------------+
+</code></pre>
+<p>Note that the first row is separated from the rest of the table by the row of <code>=</code> symbols, and will
+be styled differently (because the separation indicates that it is a header row).</p>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

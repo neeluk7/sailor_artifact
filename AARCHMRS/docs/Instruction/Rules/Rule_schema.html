@@ -1,0 +1,840 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../../img/mstile-144x144.png">
+    <link rel="icon" href="../../img/favicon.ico">
+
+        <title>Instruction.Rules.Rule - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../../index.html"><img src="../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Instruction.Rules.</span><span class=" title-type">Rule</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>A <a class="schema_link" href="../../Instruction/Rules/Rule_schema.html" title="Instruction.Rules.Rule">Rule</a> describes, in the form of an <code>assemble</code> property, the mapping between one or more
+assembly symbols and the encoding field values that encode them. A Rule also has a <code>symbols</code> property,
+which matches part of an associated assembly stream.</p>
+<p>The first example below is of the Rule <code>Wd</code>. Its <code>assemble</code> property describes how the
+<code>Wd</code> assembly symbol gains a numeric value from the assembly stream. For example,
+if the stream being assembled were 'ADD W0, W1, W2', then the <code>Wd</code> symbol would first gain
+the numeric value '0'. For disassembly, the process is reversed.</p>
+<p>The second example is of a <code>Rule</code> that sets the value of the <code>Wn</code> assembly symbol to 31.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Metadata</p></div>
+                    
+    <div>
+        See
+            <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Instruction.Rules.Rule</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/assemble" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/assemble">assemble</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="../../AST/StatementBlock_schema.html" class="schema_link">AST.StatementBlock</a>
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A block of ASL pseudocode that defines the translation from assembly symbols to instruction properties.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../../AST/StatementBlock_schema.html">AST.StatementBlock</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/condition" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/condition">condition</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">definitions.condition</a> in
+            <a href="../../Traits/HasCondition_schema.html#/definitions/condition" class="schema_link">Traits.HasCondition</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/description" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/description">description</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Description_schema.html" class="schema_link">Description</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Optional human-readable text describing this <code>Rule</code>.</p></div>
+                    
+    <div>
+        See
+            <a href="../../Description_schema.html" class="schema_link">Description</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/disassemble" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/disassemble">disassemble</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="../../AST/StatementBlock_schema.html" class="schema_link">AST.StatementBlock</a>
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A block of ASL pseudocode that defines the translation from instruction properties to assembly symbols.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../../AST/StatementBlock_schema.html">AST.StatementBlock</a></span>
+            
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/display" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/display">display</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                        string
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The string representation that is used for this <code>Rule</code> when it appears in an
+assembly string, if that representation is different from concatenating the
+string representation of its symbols.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is a string -->
+                    <span class="type"><span class="Xof">oneOf</span> string</span>
+                
+
+                
+
+                
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/symbols" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/symbols">symbols<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="../Assembly_schema.html" class="schema_link">Assembly</a>
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The set of symbols that make up this <code>Rule</code>. null signifies an empty symbol.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Assembly_schema.html">Assembly</a></span>
+            
+    <div><p>The string of assembly that this <code>Rule</code> matches.</p></div>
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Instruction.Rules.Rule&#34;, 
+    &#34;assemble&#34;: {
+        &#34;_type&#34;: &#34;AST.StatementBlock&#34;, 
+        &#34;statements&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.Assignment&#34;, 
+                &#34;var&#34;: {
+                    &#34;_type&#34;: &#34;AST.DotAtom&#34;, 
+                    &#34;values&#34;: [
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;operands&#34;
+                        }, 
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;Wn&#34;
+                        }, 
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;value&#34;
+                        }
+                    ]
+                }, 
+                &#34;val&#34;: {
+                    &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                    &#34;value&#34;: &#34;Uinteger&#34;
+                }
+            }
+        ]
+    }, 
+    &#34;disassemble&#34;: {
+        &#34;_type&#34;: &#34;AST.StatementBlock&#34;, 
+        &#34;statements&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.Return&#34;, 
+                &#34;val&#34;: {
+                    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+                    &#34;left&#34;: {
+                        &#34;_type&#34;: &#34;Types.String&#34;, 
+                        &#34;value&#34;: &#34;W&#34;
+                    }, 
+                    &#34;op&#34;: &#34;++&#34;, 
+                    &#34;right&#34;: {
+                        &#34;_type&#34;: &#34;AST.DotAtom&#34;, 
+                        &#34;values&#34;: [
+                            {
+                                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                                &#34;value&#34;: &#34;operands&#34;
+                            }, 
+                            {
+                                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                                &#34;value&#34;: &#34;Wn&#34;
+                            }, 
+                            {
+                                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                                &#34;value&#34;: &#34;value&#34;
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }, 
+    &#34;description&#34;: {
+        &#34;_type&#34;: &#34;Description&#34;, 
+        &#34;after&#34;: null, 
+        &#34;before&#34;: &#34;Is the 32-bit name of the general-purpose destination register, encoded in the Rn field.&#34;
+    }, 
+    &#34;symbols&#34;: {
+        &#34;_type&#34;: &#34;Instruction.Assembly&#34;, 
+        &#34;symbols&#34;: [
+            {
+                &#34;_type&#34;: &#34;Instruction.Symbols.Literal&#34;, 
+                &#34;value&#34;: &#34;W&#34;
+            }, 
+            {
+                &#34;_type&#34;: &#34;Instruction.Symbols.RuleReference&#34;, 
+                &#34;rule_id&#34;: &#34;UInteger&#34;
+            }
+        ]
+    }, 
+    &#34;display&#34;: &#34;&lt;Wd&gt;&#34;
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Instruction.Rules.Rule&#34;, 
+    &#34;assemble&#34;: {
+        &#34;_type&#34;: &#34;AST.StatementBlock&#34;, 
+        &#34;statements&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.Assignment&#34;, 
+                &#34;val&#34;: {
+                    &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                    &#34;value&#34;: 31
+                }, 
+                &#34;var&#34;: {
+                    &#34;_type&#34;: &#34;AST.DotAtom&#34;, 
+                    &#34;values&#34;: [
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;operands&#34;
+                        }, 
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;Wn&#34;
+                        }, 
+                        {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;value&#34;
+                        }
+                    ]
+                }
+            }
+        ]
+    }, 
+    &#34;disassemble&#34;: {
+        &#34;_type&#34;: &#34;AST.StatementBlock&#34;, 
+        &#34;statements&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.Return&#34;, 
+                &#34;val&#34;: {
+                    &#34;_type&#34;: &#34;Types.String&#34;, 
+                    &#34;value&#34;: &#34;&#34;
+                }
+            }
+        ]
+    }, 
+    &#34;symbols&#34;: null
+}</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    [
+      "A $(~Instruction.Rules.Rule) describes, in the form of an `assemble` property, the mapping between one or more",
+      "assembly symbols and the encoding field values that encode them. A Rule also has a `symbols` property,",
+      "which matches part of an associated assembly stream."
+    ],
+    [
+      "The first example below is of the Rule `Wd`. Its `assemble` property describes how the",
+      "`Wd` assembly symbol gains a numeric value from the assembly stream. For example,",
+      "if the stream being assembled were 'ADD W0, W1, W2', then the `Wd` symbol would first gain",
+      "the numeric value '0'. For disassembly, the process is reversed."
+    ],
+    "The second example is of a `Rule` that sets the value of the `Wn` assembly symbol to 31."
+  ],
+  "type": "object",
+  "examples": [
+    {
+      "_type": "Instruction.Rules.Rule",
+      "assemble": {
+        "_type": "AST.StatementBlock",
+        "statements": [
+          {
+            "_type": "AST.Assignment",
+            "var": {
+              "_type": "AST.DotAtom",
+              "values": [
+                {
+                  "_type": "AST.Identifier",
+                  "value": "operands"
+                },
+                {
+                  "_type": "AST.Identifier",
+                  "value": "Wn"
+                },
+                {
+                  "_type": "AST.Identifier",
+                  "value": "value"
+                }
+              ]
+            },
+            "val": {
+              "_type": "AST.Identifier",
+              "value": "Uinteger"
+            }
+          }
+        ]
+      },
+      "disassemble": {
+        "_type": "AST.StatementBlock",
+        "statements": [
+          {
+            "_type": "AST.Return",
+            "val": {
+              "_type": "AST.BinaryOp",
+              "left": {
+                "_type": "Types.String",
+                "value": "W"
+              },
+              "op": "++",
+              "right": {
+                "_type": "AST.DotAtom",
+                "values": [
+                  {
+                    "_type": "AST.Identifier",
+                    "value": "operands"
+                  },
+                  {
+                    "_type": "AST.Identifier",
+                    "value": "Wn"
+                  },
+                  {
+                    "_type": "AST.Identifier",
+                    "value": "value"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "description": {
+        "_type": "Description",
+        "after": null,
+        "before": "Is the 32-bit name of the general-purpose destination register, encoded in the Rn field."
+      },
+      "symbols": {
+        "_type": "Instruction.Assembly",
+        "symbols": [
+          {
+            "_type": "Instruction.Symbols.Literal",
+            "value": "W"
+          },
+          {
+            "_type": "Instruction.Symbols.RuleReference",
+            "rule_id": "UInteger"
+          }
+        ]
+      },
+      "display": "<Wd>"
+    },
+    {
+      "_type": "Instruction.Rules.Rule",
+      "assemble": {
+        "_type": "AST.StatementBlock",
+        "statements": [
+          {
+            "_type": "AST.Assignment",
+            "val": {
+              "_type": "AST.Integer",
+              "value": 31
+            },
+            "var": {
+              "_type": "AST.DotAtom",
+              "values": [
+                {
+                  "_type": "AST.Identifier",
+                  "value": "operands"
+                },
+                {
+                  "_type": "AST.Identifier",
+                  "value": "Wn"
+                },
+                {
+                  "_type": "AST.Identifier",
+                  "value": "value"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "disassemble": {
+        "_type": "AST.StatementBlock",
+        "statements": [
+          {
+            "_type": "AST.Return",
+            "val": {
+              "_type": "Types.String",
+              "value": ""
+            }
+          }
+        ]
+      },
+      "symbols": null
+    }
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../../Meta.json",
+      "info": [
+        "Metadata"
+      ]
+    },
+    "_type": {
+      "enum": [
+        "Instruction.Rules.Rule"
+      ]
+    },
+    "assemble": {
+      "info": [
+        "A block of ASL pseudocode that defines the translation from assembly symbols to instruction properties."
+      ],
+      "oneOf": [
+        {
+          "$ref": "../../AST/StatementBlock.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "disassemble": {
+      "info": [
+        "A block of ASL pseudocode that defines the translation from instruction properties to assembly symbols."
+      ],
+      "oneOf": [
+        {
+          "$ref": "../../AST/StatementBlock.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "description": {
+      "$ref": "../../Description.json",
+      "info": [
+        "Optional human-readable text describing this `Rule`."
+      ]
+    },
+    "symbols": {
+      "info": [
+        "The set of symbols that make up this `Rule`. null signifies an empty symbol."
+      ],
+      "oneOf": [
+        {
+          "info": [
+            "The string of assembly that this `Rule` matches."
+          ],
+          "$ref": "../Assembly.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "display": {
+      "info": [
+        [
+          "The string representation that is used for this `Rule` when it appears in an",
+          "assembly string, if that representation is different from concatenating the",
+          "string representation of its symbols."
+        ]
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "condition": {
+      "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+    }
+  },
+  "required": [
+    "symbols"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Instruction.Rules.Rule"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../../js/highlight/highlight.js"></script>
+    <script src="../../js/highlight/languages/json.min.js"></script>
+    <script src="../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../../js/highlight/languages/yaml.min.js"></script>
+    <script src="../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

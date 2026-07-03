@@ -1,0 +1,76 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A EquationValue provides an infrastructure that defines a value",
+            "given an equation in the format `(<value>)[<slice>]`."
+        ],
+        [
+            "For example `((n * 2) + x)[3:0]`, where the values of `n` or `x` can",
+            "be defined by an implementation, and `[3:0]` provides an indication of the size",
+            "(4-bits) and slice (bits 3:0) of the value after evaluation."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Values.EquationValue",
+            "meaning": "Meaning EV",
+            "value": "((n * 2) - x)",
+            "slice": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 4
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Values.EquationValue"
+            ]
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "see": "Value.json"
+        },
+        "value": {
+            "info": [
+                [
+                    "This represents the `(n * 2) + x` (note without leading parenthesis) part of",
+                    "the `EquationValue`. The value stores the internal part of the equation."
+                ]
+            ],
+            "type": "string"
+        },
+        "slice": {
+            "info": [
+                "This represent the `[3:0]` part of the `EquationValue`.",
+                [
+                    "The slice can start from any position (for example `[3:1]`) or be ",
+                    "non-continuous (for example `[3:2, 0]`) and the evaluation of the value must",
+                    "respect the slice."
+                ]
+            ],
+            "$ref": "../Rangeset.json"
+        }
+    },
+    "required": [
+        "value",
+        "slice"
+    ],
+    "title": "EquationValue",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

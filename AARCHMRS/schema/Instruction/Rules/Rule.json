@@ -1,0 +1,239 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A $(~Instruction.Rules.Rule) describes, in the form of an `assemble` property, the mapping between one or more",
+            "assembly symbols and the encoding field values that encode them. A Rule also has a `symbols` property,",
+            "which matches part of an associated assembly stream."
+        ],
+        [
+            "The first example below is of the Rule `Wd`. Its `assemble` property describes how the",
+            "`Wd` assembly symbol gains a numeric value from the assembly stream. For example,",
+            "if the stream being assembled were 'ADD W0, W1, W2', then the `Wd` symbol would first gain",
+            "the numeric value '0'. For disassembly, the process is reversed."
+        ],
+        "The second example is of a `Rule` that sets the value of the `Wn` assembly symbol to 31."
+    ],
+    "type": "object",
+    "examples": [
+        {
+            "_type": "Instruction.Rules.Rule",
+            "assemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "var": {
+                            "_type": "AST.DotAtom",
+                            "values": [
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "operands"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "Wn"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "value"
+                                }
+                            ]
+                        },
+                        "val": {
+                            "_type": "AST.Identifier",
+                            "value": "Uinteger"
+                        }
+                    }
+                ]
+            },
+            "disassemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Return",
+                        "val": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "Types.String",
+                                "value": "W"
+                            },
+                            "op": "++",
+                            "right": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "operands"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "Wn"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "value"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "description": {
+                "_type": "Description",
+                "after": null,
+                "before": "Is the 32-bit name of the general-purpose destination register, encoded in the Rn field."
+            },
+            "symbols": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "W"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "UInteger"
+                    }
+                ]
+            },
+            "display": "<Wd>"
+        },
+        {
+            "_type": "Instruction.Rules.Rule",
+            "assemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "val": {
+                            "_type": "AST.Integer",
+                            "value": 31
+                        },
+                        "var": {
+                            "_type": "AST.DotAtom",
+                            "values": [
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "operands"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "Wn"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "value"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "disassemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Return",
+                        "val": {
+                            "_type": "Types.String",
+                            "value": ""
+                        }
+                    }
+                ]
+            },
+            "symbols": null
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Rules.Rule"
+            ]
+        },
+        "assemble": {
+            "info": [
+                "A block of ASL pseudocode that defines the translation from assembly symbols to instruction properties."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../../AST/StatementBlock.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "disassemble": {
+            "info": [
+                "A block of ASL pseudocode that defines the translation from instruction properties to assembly symbols."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../../AST/StatementBlock.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "description": {
+            "$ref": "../../Description.json",
+            "info": [
+                "Optional human-readable text describing this `Rule`."
+            ]
+        },
+        "symbols": {
+            "info": [
+                "The set of symbols that make up this `Rule`. null signifies an empty symbol."
+            ],
+            "oneOf": [
+                {
+                    "info": [
+                        "The string of assembly that this `Rule` matches."
+                    ],
+                    "$ref": "../Assembly.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "display": {
+            "info": [
+                [
+                    "The string representation that is used for this `Rule` when it appears in an",
+                    "assembly string, if that representation is different from concatenating the",
+                    "string representation of its symbols."
+                ]
+            ],
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "condition": {
+            "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "symbols"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Rules.Rule"
+}

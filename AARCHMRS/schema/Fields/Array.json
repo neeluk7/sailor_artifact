@@ -1,0 +1,167 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "Field array is a rolled up representation of an array of fields.",
+            "Architecturally this should be treated the same as a set of unrolled fields."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Fields.Array",
+            "name": "F<x>",
+            "description": {
+                "after": null,
+                "before": "A short way of writing many 2 bit fields: F3 at 7:6, F2 at 5:4, F1 at 3:2 and, F0 at 1:0"
+            },
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                }
+            ],
+            "indexes": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 4
+                }
+            ],
+            "index_variable": "x",
+            "values": {
+                "_type": "Valuesets.Values",
+                "values": [
+                    {
+                        "_type": "Values.Value",
+                        "meaning": "The first value of every F&lt;x&gt; field",
+                        "value": "'01'"
+                    },
+                    {
+                        "_type": "Values.Value",
+                        "meaning": "The second value of every F&lt;x&gt; field",
+                        "value": "'00'"
+                    }
+                ]
+            },
+            "access": [
+                {
+                    "_type": "Accessors.Permission.FieldAccess",
+                    "condition": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "x"
+                        },
+                        "op": "<",
+                        "right": {
+                            "_type": "AST.Function",
+                            "arguments": [
+                                {
+                                    "_type": "Types.Field",
+                                    "value": {
+                                        "field": "CG1NC",
+                                        "instance": null,
+                                        "name": "AMCGCR_EL0",
+                                        "slices": null,
+                                        "state": "AArch64"
+                                    }
+                                }
+                            ],
+                            "name": "UInt"
+                        }
+                    },
+                    "access": "RW"
+                },
+                {
+                    "_type": "Accessors.Permission.FieldAccess",
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "access": "RES0"
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.Array"
+            ]
+        },
+        "access": {
+            "default": null,
+            "$ref": "../Traits/HasFieldAccess.json#/definitions/access"
+        },
+        "description": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Traits/HasDescription.json#/definitions/description"
+        },
+        "display": {
+            "see": "../Fields/Field.json",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "name": {
+            "see": "../Fields/Field.json",
+            "info": [
+                "The name must include a `<[^<]+>` which is used to represent the index value of the field.",
+                [
+                    "For example, unrolling a field named `F<x>` with indexes `4:2`",
+                    " will yield three fields with the names `F4`, `F3`, `F2` in that order."
+                ],
+                "Below are few other examples on how a name property could be defined:"
+            ],
+            "examples": [
+                "F<x>",
+                "Part<x>_Q"
+            ],
+            "pattern": "<[^<]+>",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "volatile": {
+            "see": "../Fields/Field.json",
+            "type": "boolean"
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "resets": {
+            "see": "../Fields/Field.json",
+            "$ref": "../FieldResets.json"
+        },
+        "indexes": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "../Traits/HasIndexes.json#/definitions/index_variable"
+        },
+        "values": {
+            "$ref": "../Valuesets/ValuesetAbstract.json#/definitions/children",
+            "see": "../Fields/Field.json"
+        }
+    },
+    "required": [
+        "name",
+        "rangeset",
+        "indexes",
+        "index_variable"
+    ],
+    "title": "Array",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

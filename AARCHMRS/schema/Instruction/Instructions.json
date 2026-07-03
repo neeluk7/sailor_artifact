@@ -1,0 +1,184 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Instructions",
+    "info": [
+        "This is a wrapper object for all InstructionSets.",
+        [
+            "The example below is for an instance of $(~Instruction.Instructions) that contains one",
+            "instruction set, named 'EXAMPLE', which has a single instruction, named 'NOP'."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.Instructions",
+            "instructions": [
+                {
+                    "_type": "Instruction.InstructionSet",
+                    "name": "EXAMPLE",
+                    "read_width": 32,
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": []
+                    },
+                    "children": [
+                        {
+                            "_type": "Instruction.Instruction",
+                            "name": "NOP",
+                            "assembly": {
+                                "_type": "Instruction.Assembly",
+                                "symbols": [
+                                    {
+                                        "_type": "Instruction.Symbols.Literal",
+                                        "value": "NOP"
+                                    }
+                                ]
+                            },
+                            "encoding": {
+                                "_type": "Instruction.Encodeset.Encodeset",
+                                "width": 32,
+                                "values": [
+                                    {
+                                        "_type": "Instruction.Encodeset.Bits",
+                                        "range": {
+                                            "_type": "Range",
+                                            "start": 0,
+                                            "width": 32
+                                        },
+                                        "value": {
+                                            "_type": "Values.Value",
+                                            "value": "'00000000000000000000000000000000'",
+                                            "meaning": null
+                                        },
+                                        "should_be_mask": {
+                                            "_type": "Values.Value",
+                                            "value": "'00000000000000000000000000000000'"
+                                        }
+                                    }
+                                ]
+                            },
+                            "operation_id": "ExampleOp",
+                            "assemble": null,
+                            "disassemble": null,
+                            "assertions": null
+                        }
+                    ],
+                    "operation_id": null,
+                    "condition": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    }
+                }
+            ],
+            "assembly_rules": {
+                "EMPTY": {
+                    "_type": "Instruction.Rules.Token",
+                    "pattern": "",
+                    "default": ""
+                },
+                "SPACE": {
+                    "_type": "Instruction.Rules.Token",
+                    "pattern": "\\s+",
+                    "default": " "
+                }
+            },
+            "operations": {
+                "ExampleOp": {
+                    "_type": "Instruction.Operation",
+                    "title": "ExampleOp",
+                    "operation": [
+                        [
+                            "bits(32) result = 0;",
+                            "X[0, 32] = result;"
+                        ]
+                    ],
+                    "brief": "An example operation.",
+                    "description": "A more detailed description of the example operation."
+                }
+            }
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Instructions"
+            ]
+        },
+        "assembly_rules": {
+            "info": [
+                [
+                    "The dictionary of assembly rules that is used in this instruction set.",
+                    "An entry in this dictionary is a key:value pair, where the key is the unique ",
+                    "string identifier for the assembly rule and the value is an instance of",
+                    "`Rules.Choice`, `Rules.Rule`, or `Rules.Token`."
+                ]
+            ],
+            "type": "object",
+            "patternProperties": {
+                "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$": {
+                    "info": [
+                        "Either a lexical rule or a grammatical assembly rule"
+                    ],
+                    "type": "object",
+                    "oneOf": [
+                        {
+                            "$ref": "Rules/Choice.json"
+                        },
+                        {
+                            "$ref": "Rules/Rule.json"
+                        },
+                        {
+                            "$ref": "Rules/Token.json"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "instructions": {
+            "type": "array",
+            "info": [
+                "A list of instances of $(~Instruction.InstructionSet)."
+            ],
+            "items": {
+                "$ref": "InstructionSet.json"
+            }
+        },
+        "operations": {
+            "info": [
+                [
+                    "The dictionary of operations for the instructions.",
+                    "An entry in this dictionary is a key:value pair, where the key is the unique ",
+                    "string identifier for the operation and the value is an instance of",
+                    "`Operation` or `OperationAlias`."
+                ]
+            ],
+            "type": "object",
+            "patternProperties": {
+                "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$": {
+                    "oneOf": [
+                        {
+                            "$ref": "Operation.json"
+                        },
+                        {
+                            "$ref": "OperationAlias.json"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

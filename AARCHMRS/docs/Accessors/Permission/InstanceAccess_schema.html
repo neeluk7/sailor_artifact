@@ -1,0 +1,311 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../../img/mstile-144x144.png">
+    <link rel="icon" href="../../img/favicon.ico">
+
+        <title>InstanceAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../../index.html"><img src="../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Accessors.Permission.</span><span class=" title-type">InstanceAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>The instance access describes a mapping between the various register instances and the way this field is accessed.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Metadata</p></div>
+                    
+    <div>
+        See
+            <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Accessors.Permission.InstanceAccess</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/instances" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/instances">instances<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                            <div>
+                                <span class="type">object</span> {
+                                <code title="Regex">/^[A-Za-z][A-Za-z0-9_<>]*$/</code> :
+                            </div>
+                            <div class="items-oneOf">
+                                    <div><span class="type Xof">oneOf</span> [</div>
+                                    
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="FieldAccess_schema.html" class="schema_link">FieldAccess</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="FieldGetterSetter_schema.html" class="schema_link">FieldGetterSetter</a>
+            </div>
+    
+
+                                    <div>]</div>
+                            </div>
+                            <div>}</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The instances for which this field is accessible and their respective accesses.</p></div>
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Accessors.Permission.InstanceAccess&#34;, 
+    &#34;instances&#34;: {
+        &#34;REG_S&#34;: {
+            &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+            &#34;access&#34;: &#34;RW&#34;
+        }, 
+        &#34;REG_NS&#34;: {
+            &#34;_type&#34;: &#34;Accessors.Permission.FieldAccess&#34;, 
+            &#34;access&#34;: &#34;RAZ/WI&#34;
+        }
+    }
+}</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "The instance access describes a mapping between the various register instances and the way this field is accessed."
+  ],
+  "examples": [
+    {
+      "_type": "Accessors.Permission.InstanceAccess",
+      "instances": {
+        "REG_S": {
+          "_type": "Accessors.Permission.FieldAccess",
+          "access": "RW"
+        },
+        "REG_NS": {
+          "_type": "Accessors.Permission.FieldAccess",
+          "access": "RAZ/WI"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../../Meta.json",
+      "info": [
+        "Metadata"
+      ]
+    },
+    "_type": {
+      "enum": [
+        "Accessors.Permission.InstanceAccess"
+      ]
+    },
+    "instances": {
+      "info": [
+        "The instances for which this field is accessible and their respective accesses."
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_<>]*$": {
+          "oneOf": [
+            {
+              "$ref": "FieldAccess.json"
+            },
+            {
+              "$ref": "FieldGetterSetter.json"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "instances"
+  ],
+  "title": "InstanceAccess",
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "additionalProperties": false
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../../js/highlight/highlight.js"></script>
+    <script src="../../js/highlight/languages/json.min.js"></script>
+    <script src="../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../../js/highlight/languages/yaml.min.js"></script>
+    <script src="../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

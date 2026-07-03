@@ -1,0 +1,90 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+<div class="row static-markdown">
+    <h1 id="aarchmrs-schema-specification">AARCHMRS Schema Specification</h1>
+<p>The AARCHMRS uses the <a href="http://json-schema.org/draft-04/schema#">Draft-04</a>
+version of json-schema as its schema standard.</p>
+<h2 id="non-standard-draft-04-properties-used-in-the-schema">Non standard Draft-04 properties used in the schema</h2>
+<p>As draft-04 json-schema permits additional properties, we have defined some properties to
+capture more details about some aspects of the schema:</p>
+<ul>
+<li><strong>info</strong> (<code>string</code>, <code>strings[]</code>): provides detailed information about any
+   property used inside a schema, it can be used at the the top level to define information about a
+   given sub model. An array of strings are used to make it easier to write multilines in JSON.</li>
+<li><strong>deprecated</strong> (<code>boolean</code>): is used for properties that have been deprecated
+   in this version of the schema. For deprecated properties see the <code>info</code>/<code>see</code> section for
+   details.</li>
+<li><strong>see</strong> (<code>string</code>): property allows you to reference another property, formats include:<ul>
+<li><code>Schema.json</code> this will reference the current property in <code>Schema.json</code></li>
+<li><code>Schema.json#another-property</code> this will reference <code>another-property</code> in <code>Schema.json</code></li>
+</ul>
+</li>
+<li><strong>examples</strong> (<code>array</code>): an array of examples. <em>This comes from Draft-07, and is used to be forward compatible</em></li>
+<li><strong>license</strong> (<code>object</code>): an object containing license information and copyright under which this package is provided.</li>
+</ul>
+<h2 id="aarchmrs-defined-properties-in-the-schema">AARCHMRS defined properties in the schema</h2>
+<p>Any schema defined property starting with an <code>_</code> is reserved by the AARCHMRS schema definition,
+unless it is used inside the <code>_meta</code> property.</p>
+<ul>
+<li><strong>_meta</strong>: See <a href="Meta_schema.html">Meta</a> for more details.</li>
+<li><strong>_type</strong>: This string property is used to map the AARCHMRS json files to the corresponding models.
+   Every schema model must have a <code>_type</code> property. These properties can be namespaced by a <code>.</code>.</li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

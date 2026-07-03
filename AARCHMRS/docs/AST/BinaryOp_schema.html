@@ -1,0 +1,1011 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>BinaryOp - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class=" title-type">BinaryOp</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type Xof">oneOf [ ... ]</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>A model representing binary operations such as <code>A == B</code>, <code>A ==&gt; B</code> etc.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/expression" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/expression">expression</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                    <a href="../Types/String_schema.html" class="schema_link">Types.String</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Types/Field_schema.html" class="schema_link">Types.Field</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Types/PstateField_schema.html" class="schema_link">Types.PstateField</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Types/RegisterType_schema.html" class="schema_link">Types.RegisterType</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Types/RegisterMultiFields_schema.html" class="schema_link">Types.RegisterMultiFields</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="../Values/Value_schema.html" class="schema_link">Values.Value</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Bool_schema.html" class="schema_link">Bool</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Real_schema.html" class="schema_link">Real</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Integer_schema.html" class="schema_link">Integer</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Set_schema.html" class="schema_link">Set</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Function_schema.html" class="schema_link">Function</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="SquareOp_schema.html" class="schema_link">SquareOp</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="ArrayAccessOp_schema.html" class="schema_link">ArrayAccessOp</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Concat_schema.html" class="schema_link">Concat</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Tuple_schema.html" class="schema_link">Tuple</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="DotAtom_schema.html" class="schema_link">DotAtom</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="Identifier_schema.html" class="schema_link">Identifier</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="TypeAnnotation_schema.html" class="schema_link">TypeAnnotation</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="UnaryOp_schema.html" class="schema_link">UnaryOp</a>
+            </div>
+            <div class="items-oneOf">
+                    <a href="" class="schema_link">#</a>
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A definition used to easily compose all of the known <a class="schema_link" href="../AST/" title="AST">AST</a> in different parts of the schema.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Types/String_schema.html">Types.String</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Types/Field_schema.html">Types.Field</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Types/PstateField_schema.html">Types.PstateField</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Types/RegisterType_schema.html">Types.RegisterType</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Types/RegisterMultiFields_schema.html">Types.RegisterMultiFields</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="../Values/Value_schema.html">Values.Value</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Bool_schema.html">Bool</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Real_schema.html">Real</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Integer_schema.html">Integer</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Set_schema.html">Set</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Function_schema.html">Function</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="SquareOp_schema.html">SquareOp</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="ArrayAccessOp_schema.html">ArrayAccessOp</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Concat_schema.html">Concat</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Tuple_schema.html">Tuple</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="DotAtom_schema.html">DotAtom</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="Identifier_schema.html">Identifier</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="TypeAnnotation_schema.html">TypeAnnotation</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="UnaryOp_schema.html">UnaryOp</a></span>
+            
+
+        </div>
+        <div class="item-type">
+            <span><span class="type Xof">oneOf</span> <a class="title-type" href="">#</a></span>
+            
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is an object -->
+                    <h3 class="type"><span class="Xof">oneOf</span> object</h3>
+                
+    <div class="static-markdown"><p>A BinaryOp composition (only valid when composing constraints) allows the following:</p>
+<ul>
+<li><code>FEAT_A ==&gt; FEAT_B</code></li>
+<li><code>FEAT_A &lt;=&gt; FEAT_B</code></li>
+</ul></div>
+
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>AST.BinaryOp</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/left" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/left">left<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="#/definitions/expression" class="schema_link"></a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The left-hand-side of the constraint.</p></div>
+                    
+    <div>
+        See
+            <a href="#/definitions/expression" class="schema_link">definitions.expression</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/op" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/op">op<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <div><p>The operation to be performed between <code>left</code> and <code>right</code>. 
+See <a class="schema_link" href="../Traits/HasConstraints_schema.html" title="Traits.HasConstraints">Traits.HasConstraints</a> for more detail around the meaning of 
+the enums listed below.</p></div>
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>==></code>
+                            <code><=></code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/right" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/right">right<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="#/definitions/expression" class="schema_link"></a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The right-hand-side of the constraint.</p></div>
+                    
+    <div>
+        See
+            <a href="#/definitions/expression" class="schema_link">definitions.expression</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+                <tr>
+                    <td colspan="3" class="examples">
+                        
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+    &#34;left&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;FEAT_A&#34;
+    }, 
+    &#34;op&#34;: &#34;==&gt;&#34;, 
+    &#34;right&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;FEAT_B&#34;
+    }
+}</code></pre>
+        </div>
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is an object -->
+                    <h3 class="type"><span class="Xof">oneOf</span> object</h3>
+                
+    <div class="static-markdown"><p>A BinaryOp composition (used for every other expression other than constraints) allows the following:</p>
+<ul>
+<li><code>A || B</code></li>
+<li><code>A &lt;&lt; 2</code></li>
+<li><code>B IN {1, 2, 3}</code></li>
+</ul></div>
+
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>AST.BinaryOp</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/left" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/left">left<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="#/definitions/expression" class="schema_link"></a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The left-hand-side of the expression</p></div>
+                    
+    <div>
+        See
+            <a href="#/definitions/expression" class="schema_link">definitions.expression</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/op" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/op">op<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <div><p>The operation to be performed between <code>left</code> and <code>right</code>.</p></div>
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>||</code>
+                            <code>&&</code>
+                            <code><=</code>
+                            <code>>=</code>
+                            <code>==</code>
+                            <code>!=</code>
+                            <code><</code>
+                            <code>></code>
+                            <code><<</code>
+                            <code>>></code>
+                            <code>+</code>
+                            <code>-</code>
+                            <code>OR</code>
+                            <code>XOR</code>
+                            <code>AND</code>
+                            <code>*</code>
+                            <code>/</code>
+                            <code>^</code>
+                            <code>::</code>
+                            <code>++</code>
+                            <code>IN</code>
+                            <code>MOD</code>
+                            <code>DIV</code>
+                            <code>DIVRM</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/right" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/right">right<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <a href="#/definitions/expression" class="schema_link"></a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The right-hand-side of the expression</p></div>
+                    
+    <div>
+        See
+            <a href="#/definitions/expression" class="schema_link">definitions.expression</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+                <tr>
+                    <td colspan="3" class="examples">
+                        
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+    &#34;left&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;A&#34;
+    }, 
+    &#34;op&#34;: &#34;||&#34;, 
+    &#34;right&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;B&#34;
+    }
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+    &#34;left&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;A&#34;
+    }, 
+    &#34;op&#34;: &#34;&lt;&lt;&#34;, 
+    &#34;right&#34;: {
+        &#34;_type&#34;: &#34;AST.Integer&#34;, 
+        &#34;value&#34;: 2
+    }
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+    &#34;left&#34;: {
+        &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+        &#34;value&#34;: &#34;B&#34;
+    }, 
+    &#34;op&#34;: &#34;IN&#34;, 
+    &#34;right&#34;: {
+        &#34;_type&#34;: &#34;AST.Set&#34;, 
+        &#34;values&#34;: [
+            {
+                &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                &#34;value&#34;: 1
+            }, 
+            {
+                &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                &#34;value&#34;: 2
+            }, 
+            {
+                &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                &#34;value&#34;: 3
+            }
+        ]
+    }
+}</code></pre>
+        </div>
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "definitions": {
+    "expression": {
+      "info": [
+        "A definition used to easily compose all of the known $(AST.) in different parts of the schema."
+      ],
+      "oneOf": [
+        {
+          "$ref": "../Types/String.json"
+        },
+        {
+          "$ref": "../Types/Field.json"
+        },
+        {
+          "$ref": "../Types/PstateField.json"
+        },
+        {
+          "$ref": "../Types/RegisterType.json"
+        },
+        {
+          "$ref": "../Types/RegisterMultiFields.json"
+        },
+        {
+          "$ref": "../Values/Value.json"
+        },
+        {
+          "$ref": "Bool.json"
+        },
+        {
+          "$ref": "Real.json"
+        },
+        {
+          "$ref": "Integer.json"
+        },
+        {
+          "$ref": "Set.json"
+        },
+        {
+          "$ref": "Function.json"
+        },
+        {
+          "$ref": "SquareOp.json"
+        },
+        {
+          "$ref": "ArrayAccessOp.json"
+        },
+        {
+          "$ref": "Concat.json"
+        },
+        {
+          "$ref": "Tuple.json"
+        },
+        {
+          "$ref": "DotAtom.json"
+        },
+        {
+          "$ref": "Identifier.json"
+        },
+        {
+          "$ref": "TypeAnnotation.json"
+        },
+        {
+          "$ref": "UnaryOp.json"
+        },
+        {
+          "$ref": "#"
+        }
+      ]
+    }
+  },
+  "info": [
+    "A model representing binary operations such as `A == B`, `A ==> B` etc."
+  ],
+  "oneOf": [
+    {
+      "info": [
+        "A BinaryOp composition (only valid when composing constraints) allows the following:",
+        [
+          " - `FEAT_A ==> FEAT_B`",
+          " - `FEAT_A <=> FEAT_B`"
+        ]
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "_meta": {
+          "$ref": "../Meta.json"
+        },
+        "_type": {
+          "enum": [
+            "AST.BinaryOp"
+          ]
+        },
+        "left": {
+          "info": [
+            "The left-hand-side of the constraint."
+          ],
+          "$ref": "#/definitions/expression"
+        },
+        "op": {
+          "info": [
+            [
+              "The operation to be performed between `left` and `right`. ",
+              "See $(Traits.HasConstraints) for more detail around the meaning of ",
+              "the enums listed below."
+            ]
+          ],
+          "enum": [
+            "==>",
+            "<=>"
+          ]
+        },
+        "right": {
+          "info": [
+            "The right-hand-side of the constraint."
+          ],
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "examples": [
+        {
+          "_type": "AST.BinaryOp",
+          "left": {
+            "_type": "AST.Identifier",
+            "value": "FEAT_A"
+          },
+          "op": "==>",
+          "right": {
+            "_type": "AST.Identifier",
+            "value": "FEAT_B"
+          }
+        }
+      ],
+      "required": [
+        "left",
+        "op",
+        "right"
+      ]
+    },
+    {
+      "type": "object",
+      "info": [
+        "A BinaryOp composition (used for every other expression other than constraints) allows the following:",
+        [
+          " - `A || B`",
+          " - `A << 2`",
+          " - `B IN {1, 2, 3}`"
+        ]
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "_meta": {
+          "$ref": "../Meta.json"
+        },
+        "_type": {
+          "enum": [
+            "AST.BinaryOp"
+          ]
+        },
+        "left": {
+          "info": [
+            "The left-hand-side of the expression"
+          ],
+          "$ref": "#/definitions/expression"
+        },
+        "op": {
+          "info": [
+            "The operation to be performed between `left` and `right`."
+          ],
+          "enum": [
+            "||",
+            "&&",
+            "<=",
+            ">=",
+            "==",
+            "!=",
+            "<",
+            ">",
+            "<<",
+            ">>",
+            "+",
+            "-",
+            "OR",
+            "XOR",
+            "AND",
+            "*",
+            "/",
+            "^",
+            "::",
+            "++",
+            "IN",
+            "MOD",
+            "DIV",
+            "DIVRM"
+          ]
+        },
+        "right": {
+          "info": [
+            "The right-hand-side of the expression"
+          ],
+          "$ref": "#/definitions/expression"
+        }
+      },
+      "examples": [
+        {
+          "_type": "AST.BinaryOp",
+          "left": {
+            "_type": "AST.Identifier",
+            "value": "A"
+          },
+          "op": "||",
+          "right": {
+            "_type": "AST.Identifier",
+            "value": "B"
+          }
+        },
+        {
+          "_type": "AST.BinaryOp",
+          "left": {
+            "_type": "AST.Identifier",
+            "value": "A"
+          },
+          "op": "<<",
+          "right": {
+            "_type": "AST.Integer",
+            "value": 2
+          }
+        },
+        {
+          "_type": "AST.BinaryOp",
+          "left": {
+            "_type": "AST.Identifier",
+            "value": "B"
+          },
+          "op": "IN",
+          "right": {
+            "_type": "AST.Set",
+            "values": [
+              {
+                "_type": "AST.Integer",
+                "value": 1
+              },
+              {
+                "_type": "AST.Integer",
+                "value": 2
+              },
+              {
+                "_type": "AST.Integer",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ],
+      "required": [
+        "left",
+        "op",
+        "right"
+      ]
+    }
+  ],
+  "title": "BinaryOp",
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

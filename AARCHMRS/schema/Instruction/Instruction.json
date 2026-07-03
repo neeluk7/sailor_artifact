@@ -1,0 +1,588 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "type": "object",
+    "info": [
+        [
+            "An $(~Instruction.Instruction) object defines an encoding that has a name (for example, ADD or SYS)",
+            "and an operation. Most instances of $(~Instruction.Instruction) also have an assembly representation",
+            "and a set of user-defined properties."
+        ],
+        "If an $(~Instruction.Instruction) has children, each is of one of three types:",
+        [
+            "* $(~Instruction.Instruction) children use a subset of the parent $(~Instruction.Instruction) encoding and",
+            "may define a different operation and assembly.",
+            "* $(~Instruction.InstructionAlias) children use the same encoding and operation as the parent $(~Instruction.Instruction),",
+            "but define different assembly.",
+            "* $(~Instruction.InstructionInstance) children define instances of the parent $(~Instruction.Instruction)",
+            "by associating additional metadata with it."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.Instruction",
+            "name": "ADD",
+            "assembly": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "ADD"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rd"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rn"
+                    }
+                ]
+            },
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": []
+            },
+            "operation_id": "add_sub_imm"
+        },
+        {
+            "_type": "Instruction.Instruction",
+            "name": "SYS",
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": []
+            },
+            "assembly": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "SYS"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "c"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Xt"
+                    }
+                ]
+            },
+            "assemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "val": {
+                            "_type": "Values.Value",
+                            "meaning": null,
+                            "value": "'1'"
+                        },
+                        "var": {
+                            "_type": "AST.Identifier",
+                            "value": "some_field"
+                        }
+                    }
+                ]
+            },
+            "disassemble": {
+                "_type": "AST.StatementBlock",
+                "statements": [
+                    {
+                        "_type": "AST.Assignment",
+                        "val": {
+                            "_type": "AST.Bool",
+                            "value": true
+                        },
+                        "var": {
+                            "_type": "AST.DotAtom",
+                            "values": [
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "operations"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "c"
+                                },
+                                {
+                                    "_type": "AST.Identifier",
+                                    "value": "some_property"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "assertions": [
+                {
+                    "_type": "AST.BinaryOp",
+                    "left": {
+                        "_type": "AST.DotAtom",
+                        "values": [
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "operands"
+                            },
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "c"
+                            },
+                            {
+                                "_type": "AST.Identifier",
+                                "value": "some_property"
+                            }
+                        ]
+                    },
+                    "op": ">=",
+                    "right": {
+                        "_type": "AST.Integer",
+                        "value": 0
+                    }
+                }
+            ],
+            "operation_id": "sys",
+            "operational_note": "Takes 4 cycles to execute.",
+            "decode": "// decode ASL",
+            "title": "System instructions",
+            "properties": {
+                "operations": {
+                    "c": {
+                        "some_property": true
+                    }
+                }
+            },
+            "children": [
+                {
+                    "_type": "Instruction.Instruction",
+                    "name": "BRB",
+                    "title": "BRB",
+                    "decode": "// brb decode",
+                    "assembly": {
+                        "_type": "Instruction.Assembly",
+                        "symbols": [
+                            {
+                                "_type": "Instruction.Symbols.Literal",
+                                "value": "BRB"
+                            },
+                            {
+                                "_type": "Instruction.Symbols.RuleReference",
+                                "rule_id": "brb_op"
+                            }
+                        ]
+                    },
+                    "preferred": {
+                        "_type": "AST.Bool",
+                        "value": true
+                    },
+                    "encoding": {
+                        "_type": "Instruction.Encodeset.Encodeset",
+                        "width": 32,
+                        "values": []
+                    },
+                    "operation_id": "brb",
+                    "properties": {
+                        "other_property": 2,
+                        "operations": {
+                            "c": {
+                                "value": 4,
+                                "some_property": false
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "_type": "Instruction.Instruction",
+            "name": "ADD",
+            "assembly": {
+                "_type": "Instruction.Assembly",
+                "symbols": [
+                    {
+                        "_type": "Instruction.Symbols.Literal",
+                        "value": "ADD"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rd"
+                    },
+                    {
+                        "_type": "Instruction.Symbols.RuleReference",
+                        "rule_id": "Rn"
+                    }
+                ]
+            },
+            "encoding": {
+                "_type": "Instruction.Encodeset.Encodeset",
+                "width": 32,
+                "values": []
+            },
+            "properties": {
+                "is_double": false
+            },
+            "operation_id": "add_sub_imm",
+            "children": [
+                {
+                    "_type": "Instruction.InstructionAlias",
+                    "condition": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "Rn"
+                        },
+                        "op": "==",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "Rd"
+                        }
+                    },
+                    "name": "DOUBLE",
+                    "operation_id": "foo",
+                    "assembly": {
+                        "_type": "Instruction.Assembly",
+                        "symbols": [
+                            {
+                                "_type": "Instruction.Symbols.Literal",
+                                "value": "DOUBLE"
+                            },
+                            {
+                                "_type": "Instruction.Symbols.RuleReference",
+                                "rule_id": "Rd"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_type": "Instruction.InstructionInstance",
+                    "name": "DOUBLE_instance",
+                    "condition": {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "Rn"
+                        },
+                        "op": "==",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "Rd"
+                        }
+                    },
+                    "properties": {
+                        "is_double": true
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Instruction"
+            ]
+        },
+        "name": {
+            "info": [
+                "The name of the $(~Instruction.Instruction), which identifies it in the instruction set."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "encoding": {
+            "$ref": "Encodeset/Encodeset.json"
+        },
+        "assembly": {
+            "info": [
+                "The assembly for this $(~Instruction.Instruction)."
+            ],
+            "$ref": "Assembly.json"
+        },
+        "assemble": {
+            "info": [
+                "A block of ASL code that defines the translation from instruction properties to encoding fields for this $(~Instruction.Instruction)."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../AST/StatementBlock.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "examples": [
+                {
+                    "_type": "AST.StatementBlock",
+                    "statements": [
+                        {
+                            "_type": "AST.Assignment",
+                            "val": {
+                                "_type": "AST.SquareOp",
+                                "arguments": [
+                                    {
+                                        "_type": "AST.Slice",
+                                        "left": {
+                                            "_type": "AST.Integer",
+                                            "value": 3
+                                        },
+                                        "right": {
+                                            "_type": "AST.Integer",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "var": {
+                                    "_type": "AST.DotAtom",
+                                    "values": [
+                                        {
+                                            "_type": "AST.Identifier",
+                                            "value": "operands"
+                                        },
+                                        {
+                                            "_type": "AST.Identifier",
+                                            "value": "destination"
+                                        },
+                                        {
+                                            "_type": "AST.Identifier",
+                                            "value": "value"
+                                        }
+                                    ]
+                                }
+                            },
+                            "var": {
+                                "_type": "AST.Identifier",
+                                "value": "Rd"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "disassemble": {
+            "info": [
+                "A block of ASL code that defines the translation from encoding fields to instruction properties for this $(~Instruction.Instruction)."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../AST/StatementBlock.json"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "examples": [
+                {
+                    "_type": "AST.StatementBlock",
+                    "statements": [
+                        {
+                            "_type": "AST.Assignment",
+                            "val": {
+                                "_type": "AST.Function",
+                                "arguments": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "Rd"
+                                    }
+                                ],
+                                "name": "UInteger"
+                            },
+                            "var": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "operands"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "destination"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "value"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "assertions": {
+            "info": [
+                "A list of assertions about instruction properties."
+            ],
+            "oneOf": [
+                {
+                    "$ref": "../Traits/HasConstraints.json#/definitions/constraints"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "examples": [
+                [
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "operands"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "destination"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "value"
+                                    }
+                                ]
+                            },
+                            "op": ">=",
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 0
+                            }
+                        },
+                        "op": "&&",
+                        "right": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.DotAtom",
+                                "values": [
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "operands"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "destination"
+                                    },
+                                    {
+                                        "_type": "AST.Identifier",
+                                        "value": "value"
+                                    }
+                                ]
+                            },
+                            "op": "<",
+                            "right": {
+                                "_type": "AST.Integer",
+                                "value": 16
+                            }
+                        }
+                    }
+                ]
+            ]
+        },
+        "properties": {
+            "info": [
+                "The user-defined properties for this $(~Instruction.Instruction). Each entry is a key:value pair, where the key is a string identifier and the value is any valid value."
+            ],
+            "patternProperties": {
+                "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$": {}
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "examples": [
+                {
+                    "WriteNZCV": false
+                },
+                {
+                    "utilizes_cores": 4
+                }
+            ]
+        },
+        "preferred": {
+            "info": [
+                "If the `preferred` condition evaluates true, then this $(~Instruction.Instruction) is the preferred disassembly.",
+                "This can be a complex condition that will need to be evaluated.",
+                "This is only used if this Instruction's parent is also an Instruction."
+            ],
+            "anyOf": [
+                {
+                    "$ref": "../Traits/HasCondition.json#/definitions/condition"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "operation_id": {
+            "info": [
+                "The ID of the `Operation` for this $(~Instruction.Instruction). The `Operation` is a value in the `operations` property of the top-level $(~Instruction.Instructions) element, and this operation_id matches its key."
+            ],
+            "$ref": "../AST/Identifier.json#/definitions/c_identifier_regex"
+        },
+        "operational_note": {
+            "info": [
+                "Any information about the Instructions behaviour that cannot be expressed using ASL."
+            ],
+            "$ref": "../Text.json"
+        },
+        "decode": {
+            "info": [
+                "ASL code for decoding the encoding fields."
+            ],
+            "$ref": "../Text.json"
+        },
+        "title": {
+            "info": [
+                "The human-readable name for this $(~Instruction.Instruction). For example, '32-bit' and '64-bit' might be titles for two instructions in an ADD operation."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "children": {
+            "type": "array",
+            "info": [
+                "Defines children nodes.",
+                [
+                    "Any child node with a unique `name` that inherits its parent's `operation_id`,",
+                    "unless it redefines the `operation_id`, in which case it overwrites",
+                    "the behavior that is defined by the `operation_id` of this $(~Instruction.Instruction)."
+                ]
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#"
+                    },
+                    {
+                        "$ref": "InstructionInstance.json"
+                    },
+                    {
+                        "$ref": "InstructionAlias.json"
+                    }
+                ]
+            }
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "name",
+        "encoding",
+        "operation_id"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Instruction"
+}

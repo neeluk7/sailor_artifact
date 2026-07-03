@@ -1,0 +1,97 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Field.ReadWriteAccess",
+    "info": [
+        "The ReadWriteAccess is used to represent the Read and Write behavior of an access at the Field level."
+    ],
+    "oneOf": [
+        {
+            "enum": [
+                "RW",
+                "RO",
+                "WO/RAZ",
+                "RAZ/WI",
+                "WO/RAO",
+                "RAO/WI",
+                "WO/RES0",
+                "RES0/WI",
+                "RES0",
+                "WO/RES1",
+                "RES1/WI",
+                "RES1",
+                "WO/UNKNOWN",
+                "UNKNOWN/WI",
+                "IGNORE",
+                "W1S",
+                "W1C",
+                "W1T",
+                "W0S",
+                "W0C",
+                "W0T",
+                "WS",
+                "WC",
+                "RAZ/W1S",
+                "RAZ/W1C",
+                "RAZ/W1T",
+                "RAZ/SBZ",
+                "RAZ/SBZP",
+                "RAO/W1S",
+                "RAO/W1C",
+                "RAO/W1T",
+                "RAO/SBO",
+                "RAO/SBOP",
+                "UNKNOWN/SBZ",
+                "UNKNOWN/SBO",
+                "UNKNOWN/SBZP",
+                "UNKNOWN/SBOP",
+                "SBZ",
+                "SBO",
+                "RC/W",
+                "RC/WI",
+                "RS/W",
+                "RS/WI",
+                "RC/WS",
+                "RS/WC",
+                "RC/W1S",
+                "RS/W1C",
+                "RC/W0S",
+                "RS/W0C",
+                "ERROR/W",
+                "ERROR/W0C",
+                "ERROR/W0S"
+            ]
+        },
+        {
+            "additionalProperties": false,
+            "properties": {
+                "_meta": {
+                    "$ref": "../../../../Meta.json"
+                },
+                "_type": {
+                    "enum": [
+                        "Accessors.Permission.AccessTypes.Field.ReadWriteAccess"
+                    ]
+                },
+                "read": {
+                    "info": [
+                        "Defines the read behavior of this access."
+                    ],
+                    "default": "UNKNOWN",
+                    "$ref": "../../../../Enums/ReadAccess.json"
+                },
+                "write": {
+                    "info": [
+                        "Defines the write behavior of this access."
+                    ],
+                    "default": "WI",
+                    "$ref": "../../../../Enums/WriteAccess.json"
+                }
+            },
+            "type": "object"
+        }
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

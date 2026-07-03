@@ -1,0 +1,502 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="./img/mstile-144x144.png">
+    <link rel="icon" href="./img/favicon.ico">
+
+        <title>Registers - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/schema.css">
+    <link rel="stylesheet" type="text/css" href="./css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="./index.html"><img src="./img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="./index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class=" title-type">Registers</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">array</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>An array of <a class="schema_link" href="Register_schema.html" title="Register">Register</a>, <a class="schema_link" href="RegisterArray_schema.html" title="RegisterArray">RegisterArray</a>, or <a class="schema_link" href="RegisterBlock_schema.html" title="RegisterBlock">RegisterBlock</a>.</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+                            <h3 class="type">array</h3>
+                            <ul>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="Register_schema.html" class="schema_link">Register</a>
+
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="RegisterArray_schema.html" class="schema_link">RegisterArray</a>
+
+
+
+                                </li>
+                                <li>
+                                    <span class="type Xof">oneOf</span>
+                                    <a href="RegisterBlock_schema.html" class="schema_link">RegisterBlock</a>
+
+
+
+                                </li>
+                            </ul>
+
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    {
+        &#34;_type&#34;: &#34;Register&#34;, 
+        &#34;state&#34;: &#34;AArch64&#34;, 
+        &#34;name&#34;: &#34;REG0&#34;, 
+        &#34;title&#34;: &#34;Register 0&#34;, 
+        &#34;purpose&#34;: &#34;To represent a simple register in this test case.&#34;, 
+        &#34;fieldsets&#34;: [
+            {
+                &#34;_type&#34;: &#34;Fieldset&#34;, 
+                &#34;width&#34;: 32, 
+                &#34;values&#34;: [
+                    {
+                        &#34;_type&#34;: &#34;Fields.Reserved&#34;, 
+                        &#34;value&#34;: &#34;RES0&#34;, 
+                        &#34;rangeset&#34;: [
+                            {
+                                &#34;_type&#34;: &#34;Range&#34;, 
+                                &#34;start&#34;: 1, 
+                                &#34;width&#34;: 31
+                            }
+                        ]
+                    }, 
+                    {
+                        &#34;_type&#34;: &#34;Fields.Field&#34;, 
+                        &#34;name&#34;: &#34;F0&#34;, 
+                        &#34;rangeset&#34;: [
+                            {
+                                &#34;_type&#34;: &#34;Range&#34;, 
+                                &#34;start&#34;: 0, 
+                                &#34;width&#34;: 1
+                            }
+                        ], 
+                        &#34;values&#34;: {
+                            &#34;_type&#34;: &#34;Valuesets.Values&#34;, 
+                            &#34;values&#34;: [
+                                {
+                                    &#34;_type&#34;: &#34;Values.Value&#34;, 
+                                    &#34;meaning&#34;: &#34;First value&#34;, 
+                                    &#34;value&#34;: &#34;&#39;0&#39;&#34;
+                                }, 
+                                {
+                                    &#34;_type&#34;: &#34;Values.Value&#34;, 
+                                    &#34;meaning&#34;: &#34;Second value&#34;, 
+                                    &#34;value&#34;: &#34;&#39;1&#39;&#34;
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }, 
+    {
+        &#34;_type&#34;: &#34;RegisterArray&#34;, 
+        &#34;state&#34;: &#34;AArch64&#34;, 
+        &#34;name&#34;: &#34;REG0&lt;n&gt;&#34;, 
+        &#34;title&#34;: &#34;Register Array 0&#34;, 
+        &#34;purpose&#34;: &#34;To represent a simple register array in this test case.&#34;, 
+        &#34;fieldsets&#34;: [
+            {
+                &#34;_type&#34;: &#34;Fieldset&#34;, 
+                &#34;width&#34;: 32, 
+                &#34;values&#34;: [
+                    {
+                        &#34;_type&#34;: &#34;Fields.Reserved&#34;, 
+                        &#34;value&#34;: &#34;RES0&#34;, 
+                        &#34;rangeset&#34;: [
+                            {
+                                &#34;_type&#34;: &#34;Range&#34;, 
+                                &#34;start&#34;: 1, 
+                                &#34;width&#34;: 31
+                            }
+                        ]
+                    }, 
+                    {
+                        &#34;_type&#34;: &#34;Fields.Field&#34;, 
+                        &#34;name&#34;: &#34;F0&#34;, 
+                        &#34;rangeset&#34;: [
+                            {
+                                &#34;_type&#34;: &#34;Range&#34;, 
+                                &#34;start&#34;: 0, 
+                                &#34;width&#34;: 1
+                            }
+                        ], 
+                        &#34;values&#34;: {
+                            &#34;_type&#34;: &#34;Valuesets.Values&#34;, 
+                            &#34;values&#34;: [
+                                {
+                                    &#34;_type&#34;: &#34;Values.Value&#34;, 
+                                    &#34;meaning&#34;: &#34;First value&#34;, 
+                                    &#34;value&#34;: &#34;&#39;0&#39;&#34;
+                                }, 
+                                {
+                                    &#34;_type&#34;: &#34;Values.Value&#34;, 
+                                    &#34;meaning&#34;: &#34;Second value&#34;, 
+                                    &#34;value&#34;: &#34;&#39;1&#39;&#34;
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ], 
+        &#34;index_variable&#34;: &#34;n&#34;, 
+        &#34;indexes&#34;: [
+            {
+                &#34;_type&#34;: &#34;Range&#34;, 
+                &#34;start&#34;: 0, 
+                &#34;width&#34;: 4
+            }
+        ]
+    }, 
+    {
+        &#34;_type&#34;: &#34;RegisterBlock&#34;, 
+        &#34;size&#34;: &#34;32000&#34;, 
+        &#34;name&#34;: &#34;RB&#34;, 
+        &#34;default_access&#34;: &#34;RAZ/WI&#34;, 
+        &#34;purpose&#34;: &#34;To represent a simple register block in this test case.&#34;, 
+        &#34;accessors&#34;: [
+            {
+                &#34;_type&#34;: &#34;Accessors.ReadOffsetAccessor&#34;, 
+                &#34;offset&#34;: [
+                    {
+                        &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                        &#34;value&#34;: 0
+                    }
+                ], 
+                &#34;access&#34;: {
+                    &#34;_type&#34;: &#34;Accessors.Permission.SystemAccess&#34;, 
+                    &#34;access&#34;: {
+                        &#34;_type&#34;: &#34;AST.Return&#34;, 
+                        &#34;val&#34;: {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;REG_S&#34;
+                        }
+                    }
+                }
+            }, 
+            {
+                &#34;_type&#34;: &#34;Accessors.WriteOffsetAccessor&#34;, 
+                &#34;offset&#34;: [
+                    {
+                        &#34;_type&#34;: &#34;AST.Integer&#34;, 
+                        &#34;value&#34;: 0
+                    }
+                ], 
+                &#34;access&#34;: {
+                    &#34;_type&#34;: &#34;Accessors.Permission.SystemAccess&#34;, 
+                    &#34;access&#34;: {
+                        &#34;_type&#34;: &#34;AST.Assignment&#34;, 
+                        &#34;val&#34;: {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;value&#34;
+                        }, 
+                        &#34;var&#34;: {
+                            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                            &#34;value&#34;: &#34;REG_S&#34;
+                        }
+                    }
+                }
+            }
+        ]
+    }
+]</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "title": "Registers",
+  "info": [
+    "An array of $(Register), $(RegisterArray), or $(RegisterBlock)."
+  ],
+  "examples": [
+    [
+      {
+        "_type": "Register",
+        "state": "AArch64",
+        "name": "REG0",
+        "title": "Register 0",
+        "purpose": "To represent a simple register in this test case.",
+        "fieldsets": [
+          {
+            "_type": "Fieldset",
+            "width": 32,
+            "values": [
+              {
+                "_type": "Fields.Reserved",
+                "value": "RES0",
+                "rangeset": [
+                  {
+                    "_type": "Range",
+                    "start": 1,
+                    "width": 31
+                  }
+                ]
+              },
+              {
+                "_type": "Fields.Field",
+                "name": "F0",
+                "rangeset": [
+                  {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 1
+                  }
+                ],
+                "values": {
+                  "_type": "Valuesets.Values",
+                  "values": [
+                    {
+                      "_type": "Values.Value",
+                      "meaning": "First value",
+                      "value": "'0'"
+                    },
+                    {
+                      "_type": "Values.Value",
+                      "meaning": "Second value",
+                      "value": "'1'"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "RegisterArray",
+        "state": "AArch64",
+        "name": "REG0<n>",
+        "title": "Register Array 0",
+        "purpose": "To represent a simple register array in this test case.",
+        "fieldsets": [
+          {
+            "_type": "Fieldset",
+            "width": 32,
+            "values": [
+              {
+                "_type": "Fields.Reserved",
+                "value": "RES0",
+                "rangeset": [
+                  {
+                    "_type": "Range",
+                    "start": 1,
+                    "width": 31
+                  }
+                ]
+              },
+              {
+                "_type": "Fields.Field",
+                "name": "F0",
+                "rangeset": [
+                  {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 1
+                  }
+                ],
+                "values": {
+                  "_type": "Valuesets.Values",
+                  "values": [
+                    {
+                      "_type": "Values.Value",
+                      "meaning": "First value",
+                      "value": "'0'"
+                    },
+                    {
+                      "_type": "Values.Value",
+                      "meaning": "Second value",
+                      "value": "'1'"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "index_variable": "n",
+        "indexes": [
+          {
+            "_type": "Range",
+            "start": 0,
+            "width": 4
+          }
+        ]
+      },
+      {
+        "_type": "RegisterBlock",
+        "size": "32000",
+        "name": "RB",
+        "default_access": "RAZ/WI",
+        "purpose": "To represent a simple register block in this test case.",
+        "accessors": [
+          {
+            "_type": "Accessors.ReadOffsetAccessor",
+            "offset": [
+              {
+                "_type": "AST.Integer",
+                "value": 0
+              }
+            ],
+            "access": {
+              "_type": "Accessors.Permission.SystemAccess",
+              "access": {
+                "_type": "AST.Return",
+                "val": {
+                  "_type": "AST.Identifier",
+                  "value": "REG_S"
+                }
+              }
+            }
+          },
+          {
+            "_type": "Accessors.WriteOffsetAccessor",
+            "offset": [
+              {
+                "_type": "AST.Integer",
+                "value": 0
+              }
+            ],
+            "access": {
+              "_type": "Accessors.Permission.SystemAccess",
+              "access": {
+                "_type": "AST.Assignment",
+                "val": {
+                  "_type": "AST.Identifier",
+                  "value": "value"
+                },
+                "var": {
+                  "_type": "AST.Identifier",
+                  "value": "REG_S"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  ],
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "Register.json"
+      },
+      {
+        "$ref": "RegisterArray.json"
+      },
+      {
+        "$ref": "RegisterBlock.json"
+      }
+    ]
+  },
+  "type": "array",
+  "minItems": 1,
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="./js/highlight/highlight.js"></script>
+    <script src="./js/highlight/languages/json.min.js"></script>
+    <script src="./js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="./js/highlight/languages/yaml.min.js"></script>
+    <script src="./js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

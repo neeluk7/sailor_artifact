@@ -1,0 +1,78 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "deprecated": "This has been deprecated in favor of the should_be_mask property of Bits and Fields.",
+    "type": "object",
+    "info": [
+        [
+            "A `ShouldBeBits` object represents a group of one or more bits in an `Encodeset`. The",
+            "`range` property states how many bits are present and where they are in the `Encodeset`.",
+            "The value given is what the individual bits should hold, architecturally,",
+            "but the actual value present may differ."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Instruction.Encodeset.ShouldBeBits",
+            "range": {
+                "_type": "Range",
+                "start": 3,
+                "width": 2
+            },
+            "value": {
+                "_type": "Values.Value",
+                "value": "'10'",
+                "meaning": null
+            },
+            "should_be_mask": {
+                "_type": "Values.Value",
+                "value": "'00'"
+            }
+        },
+        {
+            "_type": "Instruction.Encodeset.ShouldBeBits",
+            "range": {
+                "_type": "Range",
+                "start": 0,
+                "width": 4
+            },
+            "value": {
+                "_type": "Values.Value",
+                "value": "'0010'",
+                "meaning": null
+            },
+            "should_be_mask": {
+                "_type": "Values.Value",
+                "value": "'0000'"
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Bits.json#/properties/_meta"
+        },
+        "_type": {
+            "enum": [
+                "Instruction.Encodeset.ShouldBeBits"
+            ]
+        },
+        "value": {
+            "$ref": "Bits.json#/properties/value"
+        },
+        "range": {
+            "$ref": "Bits.json#/properties/range"
+        },
+        "should_be_mask": {
+            "$ref": "Bits.json#/properties/should_be_mask"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "value",
+        "range"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Instruction.Encodeset.ShouldBeBits"
+}

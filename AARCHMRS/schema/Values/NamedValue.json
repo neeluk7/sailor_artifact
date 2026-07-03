@@ -1,0 +1,60 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A value object encapsulates a named value represented in binary, hex, or a bitstring.",
+            "The name provides a clear identifier for the value, enhancing readability and also enables easy ",
+            "identification within the broader architectural context. ",
+            "In some cases the optional `meaning` property is used to elaborate architectural ",
+            "meaning behind the value."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Values.NamedValue"
+            ]
+        },
+        "name": {
+            "$ref": "../AST/Identifier.json#/definitions/regex"
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "info": [
+                "The meaning associated to this value in the context it is used."
+            ]
+        },
+        "value": {
+            "info": [
+                "The binary, hex or a bitstring representation of the value."
+            ],
+            "$ref": "Value.json#/definitions/value",
+            "see": "Value.json"
+        }
+    },
+    "required": [
+        "name",
+        "value"
+    ],
+    "title": "NamedValue",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Values.NamedValue",
+            "name": "Rn",
+            "value": "'00001'",
+            "meaning": "The first defined value"
+        }
+    ]
+}

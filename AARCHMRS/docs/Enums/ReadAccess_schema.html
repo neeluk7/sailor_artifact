@@ -1,0 +1,163 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Enums.ReadAccess - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Enums.</span><span class=" title-type">ReadAccess</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">*</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>This enumeration represents the Read Access types.</p>
+<ul>
+<li><code>R</code> - Read (only).</li>
+<li><code>RAZ</code> - Read As Zero.</li>
+<li><code>RAO</code> - Read As One.</li>
+<li><code>RES0</code> - Reserved, read as zero.</li>
+<li><code>RES1</code> - Reserved, read as one.</li>
+<li><code>UNKNOWN</code> - Read returns an UNKNOWN value.</li>
+<li><code>IGNORE</code> - Read access is ignored.</li>
+<li><code>RC</code> - Read to Clear (Read with side effect).</li>
+<li><code>RS</code> - Read to Set (Read with side effect).</li>
+<li><code>RESERVED</code> - Implies Do-not-read and do-not-write.</li>
+<li><code>ERROR</code> - Reading will issue an Error.</li>
+</ul></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "additionalProperties": false,
+  "info": [
+    "This enumeration represents the Read Access types.",
+    [
+      " - `R` - Read (only).",
+      " - `RAZ` - Read As Zero.",
+      " - `RAO` - Read As One.",
+      " - `RES0` - Reserved, read as zero.",
+      " - `RES1` - Reserved, read as one.",
+      " - `UNKNOWN` - Read returns an UNKNOWN value.",
+      " - `IGNORE` - Read access is ignored.",
+      " - `RC` - Read to Clear (Read with side effect).",
+      " - `RS` - Read to Set (Read with side effect).",
+      " - `RESERVED` - Implies Do-not-read and do-not-write.",
+      " - `ERROR` - Reading will issue an Error."
+    ]
+  ],
+  "enum": [
+    "R",
+    "RAZ",
+    "RAO",
+    "RES0",
+    "RES1",
+    "UNKNOWN",
+    "IGNORE",
+    "RC",
+    "RS",
+    "RESERVED",
+    "ERROR"
+  ],
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Enums.ReadAccess"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

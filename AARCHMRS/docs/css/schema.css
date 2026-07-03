@@ -1,0 +1,255 @@
+
+body {
+    padding: 50px !important;
+}
+
+.heading {
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 40px;
+}
+
+.logo {
+    width:100px;
+    height: 32px;
+    padding-top:15px;
+    padding-right:10px
+}
+
+.schema {
+    margin-top:40px !important;
+}
+
+.schema-json {
+    padding:20px;
+    font-size: 14px;
+    font-family: "Courier New";
+
+    border-radius: 0px 0px 4px 4px;
+    border:none;
+
+    border-top:1px #999999 dashed;
+
+    white-space: pre-wrap;
+    overflow-x: scroll;
+}
+
+.schema-json code, .includes code {
+    background: none;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.title-namespace {
+    color:#999;
+    font-size: 0.6em;
+    font-weight: normal;
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+
+}
+
+.title-type {
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+
+.type {
+    color: #62c462;
+    font-weight: 500;
+}
+
+.item-type {
+}
+
+.list-type > li {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.list-type > li:not(:last-child)::after {
+    content: "|";
+    color: #333;
+    padding-left: 5px !important;
+    padding-right: 0px !important;
+    font-weight: normal;
+}
+
+.Xof {
+    font-style: italic;
+    font-weight: normal;
+}
+
+.object {
+    font-family:"Helvetica Neue";
+    font-weight: 300;
+}
+
+.footer {
+    font-size:10px
+}
+
+.items-oneOf, .items-anyOf, items-array {
+    margin-left:10px;
+    font-size:12px
+}
+
+.back-to-home {
+    position:absolute;
+    top:40px;
+    font-weight: bold;
+}
+
+.static-markdown {
+    font-size:1.4em;
+    line-height: 1.4em !important;
+    font-family:"Helvetica Neue";
+    font-weight:300;
+
+    margin-bottom: 30px;
+}
+
+.static-markdown h2{
+    margin-top:40px;
+    font-weight: 400;
+    padding-bottom: 5px;
+    margin-bottom:10px;
+
+    border-bottom:1px solid #EEEEEE;
+}
+
+.static-markdown p{
+    margin-bottom:20px;
+}
+
+.static-markdown ul {
+    margin-top:20px;
+    margin-left:60px;
+}
+
+.static-markdown li {
+    margin-bottom: 7px;
+}
+
+.static-markdown table {
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.static-markdown thead {
+    background-color: #bbbbbb;
+    border-bottom: #0e0e0e 1px solid;
+    padding:10px;
+}
+
+.static-markdown tr {
+    border-bottom: #999999 1px dashed;
+    text-align: center;
+}
+
+.static-markdown th {
+    padding:5px;
+    text-align: center;
+}
+
+table.properties {
+    margin-bottom:50px;
+}
+
+.property:target {
+    background-color: papayawhip;
+}
+
+thead {
+    font-size:1.1em;
+}
+
+thead tr h3 {
+    line-height: 7px;
+}
+
+/**
+ This is used the space the tables nicely when they are markdown formatted
+ */
+td > p:last-child {
+    margin-bottom:0 !important;
+}
+
+.deprecated {
+    text-decoration: line-through;
+}
+
+code{
+    font-size: 0.8em;
+    border:none;
+    color:#ff2848;
+}
+
+a code{
+    color: #28a5ff;
+}
+
+pre {
+    overflow: scroll;
+}
+
+pre code {
+    font-size:1.0em;
+    white-space: pre !important;
+}
+
+dl {
+    display:inline-block;
+    margin:0 !important;
+    width:100%;
+}
+
+dt{
+    float:left;
+    margin-right:6px;
+    text-align: right;
+
+}
+
+dd{
+    float:left;
+    margin:0px
+}
+
+.admonition{
+    padding:8px 35px 8px 14px;
+    margin-bottom:20px;
+    text-shadow:0 1px 0 rgba(255,255,255,0.5);
+    background-color:#fcf8e3;
+    border:1px solid #fbeed5;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;border-radius:4px
+}
+
+.note{color:#3a87ad;background-color:#d9edf7;border-color:#bce8f1}
+
+.admonition-title {
+    font-weight: bold;
+}
+
+.hljs-keyword {
+    color: #3a87ad !important;
+}
+
+.schema_link {
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+
+.schema_link small {
+    font-size: 0.7em;
+}
+
+
+/* Schema diff style definitions */
+
+a[diff="true"] {
+    background-color:yellow;
+}
+
+a[diff="false"] {
+    color:grey;
+    pointer-events: none;
+    cursor: not-allowed;
+}

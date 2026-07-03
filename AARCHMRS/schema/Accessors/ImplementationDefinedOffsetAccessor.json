@@ -1,0 +1,77 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "An `ImplementationDefinedOffsetAccessor` for a given `RegisterBlock` describes a section of implementation defined space."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Accessors.ImplementationDefinedOffsetAccessor"
+            ]
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition which must be true for this accessor to be used."
+            ]
+        },
+        "offset": {
+            "info": [
+                "Specifies the memory offset (or offsets) at which the referenced `Register` or `RegisterBlock` exists."
+            ],
+            "$ref": "BlockAccess.json#/properties/offset"
+        },
+        "access": {
+            "info": [
+                "Provides accessibility information for the access."
+            ],
+            "$ref": "./Permission/MemoryAccess.json",
+            "default": {
+                "_type": "Accessors.Permission.MemoryAccess",
+                "access": "IMPDEF"
+            }
+        }
+    },
+    "examples": [
+        {
+            "_type": "Accessors.ImplementationDefinedOffsetAccessor",
+            "offset": [
+                {
+                    "_type": "AST.Integer",
+                    "value": 252
+                }
+            ],
+            "access": {
+                "_type": "Accessors.Permission.MemoryAccess",
+                "access": {
+                    "_type": "Accessors.Permission.AccessTypes.Memory.ImplementationDefined",
+                    "constraints": [
+                        {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "RESERVED"
+                        },
+                        {
+                            "_type": "Accessors.Permission.AccessTypes.Memory.ReadWriteAccess",
+                            "read": "R",
+                            "write": "W"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "required": [
+        "offset"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "ImplementationDefinedOffsetAccessor"
+}

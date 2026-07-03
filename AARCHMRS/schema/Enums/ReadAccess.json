@@ -1,0 +1,38 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "This enumeration represents the Read Access types.",
+        [
+            " - `R` - Read (only).",
+            " - `RAZ` - Read As Zero.",
+            " - `RAO` - Read As One.",
+            " - `RES0` - Reserved, read as zero.",
+            " - `RES1` - Reserved, read as one.",
+            " - `UNKNOWN` - Read returns an UNKNOWN value.",
+            " - `IGNORE` - Read access is ignored.",
+            " - `RC` - Read to Clear (Read with side effect).",
+            " - `RS` - Read to Set (Read with side effect).",
+            " - `RESERVED` - Implies Do-not-read and do-not-write.",
+            " - `ERROR` - Reading will issue an Error."
+        ]
+    ],
+    "enum": [
+        "R",
+        "RAZ",
+        "RAO",
+        "RES0",
+        "RES1",
+        "UNKNOWN",
+        "IGNORE",
+        "RC",
+        "RS",
+        "RESERVED",
+        "ERROR"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Enums.ReadAccess"
+}

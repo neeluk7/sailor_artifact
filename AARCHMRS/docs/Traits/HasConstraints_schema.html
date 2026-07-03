@@ -1,0 +1,421 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Traits.HasConstraints - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Traits.</span><span class=" title-type">HasConstraints</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p><code>HasConstraints</code> a reference schema for classes with constraints.</p>
+<p>Constraints are written in the form of: </p>
+<pre><code>&lt;condition&gt; &lt;operation&gt; &lt;action&gt;
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>&lt;condition&gt;</code>: Expression that defines a condition.</li>
+<li><code>&lt;action&gt;</code>: Expression that defines an action.</li>
+<li><code>&lt;operation&gt;</code>: One of <code>==&gt;</code> (implies) and <code>&lt;=&gt;</code> (if-and-only-if).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this documentation for ease we write constraints <strong>as strings</strong> <code>A ==&gt; B</code>, however
+in the data this is stored as <a class="schema_link" href="../AST/BinaryOp_schema.html" title="AST.BinaryOp">AST.BinaryOp</a>.</p>
+</div>
+<p>The condition must be satisfied to apply the action. In other words:</p>
+<ul>
+<li><code>A ==&gt; B</code>, <code>A</code> implies that action <code>B</code> is satisfied
+    but also if <code>B</code> is <code>false</code> then <code>A</code> is <code>false</code> (<code>!B ==&gt; !A</code>).</li>
+<li><code>A &lt;=&gt; B</code> means that <code>A</code> is satisfied <strong>if and only if</strong> <code>B</code> is satisfied and vice versa.</li>
+</ul>
+<p>In both left and right sides we can have complex expressions. For example:</p>
+<pre><code>(A &amp;&amp; B) &lt;=&gt; !C
+(A || B) ==&gt; (D == 3 &amp;&amp; C)
+((D &gt;= 1 &amp;&amp; D &lt;= 3) || (E &gt;= 2 &amp;&amp; E &lt; 3)) ==&gt; (F == &quot;somevalue&quot; &amp;&amp; G == 0)
+...
+</code></pre>
+<p>Constraints can affect register fields. For example:</p>
+<pre><code>A &lt;=&gt; AArch64-IDREG.Xfeature != '0000'
+</code></pre>
+<p>However when doing field compares with integers you have to cast to <code>UInt</code> or <code>SInt</code>. 
+For example:</p>
+<pre><code>FEAT_X &lt;=&gt; UInt(AArch64-IDREG.Xfeature) &gt; 0
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usage of <code>UInt</code>, <code>SInt</code> is done to keep the syntax as close to ASL, because the
+register <code>AArch64-IDREG.Xfeature</code> is defined as bits, and bits must be cast to an integer in ASL before
+any comparative operator (anything other than <code>==</code> and <code>!=</code>) is performed.</p>
+</div>
+<p>Sometimes it is useful to express numerical constraints with register fields values
+For example <code>NUM_COUNTERS</code> can have an equality constraint with <code>AArch64-IDREG.Counters</code>:</p>
+<pre><code>NUM_COUNTERS == UInt(AArch64-IDREG.Counters)
+</code></pre>
+<p>This means when the value of <code>NUM_COUNTERS</code> is known (or only one value is left in
+it's domain), then the value of <code>AArch64-IDREG.Counters</code> is also known to be equal to
+the value of <code>NUM_COUNTERS</code>. The same applies in reverse.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>When constraints are applied the domains on both the left and the right must
+match!</strong></p>
+<p>Therefore the <code>UInt</code> cast on the right (<code>UInt(AArch64-IDREG.Counters)</code>)
+ensures the domain consistency. Noting that writing the right hand-side without 
+a <code>UInt</code> cast will be invalid.</p>
+</div>
+<p>Integer parameters such as <code>NUM_CORES</code> start from <code>1</code> (as a cpu must have at least one core),
+however to save space in the architecture <code>AArch64-IDREG.Cores</code> being set to <code>'00'</code>
+might denote 1-Core, meaning the relationship between <code>NUM_CORES</code> and
+<code>AArch64-IDREG.Cores</code> requires more expressiveness, to achieve this you can do:</p>
+<pre><code>NUM_CORES == UInt(AArch64-IDREG.Cores) + 1
+</code></pre>
+<p>You can even express implication of boolean parameters using integers. For example:</p>
+<pre><code>MULTICORE_ENABLED &lt;=&gt; NUM_CORES &gt; 1
+</code></pre>
+<p>Meaning, if <code>NUM_CORES</code> is greater than 1 then <code>MULTICORE_ENABLED</code> is <code>true</code>, or
+if <code>MULTICORE_ENABLED</code> is <code>true</code>, then <code>NUM_CORES</code> must be greater than 1.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/constraints" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/constraints">constraints</a>
+            </th>
+            <td class="col-md-4">
+                        <div><span class="type">array</span> [</div>
+                          
+    
+
+        <a href="../AST/BinaryOp_schema.html#/definitions/expression" class="schema_link">AST.BinaryOp</a>
+
+                            <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>List of AST describing constraints which must be satisfied.</p></div>
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">[
+    {
+        &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+        &#34;left&#34;: {
+            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+            &#34;value&#34;: &#34;A&#34;
+        }, 
+        &#34;op&#34;: &#34;&lt;=&gt;&#34;, 
+        &#34;right&#34;: {
+            &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+            &#34;value&#34;: &#34;B&#34;
+        }
+    }, 
+    {
+        &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+        &#34;left&#34;: {
+            &#34;_type&#34;: &#34;AST.BinaryOp&#34;, 
+            &#34;left&#34;: {
+                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                &#34;value&#34;: &#34;A&#34;
+            }, 
+            &#34;op&#34;: &#34;&amp;&amp;&#34;, 
+            &#34;right&#34;: {
+                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                &#34;value&#34;: &#34;B&#34;
+            }
+        }, 
+        &#34;op&#34;: &#34;&lt;=&gt;&#34;, 
+        &#34;right&#34;: {
+            &#34;_type&#34;: &#34;AST.UnaryOp&#34;, 
+            &#34;expr&#34;: {
+                &#34;_type&#34;: &#34;AST.Identifier&#34;, 
+                &#34;value&#34;: &#34;C&#34;
+            }, 
+            &#34;op&#34;: &#34;!&#34;
+        }
+    }
+]</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "`HasConstraints` a reference schema for classes with constraints.",
+    "Constraints are written in the form of: ",
+    [
+      "```",
+      "<condition> <operation> <action>",
+      "```"
+    ],
+    "Where:",
+    [
+      " - `<condition>`: Expression that defines a condition.",
+      " - `<action>`: Expression that defines an action.",
+      " - `<operation>`: One of `==>` (implies) and `<=>` (if-and-only-if)."
+    ],
+    [
+      "!!! NOTE ",
+      "    In this documentation for ease we write constraints **as strings** `A ==> B`, however",
+      "    in the data this is stored as $(AST.BinaryOp)."
+    ],
+    "The condition must be satisfied to apply the action. In other words:",
+    [
+      " - `A ==> B`, `A` implies that action `B` is satisfied",
+      "    but also if `B` is `false` then `A` is `false` (`!B ==> !A`).",
+      " - `A <=> B` means that `A` is satisfied **if and only if** `B` is satisfied and vice versa."
+    ],
+    "In both left and right sides we can have complex expressions. For example:",
+    [
+      "```",
+      "(A && B) <=> !C",
+      "(A || B) ==> (D == 3 && C)",
+      "((D >= 1 && D <= 3) || (E >= 2 && E < 3)) ==> (F == \"somevalue\" && G == 0)",
+      "...",
+      "```"
+    ],
+    "Constraints can affect register fields. For example:",
+    [
+      "```",
+      "A <=> AArch64-IDREG.Xfeature != '0000'",
+      "```"
+    ],
+    [
+      "However when doing field compares with integers you have to cast to `UInt` or `SInt`. ",
+      "For example:"
+    ],
+    [
+      "```",
+      "FEAT_X <=> UInt(AArch64-IDREG.Xfeature) > 0",
+      "```"
+    ],
+    "!!! note",
+    [
+      "    Usage of `UInt`, `SInt` is done to keep the syntax as close to ASL, because the",
+      "    register `AArch64-IDREG.Xfeature` is defined as bits, and bits must be cast to an integer in ASL before",
+      "    any comparative operator (anything other than `==` and `!=`) is performed."
+    ],
+    [
+      "Sometimes it is useful to express numerical constraints with register fields values",
+      "For example `NUM_COUNTERS` can have an equality constraint with `AArch64-IDREG.Counters`:"
+    ],
+    [
+      "```",
+      "NUM_COUNTERS == UInt(AArch64-IDREG.Counters)",
+      "```"
+    ],
+    [
+      "This means when the value of `NUM_COUNTERS` is known (or only one value is left in",
+      "it's domain), then the value of `AArch64-IDREG.Counters` is also known to be equal to",
+      "the value of `NUM_COUNTERS`. The same applies in reverse."
+    ],
+    "!!! important",
+    [
+      "    **When constraints are applied the domains on both the left and the right must",
+      "    match!**",
+      "    ",
+      "    Therefore the `UInt` cast on the right (`UInt(AArch64-IDREG.Counters)`)",
+      "    ensures the domain consistency. Noting that writing the right hand-side without ",
+      "    a `UInt` cast will be invalid."
+    ],
+    [
+      "Integer parameters such as `NUM_CORES` start from `1` (as a cpu must have at least one core),",
+      "however to save space in the architecture `AArch64-IDREG.Cores` being set to `'00'`",
+      "might denote 1-Core, meaning the relationship between `NUM_CORES` and",
+      "`AArch64-IDREG.Cores` requires more expressiveness, to achieve this you can do:"
+    ],
+    [
+      "```",
+      "NUM_CORES == UInt(AArch64-IDREG.Cores) + 1",
+      "```"
+    ],
+    "You can even express implication of boolean parameters using integers. For example:",
+    [
+      "```",
+      "MULTICORE_ENABLED <=> NUM_CORES > 1",
+      "```"
+    ],
+    [
+      "Meaning, if `NUM_CORES` is greater than 1 then `MULTICORE_ENABLED` is `true`, or",
+      "if `MULTICORE_ENABLED` is `true`, then `NUM_CORES` must be greater than 1."
+    ]
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "constraints": {
+      "info": [
+        "List of AST describing constraints which must be satisfied."
+      ],
+      "type": "array",
+      "items": {
+        "$ref": "../AST/BinaryOp.json#/definitions/expression"
+      },
+      "examples": [
+        [
+          {
+            "_type": "AST.BinaryOp",
+            "left": {
+              "_type": "AST.Identifier",
+              "value": "A"
+            },
+            "op": "<=>",
+            "right": {
+              "_type": "AST.Identifier",
+              "value": "B"
+            }
+          },
+          {
+            "_type": "AST.BinaryOp",
+            "left": {
+              "_type": "AST.BinaryOp",
+              "left": {
+                "_type": "AST.Identifier",
+                "value": "A"
+              },
+              "op": "&&",
+              "right": {
+                "_type": "AST.Identifier",
+                "value": "B"
+              }
+            },
+            "op": "<=>",
+            "right": {
+              "_type": "AST.UnaryOp",
+              "expr": {
+                "_type": "AST.Identifier",
+                "value": "C"
+              },
+              "op": "!"
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "title": "Traits.HasConstraints",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

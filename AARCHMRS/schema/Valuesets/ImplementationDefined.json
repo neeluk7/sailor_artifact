@@ -1,0 +1,57 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "An `ImplementationDefined` valueset allows an implementation to define its own set of values.",
+        [
+            "Architecture can constrain a set of values that can be defined by the ",
+            "implementation, by providing constraints in the `values` property."
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "Valuesets.ImplementationDefined",
+            "values": [
+                {
+                    "_type": "Values.Value",
+                    "meaning": "Armv8 debug architecture.",
+                    "value": "'0110'"
+                },
+                {
+                    "_type": "Values.Value",
+                    "meaning": "Armv9 debug architecture",
+                    "value": "'00001'"
+                }
+            ]
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Valuesets.ImplementationDefined"
+            ]
+        },
+        "values": {
+            "type": "array",
+            "info": [
+                "A list of values that an implementation is constraint to.",
+                "If no values are defined, the architecture does not constrain the implementation."
+            ],
+            "items": {
+                "$ref": "ValuesetAbstract.json#/definitions/values"
+            }
+        }
+    },
+    "title": "Valuesets.ImplementationDefined",
+    "required": [
+        "values"
+    ],
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

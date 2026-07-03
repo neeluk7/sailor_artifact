@@ -1,0 +1,87 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "The access property defines the logic behind memory mapped register access.",
+        "### Example",
+        [
+            "```",
+            "if boolean IMPLEMENTATION_DEFINED \"Allow Register Writes\" then",
+            "   RW",
+            "else",
+            "   RO",
+            "```"
+        ],
+        "The MemoryAccess can be written as:",
+        [
+            "```",
+            "{",
+            "   \"_type\": \"Accessors.Permission.MemoryAccess\",",
+            "   \"access\": [",
+            "       {",
+            "           \"_type\": \"Accessors.Permission.MemoryAccess\",",
+            "           \"condition\": \"boolean IMPLEMENTATION_DEFINED \\\"Allow Register Writes\\\"\"",
+            "           \"access\": \"RW\"",
+            "       },",
+            "       {",
+            "           \"_type\": \"Accessors.Permission.MemoryAccess\",",
+            "           \"condition\": null,",
+            "           \"access\": \"RO\"",
+            "       },",
+            "   ]",
+            "}",
+            "```"
+        ],
+        "Note, a `null` condition defines the otherwise clause. When omitted the parent's permission applies.",
+        "### Nesting",
+        "Memory Accesses can be nested inside other Memory Accesses to represent complex nested conditions."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Accessors.Permission.MemoryAccess"
+            ]
+        },
+        "access": {
+            "info": [
+                "The access which occurs when the condition is satisfied. This is effectively the contents of the `if` branch."
+            ],
+            "oneOf": [
+                {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "$ref": "AccessTypes/Memory/ReadWriteAccess.json"
+                },
+                {
+                    "$ref": "AccessTypes/Memory/ImplementationDefined.json"
+                }
+            ]
+        },
+        "condition": {
+            "info": [
+                "The condition under which the current access applies. This is effectively the `if` statement in the rendered pseudocode."
+            ],
+            "$ref": "../../Traits/HasCondition.json#/definitions/condition"
+        }
+    },
+    "required": [
+        "access"
+    ],
+    "title": "MemoryAccess",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

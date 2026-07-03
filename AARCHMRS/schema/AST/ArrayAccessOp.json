@@ -1,0 +1,67 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A model representing an array access:",
+        [
+            " - `MYARRAY[[m]]`",
+            " - `MYARRAY[[1]]`"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.ArrayAccessOp",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "MYARRAY"
+            },
+            "index": {
+                "_type": "AST.Identifier",
+                "value": "m"
+            }
+        },
+        {
+            "_type": "AST.ArrayAccessOp",
+            "var": {
+                "_type": "AST.Identifier",
+                "value": "MYARRAY"
+            },
+            "index": {
+                "_type": "AST.Integer",
+                "value": 1
+            }
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.ArrayAccessOp"
+            ]
+        },
+        "var": {
+            "info": [
+                "The array object to be indexed."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        },
+        "index": {
+            "info": [
+                "The ArrayAccessOp's index."
+            ],
+            "$ref": "BinaryOp.json#/definitions/expression"
+        }
+    },
+    "required": [
+        "var",
+        "index"
+    ],
+    "title": "ArrayAccessOp",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

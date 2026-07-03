@@ -1,0 +1,51 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "info": [
+        "A list of References, usually generated from an expanded RegisterArray."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "References.References"
+            ]
+        },
+        "indexes": {
+            "type": "object",
+            "info": [
+                "An object of integers containing the indexes of referenced registers within a parent RegisterArray as keys. Each has a $(~References.Reference) object containing the name of the child Register as a value."
+            ],
+            "patternProperties": {
+                "\\d+": {
+                    "$ref": "Reference.json"
+                }
+            }
+        }
+    },
+    "examples": [
+        {
+            "_type": "References.References",
+            "indexes": {
+                "0": {
+                    "_type": "References.Reference",
+                    "ref": {
+                        "_type": "AST.Identifier",
+                        "value": "REG"
+                    }
+                }
+            }
+        }
+    ],
+    "required": [
+        "indexes"
+    ],
+    "title": "References",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

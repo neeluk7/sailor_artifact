@@ -1,0 +1,46 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "_type": "Index",
+            "start": 3,
+            "end": 5
+        }
+    ],
+    "info": [
+        "Defines a range of values."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Index"
+            ]
+        },
+        "start": {
+            "info": [
+                "The minimum value of the range."
+            ],
+            "type": "integer"
+        },
+        "end": {
+            "info": [
+                "The maximum value of the range."
+            ],
+            "type": "integer"
+        }
+    },
+    "required": [
+        "start",
+        "end"
+    ],
+    "title": "Index",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

@@ -1,0 +1,73 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "additionalProperties": true,
+    "examples": [
+        {
+            "_type": "Fields.ReservedInternal",
+            "rangeset": [
+                {
+                    "_type": "Range",
+                    "start": 0,
+                    "width": 8
+                }
+            ],
+            "value": "RES0",
+            "reserved_by": "James bond",
+            "reserved_for": "FEAT_007"
+        }
+    ],
+    "info": [
+        [
+            "A ReservedInternal field is a field that is reserved for future use, and converted later",
+            "into a Reserved field."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Fields.ReservedInternal"
+            ]
+        },
+        "rangeset": {
+            "see": "../Fields/Field.json",
+            "$ref": "../Rangeset.json"
+        },
+        "reserved_by": {
+            "info": [
+                "The name of the person that has reserved this."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "reserved_for": {
+            "info": [
+                "The profile or extension this field is reserved for."
+            ],
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "value": {
+            "info": [
+                "A constant value for the the field representing the reserved type."
+            ],
+            "$ref": "../Enums/ReservedTypes.json"
+        }
+    },
+    "required": [
+        "rangeset",
+        "value"
+    ],
+    "title": "ReservedInternal",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

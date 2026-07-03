@@ -1,0 +1,161 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "`HasConstraints` a reference schema for classes with constraints.",
+        "Constraints are written in the form of: ",
+        [
+            "```",
+            "<condition> <operation> <action>",
+            "```"
+        ],
+        "Where:",
+        [
+            " - `<condition>`: Expression that defines a condition.",
+            " - `<action>`: Expression that defines an action.",
+            " - `<operation>`: One of `==>` (implies) and `<=>` (if-and-only-if)."
+        ],
+        [
+            "!!! NOTE ",
+            "    In this documentation for ease we write constraints **as strings** `A ==> B`, however",
+            "    in the data this is stored as $(AST.BinaryOp)."
+        ],
+        "The condition must be satisfied to apply the action. In other words:",
+        [
+            " - `A ==> B`, `A` implies that action `B` is satisfied",
+            "    but also if `B` is `false` then `A` is `false` (`!B ==> !A`).",
+            " - `A <=> B` means that `A` is satisfied **if and only if** `B` is satisfied and vice versa."
+        ],
+        "In both left and right sides we can have complex expressions. For example:",
+        [
+            "```",
+            "(A && B) <=> !C",
+            "(A || B) ==> (D == 3 && C)",
+            "((D >= 1 && D <= 3) || (E >= 2 && E < 3)) ==> (F == \"somevalue\" && G == 0)",
+            "...",
+            "```"
+        ],
+        "Constraints can affect register fields. For example:",
+        [
+            "```",
+            "A <=> AArch64-IDREG.Xfeature != '0000'",
+            "```"
+        ],
+        [
+            "However when doing field compares with integers you have to cast to `UInt` or `SInt`. ",
+            "For example:"
+        ],
+        [
+            "```",
+            "FEAT_X <=> UInt(AArch64-IDREG.Xfeature) > 0",
+            "```"
+        ],
+        "!!! note",
+        [
+            "    Usage of `UInt`, `SInt` is done to keep the syntax as close to ASL, because the",
+            "    register `AArch64-IDREG.Xfeature` is defined as bits, and bits must be cast to an integer in ASL before",
+            "    any comparative operator (anything other than `==` and `!=`) is performed."
+        ],
+        [
+            "Sometimes it is useful to express numerical constraints with register fields values",
+            "For example `NUM_COUNTERS` can have an equality constraint with `AArch64-IDREG.Counters`:"
+        ],
+        [
+            "```",
+            "NUM_COUNTERS == UInt(AArch64-IDREG.Counters)",
+            "```"
+        ],
+        [
+            "This means when the value of `NUM_COUNTERS` is known (or only one value is left in",
+            "it's domain), then the value of `AArch64-IDREG.Counters` is also known to be equal to",
+            "the value of `NUM_COUNTERS`. The same applies in reverse."
+        ],
+        "!!! important",
+        [
+            "    **When constraints are applied the domains on both the left and the right must",
+            "    match!**",
+            "    ",
+            "    Therefore the `UInt` cast on the right (`UInt(AArch64-IDREG.Counters)`)",
+            "    ensures the domain consistency. Noting that writing the right hand-side without ",
+            "    a `UInt` cast will be invalid."
+        ],
+        [
+            "Integer parameters such as `NUM_CORES` start from `1` (as a cpu must have at least one core),",
+            "however to save space in the architecture `AArch64-IDREG.Cores` being set to `'00'`",
+            "might denote 1-Core, meaning the relationship between `NUM_CORES` and",
+            "`AArch64-IDREG.Cores` requires more expressiveness, to achieve this you can do:"
+        ],
+        [
+            "```",
+            "NUM_CORES == UInt(AArch64-IDREG.Cores) + 1",
+            "```"
+        ],
+        "You can even express implication of boolean parameters using integers. For example:",
+        [
+            "```",
+            "MULTICORE_ENABLED <=> NUM_CORES > 1",
+            "```"
+        ],
+        [
+            "Meaning, if `NUM_CORES` is greater than 1 then `MULTICORE_ENABLED` is `true`, or",
+            "if `MULTICORE_ENABLED` is `true`, then `NUM_CORES` must be greater than 1."
+        ]
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "constraints": {
+            "info": [
+                "List of AST describing constraints which must be satisfied."
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "../AST/BinaryOp.json#/definitions/expression"
+            },
+            "examples": [
+                [
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.Identifier",
+                            "value": "A"
+                        },
+                        "op": "<=>",
+                        "right": {
+                            "_type": "AST.Identifier",
+                            "value": "B"
+                        }
+                    },
+                    {
+                        "_type": "AST.BinaryOp",
+                        "left": {
+                            "_type": "AST.BinaryOp",
+                            "left": {
+                                "_type": "AST.Identifier",
+                                "value": "A"
+                            },
+                            "op": "&&",
+                            "right": {
+                                "_type": "AST.Identifier",
+                                "value": "B"
+                            }
+                        },
+                        "op": "<=>",
+                        "right": {
+                            "_type": "AST.UnaryOp",
+                            "expr": {
+                                "_type": "AST.Identifier",
+                                "value": "C"
+                            },
+                            "op": "!"
+                        }
+                    }
+                ]
+            ]
+        }
+    },
+    "title": "Traits.HasConstraints",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object"
+}

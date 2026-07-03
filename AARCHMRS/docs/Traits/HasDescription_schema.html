@@ -1,0 +1,215 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Traits.HasDescription - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Traits.</span><span class=" title-type">HasDescription</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>HasDescription provides additional schema elements for descriptions. HasDescription should not be used on its own but instead used as a reference schema for classes that have descriptions.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/description" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/description">description</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Description_schema.html" class="schema_link">Description</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Provides an architectural description of this field.</p>
+<p>You can use a dictionary that contains <code>before</code> and <code>after</code> keys, where:</p>
+<ul>
+<li>The <code>before</code> key is used to define architectural information before the values are represented.</li>
+<li>The <code>after</code> key is used to define architectural description after the values are represented.</li>
+</ul>
+<p>If the property value is of type <code>string</code>, this behaves as having a description with just the <em>before</em> key, 
+<code>before</code> and <code>after</code> have no architectural significance, this is just for rendering.</p></div>
+                    
+    <div>
+        See
+            <a href="../Description_schema.html" class="schema_link">Description</a>
+        for more information.
+    </div>
+
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Description&#34;, 
+    &#34;after&#34;: [
+        &#34;This is a description that appears after Values.&#34;
+    ], 
+    &#34;before&#34;: [
+        &#34;This is a description that appears before Values&#34;
+    ]
+}</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "HasDescription provides additional schema elements for descriptions. HasDescription should not be used on its own but instead used as a reference schema for classes that have descriptions."
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "description": {
+      "$ref": "../Description.json",
+      "examples": [
+        {
+          "_type": "Description",
+          "after": [
+            "This is a description that appears after Values."
+          ],
+          "before": [
+            "This is a description that appears before Values"
+          ]
+        }
+      ],
+      "info": [
+        "Provides an architectural description of this field.",
+        "You can use a dictionary that contains `before` and `after` keys, where:",
+        [
+          " - The `before` key is used to define architectural information before the values are represented.",
+          " - The `after` key is used to define architectural description after the values are represented."
+        ],
+        [
+          "If the property value is of type `string`, this behaves as having a description with just the _before_ key, ",
+          "`before` and `after` have no architectural significance, this is just for rendering."
+        ]
+      ]
+    }
+  },
+  "title": "Traits.HasDescription",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

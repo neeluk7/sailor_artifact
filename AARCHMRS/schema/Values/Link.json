@@ -1,0 +1,150 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "A __Link__ object indicates that the value of this field affects the layout of a [__Dynamic__](../Fields/Dynamic_schema.html) field elsewhere in the parent register.  __Link__ is a subclass of __Value__.  ",
+        "A __Link__ instance has two important components:",
+        "   * The _value_ property.",
+        "   * The _links_ property.",
+        "When the __Field__ containing the __Link__ holds the value of the __Link__, then each Dynamic that is referenced (as a key) in the _links_ property assumes the content of the fieldset that the link refers to by name.",
+        "Example:",
+        [
+            "        {",
+            "          '_type': 'Fieldset',",
+            "          'condition': null,",
+            "          'name': 'containing-fieldset',",
+            "          'values': [",
+            "            {",
+            "              '_type': 'Fields.Dynamic',",
+            "              'name': 'dynamic-field',",
+            "              'instances': [",
+            "                {",
+            "                  '_type': 'Fieldset',",
+            "                  'condition': null,",
+            "                  'name': 'example-one',",
+            "                  'values': [",
+            "                    {",
+            "                      '_type': 'Fields.Reserved',",
+            "                      'rangeset': [",
+            "                           {",
+            "                               '_type': 'Range',",
+            "                               'start': 0,",
+            "                               'width': 31",
+            "                           }",
+            "                       ],",
+            "                      'value': 'RES0'",
+            "                    }",
+            "                  ]",
+            "                  'width': 31",
+            "                },",
+            "                {",
+            "                  '_type': 'Fieldset',",
+            "                  'condition': null,",
+            "                  'name': 'example-two',",
+            "                  'values': [",
+            "                      {",
+            "                          '_type': 'Fields.Reserved',",
+            "                          'rangeset': [",
+            "                               {",
+            "                                   '_type': 'Range',",
+            "                                   'start': 0,",
+            "                                   'width': 16",
+            "                               }",
+            "                           ],",
+            "                          'value': 'RES1',",
+            "                      }",
+            "                      {",
+            "                          '_type': 'Fields.Reserved',",
+            "                          'rangeset': [",
+            "                               {",
+            "                                   '_type': 'Range',",
+            "                                   'start': 16,",
+            "                                   'width': 15",
+            "                               }",
+            "                           ],",
+            "                          'value': 'RES1',",
+            "                      }",
+            "                  ]",
+            "                  'width': 31",
+            "                }",
+            "              ]",
+            "            },",
+            "            {",
+            "              '_type': 'Fields.Field',",
+            "              'name': 'select',",
+            "              'rangeset': [",
+            "                   {",
+            "                       '_type': 'Range',",
+            "                       'start': 31,",
+            "                       'width': 1",
+            "                   }",
+            "               ],",
+            "              'values': [",
+            "                {",
+            "                  '_type': 'Values.Link',",
+            "                  'links': {",
+            "                    'dynamic-field': 'example-one'",
+            "                  },",
+            "                  'value': \"'0'\"",
+            "                },",
+            "                {",
+            "                  '_type': 'Values.Link',",
+            "                  'links': {",
+            "                    'dynamic-field': 'example-two'",
+            "                  },",
+            "                  'value': \"'1'\"",
+            "                }",
+            "              ],",
+            "            }",
+            "          ],",
+            "          'width': 32",
+            "        }"
+        ],
+        "In the above example, when the 'select' field is set to 0, there are two fields in the register and the upper 31 bits are RES0.  When the 'select' field is set to 1, there are three fields in the register and the upper 31 bits are two fields, both of which are RES1."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "Values.Link"
+            ]
+        },
+        "links": {
+            "additionalProperties": {
+                "info": [
+                    "string values"
+                ],
+                "type": "string"
+            },
+            "info": [
+                "The __links__ object contains a set of key-value pairs.  For each pair, the key is the name of the __Dynamic__ field that is affected by this __Link__, and the value is the name of the fieldset (from the fieldsets in the Dynamic's _instances_ variable) that will become active."
+            ],
+            "type": "object"
+        },
+        "meaning": {
+            "$ref": "../Text.json",
+            "info": [
+                "The meaning associated to this value in the context it is used."
+            ]
+        },
+        "value": {
+            "info": [
+                "An instance of __Link__ has a _value_ member, which indicates the value of the field for which this particular __Link__ is valid."
+            ],
+            "pattern": "^(0b[01]+)|('[01]+')$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "value",
+        "links"
+    ],
+    "title": "Link",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

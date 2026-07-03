@@ -1,0 +1,491 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../../img/mstile-144x144.png">
+    <link rel="icon" href="../../img/favicon.ico">
+
+        <title>Instruction.Rules.Choice - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../../index.html"><img src="../../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+            
+        <h2>
+                <span class="title-namespace">Instruction.Rules.</span><span class=" title-type">Choice</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p>A <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a> contains a list of symbol-streams, exactly one of which matches part of an associated assembly stream.
+The list of symbols is ordered, so that the instances of <a class="schema_link" href="../../Instruction/Symbols/RuleReference_schema.html" title="Instruction.Symbols.RuleReference">Instruction.Symbols.RuleReference</a> in the first matched symbols entry are invoked.</p>
+<p>A <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a> has a choices property (a list of permitted assembly streams), an optional description property,
+and an optional display property.</p>
+<p>The first example below is a <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a> that states that 'foo' is optional in the
+associated assembly stream. Of the two choices, if the <code>COMMA foo</code> option is not invoked, then the <code>EMPTY</code> option is invoked.</p>
+<p>The second example is a <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a> that states that <code>#</code> may be present at this point in the assembly stream.
+The first option is a <code>#</code> Literal. The second choice is null (no symbol).</p></div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+                <h3 class="type">object</h3>
+                
+    <table class="table table-hover properties">
+        <thead>
+            <tr>
+                <th class="col-md-4">Properties</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- properties -->
+                
+        
+        <tr id="/properties/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Metadata</p></div>
+                    
+    <div>
+        See
+            <a href="../../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/_type" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/_type">_type</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>Instruction.Rules.Choice</code>
+                        </dd>
+                    </dl>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/choices" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/choices">choices<sup>&loz;</sup></a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The list of options available for this <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a>. An option is either an instance
+of <a class="schema_link" href="../../Instruction/Assembly_schema.html" title="Instruction.Assembly">Instruction.Assembly</a> containing one or more symbols, or null.
+The sequence of options in the list is the sequence in which they are considered
+(the first match succeeds and the others are ignored).</p></div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/description" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/description">description</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../../Description_schema.html" class="schema_link">Description</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>Optional human-readable text describing this <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a>.</p></div>
+                    
+    <div>
+        See
+            <a href="../../Description_schema.html" class="schema_link">Description</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/properties/display" class="property">
+                <th class="col-md-4">
+                <a href="#/properties/display">display</a>
+            </th>
+            <td class="col-md-4">
+                    <div><span class="type Xof">oneOf</span> [</div>
+                        
+    
+
+        
+            <div class="items-oneOf">
+                        string
+            </div>
+            <div class="items-oneOf">
+                        null
+            </div>
+    
+
+                    <div>]</div>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The string representation that is used for this <a class="schema_link" href="../../Instruction/Rules/Choice_schema.html" title="Instruction.Rules.Choice">Choice</a> when it is
+rendered into an assembly string.</p></div>
+                    
+    <div>
+            
+    <!-- Can be one of following objects -->
+    
+    
+        <div class="item-type">
+                <!-- type is a string -->
+                    <span class="type"><span class="Xof">oneOf</span> string</span>
+                
+
+                
+
+                
+
+
+        </div>
+        <div class="item-type">
+                <!-- type is a null -->
+                    <span class="type"><span class="Xof">oneOf</span> null</span>
+                
+
+                
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+
+            </td>
+        </tr>
+
+
+            <!-- patternProperties -->
+
+            <!-- object property attributes -->
+            <tr>
+                <td colspan="3">
+                    <dl>
+                        <dt>Additional Properties</dt>
+                        <dd>Not Allowed</dd>
+                    </dl>
+                </td>
+            </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <dl>
+                            <dt>&loz; Required</dt>
+                            <dd>Properties marked with &loz; are required properties.</dd>
+                        </dl>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Instruction.Rules.Choice&#34;, 
+    &#34;choices&#34;: [
+        {
+            &#34;_type&#34;: &#34;Instruction.Assembly&#34;, 
+            &#34;symbols&#34;: [
+                {
+                    &#34;_type&#34;: &#34;Instruction.Symbols.RuleReference&#34;, 
+                    &#34;rule_id&#34;: &#34;COMMA&#34;
+                }, 
+                {
+                    &#34;_type&#34;: &#34;Instruction.Symbols.RuleReference&#34;, 
+                    &#34;rule_id&#34;: &#34;foo&#34;
+                }
+            ]
+        }, 
+        {
+            &#34;_type&#34;: &#34;Instruction.Assembly&#34;, 
+            &#34;symbols&#34;: [
+                {
+                    &#34;_type&#34;: &#34;Instruction.Symbols.RuleReference&#34;, 
+                    &#34;rule_id&#34;: &#34;EMPTY&#34;
+                }
+            ]
+        }
+    ], 
+    &#34;display&#34;: &#34;{, foo}&#34;
+}</code></pre>
+            <pre class="schema-json"><code class="language-json">{
+    &#34;_type&#34;: &#34;Instruction.Rules.Choice&#34;, 
+    &#34;display&#34;: &#34;{#}&#34;, 
+    &#34;choices&#34;: [
+        {
+            &#34;_type&#34;: &#34;Instruction.Assembly&#34;, 
+            &#34;symbols&#34;: [
+                {
+                    &#34;_type&#34;: &#34;Instruction.Symbols.Literal&#34;, 
+                    &#34;value&#34;: &#34;#&#34;
+                }
+            ]
+        }, 
+        null
+    ]
+}</code></pre>
+        </div>
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    [
+      "A $(~Instruction.Rules.Choice) contains a list of symbol-streams, exactly one of which matches part of an associated assembly stream.",
+      "The list of symbols is ordered, so that the instances of $(Instruction.Symbols.RuleReference) in the first matched symbols entry are invoked."
+    ],
+    [
+      "A $(~Instruction.Rules.Choice) has a choices property (a list of permitted assembly streams), an optional description property,",
+      "and an optional display property."
+    ],
+    [
+      "The first example below is a $(~Instruction.Rules.Choice) that states that 'foo' is optional in the",
+      "associated assembly stream. Of the two choices, if the `COMMA foo` option is not invoked, then the `EMPTY` option is invoked."
+    ],
+    [
+      "The second example is a $(~Instruction.Rules.Choice) that states that `#` may be present at this point in the assembly stream.",
+      "The first option is a `#` Literal. The second choice is null (no symbol)."
+    ]
+  ],
+  "type": "object",
+  "examples": [
+    {
+      "_type": "Instruction.Rules.Choice",
+      "choices": [
+        {
+          "_type": "Instruction.Assembly",
+          "symbols": [
+            {
+              "_type": "Instruction.Symbols.RuleReference",
+              "rule_id": "COMMA"
+            },
+            {
+              "_type": "Instruction.Symbols.RuleReference",
+              "rule_id": "foo"
+            }
+          ]
+        },
+        {
+          "_type": "Instruction.Assembly",
+          "symbols": [
+            {
+              "_type": "Instruction.Symbols.RuleReference",
+              "rule_id": "EMPTY"
+            }
+          ]
+        }
+      ],
+      "display": "{, foo}"
+    },
+    {
+      "_type": "Instruction.Rules.Choice",
+      "display": "{#}",
+      "choices": [
+        {
+          "_type": "Instruction.Assembly",
+          "symbols": [
+            {
+              "_type": "Instruction.Symbols.Literal",
+              "value": "#"
+            }
+          ]
+        },
+        null
+      ]
+    }
+  ],
+  "properties": {
+    "_meta": {
+      "$ref": "../../Meta.json",
+      "info": [
+        "Metadata"
+      ]
+    },
+    "_type": {
+      "enum": [
+        "Instruction.Rules.Choice"
+      ]
+    },
+    "choices": {
+      "info": [
+        [
+          "The list of options available for this $(~Instruction.Rules.Choice). An option is either an instance",
+          "of $(Instruction.Assembly) containing one or more symbols, or null.",
+          "The sequence of options in the list is the sequence in which they are considered",
+          "(the first match succeeds and the others are ignored)."
+        ]
+      ],
+      "minItems": 2,
+      "items": [
+        {
+          "oneOf": [
+            {
+              "$ref": "../Assembly.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      ]
+    },
+    "description": {
+      "$ref": "../../Description.json",
+      "info": [
+        "Optional human-readable text describing this $(~Instruction.Rules.Choice)."
+      ]
+    },
+    "display": {
+      "info": [
+        [
+          "The string representation that is used for this $(~Instruction.Rules.Choice) when it is",
+          "rendered into an assembly string."
+        ]
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "choices"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Instruction.Rules.Choice"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../../js/highlight/highlight.js"></script>
+    <script src="../../js/highlight/languages/json.min.js"></script>
+    <script src="../../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../../js/highlight/languages/yaml.min.js"></script>
+    <script src="../../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

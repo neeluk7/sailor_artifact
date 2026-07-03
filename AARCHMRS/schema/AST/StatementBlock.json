@@ -1,0 +1,89 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Statement Block",
+    "info": [
+        "A model representing multiple ASL statements. For example:",
+        [
+            "```",
+            "x = 5;",
+            "z = 3;",
+            "```"
+        ]
+    ],
+    "examples": [
+        {
+            "_type": "AST.StatementBlock",
+            "statements": [
+                {
+                    "_type": "AST.Assignment",
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "x"
+                    },
+                    "val": {
+                        "_type": "AST.Integer",
+                        "value": 5
+                    }
+                },
+                {
+                    "_type": "AST.Assignment",
+                    "var": {
+                        "_type": "AST.Identifier",
+                        "value": "z"
+                    },
+                    "val": {
+                        "_type": "AST.Integer",
+                        "value": 3
+                    }
+                }
+            ]
+        }
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "AST.StatementBlock"
+            ]
+        },
+        "statements": {
+            "info": [
+                "The statements that make up the expression block."
+            ],
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#"
+                    },
+                    {
+                        "$ref": "Assignment.json"
+                    },
+                    {
+                        "$ref": "Return.json"
+                    },
+                    {
+                        "$ref": "Function.json"
+                    },
+                    {
+                        "$ref": "If.json"
+                    },
+                    {
+                        "$ref": "ForLoop.json"
+                    },
+                    {
+                        "$ref": "VariableDeclaration.json"
+                    }
+                ]
+            }
+        }
+    },
+    "type": "object",
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

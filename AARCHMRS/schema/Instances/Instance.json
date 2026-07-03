@@ -1,0 +1,42 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "title": "Instance",
+    "info": [
+        "The Instance model is used to define what banking instances are available in the register given specific conditions."
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Instances.Instance"
+            ]
+        },
+        "instance": {
+            "info": [
+                "The name of the instance referenceable from the parent Register object.",
+                "Must be a valid Identifier string."
+            ],
+            "$ref": "../Types/Variable.json#/definitions/name_part_regex"
+        },
+        "condition": {
+            "$ref": "../Traits/HasCondition.json#/definitions/condition",
+            "info": [
+                "The condition that must be true for this instance to be present."
+            ]
+        }
+    },
+    "required": [
+        "instance"
+    ],
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false
+}

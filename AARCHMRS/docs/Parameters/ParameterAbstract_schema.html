@@ -1,0 +1,338 @@
+<!-- Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved. -->
+<!-- This document is Non-confidential and licensed under the BSD 3-clause license. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--FAVICON.ico-->
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="../img/mstile-144x144.png">
+    <link rel="icon" href="../img/favicon.ico">
+
+        <title>Parameters.ParameterAbstract - ARM Machine Readable Schema - 2.7.4</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/schema.css">
+    <link rel="stylesheet" type="text/css" href="../css/hljs-github.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row heading">
+            <div class="col-md-6 pull-left"><a href="../index.html"><img src="../img/arm.svg" class="logo" /></a></div>
+            <div class="col-md-6 pull-left"><h1>AARCHMRS Schema <small>2.7.4</small></h1></div>
+
+                <!--Show the home button-->
+                <a href="../index.html"><div class="back-to-home">&nlarr; Home</div></a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+    
+    
+        
+        <h2>
+                <span class="title-namespace">Parameters.</span><span class=" title-type">ParameterAbstract</span>
+
+            <!-- if oneOf is set, then type is ignored -->
+                <span class="type">object</span>
+        </h2>
+
+
+    
+
+    <div class="static-markdown"><p><code>ParameterAbstract</code> is a reference schema for other Parameters.</p></div>
+</div>
+
+<!-- definitions -->
+<div class="row">
+    <h3><span class="type Xof">definition</span></h3>
+    <table class="table table-hover definitions">
+        <thead>
+            <tr>
+                <th class="col-md-4">Definitions</th>
+                <th class="col-md-4">Type</th>
+                <th class="col-md-4">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        
+        <tr id="/definitions/_meta" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/_meta">_meta</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Meta_schema.html" class="schema_link">Meta</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Meta_schema.html" class="schema_link">Meta</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/configured_by" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/configured_by">configured_by</a>
+            </th>
+            <td class="col-md-4">
+            </td>
+            <td class="col-md-4">
+                    <div><p>State if the parameter can be configured by the user or not. Possible values are <code>user</code> or <code>port</code>:</p>
+<ul>
+<li><code>user</code>: The parameter is configurable by the user.</li>
+<li><code>port</code>: The parameter is dynamic and it is configurable by a signal port. Note that in port mode the domain cannot be reduced to one value.</li>
+</ul></div>
+                    <dl>
+                        <dt>Enum</dt>
+                        <dd>
+                            <code>user</code>
+                            <code>port</code>
+                        </dd>
+                    </dl>
+                    <div>
+                        <b>Default</b>
+                        <pre class="schema-json"><code class="language-json">&#34;user&#34;</code></pre>
+                    </div>
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/constraints" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/constraints">constraints</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Traits/HasConstraints_schema.html#/definitions/constraints" class="schema_link">Traits.HasConstraints</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Traits/HasConstraints_schema.html#/definitions/constraints" class="schema_link">definitions.constraints</a> in
+            <a href="../Traits/HasConstraints_schema.html#/definitions/constraints" class="schema_link">Traits.HasConstraints</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/description" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/description">description</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Description_schema.html" class="schema_link">Description</a>
+            </td>
+            <td class="col-md-4">
+                    
+    <div>
+        See
+            <a href="../Description_schema.html" class="schema_link">Description</a>
+        for more information.
+    </div>
+
+                
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/name" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/name">name</a>
+            </th>
+            <td class="col-md-4">
+                    <a href="../Types/Variable_schema.html#/definitions/variable_regex" class="schema_link">Types.Variable</a>
+            </td>
+            <td class="col-md-4">
+                    <div><p>The unique (case-sensitive) name used to reference this parameter.</p></div>
+                    
+    <div>
+        See
+            <a href="../Types/Variable_schema.html#/definitions/variable_regex" class="schema_link">definitions.variable_regex</a> in
+            <a href="../Types/Variable_schema.html#/definitions/variable_regex" class="schema_link">Types.Variable</a>
+        for more information.
+    </div>
+
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;FEAT_X&#34;</code></pre>
+            <pre class="schema-json"><code class="language-json">&#34;v8Ap1&#34;</code></pre>
+            <pre class="schema-json"><code class="language-json">&#34;NUM_CORES&#34;</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+        
+        <tr id="/definitions/title" class="property">
+                <th class="col-md-4">
+                <a href="#/definitions/title">title</a>
+            </th>
+            <td class="col-md-4">
+                        <ul class="inline list-type">
+                                <li class="inline type">string</li>
+                                <li class="inline type">null</li>
+                        </ul>
+            </td>
+            <td class="col-md-4">
+                    <div><p>A title describing this parameter.</p></div>
+                
+        <h5>Examples</h5>
+        <div>
+            <pre class="schema-json"><code class="language-json">&#34;A feature parameter&#34;</code></pre>
+        </div>
+
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="row">
+
+    <div>
+            <!-- A simple object -->
+
+
+            <!-- array, and it has described items -->
+    </div>
+
+    
+
+
+
+
+</div>
+
+<div class="row schema">
+        <h3>Schema <small><a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a></small></h3>
+    <pre class="schema-json"><code class="language-json">{
+  "info": [
+    "`ParameterAbstract` is a reference schema for other Parameters."
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "_meta": {
+      "$ref": "../Meta.json"
+    },
+    "name": {
+      "info": [
+        "The unique (case-sensitive) name used to reference this parameter."
+      ],
+      "$ref": "../Types/Variable.json#/definitions/variable_regex",
+      "examples": [
+        "FEAT_X",
+        "v8Ap1",
+        "NUM_CORES"
+      ]
+    },
+    "title": {
+      "info": [
+        "A title describing this parameter."
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "examples": [
+        "A feature parameter"
+      ]
+    },
+    "description": {
+      "$ref": "../Description.json"
+    },
+    "constraints": {
+      "$ref": "../Traits/HasConstraints.json#/definitions/constraints"
+    },
+    "configured_by": {
+      "info": [
+        "State if the parameter can be configured by the user or not. Possible values are `user` or `port`:",
+        [
+          " - `user`: The parameter is configurable by the user.",
+          " - `port`: The parameter is dynamic and it is configurable by a signal port. Note that in port mode the domain cannot be reduced to one value."
+        ]
+      ],
+      "enum": [
+        "user",
+        "port"
+      ],
+      "default": "user"
+    }
+  },
+  "title": "Parameters.ParameterAbstract",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object"
+}</code></pre>
+</div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer text-right">
+            Copyright &copy; 2025 ARM Limited or its affiliates. All rights reserved.
+        </div>
+    </div>
+
+    <script src="../js/highlight/highlight.js"></script>
+    <script src="../js/highlight/languages/json.min.js"></script>
+    <script src="../js/highlight/languages/django.min.js"></script> <!-- JINJA2 -->
+    <script src="../js/highlight/languages/yaml.min.js"></script>
+    <script src="../js/highlight/languages/isa.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            hljs.configure({
+              cssSelector: ".schema-json code, .includes code, pre code",
+              noHighlightRe: /^(no-?highlight|nohl)$/i,
+            });
+            hljs.highlightAll()
+        };
+    </script>
+
+</body>
+</html>

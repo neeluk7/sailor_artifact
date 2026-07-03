@@ -1,0 +1,110 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        [
+            "A RegisterArray is an array of registers, all of which have the same structure.",
+            "The implementer should treat this register array as many registers rolled into one."
+        ],
+        [
+            "For example the register REG0, REG1, REG2, ..., REGN could be formulated as the RegisterArray `REG<n>` ",
+            "where `<n>` is the nth value to use when talking about the canonical register, and the rangeset is used to define ",
+            "the index range."
+        ]
+    ],
+    "properties": {
+        "_meta": {
+            "$ref": "Meta.json"
+        },
+        "_type": {
+            "enum": [
+                "RegisterArray"
+            ]
+        },
+        "access_text": {
+            "$ref": "Register.json#/properties/access_text",
+            "see": "Register.json"
+        },
+        "accessors": {
+            "see": "Register.json",
+            "info": [
+                [
+                    "The accessors work exactly like the accessors in a normal [Register](Register_schema.html) except",
+                    "the encoding values include references to the `<n>` index value. This is because the encoding applies to",
+                    "each of the `<n>` registers."
+                ],
+                "When using a [MemoryMapped](Accessors/MemoryMapped_schema.html) accessor, the `n` value in its offset property is the index into this register array."
+            ],
+            "$ref": "Register.json#/properties/accessors"
+        },
+        "condition": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/condition"
+        },
+        "configuration": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/configuration"
+        },
+        "fieldsets": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/fieldsets"
+        },
+        "groups": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/groups"
+        },
+        "instances": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/instances"
+        },
+        "mapset": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/mapset"
+        },
+        "name": {
+            "see": "Register.json",
+            "info": [
+                "The name of a RegisterArray must contain an index variable, e.g. `<n>`, exactly once.",
+                [
+                    " - `REG<n>`",
+                    " - `REG<n>_EL1`"
+                ]
+            ],
+            "pattern": "<([^>]+)>",
+            "$ref": "Register.json#/properties/name"
+        },
+        "purpose": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/purpose"
+        },
+        "reset": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/reset"
+        },
+        "state": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/state"
+        },
+        "title": {
+            "see": "Register.json",
+            "$ref": "Register.json#/properties/title"
+        },
+        "indexes": {
+            "$ref": "Traits/HasIndexes.json#/definitions/indexes"
+        },
+        "index_variable": {
+            "$ref": "Traits/HasIndexes.json#/definitions/index_variable"
+        }
+    },
+    "title": "RegisterArray",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "required": [
+        "name",
+        "index_variable",
+        "indexes"
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "license": {
+        "copyright": "Copyright (c) 2010-2025 Arm Limited or its affiliates. All rights reserved.",
+        "info": "This document is Non-confidential and licensed under the BSD 3-clause license."
+    },
+    "info": [
+        "This model represents a reference to a named variable."
+    ],
+    "see": "../AST/Identifier.json",
+    "definitions": {
+        "name_part_regex": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]*(?:<[^>]+>)?[a-zA-Z0-9_]*$"
+        },
+        "variable_regex": {
+            "type": "string",
+            "pattern": "^([A-Za-z][A-Za-z0-9_<>]*)(\\.(.+))*(\\[.+\\])?$"
+        }
+    },
+    "title": "Types.Variable",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "deprecated": true,
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_meta": {
+            "$ref": "../Meta.json",
+            "info": [
+                "Metadata"
+            ]
+        },
+        "_type": {
+            "enum": [
+                "Types.Variable"
+            ]
+        },
+        "value": {
+            "info": [
+                [
+                    "This property holds the dictionary that represents two parts of ",
+                    "the variable."
+                ],
+                [
+                    " - `name`: This holds the name value, for example: `FOO`, `FOO.BAR`, `FOO<n * 2>.BAR`.",
+                    " - `slices`: This holds the bitslice of the variable. For example `3:0`.",
+                    "   When slices is set to `null` no bit slicing applies."
+                ]
+            ],
+            "properties": {
+                "name": {
+                    "info": [
+                        "The name of the variable. For example `FOO`, `FOO.BAR`"
+                    ],
+                    "type": "string"
+                },
+                "slices": {
+                    "oneOf": [
+                        {
+                            "$ref": "../Rangeset.json"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "info": [
+                        [
+                            "When specified this represents the slice of the current",
+                            "variable. `MY.VAR[10:5]` points to the 6 bits of `MY.VAR` ",
+                            "located at `[10:5]`."
+                        ],
+                        "When set to null, no slicing applies"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        }
+    },
+    "required": [
+        "value"
+    ]
+}
